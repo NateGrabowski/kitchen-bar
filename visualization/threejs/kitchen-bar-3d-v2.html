@@ -82,6 +82,40 @@
     controls.maxPolarAngle = Math.PI / 2;
     controls.update();
 
+    // ============================================
+    // LIGHTING
+    // ============================================
+    // Ambient light - base illumination
+    const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+    scene.add(ambientLight);
+
+    // Key light - main shadow-casting light
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
+    keyLight.position.set(50, 80, 30);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
+    keyLight.shadow.camera.near = 10;
+    keyLight.shadow.camera.far = 200;
+    keyLight.shadow.camera.left = -100;
+    keyLight.shadow.camera.right = 100;
+    keyLight.shadow.camera.top = 100;
+    keyLight.shadow.camera.bottom = -100;
+    scene.add(keyLight);
+
+    // Fill light - reduce harsh shadows
+    const fillLight = new THREE.DirectionalLight(0x8080a0, 0.4);
+    fillLight.position.set(-30, 40, -20);
+    scene.add(fillLight);
+
+    // Temporary test sphere to verify lighting
+    const testGeo = new THREE.SphereGeometry(15, 32, 32);
+    const testMat = new THREE.MeshStandardMaterial({ color: 0x3b82f6 });
+    const testSphere = new THREE.Mesh(testGeo, testMat);
+    testSphere.position.set(42, 30, 0);
+    testSphere.castShadow = true;
+    scene.add(testSphere);
+
     // Axes helper for development
     const axesHelper = new THREE.AxesHelper(50);
     scene.add(axesHelper);
