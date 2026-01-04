@@ -1,6 +1,7 @@
 import React, { useState, lazy, Suspense } from 'react'
 
 const visualizations = {
+  'kitchen-bar-planner-v4': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v4.jsx')),
   'hybrid-bar-options': lazy(() => import('../visualization/jsx/hybrid-bar-options.jsx')),
   'kitchen-bar-planner-v3': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v3.jsx')),
   'kitchen-floor-cabinet-options': lazy(() => import('../visualization/jsx/kitchen-floor-cabinet-options.jsx')),
@@ -9,7 +10,7 @@ const visualizations = {
 }
 
 export default function App() {
-  const [current, setCurrent] = useState('hybrid-bar-options')
+  const [current, setCurrent] = useState('kitchen-bar-planner-v4')
   const Visualization = visualizations[current]
 
   return (
