@@ -206,13 +206,11 @@
     fillLight.position.set(-30, 40, -20);
     scene.add(fillLight);
 
-    // Axes helper for development
-    const axesHelper = new THREE.AxesHelper(50);
-    scene.add(axesHelper);
-
-    // Grid helper for development
-    const gridHelper = new THREE.GridHelper(200, 20, 0x3b82f6, 0x1e3a5f);
-    scene.add(gridHelper);
+    // Debug helpers (commented out for production)
+    // const axesHelper = new THREE.AxesHelper(50);
+    // scene.add(axesHelper);
+    // const gridHelper = new THREE.GridHelper(200, 20, 0x3b82f6, 0x1e3a5f);
+    // scene.add(gridHelper);
 
     // ============================================
     // MATERIALS
@@ -300,6 +298,19 @@
       column.position.set(CONFIG.barLength + 3, 48, 0);
       column.castShadow = true;
       room.add(column);
+
+      // Ceiling indicator (wireframe)
+      const ceilingGeo = new THREE.PlaneGeometry(150, 80);
+      const ceilingMat = new THREE.MeshBasicMaterial({
+        color: 0x3b82f6,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.3
+      });
+      const ceiling = new THREE.Mesh(ceilingGeo, ceilingMat);
+      ceiling.position.set(75, 96, -20);
+      ceiling.rotation.x = Math.PI / 2;
+      room.add(ceiling);
 
       return room;
     }
@@ -484,6 +495,14 @@
       }
       update();
     }
+
+    // Set initial camera position to Living Room preset
+    const initialPreset = CAMERA_PRESETS.livingroom;
+    camera.position.set(...initialPreset.pos);
+    controls.target.set(...initialPreset.target);
+    camera.fov = initialPreset.fov;
+    camera.updateProjectionMatrix();
+    controls.update();
 
     // ============================================
     // UI: CAMERA BUTTONS
