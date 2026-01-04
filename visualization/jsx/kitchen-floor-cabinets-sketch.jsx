@@ -10,9 +10,6 @@ export default function KitchenFloorCabinetsSketch() {
     overhangTowardKitchen: 12,  // Knee space on kitchen side
     barLength: 84,
     stoolHeight: 30,
-    // Options
-    showStepPanel: true,        // Show finished panel on step face
-    stepPanelStyle: 'match',    // 'match' cabinet or 'contrast'
   })
 
   const [activeView, setActiveView] = useState('side')
@@ -293,31 +290,6 @@ export default function KitchenFloorCabinetsSketch() {
           </div>
 
           <div className="panel">
-            <div className="panel-title">Options</div>
-
-            <div className="checkbox-item" onClick={() => update('showStepPanel', !config.showStepPanel)}>
-              <input type="checkbox" checked={config.showStepPanel} readOnly />
-              <span>Show step face panel</span>
-            </div>
-            {config.showStepPanel && (
-              <div style={{ marginLeft: 24 }}>
-                <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>Panel style</div>
-                <div className="toggle-group">
-                  {['match', 'contrast'].map(style => (
-                    <button
-                      key={style}
-                      className={`toggle-btn ${config.stepPanelStyle === style ? 'active' : ''}`}
-                      onClick={() => update('stepPanelStyle', style)}
-                    >
-                      {style.charAt(0).toUpperCase() + style.slice(1)}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="panel">
             <div className="panel-title">Calculated Values</div>
 
             <div className="calc-row">
@@ -433,20 +405,27 @@ export default function KitchenFloorCabinetsSketch() {
                   <rect x="30" y={groundY} width={stepX - 30} height="40" fill="#1e3a5f"/>
                   <text x="100" y={groundY + 22} fill="#3b5a7a" fontSize="10">LIVING ROOM</text>
 
-                  {/* Step face - with optional panel */}
-                  {config.showStepPanel ? (
-                    <rect
-                      x={stepX - 4}
-                      y={kitchenFloorY}
-                      width="4"
-                      height={groundY - kitchenFloorY}
-                      fill={config.stepPanelStyle === 'match' ? '#2d4a6a' : '#1a1a2e'}
-                      stroke="#60a5fa"
-                      strokeWidth="1"
-                    />
-                  ) : (
-                    <rect x={stepX - 4} y={kitchenFloorY} width="4" height={groundY - kitchenFloorY} fill="#334155"/>
-                  )}
+                  {/* Existing drywall half-wall (already there) */}
+                  <rect
+                    x={stepX - 8}
+                    y={kitchenFloorY}
+                    width="8"
+                    height={groundY - kitchenFloorY}
+                    fill="#d4c5b0"
+                    stroke="#b8a890"
+                    strokeWidth="1"
+                  />
+                  {/* Wood cap on existing half-wall */}
+                  <rect
+                    x={stepX - 10}
+                    y={kitchenFloorY - 3}
+                    width="12"
+                    height="4"
+                    fill="#8b6914"
+                    stroke="#a07d1a"
+                    strokeWidth="0.5"
+                  />
+                  <text x={stepX - 4} y={groundY - 15} fill="#8b7355" fontSize="7" textAnchor="middle" style={{ writingMode: 'vertical-rl' }}>EXISTING WALL</text>
 
                   {/* Kitchen floor */}
                   <rect x={stepX} y={kitchenFloorY} width="260" height={groundY - kitchenFloorY + 40} fill="#234060"/>
@@ -578,12 +557,6 @@ export default function KitchenFloorCabinetsSketch() {
                   <text x="30" y="42" fill="#64748b" fontSize="10">Cabinet on kitchen floor, counter overhangs both sides</text>
 
                   {/* Step panel label */}
-                  {config.showStepPanel && (
-                    <text x={stepX - 8} y={kitchenFloorY + (groundY - kitchenFloorY) / 2}
-                          textAnchor="end" fill="#64748b" fontSize="8" transform={`rotate(-90 ${stepX - 8} ${kitchenFloorY + (groundY - kitchenFloorY) / 2})`}>
-                      panel
-                    </text>
-                  )}
                 </g>
               )
             })()}
@@ -597,7 +570,7 @@ export default function KitchenFloorCabinetsSketch() {
               <li><span style={{ color: '#60a5fa' }}>Cabinet doors face living room</span> (access from LR side)</li>
               <li>Countertop overhangs <span style={{ color: '#fbbf24' }}>{config.overhangTowardLR}"</span> toward living room</li>
               <li>Seating on kitchen side with <span style={{ color: '#4ade80' }}>{config.overhangTowardKitchen}" knee space</span></li>
-              <li>Step face {config.showStepPanel ? `covered with ${config.stepPanelStyle} panel` : 'left exposed (needs finishing)'}</li>
+              <li><span style={{ color: '#d4c5b0' }}>Existing drywall half-wall</span> stays in place (just remove metal railing)</li>
               {config.overhangTowardLR > 6 && <li>Steel bracket supports the LR overhang</li>}
               {needsCustom && <li style={{ color: '#fb923c' }}>Note: {cabinetHeight}" cabinet requires custom build (not standard size)</li>}
             </ul>
@@ -642,18 +615,27 @@ export default function KitchenFloorCabinetsSketch() {
                     <rect x="20" y={groundY} width="560" height="30" fill="#1e3a5f"/>
                     <text x="300" y={groundY + 20} textAnchor="middle" fill="#3b5a7a" fontSize="10">LIVING ROOM FLOOR</text>
 
-                    {/* Step panel (below kitchen floor) */}
-                    {config.showStepPanel && (
-                      <rect
-                        x={startX}
-                        y={kitchenFloorY}
-                        width={barLengthPx}
-                        height={stepHeightPx}
-                        fill={config.stepPanelStyle === 'match' ? '#2d4a6a' : '#1a1a2e'}
-                        stroke="#60a5fa"
-                        strokeWidth="1"
-                      />
-                    )}
+                    {/* Existing drywall half-wall (below kitchen floor) */}
+                    <rect
+                      x={startX}
+                      y={kitchenFloorY}
+                      width={barLengthPx}
+                      height={stepHeightPx}
+                      fill="#d4c5b0"
+                      stroke="#b8a890"
+                      strokeWidth="1"
+                    />
+                    {/* Wood cap on existing half-wall */}
+                    <rect
+                      x={startX - 3}
+                      y={kitchenFloorY - 4}
+                      width={barLengthPx + 6}
+                      height="5"
+                      fill="#8b6914"
+                      stroke="#a07d1a"
+                      strokeWidth="0.5"
+                    />
+                    <text x={startX + barLengthPx / 2} y={kitchenFloorY + stepHeightPx / 2 + 4} textAnchor="middle" fill="#8b7355" fontSize="10">EXISTING DRYWALL HALF-WALL</text>
 
                     {/* Cabinet face with doors */}
                     <rect
@@ -775,7 +757,7 @@ export default function KitchenFloorCabinetsSketch() {
                 <li>3 cabinet doors, each ~{Math.round(config.barLength / 3)}" wide</li>
                 <li>Doors face living room for easy access</li>
                 <li>Countertop overhangs {config.overhangTowardLR}" toward you (viewer)</li>
-                {config.showStepPanel && <li>Step panel ({config.stepPanelStyle}) visible below cabinet</li>}
+                <li>Existing drywall half-wall remains below cabinet (railing removed)</li>
               </ul>
             </div>
           </>
@@ -1186,74 +1168,45 @@ export default function KitchenFloorCabinetsSketch() {
                 })()}
               </svg>
 
-              {/* 4. STEP PANEL FRAMING */}
+              {/* 4. EXISTING WALL PREP */}
               <svg viewBox="0 0 280 200" style={{ width: '100%', background: '#0a0f18', borderRadius: 4 }}>
-                {(() => {
-                  const panelW = 180
-                  const panelH = 60
-                  const startX = 50
-                  const startY = 80
-                  const cleatH = 12
+                <g>
+                  <text x="14" y="20" fill="#d4c5b0" fontSize="10" fontWeight="600">EXISTING WALL PREP</text>
+                  <text x="14" y="32" fill="#64748b" fontSize="8">Railing removal and patching</text>
 
-                  return (
-                    <g>
-                      <text x="14" y="20" fill="#60a5fa" fontSize="10" fontWeight="600">STEP PANEL FRAMING</text>
-                      <text x="14" y="32" fill="#64748b" fontSize="8">How panel attaches to step face</text>
+                  {/* Existing drywall half-wall */}
+                  <rect x="50" y="50" width="180" height="90" fill="#d4c5b0" stroke="#b8a890" strokeWidth="1"/>
+                  <text x="140" y="100" fill="#8b7355" fontSize="9" textAnchor="middle">EXISTING DRYWALL</text>
+                  <text x="140" y="112" fill="#8b7355" fontSize="7" textAnchor="middle">HALF-WALL</text>
 
-                      {/* Step structure (side section) */}
-                      <rect x={startX - 20} y={startY + panelH} width={panelW + 40} height="30" fill="#234060" stroke="#3b5a7a" strokeWidth="1"/>
-                      <text x={startX + panelW/2} y={startY + panelH + 20} fill="#3b5a7a" fontSize="8" textAnchor="middle">KITCHEN FLOOR</text>
+                  {/* Wood cap */}
+                  <rect x="45" y="45" width="190" height="8" fill="#8b6914" stroke="#a07d1a" strokeWidth="0.5"/>
+                  <text x="140" y="42" fill="#a07d1a" fontSize="7" textAnchor="middle">wood cap (keep or replace)</text>
 
-                      <rect x={startX - 20} y={startY + panelH + 30} width="60" height="40" fill="#1e3a5f" stroke="#3b5a7a" strokeWidth="1"/>
-                      <text x={startX + 10} y={startY + panelH + 55} fill="#3b5a7a" fontSize="8" textAnchor="middle">LR</text>
+                  {/* Railing mount holes to patch */}
+                  <circle cx="80" cy="55" r="3" fill="#ef4444" stroke="#fca5a5" strokeWidth="1"/>
+                  <circle cx="140" cy="55" r="3" fill="#ef4444" stroke="#fca5a5" strokeWidth="1"/>
+                  <circle cx="200" cy="55" r="3" fill="#ef4444" stroke="#fca5a5" strokeWidth="1"/>
 
-                      {/* Step face (where panel attaches) */}
-                      <line x1={startX} y1={startY} x2={startX} y2={startY + panelH + 30} stroke="#fb923c" strokeWidth="2" strokeDasharray="4,2"/>
-                      <text x={startX - 8} y={startY + panelH/2} fill="#fb923c" fontSize="7" textAnchor="end" transform={`rotate(-90 ${startX - 8} ${startY + panelH/2})`}>STEP FACE</text>
+                  {/* Callout for holes */}
+                  <line x1="200" y1="55" x2="240" y2="40" stroke="#ef4444" strokeWidth="0.5"/>
+                  <text x="242" y="38" fill="#ef4444" fontSize="6">patch holes</text>
+                  <text x="242" y="46" fill="#64748b" fontSize="5">(spackle + paint)</text>
 
-                      {/* Top cleat/nailer */}
-                      <rect x={startX + 4} y={startY} width={panelW - 20} height={cleatH} fill="none" stroke="#4ade80" strokeWidth="2"/>
-                      <text x={startX + panelW/2} y={startY - 6} fill="#4ade80" fontSize="7" textAnchor="middle">TOP CLEAT (2x2)</text>
+                  {/* Floor labels */}
+                  <rect x="30" y="140" width="220" height="20" fill="#234060" stroke="#3b5a7a" strokeWidth="1"/>
+                  <text x="140" y="154" fill="#3b5a7a" fontSize="8" textAnchor="middle">KITCHEN FLOOR</text>
 
-                      {/* Bottom cleat */}
-                      <rect x={startX + 4} y={startY + panelH - cleatH} width={panelW - 20} height={cleatH} fill="none" stroke="#4ade80" strokeWidth="2"/>
-                      <text x={startX + panelW/2} y={startY + panelH + 14} fill="#4ade80" fontSize="7" textAnchor="middle">BOTTOM CLEAT</text>
+                  <rect x="30" y="160" width="100" height="30" fill="#1e3a5f" stroke="#3b5a7a" strokeWidth="1"/>
+                  <text x="80" y="180" fill="#3b5a7a" fontSize="8" textAnchor="middle">LR FLOOR</text>
 
-                      {/* Panel (in front of cleats) */}
-                      <rect x={startX - 4} y={startY - 4} width={panelW} height={panelH + 8} fill={config.stepPanelStyle === 'match' ? '#2d4a6a' : '#1a1a2e'} opacity="0.5" stroke={config.stepPanelStyle === 'match' ? '#60a5fa' : '#6366f1'} strokeWidth="2"/>
-                      <text x={startX + panelW/2} y={startY + panelH/2 + 4} fill={config.stepPanelStyle === 'match' ? '#60a5fa' : '#6366f1'} fontSize="9" textAnchor="middle">PANEL</text>
-                      <text x={startX + panelW/2} y={startY + panelH/2 + 14} fill="#64748b" fontSize="7" textAnchor="middle">3/4" ply</text>
-
-                      {/* Screw indicators */}
-                      {[0.2, 0.5, 0.8].map((pos, i) => (
-                        <g key={i}>
-                          <line x1={startX - 4 + panelW * pos} y1={startY + 6} x2={startX + 10 + panelW * pos} y2={startY + 6} stroke="#f472b6" strokeWidth="1.5"/>
-                          <line x1={startX - 4 + panelW * pos} y1={startY + panelH - 6} x2={startX + 10 + panelW * pos} y2={startY + panelH - 6} stroke="#f472b6" strokeWidth="1.5"/>
-                        </g>
-                      ))}
-                      <text x={startX + panelW + 10} y={startY + 10} fill="#f472b6" fontSize="6">screws</text>
-                      <text x={startX + panelW + 10} y={startY + 18} fill="#64748b" fontSize="5">(countersunk)</text>
-
-                      {/* Dimension: panel height */}
-                      <g>
-                        <line x1={startX + panelW + 20} y1={startY} x2={startX + panelW + 20} y2={startY + panelH} stroke="#fbbf24" strokeWidth="1"/>
-                        <line x1={startX + panelW + 15} y1={startY} x2={startX + panelW + 25} y2={startY} stroke="#fbbf24" strokeWidth="1"/>
-                        <line x1={startX + panelW + 15} y1={startY + panelH} x2={startX + panelW + 25} y2={startY + panelH} stroke="#fbbf24" strokeWidth="1"/>
-                        <text x={startX + panelW + 30} y={startY + panelH/2 + 3} fill="#fbbf24" fontSize="8">{config.stepHeight}"</text>
-                      </g>
-
-                      {/* Legend */}
-                      <g transform="translate(14, 175)">
-                        <rect x="0" y="-4" width="12" height="6" fill="none" stroke="#4ade80" strokeWidth="1.5"/>
-                        <text x="16" y="0" fill="#94a3b8" fontSize="7">Cleats (2x2)</text>
-                        <line x1="80" y1="0" x2="90" y2="0" stroke="#f472b6" strokeWidth="1.5"/>
-                        <text x="94" y="2" fill="#94a3b8" fontSize="7">Screws</text>
-                        <line x1="135" y1="0" x2="145" y2="0" stroke="#fb923c" strokeWidth="1.5" strokeDasharray="3,2"/>
-                        <text x="149" y="2" fill="#94a3b8" fontSize="7">Step face</text>
-                      </g>
-                    </g>
-                  )
-                })()}
+                  {/* Steps checklist */}
+                  <g transform="translate(14, 175)">
+                    <text x="0" y="0" fill="#4ade80" fontSize="6">✓ Remove metal railing</text>
+                    <text x="90" y="0" fill="#4ade80" fontSize="6">✓ Patch screw holes</text>
+                    <text x="175" y="0" fill="#4ade80" fontSize="6">✓ Touch up paint</text>
+                  </g>
+                </g>
               </svg>
             </div>
 
@@ -1278,7 +1231,7 @@ export default function KitchenFloorCabinetsSketch() {
                   const callouts = [
                     { id: 1, x: counterLeft + 40, y: counterTopY + 4, label: 'Butcher Block', detail: `${config.counterThickness}" thick`, color: '#b45309', targetX: counterLeft + 80, targetY: counterTopY + 8 },
                     { id: 2, x: cabinetLeft + config.cabinetDepth * scale / 2, y: cabinetTopY + cabinetHeight * scale / 2, label: 'Cabinet Box', detail: `${cabinetHeight}"h × ${config.cabinetDepth}"d`, color: '#60a5fa', targetX: cabinetLeft + 20, targetY: cabinetTopY + 40 },
-                    { id: 3, x: stepX - 10, y: kitchenFloorY + (groundY - kitchenFloorY) / 2, label: 'Step Panel', detail: `${config.stepHeight}" × 3/4"`, color: '#6366f1', targetX: stepX - 6, targetY: kitchenFloorY + 30 },
+                    { id: 3, x: stepX - 10, y: kitchenFloorY + (groundY - kitchenFloorY) / 2, label: 'Existing Wall', detail: `drywall, ${config.stepHeight}"h`, color: '#b8a890', targetX: stepX - 6, targetY: kitchenFloorY + 30 },
                     { id: 4, x: cabinetRight + config.overhangTowardKitchen * scale / 2, y: counterTopY - 15, label: 'Knee Space', detail: `${config.overhangTowardKitchen}" overhang`, color: '#4ade80', targetX: cabinetRight + 15, targetY: counterTopY + 5 },
                   ]
 
@@ -1292,21 +1245,26 @@ export default function KitchenFloorCabinetsSketch() {
                       <rect x="40" y={groundY} width={stepX - 40} height="35" fill="#1e3a5f"/>
                       <text x="120" y={groundY + 22} fill="#3b5a7a" fontSize="10">LR FLOOR</text>
 
-                      {/* Step face */}
-                      <rect x={stepX - 4} y={kitchenFloorY} width="4" height={groundY - kitchenFloorY} fill="#334155" stroke="#475569" strokeWidth="1"/>
-
-                      {/* Step panel (if enabled) */}
-                      {config.showStepPanel && (
-                        <rect
-                          x={stepX - 8}
-                          y={kitchenFloorY}
-                          width="5"
-                          height={groundY - kitchenFloorY}
-                          fill={config.stepPanelStyle === 'match' ? '#2d4a6a' : '#1a1a2e'}
-                          stroke={config.stepPanelStyle === 'match' ? '#60a5fa' : '#6366f1'}
-                          strokeWidth="1.5"
-                        />
-                      )}
+                      {/* Existing drywall half-wall */}
+                      <rect
+                        x={stepX - 10}
+                        y={kitchenFloorY}
+                        width="10"
+                        height={groundY - kitchenFloorY}
+                        fill="#d4c5b0"
+                        stroke="#b8a890"
+                        strokeWidth="1"
+                      />
+                      {/* Wood cap on half-wall */}
+                      <rect
+                        x={stepX - 12}
+                        y={kitchenFloorY - 4}
+                        width="14"
+                        height="5"
+                        fill="#8b6914"
+                        stroke="#a07d1a"
+                        strokeWidth="0.5"
+                      />
 
                       {/* Kitchen floor */}
                       <rect x={stepX} y={kitchenFloorY} width="280" height={groundY - kitchenFloorY + 35} fill="#234060"/>
@@ -1393,17 +1351,15 @@ export default function KitchenFloorCabinetsSketch() {
                         <text x={cabinetRight + 110} y={cabinetTopY + cabinetHeight * scale / 2 + 17} fill="#64748b" fontSize="7" textAnchor="middle">3/4" plywood</text>
                       </g>
 
-                      {/* Callout 3: Step Panel */}
-                      {config.showStepPanel && (
-                        <g>
-                          <line x1={stepX - 45} y1={kitchenFloorY + (groundY - kitchenFloorY) / 2} x2={stepX - 10} y2={kitchenFloorY + (groundY - kitchenFloorY) / 2} stroke="#6366f1" strokeWidth="1"/>
-                          <circle cx={stepX - 8} cy={kitchenFloorY + (groundY - kitchenFloorY) / 2} r="3" fill="#6366f1"/>
-                          <rect x={stepX - 130} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 - 22} width="82" height="44" fill="#0a0f18" stroke="#6366f1" strokeWidth="1" rx="3"/>
-                          <text x={stepX - 89} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 - 8} fill="#6366f1" fontSize="9" textAnchor="middle" fontWeight="600">STEP PANEL</text>
-                          <text x={stepX - 89} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 + 5} fill="#94a3b8" fontSize="8" textAnchor="middle">{config.stepHeight}"h × {config.barLength}"w</text>
-                          <text x={stepX - 89} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 + 17} fill="#64748b" fontSize="7" textAnchor="middle">3/4" ply, {config.stepPanelStyle}</text>
-                        </g>
-                      )}
+                      {/* Callout 3: Existing Wall */}
+                      <g>
+                        <line x1={stepX - 45} y1={kitchenFloorY + (groundY - kitchenFloorY) / 2} x2={stepX - 10} y2={kitchenFloorY + (groundY - kitchenFloorY) / 2} stroke="#b8a890" strokeWidth="1"/>
+                        <circle cx={stepX - 8} cy={kitchenFloorY + (groundY - kitchenFloorY) / 2} r="3" fill="#b8a890"/>
+                        <rect x={stepX - 130} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 - 22} width="82" height="44" fill="#0a0f18" stroke="#b8a890" strokeWidth="1" rx="3"/>
+                        <text x={stepX - 89} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 - 8} fill="#d4c5b0" fontSize="9" textAnchor="middle" fontWeight="600">EXISTING WALL</text>
+                        <text x={stepX - 89} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 + 5} fill="#94a3b8" fontSize="8" textAnchor="middle">{config.stepHeight}"h drywall</text>
+                        <text x={stepX - 89} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 + 17} fill="#64748b" fontSize="7" textAnchor="middle">railing removed</text>
+                      </g>
 
                       {/* Callout 4: Knee Space */}
                       <g>
@@ -1513,65 +1469,53 @@ export default function KitchenFloorCabinetsSketch() {
                   </svg>
                 </div>
 
-                {/* Detail 2: Step Panel Attachment */}
+                {/* Detail 2: Cabinet Positioning */}
                 <div style={{ background: '#1e293b', borderRadius: 4, padding: 8 }}>
-                  <div style={{ color: '#f472b6', fontSize: 10, fontWeight: 600, marginBottom: 6, textTransform: 'uppercase' }}>Step Panel Mount</div>
+                  <div style={{ color: '#d4c5b0', fontSize: 10, fontWeight: 600, marginBottom: 6, textTransform: 'uppercase' }}>Cabinet Position</div>
                   <svg viewBox="0 0 180 140" style={{ width: '100%', background: '#0a0f18', borderRadius: 4 }}>
-                    {/* Step (cross section) */}
-                    <rect x="80" y="30" width="100" height="20" fill="#475569" stroke="#64748b" strokeWidth="1"/>
-                    <text x="130" y="44" fill="#94a3b8" fontSize="7" textAnchor="middle">kitchen floor</text>
+                    {/* Kitchen floor */}
+                    <rect x="60" y="55" width="120" height="15" fill="#234060" stroke="#3b5a7a" strokeWidth="1"/>
+                    <text x="120" y="66" fill="#3b5a7a" fontSize="7" textAnchor="middle">kitchen floor</text>
 
-                    {/* Living room floor */}
-                    <rect x="0" y="100" width="180" height="10" fill="#334155" stroke="#475569" strokeWidth="1"/>
-                    <text x="40" y="108" fill="#64748b" fontSize="7" textAnchor="middle">LR floor</text>
+                    {/* Existing drywall half-wall */}
+                    <rect x="30" y="35" width="12" height="70" fill="#d4c5b0" stroke="#b8a890" strokeWidth="1"/>
+                    <text x="36" y="75" fill="#8b7355" fontSize="5" textAnchor="middle" transform="rotate(-90 36 75)">EXISTING WALL</text>
 
-                    {/* Step face (the actual step edge) */}
-                    <rect x="80" y="50" width="10" height="50" fill="#475569" stroke="#64748b" strokeWidth="1"/>
+                    {/* Wood cap */}
+                    <rect x="28" y="32" width="16" height="4" fill="#8b6914" stroke="#a07d1a" strokeWidth="0.5"/>
 
-                    {/* Top cleat (2x2) */}
-                    <rect x="60" y="48" width="18" height="8" fill="#a16207" stroke="#ca8a04" strokeWidth="0.5"/>
-                    <text x="69" y="55" fill="#fcd34d" fontSize="5" textAnchor="middle">2×2</text>
+                    {/* LR floor */}
+                    <rect x="0" y="105" width="60" height="10" fill="#1e3a5f" stroke="#3b5a7a" strokeWidth="1"/>
+                    <text x="30" y="113" fill="#3b5a7a" fontSize="6" textAnchor="middle">LR floor</text>
 
-                    {/* Bottom cleat (2x2) */}
-                    <rect x="60" y="90" width="18" height="8" fill="#a16207" stroke="#ca8a04" strokeWidth="0.5"/>
-                    <text x="69" y="97" fill="#fcd34d" fontSize="5" textAnchor="middle">2×2</text>
+                    {/* Cabinet */}
+                    <rect x="60" y="20" width="30" height="35" fill="#2d4a6a" stroke="#60a5fa" strokeWidth="1.5"/>
+                    <text x="75" y="42" fill="#60a5fa" fontSize="6" textAnchor="middle">CABINET</text>
 
-                    {/* Panel (3/4" ply) */}
-                    <rect x="55" y="48" width="5" height="52" fill="#6366f1" stroke="#818cf8" strokeWidth="0.5"/>
+                    {/* Gap indicator */}
+                    <line x1="42" y1="35" x2="60" y2="35" stroke="#4ade80" strokeWidth="1" strokeDasharray="2,2"/>
+                    <line x1="42" y1="32" x2="42" y2="38" stroke="#4ade80" strokeWidth="1"/>
+                    <line x1="60" y1="32" x2="60" y2="38" stroke="#4ade80" strokeWidth="1"/>
 
-                    {/* Screws from panel into cleats */}
-                    <line x1="52" y1="52" x2="60" y2="52" stroke="#60a5fa" strokeWidth="1"/>
-                    <circle cx="51" cy="52" r="1.5" fill="#60a5fa"/>
-                    <line x1="52" y1="94" x2="60" y2="94" stroke="#60a5fa" strokeWidth="1"/>
-                    <circle cx="51" cy="94" r="1.5" fill="#60a5fa"/>
+                    {/* Callout */}
+                    <line x1="51" y1="35" x2="51" y2="18" stroke="#4ade80" strokeWidth="0.5"/>
+                    <text x="51" y="14" fill="#4ade80" fontSize="6" textAnchor="middle">gap behind</text>
 
-                    {/* Screws from cleat into step face */}
-                    <line x1="78" y1="52" x2="82" y2="52" stroke="#f472b6" strokeWidth="1"/>
-                    <circle cx="84" cy="52" r="1.5" fill="#f472b6"/>
+                    {/* Countertop */}
+                    <rect x="25" y="15" width="90" height="6" fill="#854d0e" stroke="#a16207" strokeWidth="1"/>
 
-                    {/* Callouts */}
-                    <line x1="57" y1="70" x2="30" y2="65" stroke="#6366f1" strokeWidth="0.5"/>
-                    <text x="5" y="62" fill="#6366f1" fontSize="6">3/4" panel</text>
-                    <text x="5" y="69" fill="#64748b" fontSize="5">(plywood)</text>
-
-                    <line x1="69" y1="52" x2="69" y2="35" stroke="#ca8a04" strokeWidth="0.5"/>
-                    <text x="69" y="30" fill="#ca8a04" fontSize="6" textAnchor="middle">cleat screwed</text>
-                    <text x="69" y="37" fill="#64748b" fontSize="5" textAnchor="middle">to step face</text>
+                    {/* Notes */}
+                    <text x="90" y="90" fill="#94a3b8" fontSize="6" textAnchor="middle">Cabinet sits ON kitchen floor</text>
+                    <text x="90" y="100" fill="#94a3b8" fontSize="6" textAnchor="middle">BEHIND existing half-wall</text>
 
                     {/* Legend */}
-                    <rect x="110" y="55" width="6" height="6" fill="#6366f1"/>
-                    <text x="120" y="60" fill="#94a3b8" fontSize="6">Panel</text>
+                    <rect x="120" y="75" width="6" height="6" fill="#d4c5b0"/>
+                    <text x="130" y="80" fill="#94a3b8" fontSize="5">Existing wall</text>
 
-                    <rect x="110" y="65" width="6" height="6" fill="#a16207"/>
-                    <text x="120" y="70" fill="#94a3b8" fontSize="6">Cleats</text>
+                    <rect x="120" y="85" width="6" height="6" fill="#2d4a6a"/>
+                    <text x="130" y="90" fill="#94a3b8" fontSize="5">Cabinet</text>
 
-                    <circle cx="113" cy="81" r="2" fill="#60a5fa"/>
-                    <text x="120" y="83" fill="#94a3b8" fontSize="6">Panel screws</text>
-
-                    <circle cx="113" cy="91" r="2" fill="#f472b6"/>
-                    <text x="120" y="93" fill="#94a3b8" fontSize="6">Cleat screws</text>
-
-                    <text x="90" y="135" fill="#64748b" fontSize="7" textAnchor="middle">Removable for access behind</text>
+                    <text x="90" y="135" fill="#64748b" fontSize="7" textAnchor="middle">Front of cabinet aligns with step edge</text>
                   </svg>
                 </div>
 
@@ -1587,8 +1531,8 @@ export default function KitchenFloorCabinetsSketch() {
                     <rect x="80" y="45" width="80" height="50" fill="#334155" stroke="#475569" strokeWidth="1"/>
                     <text x="120" y="75" fill="#64748b" fontSize="7" textAnchor="middle">cabinet</text>
 
-                    {/* Step panel area */}
-                    <rect x="30" y="45" width="5" height="55" fill="#6366f1" stroke="#818cf8" strokeWidth="0.5"/>
+                    {/* Existing wall */}
+                    <rect x="30" y="45" width="8" height="55" fill="#d4c5b0" stroke="#b8a890" strokeWidth="0.5"/>
 
                     {/* LR floor */}
                     <rect x="0" y="100" width="80" height="10" fill="#334155" stroke="#475569" strokeWidth="1"/>
@@ -1659,12 +1603,6 @@ export default function KitchenFloorCabinetsSketch() {
                       {needsCustom ? `Custom height (standard is ${closestStandard.size}")` : `Near standard ${closestStandard.label}`}
                     </td>
                   </tr>
-                  <tr style={{ borderBottom: '1px solid #1e293b' }}>
-                    <td style={{ padding: '8px 12px' }}>Step face panel</td>
-                    <td style={{ padding: '8px 12px', fontFamily: 'monospace' }}>{config.barLength}" x {config.stepHeight}" x 3/4"</td>
-                    <td style={{ padding: '8px 12px' }}>1</td>
-                    <td style={{ padding: '8px 12px', color: '#94a3b8' }}>Plywood, {config.stepPanelStyle} finish</td>
-                  </tr>
                   {config.overhangTowardLR > 6 && (
                     <tr style={{ borderBottom: '1px solid #1e293b' }}>
                       <td style={{ padding: '8px 12px' }}>Support brackets</td>
@@ -1687,9 +1625,9 @@ export default function KitchenFloorCabinetsSketch() {
             <div style={{ marginBottom: 20 }}>
               <h4 style={{ color: '#4ade80', margin: '0 0 8px 0', fontSize: 12, textTransform: 'uppercase' }}>Build Sequence</h4>
               <ol style={{ margin: 0, paddingLeft: 20, color: '#e2e8f0', fontSize: 12, lineHeight: 2 }}>
-                <li>Remove existing railing and clean step edge</li>
-                <li>Install step face panel (plywood flush with step edge)</li>
-                <li>Position cabinet on kitchen floor, front aligned with step edge</li>
+                <li>Remove existing metal railing from half-wall</li>
+                <li>Patch screw holes in drywall, touch up paint</li>
+                <li>Position cabinet on kitchen floor, behind existing half-wall</li>
                 <li>Secure cabinet to floor and wall (if applicable)</li>
                 {config.overhangTowardLR > 6 && <li>Install support brackets for LR overhang</li>}
                 <li>Place butcher block on cabinet, mark for overhang</li>

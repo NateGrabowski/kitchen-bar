@@ -62,6 +62,23 @@ Key calculated values used across views:
 - `totalDepth` = cabinetDepth + overhangTowardLR + overhangTowardKitchen
 - `counterFromLRFloor` = stepHeight + counterHeight
 
+## Major Rework (Jan 4, 2026) - Existing Half-Wall
+
+**Real-World Check**: Compared visualization with actual photos (`docs/images/.jpg/`).
+Photos revealed an **existing drywall half-wall** below the metal railing - the "step panel" concept was fictional.
+
+**Changes Made**:
+- Removed `showStepPanel` and `stepPanelStyle` config options
+- Removed OPTIONS UI panel entirely
+- Updated Side Section: cream-colored drywall half-wall (#d4c5b0) with wood cap
+- Updated Front View: existing drywall wall with label
+- Updated Plan View notes: reference existing half-wall
+- Updated Framing Diagrams: "Existing Wall Prep" replaces "Step Panel Framing"
+- Updated Side Section callouts: "EXISTING WALL" replaces "STEP PANEL"
+- Updated Connection Details: "Cabinet Position" replaces "Step Panel Mount"
+- Removed step face panel from Materials table
+- Updated Build Sequence: railing removal and hole patching steps
+
 ## Status: COMPLETE
 
-Construction view redesign complete. User mentioned wanting to create a skill from this work for future construction diagram creation.
+Design now accurately reflects reality - cabinet sits behind existing drywall half-wall.
