@@ -1083,6 +1083,70 @@ export default function KitchenBarPlannerV4() {
                           </>
                         )}
 
+                        {/* LR Ledge */}
+                        {config.lrLedge && (() => {
+                          const ledgeY = groundY - config.ledgeHeight * 2;
+                          const ledgeThick = 6;
+                          return (
+                            <g>
+                              {/* Ledge surface - runs full bar length */}
+                              <rect
+                                x={startX - 12}
+                                y={ledgeY}
+                                width={barLengthPx + 24}
+                                height={ledgeThick}
+                                fill="#92400e"
+                                stroke="#b45309"
+                                strokeWidth="1"
+                              />
+                              {/* Support brackets */}
+                              <rect x={startX + 20} y={ledgeY + ledgeThick} width="3" height="12" fill="#9ca3af"/>
+                              <rect x={startX + barLengthPx - 23} y={ledgeY + ledgeThick} width="3" height="12" fill="#9ca3af"/>
+                              {/* Height dimension */}
+                              <text x={startX + barLengthPx + 20} y={ledgeY + 3} fill="#22d3ee" fontSize="9" fontFamily="monospace">{config.ledgeHeight}"</text>
+                            </g>
+                          );
+                        })()}
+
+                        {/* LR Floating Shelves */}
+                        {config.lrShelves && (() => {
+                          const shelfY = groundY - config.shelfHeight * 2;
+                          const shelfThick = 4;
+                          const shelfSegmentWidth = (barLengthPx - 40) / 3;
+                          return (
+                            <g>
+                              {/* Three shelf segments across the bar */}
+                              {[0, 1, 2].map((i) => (
+                                <rect
+                                  key={i}
+                                  x={startX + 10 + i * (shelfSegmentWidth + 10)}
+                                  y={shelfY}
+                                  width={shelfSegmentWidth}
+                                  height={shelfThick}
+                                  fill="#4a6a8a"
+                                  stroke="#60a5fa"
+                                  strokeWidth="1"
+                                />
+                              ))}
+                              {/* Upper shelf row */}
+                              {[0, 1, 2].map((i) => (
+                                <rect
+                                  key={`upper-${i}`}
+                                  x={startX + 10 + i * (shelfSegmentWidth + 10)}
+                                  y={shelfY - 25}
+                                  width={shelfSegmentWidth}
+                                  height={shelfThick}
+                                  fill="#4a6a8a"
+                                  stroke="#60a5fa"
+                                  strokeWidth="1"
+                                />
+                              ))}
+                              {/* Height dimension */}
+                              <text x={startX + barLengthPx + 20} y={shelfY + 2} fill="#a78bfa" fontSize="9" fontFamily="monospace">{config.shelfHeight}"</text>
+                            </g>
+                          );
+                        })()}
+
                         {/* Dimensions */}
                         <g>
                           <line x1={startX} y1={groundY + 15} x2={startX + barLengthPx} y2={groundY + 15} stroke="#fb923c" strokeWidth="1"/>

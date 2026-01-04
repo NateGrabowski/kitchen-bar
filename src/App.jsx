@@ -4,7 +4,6 @@ const visualizations = {
   'kitchen-bar-planner-v4': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v4.jsx')),
   'hybrid-bar-options': lazy(() => import('../visualization/jsx/hybrid-bar-options.jsx')),
   'kitchen-bar-planner-v3': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v3.jsx')),
-  'kitchen-floor-cabinet-options': lazy(() => import('../visualization/jsx/kitchen-floor-cabinet-options.jsx')),
   'kitchen-bar-planner-v2': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v2.jsx')),
   'kitchen-bar-planner': lazy(() => import('../visualization/jsx/kitchen-bar-planner.jsx')),
 }

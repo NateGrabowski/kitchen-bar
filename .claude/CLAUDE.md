@@ -40,6 +40,19 @@ vite.config.js                    # Vite configuration
 index.html                        # Dev server entry point
 ```
 
+## Use Playwright Skill to access this project
+
+`C:\Users\nateg\.claude\plugins\marketplaces\playwright-skill`
+
+```
+playwright-skill/              # Plugin root
+├── .claude-plugin/           # Plugin metadata
+└── skills/
+    └── playwright-skill/     # The actual skill
+        └── SKILL.md
+```
+
+
 ## Running Visualizations
 
 ### Vite Dev Server (Recommended)
