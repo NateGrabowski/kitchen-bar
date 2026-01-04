@@ -74,21 +74,22 @@ wood: '#8b6914'      // wood cap/trim
 
 ## Workflow
 
-1. **Gather requirements**: Dimensions, materials, existing conditions
-2. **Draft framing diagrams**: Structural skeleton first
-3. **Add cross-section**: With callout boxes and dimension lines
-4. **Detail connections**: Zoomed views of critical joints
-5. **Document materials/sequence**: Tables and numbered steps
-6. **Reality-check**: Compare against photos, run professional perspectives
-7. **Test rendering**: Use Playwright for full-page screenshots
-8. **Iterate**: Refine based on feedback
+1. **Reality-check FIRST**: View reference photos, identify existing structures
+2. **Run professional perspectives**: Designer/Architect/Contractor questions
+3. **Gather requirements**: Dimensions, materials, what's new vs existing
+4. **Draft framing diagrams**: Structural skeleton (distinguish new from existing)
+5. **Add cross-section**: With callout boxes and dimension lines
+6. **Detail connections**: Zoomed views of critical joints
+7. **Document materials/sequence**: Tables and numbered steps
+8. **Test rendering**: Use Playwright for full-page screenshots
+9. **Iterate**: Refine based on feedback
 
 ## Common Mistakes
 
 | Mistake | Fix |
 |---------|-----|
 | Designing without photos | Always get/view reference photos first |
-| Assuming blank slate | Check what already exists (walls, finishes, framing) |
+| **Assuming blank slate** | **CRITICAL**: Check what already exists (finished walls, trim, framing). Most home improvement builds on existing structures. |
 | Over-engineering | Simplest solution that works; don't add unnecessary panels/structure |
 | Missing dimension lines | Every callout needs associated measurements |
 | Static materials list | Make tables dynamic based on config state |
