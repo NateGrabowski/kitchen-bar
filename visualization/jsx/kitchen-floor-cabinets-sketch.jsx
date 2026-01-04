@@ -954,6 +954,147 @@ export default function KitchenFloorCabinetsSketch() {
           <div style={{ background: '#0d1520', borderRadius: 4, padding: 20 }}>
             <h3 style={{ color: '#60a5fa', margin: '0 0 16px 0', fontSize: 14 }}>CONSTRUCTION NOTES</h3>
 
+            {/* Exploded Assembly Diagram */}
+            <svg viewBox="0 0 600 320" style={{ width: '100%', background: '#0a0f18', borderRadius: 4, marginBottom: 20 }}>
+              <defs>
+                <pattern id={`${uniqueId}-grid-construction`} width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a2a3a" strokeWidth="0.5"/>
+                </pattern>
+              </defs>
+              <rect width="600" height="320" fill={`url(#${uniqueId}-grid-construction)`}/>
+
+              {(() => {
+                const scale = 1.4
+                const barLengthPx = config.barLength * scale
+                const cabinetHeightPx = cabinetHeight * scale * 0.6  // Compress for fit
+                const stepHeightPx = config.stepHeight * scale * 0.6
+                const counterThickPx = config.counterThickness * scale * 3
+
+                const centerX = 300
+                const startX = centerX - barLengthPx / 2
+
+                // Exploded positions (separated vertically)
+                const counterY = 50
+                const cabinetY = 110
+                const stepPanelY = 200
+                const floorY = 270
+
+                // Assembly lines X position
+                const lineX1 = startX + 30
+                const lineX2 = startX + barLengthPx - 30
+
+                return (
+                  <g>
+                    {/* Title */}
+                    <text x="30" y="25" fill="#60a5fa" fontSize="11" fontWeight="600">EXPLODED ASSEMBLY</text>
+                    <text x="30" y="40" fill="#64748b" fontSize="9">Components shown separated - stack from bottom up</text>
+
+                    {/* 1. COUNTERTOP */}
+                    <g>
+                      <rect
+                        x={startX - config.overhangTowardLR * scale}
+                        y={counterY}
+                        width={barLengthPx + config.overhangTowardLR * scale + config.overhangTowardKitchen * scale}
+                        height={counterThickPx}
+                        fill="#92400e"
+                        stroke="#b45309"
+                        strokeWidth="1.5"
+                        rx="2"
+                      />
+                      {/* Wood grain lines */}
+                      <line x1={startX - config.overhangTowardLR * scale + 10} y1={counterY + 3} x2={startX + barLengthPx + config.overhangTowardKitchen * scale - 10} y2={counterY + 3} stroke="#78350f" strokeWidth="0.5" opacity="0.5"/>
+                      <line x1={startX - config.overhangTowardLR * scale + 10} y1={counterY + counterThickPx - 3} x2={startX + barLengthPx + config.overhangTowardKitchen * scale - 10} y2={counterY + counterThickPx - 3} stroke="#78350f" strokeWidth="0.5" opacity="0.5"/>
+                      {/* Label */}
+                      <text x={startX + barLengthPx + config.overhangTowardKitchen * scale + 15} y={counterY + counterThickPx / 2 + 4} fill="#b45309" fontSize="10" fontWeight="500">BUTCHER BLOCK</text>
+                      <text x={startX + barLengthPx + config.overhangTowardKitchen * scale + 15} y={counterY + counterThickPx / 2 + 16} fill="#64748b" fontSize="9">{config.barLength}" x {totalDepth}" x {config.counterThickness}"</text>
+                    </g>
+
+                    {/* Assembly line: counter to cabinet */}
+                    <line x1={lineX1} y1={counterY + counterThickPx + 5} x2={lineX1} y2={cabinetY - 5} stroke="#334155" strokeWidth="1" strokeDasharray="4,3"/>
+                    <line x1={lineX2} y1={counterY + counterThickPx + 5} x2={lineX2} y2={cabinetY - 5} stroke="#334155" strokeWidth="1" strokeDasharray="4,3"/>
+
+                    {/* 2. CABINET */}
+                    <g>
+                      <rect
+                        x={startX}
+                        y={cabinetY}
+                        width={barLengthPx}
+                        height={cabinetHeightPx}
+                        fill="#2d4a6a"
+                        stroke="#60a5fa"
+                        strokeWidth="1.5"
+                        rx="2"
+                      />
+                      {/* Door divisions */}
+                      {[1, 2].map(i => (
+                        <line key={i} x1={startX + (barLengthPx / 3) * i} y1={cabinetY + 4} x2={startX + (barLengthPx / 3) * i} y2={cabinetY + cabinetHeightPx - 4} stroke="#4a6a8a" strokeWidth="1"/>
+                      ))}
+                      {/* Handles */}
+                      {[0, 1, 2].map(i => (
+                        <rect key={i} x={startX + (barLengthPx / 3) * i + barLengthPx / 3 - 12} y={cabinetY + cabinetHeightPx * 0.3} width="6" height="16" fill="#60a5fa" rx="1"/>
+                      ))}
+                      {/* Label */}
+                      <text x={startX + barLengthPx + 15} y={cabinetY + cabinetHeightPx / 2} fill="#60a5fa" fontSize="10" fontWeight="500">BASE CABINET</text>
+                      <text x={startX + barLengthPx + 15} y={cabinetY + cabinetHeightPx / 2 + 12} fill="#64748b" fontSize="9">{config.barLength}" x {config.cabinetDepth}" x {cabinetHeight}"</text>
+                      {needsCustom && <text x={startX + barLengthPx + 15} y={cabinetY + cabinetHeightPx / 2 + 24} fill="#fb923c" fontSize="8">⚠ Custom height</text>}
+                    </g>
+
+                    {/* Assembly line: cabinet to step panel */}
+                    <line x1={lineX1} y1={cabinetY + cabinetHeightPx + 5} x2={lineX1} y2={stepPanelY - 5} stroke="#334155" strokeWidth="1" strokeDasharray="4,3"/>
+                    <line x1={lineX2} y1={cabinetY + cabinetHeightPx + 5} x2={lineX2} y2={stepPanelY - 5} stroke="#334155" strokeWidth="1" strokeDasharray="4,3"/>
+
+                    {/* 3. STEP PANEL */}
+                    <g>
+                      <rect
+                        x={startX}
+                        y={stepPanelY}
+                        width={barLengthPx}
+                        height={stepHeightPx}
+                        fill={config.stepPanelStyle === 'match' ? '#2d4a6a' : '#1a1a2e'}
+                        stroke={config.stepPanelStyle === 'match' ? '#60a5fa' : '#6366f1'}
+                        strokeWidth="1.5"
+                        rx="2"
+                      />
+                      {/* Label */}
+                      <text x={startX + barLengthPx + 15} y={stepPanelY + stepHeightPx / 2} fill={config.stepPanelStyle === 'match' ? '#60a5fa' : '#6366f1'} fontSize="10" fontWeight="500">STEP PANEL</text>
+                      <text x={startX + barLengthPx + 15} y={stepPanelY + stepHeightPx / 2 + 12} fill="#64748b" fontSize="9">{config.barLength}" x {config.stepHeight}" x 3/4"</text>
+                      <text x={startX + barLengthPx + 15} y={stepPanelY + stepHeightPx / 2 + 24} fill="#64748b" fontSize="8">{config.stepPanelStyle} finish</text>
+                    </g>
+
+                    {/* Assembly line: step panel to floor */}
+                    <line x1={lineX1} y1={stepPanelY + stepHeightPx + 5} x2={lineX1} y2={floorY - 5} stroke="#334155" strokeWidth="1" strokeDasharray="4,3"/>
+                    <line x1={lineX2} y1={stepPanelY + stepHeightPx + 5} x2={lineX2} y2={floorY - 5} stroke="#334155" strokeWidth="1" strokeDasharray="4,3"/>
+
+                    {/* 4. FLOOR REFERENCE */}
+                    <g>
+                      <rect x={startX - 40} y={floorY} width={barLengthPx + 80} height="20" fill="#1e3a5f" rx="2"/>
+                      <line x1={startX} y1={floorY} x2={startX} y2={floorY + 20} stroke="#fb923c" strokeWidth="2"/>
+                      <text x={startX - 35} y={floorY + 14} fill="#3b5a7a" fontSize="9">LR FLOOR</text>
+                      <text x={startX + 5} y={floorY + 14} fill="#234060" fontSize="9">KITCHEN FLOOR (+{config.stepHeight}")</text>
+                    </g>
+
+                    {/* Build order arrows */}
+                    <g transform="translate(50, 150)">
+                      <text x="0" y="0" fill="#4ade80" fontSize="10" fontWeight="600">BUILD ORDER</text>
+                      <text x="0" y="16" fill="#64748b" fontSize="9">4. Countertop</text>
+                      <text x="0" y="30" fill="#64748b" fontSize="9">3. Cabinet</text>
+                      <text x="0" y="44" fill="#64748b" fontSize="9">2. Step panel</text>
+                      <text x="0" y="58" fill="#64748b" fontSize="9">1. Prep floor</text>
+                      <path d="M 70 55 L 70 10 L 65 15 M 70 10 L 75 15" fill="none" stroke="#4ade80" strokeWidth="1.5"/>
+                    </g>
+
+                    {/* Support brackets note (if applicable) */}
+                    {config.overhangTowardLR > 6 && (
+                      <g>
+                        <rect x={startX - config.overhangTowardLR * scale - 5} y={counterY + counterThickPx + 15} width="60" height="25" fill="#1e293b" stroke="#9ca3af" strokeWidth="1" rx="2"/>
+                        <text x={startX - config.overhangTowardLR * scale + 25} y={counterY + counterThickPx + 32} textAnchor="middle" fill="#9ca3af" fontSize="8">BRACKETS</text>
+                      </g>
+                    )}
+                  </g>
+                )
+              })()}
+            </svg>
+
             {/* Materials List */}
             <div style={{ marginBottom: 20 }}>
               <h4 style={{ color: '#4ade80', margin: '0 0 8px 0', fontSize: 12, textTransform: 'uppercase' }}>Materials</h4>
