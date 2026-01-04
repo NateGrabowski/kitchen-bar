@@ -173,46 +173,79 @@ Consolidate all research into a single reference document:
 
 ---
 
-## Phase 2: Design Synthesis
+## Phase 2: Concept Sketching ("Sketch to See")
 
-**Purpose:** Evaluate research findings against this specific space.
+**Purpose:** Create quick visual sketches of creative concepts so user can SEE options before committing.
 
 **Prerequisites:** Phase 1 complete, user has reviewed research.
 
-### Task 2.1: Create Options Matrix
+**Key Insight:** Separate JSX files work better than one complex switcher. Each concept gets its own focused visualization file.
 
-Compare research findings against user's constraints:
+### Task 2.1: Select 3 Contrasting Concepts
 
-| Option | Structural | Storage | Complexity | Works w/ 23.5" Step | Notes |
-|--------|------------|---------|------------|---------------------|-------|
-| Current v4 (LR cabinets) | ... | ... | ... | ... | ... |
-| Current sketch (kitchen cabinets) | ... | ... | ... | ... | ... |
-| [New option from research] | ... | ... | ... | ... | ... |
+Pick 3 concepts from creative research at different "boldness" levels:
 
----
+| Level | Example Concepts |
+|-------|------------------|
+| Moderate | Live edge + waterfall, chevron pattern, unique wood species |
+| Bold | Copper patina, epoxy river, speakeasy hidden features |
+| Very Bold | Backlit stone, aquarium cabinet, floating cantilever |
 
-### Task 2.2: Identify Top 3-4 Candidates
-
-Based on matrix, select most promising approaches for detailed evaluation.
-
-**Criteria:**
-- Structural feasibility for 23.5" step
-- Storage capacity vs complexity trade-off
-- DIY-friendliness (if applicable)
-- Aesthetic fit with existing honey oak kitchen
-- Addresses user's primary uses (homework, WFH, meals, socializing)
+**Starting selection:**
+1. **Live edge + waterfall** — Natural edge facing LR, wood cascades down step
+2. **Chevron top + speakeasy features** — Preferred material + hidden storage/reveals
+3. **Floating cantilever + step lighting** — Dramatic architecture, bar appears to hover
 
 ---
 
-### Task 2.3: User Decision Checkpoint
+### Task 2.2: Create Quick Sketch Visualizations
 
-Present candidates with:
-- Visual sketch or description
-- Pros/cons summary
-- Estimated complexity
-- Questions to help user decide
+For each concept, create a focused JSX file:
+- Copy `kitchen-bar-planner-v4.jsx` as starting point
+- Strip down to 1-2 views (side section is primary)
+- Focus on the ONE differentiating idea
+- Keep it simple—enough to convey the concept
 
-**Wait for user to select preferred direction(s).**
+**Output files:**
+```
+visualization/jsx/
+  concept-live-edge-waterfall.jsx
+  concept-chevron-speakeasy.jsx
+  concept-floating-cantilever.jsx
+```
+
+---
+
+### Task 2.3: User Review & Feedback Loop
+
+Present sketches to user. Possible outcomes:
+
+| Response | Action |
+|----------|--------|
+| "This one resonates" | Proceed to Phase 3 with that concept |
+| "I like X from concept A, Y from concept B" | Create hybrid sketch, re-review |
+| "None of these work" | Loop back to Task 2.1, pick 3 different concepts |
+| "I like the direction but need refinement" | Iterate on that sketch |
+
+```
+┌─────────────────────────────────────────┐
+│  Create 3 concept sketches              │
+└──────────────────┬──────────────────────┘
+                   ▼
+┌─────────────────────────────────────────┐
+│  User reviews & reacts                  │
+└──────────────────┬──────────────────────┘
+                   ▼
+        ┌─────────┴─────────┐
+        ▼                   ▼
+   [Nothing works]    [Something works]
+        │                   │
+        ▼                   ▼
+   Loop: try 3 more    Continue to Phase 3
+   different concepts  (validation, dimensions)
+```
+
+**Checkpoint:** User selects concept(s) to pursue before proceeding.
 
 ---
 
@@ -295,9 +328,9 @@ Use TDD approach for any code changes:
 
 **Phase 1** tasks (1.1-1.4) can run in parallel as independent research streams.
 
-**Phase 2** depends on Phase 1 completion.
+**Phase 2** is iterative—may loop multiple times until a concept resonates. Each concept gets its own JSX file (not one master file). Keep sketches simple and focused.
 
-**Phase 3** depends on user decisions in Phase 2.
+**Phase 3** depends on user selecting a concept in Phase 2.
 
 **Phase 4** is optional based on Phase 3 outcomes.
 
@@ -309,7 +342,7 @@ Use TDD approach for any code changes:
 |-------------|------------------------|
 | Phase 0 | Confirm understanding is correct, proceed to research |
 | Phase 1 | Review research, confirm it's sufficient |
-| Phase 2 | Select preferred design direction(s) |
+| Phase 2 | Review concept sketches → "works" / "try different" / "hybrid" (may loop) |
 | Phase 3 | Approve final design spec |
 | Phase 4 | Decide if tool updates are worth doing |
 
@@ -321,6 +354,10 @@ Use TDD approach for any code changes:
 - `docs/kitchen-bar-project-brief.md` — Full project context
 - `docs/design-spec.md` — Current baseline design
 
+**Research (Phase 1 outputs):**
+- `docs/research/2026-01-04-split-level-bar-options.md` — Structural research (framing, brackets, cantilever)
+- `docs/research/2026-01-04-creative-bar-concepts.md` — Creative/unconventional concepts
+
 **Images:**
 - `docs/images/.jpg/1.jpg`, `2.jpg`, `3.jpg` — Main reference photos
 - `docs/images/.jpg/extra/` — Additional angles
@@ -328,6 +365,7 @@ Use TDD approach for any code changes:
 **Visualizations:**
 - `visualization/jsx/kitchen-bar-planner-v4.jsx` — Main tool (LR cabinets)
 - `visualization/jsx/kitchen-floor-cabinets-sketch.jsx` — Alternative (kitchen cabinets)
+- `visualization/jsx/concept-*.jsx` — Phase 2 concept sketches (created during Phase 2)
 
 **Run with:**
 ```bash
