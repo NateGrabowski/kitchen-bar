@@ -765,6 +765,41 @@ export default function KitchenBarPlannerV4() {
                         {/* Support post */}
                         <rect x={stepX - 3} y={barTopY + barThickPx} width="5" height={kitchenFloorY - barTopY - barThickPx} fill="#2d4a6a"/>
 
+                        {/* LR Ledge */}
+                        {config.lrLedge && (() => {
+                          const ledgeY = groundY - config.ledgeHeight * scale;
+                          const ledgeDepthPx = config.ledgeDepth * scale;
+                          const ledgeThick = 4;
+                          return (
+                            <g>
+                              {/* Ledge surface */}
+                              <rect
+                                x={stepX - ledgeDepthPx}
+                                y={ledgeY}
+                                width={ledgeDepthPx}
+                                height={ledgeThick}
+                                fill="#92400e"
+                                stroke="#b45309"
+                                strokeWidth="1"
+                              />
+                              {/* Support bracket */}
+                              <path
+                                d={`M ${stepX} ${ledgeY + ledgeThick} L ${stepX} ${ledgeY + 20} L ${stepX - ledgeDepthPx + 5} ${ledgeY + ledgeThick}`}
+                                fill="none"
+                                stroke="#9ca3af"
+                                strokeWidth="2"
+                              />
+                              {/* Ledge height dimension */}
+                              <g>
+                                <line x1={stepX - ledgeDepthPx - 10} y1={groundY} x2={stepX - ledgeDepthPx - 10} y2={ledgeY} stroke="#22d3ee" strokeWidth="1"/>
+                                <line x1={stepX - ledgeDepthPx - 15} y1={groundY} x2={stepX - ledgeDepthPx - 5} y2={groundY} stroke="#22d3ee" strokeWidth="1"/>
+                                <line x1={stepX - ledgeDepthPx - 15} y1={ledgeY} x2={stepX - ledgeDepthPx - 5} y2={ledgeY} stroke="#22d3ee" strokeWidth="1"/>
+                                <text x={stepX - ledgeDepthPx - 18} y={(groundY + ledgeY) / 2 + 3} textAnchor="end" fill="#22d3ee" fontSize="9" fontFamily="monospace">{config.ledgeHeight}"</text>
+                              </g>
+                            </g>
+                          );
+                        })()}
+
                         {/* Person on stool */}
                         {config.showPerson && (() => {
                           const stoolY = kitchenFloorY - config.stoolHeight * scale;
