@@ -458,11 +458,76 @@ export default function KitchenBarPlannerV4() {
                 </div>
               </div>
 
+              {/* Tiered Bar Toggle */}
+              <div className="checkbox-item" onClick={() => update('tieredBar', !config.tieredBar)}>
+                <input type="checkbox" checked={config.tieredBar} readOnly />
+                <span>Tiered bar (raised section)</span>
+              </div>
+              {config.tieredBar && (
+                <div className="slider-group" style={{ marginLeft: 24, marginTop: 8 }}>
+                  <div className="slider-label">
+                    <span>Raised Height</span>
+                    <span className="slider-value">{config.raisedBarHeight}"</span>
+                  </div>
+                  <input type="range" min="4" max="10" step="1"
+                    value={config.raisedBarHeight}
+                    onChange={e => update('raisedBarHeight', parseFloat(e.target.value))} />
+                  <div className="slider-note">Height above counter level</div>
+                </div>
+              )}
+
+              {/* LR Ledge Toggle */}
+              <div className="checkbox-item" onClick={() => update('lrLedge', !config.lrLedge)}>
+                <input type="checkbox" checked={config.lrLedge} readOnly />
+                <span>Living room ledge</span>
+              </div>
+              {config.lrLedge && (
+                <>
+                  <div className="slider-group" style={{ marginLeft: 24, marginTop: 8 }}>
+                    <div className="slider-label">
+                      <span>Ledge Height</span>
+                      <span className="slider-value">{config.ledgeHeight}"</span>
+                    </div>
+                    <input type="range" min="36" max="48" step="1"
+                      value={config.ledgeHeight}
+                      onChange={e => update('ledgeHeight', parseFloat(e.target.value))} />
+                    <div className="slider-note">From LR floor</div>
+                  </div>
+                  <div className="slider-group" style={{ marginLeft: 24 }}>
+                    <div className="slider-label">
+                      <span>Ledge Depth</span>
+                      <span className="slider-value">{config.ledgeDepth}"</span>
+                    </div>
+                    <input type="range" min="6" max="14" step="1"
+                      value={config.ledgeDepth}
+                      onChange={e => update('ledgeDepth', parseFloat(e.target.value))} />
+                  </div>
+                </>
+              )}
+
+              {/* LR Shelves Toggle */}
+              <div className="checkbox-item" onClick={() => update('lrShelves', !config.lrShelves)}>
+                <input type="checkbox" checked={config.lrShelves} readOnly />
+                <span>Living room floating shelves</span>
+              </div>
+              {config.lrShelves && (
+                <div className="slider-group" style={{ marginLeft: 24, marginTop: 8 }}>
+                  <div className="slider-label">
+                    <span>Shelf Height</span>
+                    <span className="slider-value">{config.shelfHeight}"</span>
+                  </div>
+                  <input type="range" min="36" max="54" step="2"
+                    value={config.shelfHeight}
+                    onChange={e => update('shelfHeight', parseFloat(e.target.value))} />
+                  <div className="slider-note">From LR floor</div>
+                </div>
+              )}
+
               <div className="checkbox-item" onClick={() => update('waterfallEdge', !config.waterfallEdge)}>
                 <input type="checkbox" checked={config.waterfallEdge} readOnly />
                 <span>Waterfall edge (sides)</span>
               </div>
-              
+
               <div className="checkbox-item" onClick={() => update('showLighting', !config.showLighting)}>
                 <input type="checkbox" checked={config.showLighting} readOnly />
                 <span>Under-cabinet lighting</span>
