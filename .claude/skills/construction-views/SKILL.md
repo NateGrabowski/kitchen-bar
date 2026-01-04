@@ -1,95 +1,115 @@
 ---
 name: construction-views
-description: Use when creating construction/build documentation for woodworking or home improvement projects. Triggers on "construction view", "build diagram", "framing", "assembly instructions", or when visualizing how something gets built.
+description: Use when creating or validating construction documentation for woodworking/home improvement. Triggers on "construction view", "build diagram", "framing", or when asked to review/create build documentation.
 ---
 
-# Construction Views for Build Documentation
+# Construction Views Workflow
 
 ## Overview
 
-Create comprehensive construction documentation with framing diagrams, cross-sections with callouts, connection details, and build sequences. **Always validate designs against real-world photos before finalizing.**
-
-## Core Components
-
-### 1. Framing Diagrams (2x2 Grid)
-Show structural skeleton views:
-- **Carcass/Box**: 3D-ish skeleton (sides, bottom, stretchers, dado locations)
-- **Face Frame**: Rails, stiles, door openings, hinge positions
-- **Attachment Method**: Brackets, screws, slotted holes for wood movement
-- **Site Prep**: What exists, what needs modification
-
-### 2. Cross-Section with Callouts
-Side section showing:
-- Material callout boxes pointing to each layer
-- Dimension lines with measurements
-- Interior details (shelves, cleats, supports)
-- Relationship to existing structures
-
-### 3. Connection Details
-Zoomed detail views (3 panels) of critical joints:
-- Fastener types and placement
-- Clearances and tolerances
-- Movement allowances (wood expansion)
-
-### 4. Supporting Information
-- **Materials Table**: Item, size, quantity, notes
-- **Build Sequence**: Numbered steps in order
-- **Key Dimensions**: 6-box summary grid
-- **Considerations**: Warnings, code requirements, gotchas
-
-## Reality-Check Protocol
-
-**Before finalizing any construction view:**
-
-1. **Compare with real-world photos** of the actual space
-2. **Ask three questions:**
-
-| Perspective | Key Question |
-|-------------|--------------|
-| **Interior Designer** | Does this match the existing finishes? Am I covering something that's already done? |
-| **Architect** | What's structural vs cosmetic? What's already there that I can use? |
-| **Contractor** | Am I solving a problem that doesn't exist? What's the simplest path? |
-
-3. **Challenge assumptions** about what exists vs what needs to be built
-
-### Example Reality-Check Failure
-We designed a "step panel" to cover exposed framing - photos revealed a finished drywall half-wall already existed. The entire panel concept was unnecessary complexity.
-
-## SVG Styling (Dark Theme)
-
-```javascript
-// Colors
-background: '#0a0f18'
-panel: '#1e293b'
-stroke: '#334155'
-text: '#e2e8f0'
-accent: '#4ade80'  // green for headers
-dimension: '#38bdf8' // cyan for measurements
-callout: '#fbbf24'  // amber for callout lines
-
-// Existing structures (drywall, etc)
-existing: '#d4c5b0'  // cream/beige
-wood: '#8b6914'      // wood cap/trim
-```
+**This skill validates existing construction views or creates new ones.** Always runs the Reality-Check Protocol against reference photos first.
 
 ## Workflow
 
-1. **Reality-check FIRST**: View reference photos, identify existing structures
-2. **Run professional perspectives**: Designer/Architect/Contractor questions
-3. **Gather requirements**: Dimensions, materials, what's new vs existing
-4. **Draft framing diagrams**: Structural skeleton (distinguish new from existing)
-5. **Add cross-section**: With callout boxes and dimension lines
-6. **Detail connections**: Zoomed views of critical joints
-7. **Document materials/sequence**: Tables and numbered steps
-8. **Test rendering**: Use Playwright for full-page screenshots
-9. **Iterate**: Refine based on feedback
+```
+START
+  ↓
+Does construction view exist?
+  ↓ YES                    ↓ NO
+  VALIDATE                 CREATE
+  ↓                        ↓
+Reality-Check Protocol     Reality-Check Protocol
+  ↓                        ↓
+Give feedback              Build components
+  ↓                        ↓
+Offer to update?           Show result
+  ↓ YES
+  Make changes
+```
 
-## Common Mistakes
+## Reality-Check Protocol (ALWAYS RUN FIRST)
 
-| Mistake | Fix |
-|---------|-----|
-| Designing without photos | Always get/view reference photos first |
-| **Assuming blank slate** | **CRITICAL**: Check what already exists (finished walls, trim, framing). Most home improvement builds on existing structures. |
-| Over-engineering | Simplest solution that works; don't add unnecessary panels/structure |
-| Missing dimension lines | Every callout needs associated measurements |
-| Static materials list | Make tables dynamic based on config state |
+1. **Find and view reference photos** in `docs/images/` or ask user for photos
+2. **Identify existing structures** - walls, finishes, framing already in place
+3. **Run three perspectives:**
+
+| Perspective | Question |
+|-------------|----------|
+| **Interior Designer** | What's already finished that we shouldn't cover? |
+| **Architect** | What's structural vs cosmetic? What can we reuse? |
+| **Contractor** | Am I solving a problem that doesn't exist? Simplest path? |
+
+4. **Report findings** before any design work
+
+## VALIDATE Flow (existing view)
+
+1. Read the construction view code
+2. Run Reality-Check Protocol against photos
+3. Check for these components:
+   - [ ] Framing diagrams (ideally 2x2 grid)
+   - [ ] Cross-section with material callouts
+   - [ ] Connection details (zoomed joints)
+   - [ ] Materials table (dynamic)
+   - [ ] Build sequence (numbered steps)
+   - [ ] Key dimensions summary
+   - [ ] Warnings/considerations
+
+4. **Report what's missing or incorrect**
+5. Ask: "Want me to update the construction view?"
+
+## CREATE Flow (empty/new view)
+
+Build these components in order:
+
+### 1. Framing Diagrams (2x2 grid)
+```jsx
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+  {/* Cabinet Carcass */}
+  {/* Face Frame */}
+  {/* Counter Attachment */}
+  {/* Site Prep / Existing Wall Prep */}
+</div>
+```
+
+### 2. Cross-Section with Callouts
+- Side view showing all layers
+- Callout boxes with leader lines pointing to materials
+- Dimension lines (cyan `#38bdf8`)
+- Show EXISTING structures in cream `#d4c5b0`
+
+### 3. Connection Details (3 panels)
+Zoomed views of critical joints:
+- Counter attachment (L-brackets, slotted holes)
+- Cabinet positioning (relationship to existing structures)
+- Overhang support (if applicable)
+
+### 4. Supporting Info
+- Materials table: Item | Size | Qty | Notes
+- Build sequence: Numbered steps
+- Key dimensions: 6-box summary grid
+- Considerations: Warnings, code requirements
+
+## Color Scheme (Dark Theme)
+
+```javascript
+background: '#0a0f18'
+panel: '#1e293b'
+accent: '#4ade80'      // headers
+dimension: '#38bdf8'   // measurements
+callout: '#fbbf24'     // leader lines
+existing: '#d4c5b0'    // existing structures
+wood: '#8b6914'        // trim/caps
+```
+
+## Reference Implementation
+
+See `visualization/jsx/kitchen-floor-cabinets-sketch.jsx` Construction tab for complete working example with:
+- 4-panel framing diagram grid
+- Cross-section with callout boxes
+- 3-panel connection details
+- Dynamic materials table
+- 10-step build sequence
+
+## Critical Mistake to Avoid
+
+**Assuming blank slate**: Most home improvement builds ON existing structures. The v4 construction view assumed new framing was needed, but photos revealed a finished drywall half-wall already existed. Reality-check catches this.
