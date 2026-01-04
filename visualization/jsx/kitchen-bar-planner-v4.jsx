@@ -1227,6 +1227,59 @@ export default function KitchenBarPlannerV4() {
 
                         <text x={startX + barLengthPx / 2} y={topY + totalDepthPx + 20} textAnchor="middle" fill="#64748b" fontSize="10">LIVING ROOM SIDE</text>
 
+                        {/* Tiered bar indicator (raised section on LR side) */}
+                        {config.tieredBar && (
+                          <g>
+                            <rect
+                              x={startX}
+                              y={topY + totalDepthPx - 15}
+                              width={barLengthPx}
+                              height="15"
+                              fill="#b45309"
+                              stroke="#f59e0b"
+                              strokeWidth="1"
+                              opacity="0.8"
+                            />
+                            <text x={startX + barLengthPx / 2} y={topY + totalDepthPx - 5} textAnchor="middle" fill="#fbbf24" fontSize="7">RAISED +{config.raisedBarHeight}"</text>
+                          </g>
+                        )}
+
+                        {/* LR Ledge (beyond bar depth) */}
+                        {config.lrLedge && (
+                          <g>
+                            <rect
+                              x={startX}
+                              y={topY + totalDepthPx + 25}
+                              width={barLengthPx}
+                              height={config.ledgeDepth * scale * 0.4}
+                              fill="#92400e"
+                              stroke="#22d3ee"
+                              strokeWidth="1"
+                              opacity="0.7"
+                            />
+                            <text x={startX + barLengthPx / 2} y={topY + totalDepthPx + 25 + config.ledgeDepth * scale * 0.2 + 3} textAnchor="middle" fill="#22d3ee" fontSize="7">LEDGE ({config.ledgeDepth}")</text>
+                          </g>
+                        )}
+
+                        {/* LR Floating Shelves (beyond bar depth) */}
+                        {config.lrShelves && (
+                          <g>
+                            {[0, 1, 2].map((i) => (
+                              <rect
+                                key={i}
+                                x={startX + 20 + i * (barLengthPx - 60) / 2.5}
+                                y={topY + totalDepthPx + (config.lrLedge ? 50 : 25)}
+                                width={(barLengthPx - 80) / 3}
+                                height="8"
+                                fill="#4a6a8a"
+                                stroke="#a78bfa"
+                                strokeWidth="1"
+                              />
+                            ))}
+                            <text x={startX + barLengthPx / 2} y={topY + totalDepthPx + (config.lrLedge ? 70 : 45)} textAnchor="middle" fill="#a78bfa" fontSize="7">FLOATING SHELVES</text>
+                          </g>
+                        )}
+
                         {/* Depth dimension */}
                         <g>
                           <line x1={startX + barLengthPx + 15} y1={topY} x2={startX + barLengthPx + 15} y2={topY + totalDepthPx} stroke="#a78bfa" strokeWidth="1"/>
