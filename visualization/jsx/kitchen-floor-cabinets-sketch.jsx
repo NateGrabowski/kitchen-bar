@@ -949,6 +949,119 @@ export default function KitchenFloorCabinetsSketch() {
             </div>
           </>
           )}
+
+          {activeView === 'construction' && (
+          <div style={{ background: '#0d1520', borderRadius: 4, padding: 20 }}>
+            <h3 style={{ color: '#60a5fa', margin: '0 0 16px 0', fontSize: 14 }}>CONSTRUCTION NOTES</h3>
+
+            {/* Materials List */}
+            <div style={{ marginBottom: 20 }}>
+              <h4 style={{ color: '#4ade80', margin: '0 0 8px 0', fontSize: 12, textTransform: 'uppercase' }}>Materials</h4>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
+                <thead>
+                  <tr style={{ borderBottom: '1px solid #334155' }}>
+                    <th style={{ textAlign: 'left', padding: '8px 12px', color: '#94a3b8' }}>Item</th>
+                    <th style={{ textAlign: 'left', padding: '8px 12px', color: '#94a3b8' }}>Size</th>
+                    <th style={{ textAlign: 'left', padding: '8px 12px', color: '#94a3b8' }}>Qty</th>
+                    <th style={{ textAlign: 'left', padding: '8px 12px', color: '#94a3b8' }}>Notes</th>
+                  </tr>
+                </thead>
+                <tbody style={{ color: '#e2e8f0' }}>
+                  <tr style={{ borderBottom: '1px solid #1e293b' }}>
+                    <td style={{ padding: '8px 12px' }}>Butcher block top</td>
+                    <td style={{ padding: '8px 12px', fontFamily: 'monospace' }}>{config.barLength}" x {totalDepth}" x {config.counterThickness}"</td>
+                    <td style={{ padding: '8px 12px' }}>1</td>
+                    <td style={{ padding: '8px 12px', color: '#94a3b8' }}>Seal with food-safe finish</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #1e293b' }}>
+                    <td style={{ padding: '8px 12px' }}>Base cabinet</td>
+                    <td style={{ padding: '8px 12px', fontFamily: 'monospace' }}>{config.barLength}" x {config.cabinetDepth}" x {cabinetHeight}"</td>
+                    <td style={{ padding: '8px 12px' }}>1</td>
+                    <td style={{ padding: '8px 12px', color: needsCustom ? '#fb923c' : '#94a3b8' }}>
+                      {needsCustom ? `Custom height (standard is ${closestStandard.size}")` : `Near standard ${closestStandard.label}`}
+                    </td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #1e293b' }}>
+                    <td style={{ padding: '8px 12px' }}>Step face panel</td>
+                    <td style={{ padding: '8px 12px', fontFamily: 'monospace' }}>{config.barLength}" x {config.stepHeight}" x 3/4"</td>
+                    <td style={{ padding: '8px 12px' }}>1</td>
+                    <td style={{ padding: '8px 12px', color: '#94a3b8' }}>Plywood, {config.stepPanelStyle} finish</td>
+                  </tr>
+                  {config.overhangTowardLR > 6 && (
+                    <tr style={{ borderBottom: '1px solid #1e293b' }}>
+                      <td style={{ padding: '8px 12px' }}>Support brackets</td>
+                      <td style={{ padding: '8px 12px', fontFamily: 'monospace' }}>{config.overhangTowardLR}" depth</td>
+                      <td style={{ padding: '8px 12px' }}>2-3</td>
+                      <td style={{ padding: '8px 12px', color: '#94a3b8' }}>Steel L-brackets for overhang</td>
+                    </tr>
+                  )}
+                  <tr style={{ borderBottom: '1px solid #1e293b' }}>
+                    <td style={{ padding: '8px 12px' }}>Bar stools</td>
+                    <td style={{ padding: '8px 12px', fontFamily: 'monospace' }}>{config.stoolHeight}" seat height</td>
+                    <td style={{ padding: '8px 12px' }}>3</td>
+                    <td style={{ padding: '8px 12px', color: '#94a3b8' }}>For {config.counterHeight}" counter</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* Build Steps */}
+            <div style={{ marginBottom: 20 }}>
+              <h4 style={{ color: '#4ade80', margin: '0 0 8px 0', fontSize: 12, textTransform: 'uppercase' }}>Build Sequence</h4>
+              <ol style={{ margin: 0, paddingLeft: 20, color: '#e2e8f0', fontSize: 12, lineHeight: 2 }}>
+                <li>Remove existing railing and clean step edge</li>
+                <li>Install step face panel (plywood flush with step edge)</li>
+                <li>Position cabinet on kitchen floor, front aligned with step edge</li>
+                <li>Secure cabinet to floor and wall (if applicable)</li>
+                {config.overhangTowardLR > 6 && <li>Install support brackets for LR overhang</li>}
+                <li>Place butcher block on cabinet, mark for overhang</li>
+                <li>Secure butcher block with corner brackets underneath</li>
+                <li>Sand and seal butcher block edges</li>
+                <li>Install electrical outlets (if planned)</li>
+                <li>Final finishing and cleanup</li>
+              </ol>
+            </div>
+
+            {/* Key Dimensions */}
+            <div style={{ marginBottom: 20 }}>
+              <h4 style={{ color: '#4ade80', margin: '0 0 8px 0', fontSize: 12, textTransform: 'uppercase' }}>Key Dimensions</h4>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+                {[
+                  { label: 'Counter height', value: `${config.counterHeight}"`, note: 'from kitchen floor' },
+                  { label: 'Counter from LR', value: `${counterFromLRFloor}"`, note: 'from LR floor' },
+                  { label: 'Total depth', value: `${totalDepth}"`, note: 'front to back' },
+                  { label: 'Cabinet height', value: `${cabinetHeight}"`, note: needsCustom ? 'CUSTOM' : 'near standard' },
+                  { label: 'Knee space', value: `${config.overhangTowardKitchen}"`, note: kneeSpace >= 12 ? 'OK' : 'tight' },
+                  { label: 'Seat-to-counter', value: `${seatToCounter}"`, note: seatToCounter >= 10 && seatToCounter <= 14 ? 'ideal' : 'check' },
+                ].map((dim, i) => (
+                  <div key={i} style={{ background: '#1e293b', padding: 12, borderRadius: 4 }}>
+                    <div style={{ color: '#94a3b8', fontSize: 10, marginBottom: 4 }}>{dim.label}</div>
+                    <div style={{ color: '#60a5fa', fontSize: 18, fontFamily: 'monospace' }}>{dim.value}</div>
+                    <div style={{ color: '#64748b', fontSize: 9 }}>{dim.note}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Warnings */}
+            <div>
+              <h4 style={{ color: '#fb923c', margin: '0 0 8px 0', fontSize: 12, textTransform: 'uppercase' }}>Considerations</h4>
+              <ul style={{ margin: 0, paddingLeft: 20, color: '#94a3b8', fontSize: 12, lineHeight: 1.8 }}>
+                {needsCustom && (
+                  <li style={{ color: '#fb923c' }}>
+                    Cabinet height {cabinetHeight}" is non-standard. Consider building custom or using {closestStandard.label} with filler.
+                  </li>
+                )}
+                {config.overhangTowardLR > 6 && (
+                  <li>LR overhang ({config.overhangTowardLR}") needs bracket support every 24-36"</li>
+                )}
+                <li>Butcher block needs 1/8" gap at walls for expansion</li>
+                <li>Run electrical before securing countertop</li>
+                <li>This design does NOT use the step area for storage (see "continuous cabinet" alternative)</li>
+              </ul>
+            </div>
+          </div>
+          )}
         </div>
       </div>
     </div>
