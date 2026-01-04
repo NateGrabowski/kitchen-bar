@@ -280,6 +280,144 @@ Kitchen overhang:      12" (for knee clearance when seating on kitchen side)
 
 ---
 
+## Technical Reference (for Claude Code)
+
+### File Structure
+
+Three interactive visualization files were created:
+
+```
+kitchen-bar-planner-v3.jsx      # Original concept - LR-side cabinets
+kitchen-floor-cabinet-options.jsx   # Kitchen-floor cabinet approach  
+hybrid-bar-options.jsx          # Five hybrid configurations compared
+```
+
+### Dependencies
+
+These are **self-contained React components** with minimal dependencies:
+- `React` (useState, useId hooks)
+- No external UI libraries
+- No external CSS files
+- All styles are inline or in a `<style>` tag within the component
+
+### How to Run/Preview
+
+**Option A: Claude.ai Artifacts**
+- Copy the entire file content
+- Ask Claude to display it as a React artifact
+- Interactive sliders and buttons will work
+
+**Option B: Local Development**
+```bash
+npm create vite@latest kitchen-bar -- --template react
+cd kitchen-bar
+# Replace src/App.jsx with the component file content
+# Or import the component into App.jsx
+npm install
+npm run dev
+```
+
+**Option C: CodeSandbox / StackBlitz**
+- Create new React project
+- Paste component code
+- Preview instantly
+
+### Component Architecture
+
+Each file follows the same pattern:
+
+```jsx
+import React, { useState, useId } from 'react';
+
+export default function ComponentName() {
+  // Configuration state with all adjustable values
+  const [config, setConfig] = useState({
+    stepHeight: 23.5,
+    barTopHeight: 40,
+    // ... other values
+  });
+  
+  // Unique ID for SVG patterns (prevents conflicts)
+  const uniqueId = useId();
+  
+  // Helper to update config
+  const update = (key, value) => setConfig(prev => ({ ...prev, [key]: value }));
+  
+  // Calculated/derived values
+  const calculatedValue = config.something + config.somethingElse;
+  
+  return (
+    <div>
+      {/* Inline <style> tag with CSS */}
+      <style>{`...`}</style>
+      
+      {/* Control panel with sliders */}
+      <input type="range" onChange={e => update('key', parseFloat(e.target.value))} />
+      
+      {/* SVG diagrams that react to config state */}
+      <svg>
+        {/* Drawing logic uses config values */}
+      </svg>
+    </div>
+  );
+}
+```
+
+### Key Variables to Modify
+
+In any file, the `useState` initialization object contains all adjustable values:
+
+```jsx
+const [config, setConfig] = useState({
+  stepHeight: 23.5,        // Living room to kitchen floor
+  barTopHeight: 40,        // Bar height from kitchen floor
+  barDepth: 28,            // Total front-to-back depth
+  cabinetDepth: 12,        // Depth of cabinet section
+  cabinetSetback: 3,       // How far cabinet is tucked under bar
+  barLength: 84,           // Total length of bar
+  stoolHeight: 30,         // Stool seat height
+  barTopThickness: 1.5,    // Butcher block thickness
+  kitchenOverhang: 12,     // Knee clearance overhang
+  // ... design options (booleans, strings)
+  showPerson: true,
+  cabinetStyle: 'mixed',   // 'doors', 'open', 'mixed'
+  waterfallEdge: false,
+  showLighting: true,
+});
+```
+
+### Making Modifications
+
+**To change default values:**
+Edit the `useState` initialization object.
+
+**To add new options:**
+1. Add to `useState` object
+2. Add UI control (slider, checkbox, button)
+3. Use the value in SVG drawing logic
+
+**To modify the diagrams:**
+SVG drawing logic is in arrow functions like `SideSection()`, `LivingRoomElevation()`, etc. These use `config` values to calculate pixel positions.
+
+**Common scale factor:**
+Most diagrams use `scale = 1.6` to `2.0` to convert inches to pixels. Example:
+```jsx
+const scale = 1.8;
+const cabinetHeightPx = config.cabinetHeight * scale;
+```
+
+### SVG ID Uniqueness
+
+Each SVG uses `useId()` for pattern/gradient IDs to prevent conflicts:
+```jsx
+const uniqueId = useId();
+// Then in SVG:
+<pattern id={`${uniqueId}-grid`}>
+<rect fill={`url(#${uniqueId}-grid)`}>
+```
+
+---
+
 ## For Future Redesigns
 
 When making adjustments, key variables to play with:
