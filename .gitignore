@@ -23,3 +23,6 @@ npm-debug.log*
 
 # Git worktrees
 .worktrees/
+
+# Archive
+docs/.archive/
