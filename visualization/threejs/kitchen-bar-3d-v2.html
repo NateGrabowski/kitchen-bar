@@ -35,37 +35,81 @@
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-    console.log('Three.js loaded:', THREE.REVISION);
+    // ============================================
+    // CONFIGURATION
+    // ============================================
+    const CONFIG = {
+      // Fixed architectural constraint
+      stepHeight: 23.5,
 
-    // Placeholder - will build out in subsequent tasks
+      // Bar dimensions (inches)
+      barTopHeight: 40,
+      barDepth: 28,
+      cabinetDepth: 12,
+      barLength: 84,
+      barTopThickness: 1.5,
+      raisedBarHeight: 6,
+
+      // Calculated
+      get kneeSpace() { return this.barDepth - this.cabinetDepth },
+      get barFromLR() { return this.barTopHeight + this.stepHeight },
+      get cabinetHeight() { return this.barFromLR - 4 },
+    };
+
+    // ============================================
+    // SCENE SETUP
+    // ============================================
+    const canvas = document.getElementById('canvas');
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x1a1a2e);
 
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 50, 100);
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
+    camera.position.set(-60, 48, 80);
 
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas'), antialias: true });
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    // Test cube
-    const geometry = new THREE.BoxGeometry(20, 20, 20);
-    const material = new THREE.MeshBasicMaterial({ color: 0x3b82f6, wireframe: true });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    // OrbitControls
+    const controls = new OrbitControls(camera, canvas);
+    controls.target.set(42, 30, 0);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.minDistance = 30;
+    controls.maxDistance = 200;
+    controls.maxPolarAngle = Math.PI / 2;
+    controls.update();
 
+    // Axes helper for development
+    const axesHelper = new THREE.AxesHelper(50);
+    scene.add(axesHelper);
+
+    // Grid helper for development
+    const gridHelper = new THREE.GridHelper(200, 20, 0x3b82f6, 0x1e3a5f);
+    scene.add(gridHelper);
+
+    // ============================================
+    // ANIMATION LOOP
+    // ============================================
     function animate() {
       requestAnimationFrame(animate);
-      cube.rotation.y += 0.01;
+      controls.update();
       renderer.render(scene, camera);
     }
     animate();
 
+    // ============================================
+    // RESIZE HANDLER
+    // ============================================
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
+
+    console.log('Kitchen Bar 3D - Config:', CONFIG);
   </script>
 </body>
 </html>
