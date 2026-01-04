@@ -1,19 +1,17 @@
 import React, { useId, useState } from 'react';
 
 /**
- * CONCEPT SKETCH: Kitchen-Floor Cabinets (C2)
+ * CONCEPT SKETCH: Chevron Top + Speakeasy Features
  *
  * KEY IDEAS:
- * 1. Standard 30" or 36" base cabinets sit on kitchen floor
- * 2. The 23.5" step becomes a decorative panel only (no storage)
- * 3. Simpler construction using stock cabinets
+ * 1. Chevron/herringbone pattern butcher block top
+ * 2. Hidden storage reveals - touch-latch drawers, magnetic panels
  *
  * This is a CONCEPT SKETCH - simplified to show the differentiating ideas.
  */
-export default function ConceptKitchenFloorCabinets() {
+export default function ConceptChevronSpeakeasy() {
   const uniqueId = useId();
-  const [showBaseline, setShowBaseline] = useState(false);
-  const [cabinetHeight, setCabinetHeight] = useState(30); // 30" or 36"
+  const [showHidden, setShowHidden] = useState(false);
 
   // Fixed dimensions from project constraints
   const config = {
@@ -110,38 +108,26 @@ export default function ConceptKitchenFloorCabinets() {
         {/* Header */}
         <div style={{ marginBottom: 20 }}>
           <h1 style={{ fontSize: 24, fontWeight: 500, margin: 0, color: '#f1f5f9' }}>
-            <span style={{ background: '#1e3a5f', padding: '2px 8px', borderRadius: 4, fontSize: 14, marginRight: 10 }}>C2</span>
-            Concept: Kitchen-Floor Cabinets
+            Concept: Chevron Top + Speakeasy Features
           </h1>
           <p style={{ color: '#64748b', marginTop: 6, fontSize: 14 }}>
-            Standard cabinets on kitchen floor • Step becomes decorative panel • Simpler construction
+            Elegant pattern meets hidden functionality • Touch-latch reveals • Conversation starter
           </p>
           <div style={{ marginTop: 12 }}>
-            <span className="concept-tag">Standard Construction</span>
-            <span className="concept-tag">Stock Cabinets OK</span>
-            <span className="concept-tag bold">Storage Trade-off</span>
+            <span className="concept-tag">Moderate Boldness</span>
+            <span className="concept-tag">Farmhouse Fit</span>
+            <span className="concept-tag bold">Hidden Features</span>
           </div>
         </div>
 
-        {/* Interactive Controls */}
-        <div className="concept-panel" style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
-          <button className="toggle-btn" onClick={() => setShowBaseline(!showBaseline)}>
-            {showBaseline ? 'Hide Comparison' : 'Show Baseline'}
+        {/* Interactive Toggle */}
+        <div className="concept-panel" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <button className="toggle-btn" onClick={() => setShowHidden(!showHidden)}>
+            {showHidden ? 'Hide Secrets' : 'Reveal Secrets'}
           </button>
           <span style={{ fontSize: 13, color: '#94a3b8' }}>
-            {showBaseline ? 'Baseline (continuous cabinet) shown in outline' : 'Compare to baseline continuous cabinet'}
+            {showHidden ? 'Hidden compartments shown in purple' : 'Click to see hidden storage locations'}
           </span>
-          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <label style={{ fontSize: 12, color: '#94a3b8' }}>Cabinet Height:</label>
-            <select
-              value={cabinetHeight}
-              onChange={e => setCabinetHeight(Number(e.target.value))}
-              style={{ background: '#1e293b', color: '#e2e8f0', border: '1px solid #3b82f6', borderRadius: 4, padding: '4px 8px' }}
-            >
-              <option value={30}>30" (Standard Base)</option>
-              <option value={36}>36" (Tall Base)</option>
-            </select>
-          </div>
         </div>
 
         {/* Main Visualization - Side Section */}
@@ -177,11 +163,6 @@ export default function ConceptKitchenFloorCabinets() {
               const cabinetLeft = stepX - cabinetDepthPx;
               const barRight = stepX + kneeSpacePx;
 
-              // Kitchen-floor cabinet calculations
-              const cabinetHeightPx = cabinetHeight * scale;
-              const cabinetTopY = kitchenFloorY - cabinetHeightPx;
-              const gapAboveCabinet = barTopY + barThickPx - cabinetTopY; // gap between bar and cabinet
-
               return (
                 <g>
                   {/* Room labels */}
@@ -191,23 +172,9 @@ export default function ConceptKitchenFloorCabinets() {
                   <rect x={stepX} y={kitchenFloorY} width="220" height={groundY - kitchenFloorY + 40} fill="#234060"/>
                   <text x="330" y={kitchenFloorY + 20} textAnchor="middle" fill="#3b5a7a" fontSize="11">KITCHEN</text>
 
-                  {/* BASELINE COMPARISON - continuous cabinet outline */}
-                  {showBaseline && (
-                    <rect
-                      x={cabinetLeft}
-                      y={barTopY + barThickPx}
-                      width={cabinetDepthPx}
-                      height={groundY - barTopY - barThickPx}
-                      fill="none"
-                      stroke="#4ade80"
-                      strokeWidth="2"
-                      strokeDasharray="6,3"
-                      opacity="0.6"
-                    />
-                  )}
-
-                  {/* BUTCHER BLOCK TOP */}
+                  {/* CHEVRON BUTCHER BLOCK TOP */}
                   <g>
+                    {/* Main top surface */}
                     <rect
                       x={cabinetLeft}
                       y={barTopY}
@@ -217,15 +184,23 @@ export default function ConceptKitchenFloorCabinets() {
                       stroke="#92400e"
                       strokeWidth="1.5"
                     />
-                    {/* Wood grain lines */}
-                    <g opacity="0.4">
-                      {[0, 15, 30, 45, 60].map((offset, i) => (
-                        <line
+                    {/* Chevron pattern overlay */}
+                    <rect
+                      x={cabinetLeft + 2}
+                      y={barTopY + 2}
+                      width={barRight - cabinetLeft - 4}
+                      height={barThickPx - 4}
+                      fill={`url(#${uniqueId}-chevron)`}
+                    />
+                    {/* Chevron indicator lines */}
+                    <g opacity="0.7">
+                      {[0, 12, 24, 36, 48, 60].map((offset, i) => (
+                        <path
                           key={i}
-                          x1={cabinetLeft + 5 + offset}
-                          y1={barTopY + 2}
-                          x2={cabinetLeft + 5 + offset}
-                          y2={barTopY + barThickPx - 2}
+                          d={`M ${cabinetLeft + 5 + offset} ${barTopY + barThickPx - 2}
+                              L ${cabinetLeft + 11 + offset} ${barTopY + 2}
+                              L ${cabinetLeft + 17 + offset} ${barTopY + barThickPx - 2}`}
+                          fill="none"
                           stroke="#78350f"
                           strokeWidth="1"
                         />
@@ -233,49 +208,59 @@ export default function ConceptKitchenFloorCabinets() {
                     </g>
                   </g>
 
-                  {/* Gap/spacer between bar top and cabinet (if any) */}
-                  {gapAboveCabinet > 0 && (
-                    <rect
-                      x={cabinetLeft}
-                      y={barTopY + barThickPx}
-                      width={cabinetDepthPx}
-                      height={gapAboveCabinet}
-                      fill="#1e3a5f"
-                      stroke="#60a5fa"
-                      strokeWidth="0.5"
-                      strokeDasharray="2,2"
-                    />
-                  )}
-
-                  {/* KITCHEN-FLOOR CABINET - shorter, sits on kitchen floor */}
+                  {/* Cabinet body with LR-facing doors */}
                   <rect
                     x={cabinetLeft}
-                    y={cabinetTopY}
+                    y={barTopY + barThickPx}
                     width={cabinetDepthPx}
-                    height={cabinetHeightPx}
+                    height={groundY - barTopY - barThickPx}
                     fill="#2d4a6a"
                     stroke="#60a5fa"
                     strokeWidth="1"
                   />
 
-                  {/* Cabinet shelves */}
-                  <line x1={cabinetLeft + 3} y1={cabinetTopY + cabinetHeightPx * 0.33} x2={stepX - 3} y2={cabinetTopY + cabinetHeightPx * 0.33} stroke="#60a5fa" strokeWidth="0.5"/>
-                  <line x1={cabinetLeft + 3} y1={cabinetTopY + cabinetHeightPx * 0.66} x2={stepX - 3} y2={cabinetTopY + cabinetHeightPx * 0.66} stroke="#60a5fa" strokeWidth="0.5"/>
+                  {/* HIDDEN COMPARTMENT 1: Under-counter secret drawer */}
+                  {showHidden && (
+                    <g>
+                      <rect
+                        x={cabinetLeft + 5}
+                        y={barTopY + barThickPx + 5}
+                        width={cabinetDepthPx - 10}
+                        height="25"
+                        fill={`url(#${uniqueId}-hidden)`}
+                        stroke="#a855f7"
+                        strokeWidth="2"
+                        strokeDasharray="4,2"
+                        rx="3"
+                      />
+                      <text x={cabinetLeft + cabinetDepthPx/2} y={barTopY + barThickPx + 22} textAnchor="middle" fill="#a855f7" fontSize="8" fontWeight="bold">SECRET DRAWER</text>
+                    </g>
+                  )}
 
-                  {/* DECORATIVE STEP PANEL - the 23.5" wasted space */}
-                  <rect
-                    x={cabinetLeft}
-                    y={kitchenFloorY}
-                    width={cabinetDepthPx}
-                    height={groundY - kitchenFloorY}
-                    fill="#3d1a0a"
-                    stroke="#78350f"
-                    strokeWidth="1"
-                  />
-                  <text x={cabinetLeft + cabinetDepthPx/2} y={(kitchenFloorY + groundY) / 2 - 5} textAnchor="middle" fill="#94a3b8" fontSize="8">DECORATIVE</text>
-                  <text x={cabinetLeft + cabinetDepthPx/2} y={(kitchenFloorY + groundY) / 2 + 5} textAnchor="middle" fill="#94a3b8" fontSize="8">PANEL ONLY</text>
+                  {/* Cabinet shelves (visible storage) */}
+                  <line x1={cabinetLeft + 3} y1={barTopY + 60} x2={stepX - 3} y2={barTopY + 60} stroke="#60a5fa" strokeWidth="0.5"/>
+                  <line x1={cabinetLeft + 3} y1={barTopY + 110} x2={stepX - 3} y2={barTopY + 110} stroke="#60a5fa" strokeWidth="0.5"/>
+                  <line x1={cabinetLeft + 3} y1={barTopY + 160} x2={stepX - 3} y2={barTopY + 160} stroke="#60a5fa" strokeWidth="0.5"/>
 
-                  {/* Step face */}
+                  {/* HIDDEN COMPARTMENT 2: False panel in lower section */}
+                  {showHidden && (
+                    <g>
+                      <rect
+                        x={cabinetLeft + 5}
+                        y={barTopY + 165}
+                        width={cabinetDepthPx - 10}
+                        height="30"
+                        fill={`url(#${uniqueId}-hidden)`}
+                        stroke="#a855f7"
+                        strokeWidth="2"
+                        strokeDasharray="4,2"
+                        rx="3"
+                      />
+                      <text x={cabinetLeft + cabinetDepthPx/2} y={barTopY + 184} textAnchor="middle" fill="#a855f7" fontSize="8" fontWeight="bold">FALSE PANEL</text>
+                    </g>
+                  )}
+
+                  {/* Step face with possible integrated drawer */}
                   <rect
                     x={stepX}
                     y={kitchenFloorY}
@@ -285,6 +270,24 @@ export default function ConceptKitchenFloorCabinets() {
                     stroke="#60a5fa"
                     strokeWidth="1"
                   />
+
+                  {/* HIDDEN COMPARTMENT 3: Step riser drawer */}
+                  {showHidden && (
+                    <g>
+                      <rect
+                        x={stepX + 1}
+                        y={groundY - 40}
+                        width="10"
+                        height="35"
+                        fill={`url(#${uniqueId}-hidden)`}
+                        stroke="#a855f7"
+                        strokeWidth="2"
+                        strokeDasharray="4,2"
+                      />
+                      <text x={stepX + 20} y={groundY - 18} fill="#a855f7" fontSize="8" fontWeight="bold">STEP</text>
+                      <text x={stepX + 20} y={groundY - 8} fill="#a855f7" fontSize="8" fontWeight="bold">DRAWER</text>
+                    </g>
+                  )}
 
                   {/* Support post */}
                   <rect x={stepX - 3} y={barTopY + barThickPx} width="5" height={kitchenFloorY - barTopY - barThickPx} fill="#2d4a6a"/>
@@ -306,21 +309,12 @@ export default function ConceptKitchenFloorCabinets() {
                   })()}
 
                   {/* DIMENSIONS */}
-                  {/* Step height - WASTED */}
+                  {/* Step height */}
                   <g>
-                    <line x1="50" y1={groundY} x2="50" y2={kitchenFloorY} stroke="#ef4444" strokeWidth="1.5"/>
-                    <line x1="45" y1={groundY} x2="55" y2={groundY} stroke="#ef4444" strokeWidth="1.5"/>
-                    <line x1="45" y1={kitchenFloorY} x2="55" y2={kitchenFloorY} stroke="#ef4444" strokeWidth="1.5"/>
-                    <text x="60" y={(groundY + kitchenFloorY) / 2 - 2} fill="#ef4444" fontSize="9" fontWeight="bold">23.5"</text>
-                    <text x="60" y={(groundY + kitchenFloorY) / 2 + 10} fill="#ef4444" fontSize="8">wasted</text>
-                  </g>
-
-                  {/* Cabinet height */}
-                  <g>
-                    <line x1={cabinetLeft - 15} y1={kitchenFloorY} x2={cabinetLeft - 15} y2={cabinetTopY} stroke="#60a5fa" strokeWidth="1"/>
-                    <line x1={cabinetLeft - 20} y1={kitchenFloorY} x2={cabinetLeft - 10} y2={kitchenFloorY} stroke="#60a5fa" strokeWidth="1"/>
-                    <line x1={cabinetLeft - 20} y1={cabinetTopY} x2={cabinetLeft - 10} y2={cabinetTopY} stroke="#60a5fa" strokeWidth="1"/>
-                    <text x={cabinetLeft - 25} y={(kitchenFloorY + cabinetTopY) / 2 + 4} fill="#60a5fa" fontSize="9" fontFamily="monospace" textAnchor="end">{cabinetHeight}"</text>
+                    <line x1="50" y1={groundY} x2="50" y2={kitchenFloorY} stroke="#fb923c" strokeWidth="1"/>
+                    <line x1="45" y1={groundY} x2="55" y2={groundY} stroke="#fb923c" strokeWidth="1"/>
+                    <line x1="45" y1={kitchenFloorY} x2="55" y2={kitchenFloorY} stroke="#fb923c" strokeWidth="1"/>
+                    <text x="60" y={(groundY + kitchenFloorY) / 2 + 4} fill="#fb923c" fontSize="10" fontFamily="monospace">23.5"</text>
                   </g>
 
                   {/* Bar height */}
@@ -341,22 +335,21 @@ export default function ConceptKitchenFloorCabinets() {
 
                   {/* Labels */}
                   <text x="30" y="25" fill="#60a5fa" fontSize="12" fontWeight="600">SIDE SECTION</text>
-                  <text x="30" y="42" fill="#64748b" fontSize="10">Standard cabinet on kitchen floor • Step = decorative only</text>
+                  <text x="30" y="42" fill="#64748b" fontSize="10">Chevron pattern top • Hidden compartments</text>
 
-                  {/* Gap callout */}
-                  {gapAboveCabinet > 10 && (
-                    <g>
-                      <line x1={cabinetLeft + cabinetDepthPx + 10} y1={barTopY + barThickPx + 5} x2={cabinetLeft + cabinetDepthPx + 10} y2={cabinetTopY - 5} stroke="#fbbf24" strokeWidth="1"/>
-                      <text x={cabinetLeft + cabinetDepthPx + 15} y={(barTopY + barThickPx + cabinetTopY) / 2} fill="#fbbf24" fontSize="8">{Math.round((config.barTopHeight - cabinetHeight) * 10) / 10}" gap</text>
-                    </g>
-                  )}
+                  {/* Chevron callout */}
+                  <g>
+                    <line x1={cabinetLeft + 40} y1={barTopY - 10} x2={cabinetLeft + 40} y2={barTopY + 5} stroke="#fbbf24" strokeWidth="1"/>
+                    <circle cx={cabinetLeft + 40} cy={barTopY - 15} r="4" fill="#fbbf24"/>
+                    <text x={cabinetLeft + 50} y={barTopY - 12} fill="#fbbf24" fontSize="9" fontWeight="bold">CHEVRON</text>
+                  </g>
                 </g>
               );
             })()}
           </svg>
         </div>
 
-        {/* Plan View */}
+        {/* Plan View - Shows chevron pattern better */}
         <div className="concept-panel">
           <div className="concept-title">Plan View (Bird's Eye)</div>
           <svg viewBox="0 0 420 180" style={{ width: '100%', background: '#0d1520', borderRadius: 6 }}>
@@ -380,7 +373,7 @@ export default function ConceptKitchenFloorCabinets() {
                   <text x="210" y="25" textAnchor="middle" fill="#3b5a7a" fontSize="10">LIVING ROOM</text>
                   <text x="210" y="165" textAnchor="middle" fill="#3b5a7a" fontSize="10">KITCHEN</text>
 
-                  {/* Bar top */}
+                  {/* Bar top with chevron pattern */}
                   <rect
                     x={startX}
                     y={startY}
@@ -391,22 +384,31 @@ export default function ConceptKitchenFloorCabinets() {
                     strokeWidth="2"
                   />
 
-                  {/* Wood grain lines */}
-                  <g opacity="0.3">
-                    {Array.from({ length: 12 }).map((_, i) => (
-                      <line
-                        key={i}
-                        x1={startX + 10 + i * 12}
-                        y1={startY + 2}
-                        x2={startX + 10 + i * 12}
-                        y2={startY + barDepth - 2}
-                        stroke="#78350f"
-                        strokeWidth="1"
-                      />
+                  {/* Chevron pattern - full herringbone across the top */}
+                  <g>
+                    {Array.from({ length: 14 }).map((_, col) => (
+                      Array.from({ length: 4 }).map((_, row) => {
+                        const x = startX + 10 + col * 10;
+                        const y = startY + 5 + row * 12;
+                        const flip = (col + row) % 2 === 0;
+                        return (
+                          <path
+                            key={`${col}-${row}`}
+                            d={flip
+                              ? `M ${x} ${y + 10} L ${x + 5} ${y} L ${x + 10} ${y + 10}`
+                              : `M ${x} ${y} L ${x + 5} ${y + 10} L ${x + 10} ${y}`
+                            }
+                            fill="none"
+                            stroke="#78350f"
+                            strokeWidth="1"
+                            opacity="0.5"
+                          />
+                        );
+                      })
                     ))}
                   </g>
 
-                  {/* Cabinet footprint */}
+                  {/* Cabinet section (LR-facing) */}
                   <rect
                     x={startX}
                     y={startY}
@@ -417,7 +419,35 @@ export default function ConceptKitchenFloorCabinets() {
                     strokeWidth="1"
                     strokeDasharray="4,2"
                   />
-                  <text x={startX + 10} y={startY + 15} fill="#60a5fa" fontSize="8">{cabinetHeight}" cabinet</text>
+                  <text x={startX + 10} y={startY + 15} fill="#60a5fa" fontSize="8">cabinet below</text>
+
+                  {/* Hidden compartments in plan view */}
+                  {showHidden && (
+                    <g>
+                      {/* Secret drawer */}
+                      <rect
+                        x={startX + 10}
+                        y={startY + 3}
+                        width="40"
+                        height="16"
+                        fill={`url(#${uniqueId}-hidden)`}
+                        stroke="#a855f7"
+                        strokeWidth="1.5"
+                        strokeDasharray="3,2"
+                      />
+                      {/* Pop-up outlet location */}
+                      <circle
+                        cx={startX + barLength - 30}
+                        cy={startY + barDepth - 15}
+                        r="8"
+                        fill={`url(#${uniqueId}-hidden)`}
+                        stroke="#a855f7"
+                        strokeWidth="1.5"
+                        strokeDasharray="3,2"
+                      />
+                      <text x={startX + barLength - 30} y={startY + barDepth - 12} textAnchor="middle" fill="#a855f7" fontSize="6" fontWeight="bold">POP</text>
+                    </g>
+                  )}
 
                   {/* Seating positions */}
                   {[0, 1, 2].map(i => (
@@ -454,20 +484,20 @@ export default function ConceptKitchenFloorCabinets() {
           <div className="concept-title">Key Features</div>
           <div className="feature-list">
             <div className="feature-item">
-              <h4>Stock Cabinet Compatible</h4>
-              <p>Use standard 30" or 36" base cabinets. No custom fabrication needed for cabinet boxes.</p>
+              <h4>Chevron Pattern Top</h4>
+              <p>Herringbone butcher block. Available at Home Depot (8ft Hevea). Visual interest without being too bold.</p>
             </div>
             <div className="feature-item">
-              <h4>Simpler Construction</h4>
-              <p>No need to frame into the step. Standard cabinet installation on kitchen floor.</p>
+              <h4>Touch-Latch Secret Drawer</h4>
+              <p>Push-to-open drawer hidden under counter lip. No visible hardware. Stores valuables, remotes.</p>
             </div>
             <div className="feature-item">
-              <h4>Decorative Step Panel</h4>
-              <p>Step face becomes a decorative element. Could match cabinet style or be an accent material.</p>
+              <h4>False Panel Storage</h4>
+              <p>Magnetic panel in cabinet face conceals deeper compartment. "Speakeasy" style hidden space.</p>
             </div>
             <div className="feature-item">
-              <h4>Easy Replacement</h4>
-              <p>Cabinets can be swapped out later without structural changes to the bar.</p>
+              <h4>Pop-Up Outlet</h4>
+              <p>Recessed outlet pops up when needed. Flat and invisible when closed. Clean countertop.</p>
             </div>
           </div>
         </div>
@@ -477,52 +507,57 @@ export default function ConceptKitchenFloorCabinets() {
           <div className="concept-panel">
             <div className="concept-title" style={{ color: '#4ade80' }}>Pros</div>
             <ul style={{ margin: 0, paddingLeft: 20, fontSize: 13, color: '#94a3b8', lineHeight: 1.8 }}>
-              <li>Use pre-made stock cabinets (lower cost)</li>
-              <li>Simpler installation - no step framing</li>
-              <li>Easier to replace/upgrade later</li>
-              <li>Standard cabinet heights (30" or 36")</li>
-              <li>Familiar construction for any contractor</li>
+              <li>Chevron is readily available (Home Depot)</li>
+              <li>Hidden features are conversation starters</li>
+              <li>Clean appearance when "closed"</li>
+              <li>Touch-latch = no visible hardware</li>
+              <li>Still farmhouse modern aesthetic</li>
             </ul>
           </div>
           <div className="concept-panel">
             <div className="concept-title" style={{ color: '#fb923c' }}>Cons</div>
             <ul style={{ margin: 0, paddingLeft: 20, fontSize: 13, color: '#94a3b8', lineHeight: 1.8 }}>
-              <li><strong>Wastes 23.5" of storage</strong> (step area)</li>
-              <li>Step panel is purely decorative (dead space)</li>
-              <li>~18 cu.ft storage vs ~37 cu.ft baseline</li>
-              <li>{config.barTopHeight - cabinetHeight}" gap above cabinet needs trim</li>
-              <li>Less dramatic visual impact</li>
+              <li>Hidden mechanisms need maintenance</li>
+              <li>More complex build than standard</li>
+              <li>Touch-latches can fail over time</li>
+              <li>May forget where hidden storage is!</li>
+              <li>Pop-up outlets cost more (~$100-200 each)</li>
             </ul>
           </div>
         </div>
 
-        {/* Storage Comparison */}
+        {/* Hidden Feature Details */}
         <div className="concept-panel">
-          <div className="concept-title">Storage Comparison</div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-            <div style={{ background: '#0d1520', padding: 20, borderRadius: 6, borderLeft: '3px solid #ef4444', textAlign: 'center' }}>
-              <div style={{ color: '#ef4444', fontSize: 32, fontWeight: 600 }}>~18</div>
-              <div style={{ color: '#94a3b8', fontSize: 12 }}>cubic feet</div>
-              <div style={{ color: '#ef4444', fontSize: 11, marginTop: 8 }}>This Concept ({cabinetHeight}" cabinet)</div>
+          <div className="concept-title">Hidden Feature Options</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16, fontSize: 12 }}>
+            <div style={{ background: '#0d1520', padding: 12, borderRadius: 6, borderLeft: '3px solid #a855f7' }}>
+              <div style={{ color: '#e2e8f0', fontWeight: 500, marginBottom: 4 }}>Touch-Latch Drawers</div>
+              <div style={{ color: '#94a3b8' }}>Push-to-open, no handles. Blum or Salice hardware. ~$15-30/drawer.</div>
             </div>
-            <div style={{ background: '#0d1520', padding: 20, borderRadius: 6, borderLeft: '3px solid #4ade80', textAlign: 'center' }}>
-              <div style={{ color: '#4ade80', fontSize: 32, fontWeight: 600 }}>~37</div>
-              <div style={{ color: '#94a3b8', fontSize: 12 }}>cubic feet</div>
-              <div style={{ color: '#4ade80', fontSize: 11, marginTop: 8 }}>Baseline (63.5" continuous)</div>
+            <div style={{ background: '#0d1520', padding: 12, borderRadius: 6, borderLeft: '3px solid #a855f7' }}>
+              <div style={{ color: '#e2e8f0', fontWeight: 500, marginBottom: 4 }}>Magnetic Panels</div>
+              <div style={{ color: '#94a3b8' }}>Rare-earth magnets hold panel. Push corner to release. Custom DIY.</div>
+            </div>
+            <div style={{ background: '#0d1520', padding: 12, borderRadius: 6, borderLeft: '3px solid #a855f7' }}>
+              <div style={{ color: '#e2e8f0', fontWeight: 500, marginBottom: 4 }}>Pop-Up Outlets</div>
+              <div style={{ color: '#94a3b8' }}>Lew Electric or similar. 3" diameter hole. USB + AC options.</div>
+            </div>
+            <div style={{ background: '#0d1520', padding: 12, borderRadius: 6, borderLeft: '3px solid #a855f7' }}>
+              <div style={{ color: '#e2e8f0', fontWeight: 500, marginBottom: 4 }}>Step Riser Drawer</div>
+              <div style={{ color: '#94a3b8' }}>Shallow drawer in step face. ~6" deep max. Good for remotes, coasters.</div>
             </div>
           </div>
-          <p style={{ color: '#94a3b8', fontSize: 12, marginTop: 12, textAlign: 'center' }}>
-            You lose approximately half the storage capacity with kitchen-floor cabinets
-          </p>
         </div>
 
         {/* Concept Summary */}
         <div className="concept-panel" style={{ borderColor: '#fbbf24', borderWidth: 2 }}>
           <div className="concept-title">Concept Summary</div>
           <p style={{ fontSize: 14, color: '#e2e8f0', margin: 0, lineHeight: 1.6 }}>
-            <strong>The trade-off:</strong> Kitchen-floor cabinets are simpler and use stock sizes, but they treat your 23.5" step as wasted space.
-            If storage is a priority, this isn't ideal. If simplicity and cost matter more, this is the conventional approach.
-            The step becomes a decorative panel—potentially an accent color or material, but not functional storage.
+            <strong>The idea:</strong> Combine the visual interest of a chevron/herringbone butcher block top
+            with "speakeasy" hidden features. The bar looks elegant and clean from the outside, but push
+            the right spot and drawers appear. Hidden storage for valuables, remotes, or that good bourbon
+            you don't share with everyone. It's farmhouse (wood pattern) with a playful secret life.
+            Less visually dramatic than live edge, but more functional surprise factor.
           </p>
         </div>
       </div>
