@@ -6,7 +6,6 @@ export default function KitchenBarPlannerV4() {
     barTopHeight: 40,
     barDepth: 28,
     cabinetDepth: 12,
-    cabinetSetback: 3,
     barLength: 84,
     stoolHeight: 30,
     barTopThickness: 1.5,
@@ -17,18 +16,11 @@ export default function KitchenBarPlannerV4() {
     passThrough: false,
     passThroughWidth: 24,
     wineStorage: false,
-    // NEW: Preset tracking
+    // Preset tracking
     activePreset: 'flush',
-    // NEW: Tiered bar
+    // Tiered bar option
     tieredBar: false,
     raisedBarHeight: 6,
-    // NEW: LR ledge
-    lrLedge: false,
-    ledgeHeight: 42,
-    ledgeDepth: 10,
-    // NEW: LR shelves
-    lrShelves: false,
-    shelfHeight: 42,
   });
 
   const [activeView, setActiveView] = useState('all');
@@ -36,42 +28,21 @@ export default function KitchenBarPlannerV4() {
 
   const update = (key, value) => setConfig(prev => ({ ...prev, [key]: value }));
 
-  // Preset definitions
+  // Preset definitions - two main configurations
   const presets = {
     flush: {
       name: 'Flush',
-      desc: 'Cabinets align with step edge',
-      pros: ['Simplest build', 'Standard cabinets'],
-      cons: ['No LR function', 'Counter height only'],
-      values: { cabinetSetback: 0, tieredBar: false, lrLedge: false, lrShelves: false }
-    },
-    setback: {
-      name: 'Setback',
-      desc: 'Step edge stays visible',
-      pros: ['Natural boundary', 'Easier step navigation'],
-      cons: ['May collect debris', 'Counter height only'],
-      values: { cabinetSetback: 4, tieredBar: false, lrLedge: false, lrShelves: false }
+      desc: 'Single-level counter aligned with step',
+      pros: ['Simplest build', 'Standard cabinets', 'Clean look'],
+      cons: ['Counter height only (36")'],
+      values: { tieredBar: false }
     },
     tiered: {
       name: 'Tiered',
-      desc: 'Counter + raised bar section',
-      pros: ['True bar height', 'Hides kitchen mess'],
-      cons: ['More complex', 'Crumb gap'],
-      values: { cabinetSetback: 0, tieredBar: true, raisedBarHeight: 6, lrLedge: false, lrShelves: false }
-    },
-    ledge: {
-      name: 'Ledge',
-      desc: 'Add LR drink shelf',
-      pros: ['LR functionality', 'Standing-friendly'],
-      cons: ['Needs secure mounting', 'Two separate elements'],
-      values: { cabinetSetback: 0, tieredBar: false, lrLedge: true, ledgeHeight: 42, ledgeDepth: 10, lrShelves: false }
-    },
-    floating: {
-      name: 'Floating',
-      desc: 'Add LR display shelves',
-      pros: ['Display storage', 'Modern look'],
-      cons: ['Visible clutter', 'Dust accumulation'],
-      values: { cabinetSetback: 0, tieredBar: false, lrLedge: false, lrShelves: true, shelfHeight: 42 }
+      desc: 'Counter + raised bar section facing LR',
+      pros: ['True bar height (42"+)', 'Hides kitchen mess'],
+      cons: ['More complex build', 'Crumb gap between levels'],
+      values: { tieredBar: true, raisedBarHeight: 6 }
     },
   };
 
@@ -87,8 +58,7 @@ export default function KitchenBarPlannerV4() {
   };
 
   // Calculated values with safety bounds
-  const kneeSpaceKitchen = Math.max(0, config.barDepth - config.cabinetDepth - config.cabinetSetback);
-  const overhangLivingRoom = config.cabinetSetback;
+  const kneeSpaceKitchen = Math.max(0, config.barDepth - config.cabinetDepth);
   const barFromLivingRoom = config.barTopHeight + config.stepHeight;
   const cabinetHeight = Math.max(20, barFromLivingRoom - 4);
 
@@ -356,13 +326,18 @@ export default function KitchenBarPlannerV4() {
               
               <div className="slider-group">
                 <div className="slider-label">
-                  <span>Step Height</span>
+                  <span>Step Height (fixed)</span>
                   <span className="slider-value">{config.stepHeight}"</span>
                 </div>
-                <input type="range" min="18" max="30" step="0.5"
-                  value={config.stepHeight}
-                  onChange={e => update('stepHeight', parseFloat(e.target.value))} />
-                <div className="slider-note">Kitchen floor above living room</div>
+                <div style={{
+                  padding: '8px 12px',
+                  background: '#1e3a5f',
+                  borderRadius: 4,
+                  fontSize: 11,
+                  color: '#94a3b8'
+                }}>
+                  Your step is 23.5" — this is a fixed architectural constraint
+                </div>
               </div>
 
               <div className="slider-group">
@@ -395,17 +370,6 @@ export default function KitchenBarPlannerV4() {
                   value={config.cabinetDepth}
                   onChange={e => update('cabinetDepth', parseFloat(e.target.value))} />
                 <div className="slider-note">Standard base cabinet: 24"</div>
-              </div>
-
-              <div className="slider-group">
-                <div className="slider-label">
-                  <span>Cabinet Setback</span>
-                  <span className="slider-value">{config.cabinetSetback}"</span>
-                </div>
-                <input type="range" min="0" max="6" step="0.5"
-                  value={config.cabinetSetback}
-                  onChange={e => update('cabinetSetback', parseFloat(e.target.value))} />
-                <div className="slider-note">Tuck cabinets under bar top</div>
               </div>
 
               <div className="slider-group">
@@ -476,53 +440,6 @@ export default function KitchenBarPlannerV4() {
                 </div>
               )}
 
-              {/* LR Ledge Toggle */}
-              <div className="checkbox-item" onClick={() => update('lrLedge', !config.lrLedge)}>
-                <input type="checkbox" checked={config.lrLedge} readOnly />
-                <span>Living room ledge</span>
-              </div>
-              {config.lrLedge && (
-                <>
-                  <div className="slider-group" style={{ marginLeft: 24, marginTop: 8 }}>
-                    <div className="slider-label">
-                      <span>Ledge Height</span>
-                      <span className="slider-value">{config.ledgeHeight}"</span>
-                    </div>
-                    <input type="range" min="36" max="48" step="1"
-                      value={config.ledgeHeight}
-                      onChange={e => update('ledgeHeight', parseFloat(e.target.value))} />
-                    <div className="slider-note">From LR floor</div>
-                  </div>
-                  <div className="slider-group" style={{ marginLeft: 24 }}>
-                    <div className="slider-label">
-                      <span>Ledge Depth</span>
-                      <span className="slider-value">{config.ledgeDepth}"</span>
-                    </div>
-                    <input type="range" min="6" max="14" step="1"
-                      value={config.ledgeDepth}
-                      onChange={e => update('ledgeDepth', parseFloat(e.target.value))} />
-                  </div>
-                </>
-              )}
-
-              {/* LR Shelves Toggle */}
-              <div className="checkbox-item" onClick={() => update('lrShelves', !config.lrShelves)}>
-                <input type="checkbox" checked={config.lrShelves} readOnly />
-                <span>Living room floating shelves</span>
-              </div>
-              {config.lrShelves && (
-                <div className="slider-group" style={{ marginLeft: 24, marginTop: 8 }}>
-                  <div className="slider-label">
-                    <span>Shelf Height</span>
-                    <span className="slider-value">{config.shelfHeight}"</span>
-                  </div>
-                  <input type="range" min="36" max="54" step="2"
-                    value={config.shelfHeight}
-                    onChange={e => update('shelfHeight', parseFloat(e.target.value))} />
-                  <div className="slider-note">From LR floor</div>
-                </div>
-              )}
-
               <div className="checkbox-item" onClick={() => update('waterfallEdge', !config.waterfallEdge)}>
                 <input type="checkbox" checked={config.waterfallEdge} readOnly />
                 <span>Waterfall edge (sides)</span>
@@ -573,10 +490,6 @@ export default function KitchenBarPlannerV4() {
                 <span>{kneeSpaceKitchen}"</span>
               </div>
               <div className="calc-row">
-                <span>Living room overhang</span>
-                <span>{overhangLivingRoom}"</span>
-              </div>
-              <div className="calc-row">
                 <span>Cabinet height (approx)</span>
                 <span>{cabinetHeight}"</span>
               </div>
@@ -589,23 +502,10 @@ export default function KitchenBarPlannerV4() {
                 <span>~{Math.floor(config.barLength / 24)}</span>
               </div>
 
-              {/* New feature calculated values */}
               {config.tieredBar && (
                 <div className="calc-row" style={{ color: '#f472b6' }}>
                   <span>Raised bar from LR floor</span>
                   <span>{barFromLivingRoom + config.raisedBarHeight}"</span>
-                </div>
-              )}
-              {config.lrLedge && (
-                <div className="calc-row" style={{ color: '#22d3ee' }}>
-                  <span>Ledge from LR floor</span>
-                  <span>{config.ledgeHeight}"</span>
-                </div>
-              )}
-              {config.lrShelves && (
-                <div className="calc-row" style={{ color: '#a78bfa' }}>
-                  <span>Shelves from LR floor</span>
-                  <span>{config.shelfHeight}"</span>
                 </div>
               )}
 
@@ -625,7 +525,7 @@ export default function KitchenBarPlannerV4() {
             {(activeView === 'all' || activeView === 'section') && (
               <div className="panel">
                 <div className="panel-title">Side Section View</div>
-                <svg viewBox="0 0 480 300" style={{ width: '100%', background: '#0d1520', borderRadius: 4 }}>
+                <svg viewBox="0 0 380 320" style={{ width: '100%', background: '#0d1520', borderRadius: 4 }}>
                   <defs>
                     <pattern id={`${uniqueId}-grid1`} width="20" height="20" patternUnits="userSpaceOnUse">
                       <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a2a3a" strokeWidth="0.5"/>
@@ -635,21 +535,20 @@ export default function KitchenBarPlannerV4() {
                       <stop offset="100%" stopColor="#fbbf24" stopOpacity="0"/>
                     </linearGradient>
                   </defs>
-                  <rect width="480" height="300" fill={`url(#${uniqueId}-grid1)`}/>
+                  <rect width="380" height="320" fill={`url(#${uniqueId}-grid1)`}/>
 
                   {(() => {
-                    const scale = 1.8;
-                    const groundY = 250;
+                    const scale = 2.4;
+                    const groundY = 280;
                     const kitchenFloorY = groundY - config.stepHeight * scale;
                     const barTopY = kitchenFloorY - config.barTopHeight * scale;
-                    const stepX = 180;
+                    const stepX = 160;
                     
                     const cabinetDepthPx = config.cabinetDepth * scale;
-                    const setbackPx = config.cabinetSetback * scale;
                     const kneeSpacePx = kneeSpaceKitchen * scale;
-                    
+
                     const cabinetLeft = stepX - cabinetDepthPx;
-                    const barLeft = cabinetLeft - setbackPx;
+                    const barLeft = cabinetLeft; // Bar aligns with cabinet front
                     const barRight = stepX + kneeSpacePx;
                     const barThickPx = Math.max(config.barTopThickness * scale * 2, 6);
 
@@ -665,49 +564,46 @@ export default function KitchenBarPlannerV4() {
                         {/* Step face */}
                         <line x1={stepX} y1={groundY} x2={stepX} y2={kitchenFloorY} stroke="#60a5fa" strokeWidth="2"/>
 
-                        {/* Cabinet body */}
-                        <rect 
-                          x={cabinetLeft} 
-                          y={barTopY + barThickPx + setbackPx} 
-                          width={cabinetDepthPx} 
-                          height={groundY - 4 - barTopY - barThickPx - setbackPx} 
-                          fill="#2d4a6a" 
-                          stroke="#60a5fa" 
+                        {/* Cabinet body - continuous from bar top to LR floor */}
+                        <rect
+                          x={cabinetLeft}
+                          y={barTopY + barThickPx}
+                          width={cabinetDepthPx}
+                          height={groundY - barTopY - barThickPx}
+                          fill="#2d4a6a"
+                          stroke="#60a5fa"
                           strokeWidth="1.5"
                         />
-                        
-                        {/* Toe kick */}
-                        <rect x={cabinetLeft} y={groundY - 4} width={cabinetDepthPx} height="4" fill="#0d1520"/>
 
-                        {/* Shelf lines for mixed style */}
+                        {/* Shelf lines for open/mixed style */}
                         {config.cabinetStyle !== 'doors' && (
                           <>
-                            <line 
-                              x1={cabinetLeft + 3} 
-                              y1={barTopY + barThickPx + setbackPx + 40} 
-                              x2={stepX - 3} 
-                              y2={barTopY + barThickPx + setbackPx + 40} 
-                              stroke="#60a5fa" 
+                            <line
+                              x1={cabinetLeft + 3}
+                              y1={barTopY + barThickPx + 40}
+                              x2={stepX - 3}
+                              y2={barTopY + barThickPx + 40}
+                              stroke="#60a5fa"
                               strokeWidth="0.5"
                             />
-                            <line 
-                              x1={cabinetLeft + 3} 
-                              y1={barTopY + barThickPx + setbackPx + 80} 
-                              x2={stepX - 3} 
-                              y2={barTopY + barThickPx + setbackPx + 80} 
-                              stroke="#60a5fa" 
+                            <line
+                              x1={cabinetLeft + 3}
+                              y1={barTopY + barThickPx + 80}
+                              x2={stepX - 3}
+                              y2={barTopY + barThickPx + 80}
+                              stroke="#60a5fa"
                               strokeWidth="0.5"
                             />
                           </>
                         )}
 
                         {/* Under-cabinet lighting */}
-                        {config.showLighting && setbackPx > 0 && (
-                          <rect 
-                            x={cabinetLeft + 5} 
-                            y={barTopY + barThickPx + 2} 
-                            width={cabinetDepthPx - 10} 
-                            height={setbackPx + 15} 
+                        {config.showLighting && (
+                          <rect
+                            x={cabinetLeft + 5}
+                            y={barTopY + barThickPx + 2}
+                            width={cabinetDepthPx - 10}
+                            height="15"
                             fill={`url(#${uniqueId}-glow1)`}
                           />
                         )}
@@ -785,82 +681,7 @@ export default function KitchenBarPlannerV4() {
                         {/* Support post */}
                         <rect x={stepX - 3} y={barTopY + barThickPx} width="5" height={kitchenFloorY - barTopY - barThickPx} fill="#2d4a6a"/>
 
-                        {/* LR Ledge */}
-                        {config.lrLedge && (() => {
-                          const ledgeY = groundY - config.ledgeHeight * scale;
-                          const ledgeDepthPx = config.ledgeDepth * scale;
-                          const ledgeThick = 4;
-                          return (
-                            <g>
-                              {/* Ledge surface */}
-                              <rect
-                                x={stepX - ledgeDepthPx}
-                                y={ledgeY}
-                                width={ledgeDepthPx}
-                                height={ledgeThick}
-                                fill="#92400e"
-                                stroke="#b45309"
-                                strokeWidth="1"
-                              />
-                              {/* Support bracket */}
-                              <path
-                                d={`M ${stepX} ${ledgeY + ledgeThick} L ${stepX} ${ledgeY + 20} L ${stepX - ledgeDepthPx + 5} ${ledgeY + ledgeThick}`}
-                                fill="none"
-                                stroke="#9ca3af"
-                                strokeWidth="2"
-                              />
-                              {/* Ledge height dimension */}
-                              <g>
-                                <line x1={stepX - ledgeDepthPx - 10} y1={groundY} x2={stepX - ledgeDepthPx - 10} y2={ledgeY} stroke="#22d3ee" strokeWidth="1"/>
-                                <line x1={stepX - ledgeDepthPx - 15} y1={groundY} x2={stepX - ledgeDepthPx - 5} y2={groundY} stroke="#22d3ee" strokeWidth="1"/>
-                                <line x1={stepX - ledgeDepthPx - 15} y1={ledgeY} x2={stepX - ledgeDepthPx - 5} y2={ledgeY} stroke="#22d3ee" strokeWidth="1"/>
-                                <text x={stepX - ledgeDepthPx - 18} y={(groundY + ledgeY) / 2 + 3} textAnchor="end" fill="#22d3ee" fontSize="9" fontFamily="monospace">{config.ledgeHeight}"</text>
-                              </g>
-                            </g>
-                          );
-                        })()}
-
-                        {/* LR Floating Shelves */}
-                        {config.lrShelves && (() => {
-                          const shelfY = groundY - config.shelfHeight * scale;
-                          const shelfWidth = 30;
-                          const shelfThick = 3;
-                          return (
-                            <g>
-                              {/* Primary shelf */}
-                              <rect
-                                x={stepX - shelfWidth}
-                                y={shelfY}
-                                width={shelfWidth}
-                                height={shelfThick}
-                                fill="#4a6a8a"
-                                stroke="#60a5fa"
-                                strokeWidth="1"
-                              />
-                              {/* Secondary shelf (higher) */}
-                              <rect
-                                x={stepX - shelfWidth}
-                                y={shelfY - 25}
-                                width={shelfWidth}
-                                height={shelfThick}
-                                fill="#4a6a8a"
-                                stroke="#60a5fa"
-                                strokeWidth="1"
-                              />
-                              {/* Shelf brackets */}
-                              <rect x={stepX - 3} y={shelfY - 25} width="3" height={28 + shelfThick} fill="#9ca3af"/>
-                              {/* Height dimension */}
-                              <g>
-                                <line x1={stepX - shelfWidth - 10} y1={groundY} x2={stepX - shelfWidth - 10} y2={shelfY} stroke="#a78bfa" strokeWidth="1"/>
-                                <line x1={stepX - shelfWidth - 15} y1={groundY} x2={stepX - shelfWidth - 5} y2={groundY} stroke="#a78bfa" strokeWidth="1"/>
-                                <line x1={stepX - shelfWidth - 15} y1={shelfY} x2={stepX - shelfWidth - 5} y2={shelfY} stroke="#a78bfa" strokeWidth="1"/>
-                                <text x={stepX - shelfWidth - 18} y={(groundY + shelfY) / 2 + 3} textAnchor="end" fill="#a78bfa" fontSize="9" fontFamily="monospace">{config.shelfHeight}"</text>
-                              </g>
-                            </g>
-                          );
-                        })()}
-
-                        {/* Person on stool */}
+                        {/* Person on stool - facing toward living room (left) */}
                         {config.showPerson && (() => {
                           const stoolY = kitchenFloorY - config.stoolHeight * scale;
                           const px = 250;
@@ -870,10 +691,11 @@ export default function KitchenBarPlannerV4() {
                               <rect x={px - 12} y={stoolY} width="24" height="4" fill="#4a6a8a" rx="2"/>
                               <rect x={px - 2} y={stoolY + 4} width="4" height={kitchenFloorY - stoolY - 4} fill="#4a6a8a"/>
                               <rect x={px - 10} y={kitchenFloorY - 4} width="20" height="4" fill="#4a6a8a" rx="2"/>
-                              {/* Person */}
+                              {/* Person - facing LEFT (toward living room) */}
                               <ellipse cx={px} cy={stoolY - 45} rx="11" ry="13" fill="#5a7a9a"/>
                               <rect x={px - 12} y={stoolY - 32} width="24" height="34" fill="#5a7a9a" rx="3"/>
-                              <rect x={px + 12} y={stoolY - 26} width="25" height="6" fill="#5a7a9a" rx="3"/>
+                              {/* Arm reaching toward bar/living room (left side) */}
+                              <rect x={px - 37} y={stoolY - 26} width="25" height="6" fill="#5a7a9a" rx="3"/>
                             </g>
                           );
                         })()}
@@ -894,16 +716,6 @@ export default function KitchenBarPlannerV4() {
                           <line x1="295" y1={barTopY + 3} x2="305" y2={barTopY + 3} stroke="#4ade80" strokeWidth="1"/>
                           <text x="310" y={(kitchenFloorY + barTopY) / 2 + 4} fill="#4ade80" fontSize="10" fontFamily="monospace">{config.barTopHeight}"</text>
                         </g>
-
-                        {/* Setback dimension */}
-                        {config.cabinetSetback > 0 && (
-                          <g>
-                            <line x1={barLeft} y1={barTopY - 15} x2={cabinetLeft} y2={barTopY - 15} stroke="#f472b6" strokeWidth="1"/>
-                            <line x1={barLeft} y1={barTopY - 20} x2={barLeft} y2={barTopY - 10} stroke="#f472b6" strokeWidth="1"/>
-                            <line x1={cabinetLeft} y1={barTopY - 20} x2={cabinetLeft} y2={barTopY - 10} stroke="#f472b6" strokeWidth="1"/>
-                            <text x={(barLeft + cabinetLeft) / 2} y={barTopY - 22} textAnchor="middle" fill="#f472b6" fontSize="9" fontFamily="monospace">{config.cabinetSetback}"</text>
-                          </g>
-                        )}
 
                         {/* Total depth */}
                         <g>
@@ -948,41 +760,35 @@ export default function KitchenBarPlannerV4() {
                     const barTopY = cabinetTopY - 10;
                     const numSections = Math.max(1, Math.floor(config.barLength / 21));
                     const sectionWidth = barLengthPx / numSections;
-                    const setbackShadow = config.cabinetSetback * 2;
 
                     return (
                       <g>
                         {/* Floor */}
                         <rect x="30" y={groundY} width="420" height="30" fill="#1e3a5f"/>
 
-                        {/* Shadow from overhang */}
-                        {config.cabinetSetback > 0 && (
-                          <rect x={startX - 5} y={cabinetTopY - 5} width={barLengthPx + 10} height={setbackShadow + 5} fill="#080d14" opacity="0.5"/>
-                        )}
-
                         {/* Toe kick */}
                         <rect x={startX} y={groundY - 8} width={barLengthPx} height="8" fill="#0d1520"/>
 
                         {/* Cabinet body */}
-                        <rect 
-                          x={startX} 
-                          y={cabinetTopY + setbackShadow} 
-                          width={barLengthPx} 
-                          height={cabinetHeightPx - setbackShadow} 
-                          fill="#2d4a6a" 
-                          stroke="#60a5fa" 
+                        <rect
+                          x={startX}
+                          y={cabinetTopY}
+                          width={barLengthPx}
+                          height={cabinetHeightPx}
+                          fill="#2d4a6a"
+                          stroke="#60a5fa"
                           strokeWidth="1.5"
                         />
 
                         {/* Pass-through opening */}
                         {config.passThrough && (
-                          <rect 
-                            x={startX + barLengthPx / 2 - config.passThroughWidth * 1.8} 
-                            y={cabinetTopY + setbackShadow + 8}
-                            width={config.passThroughWidth * 3.6} 
+                          <rect
+                            x={startX + barLengthPx / 2 - config.passThroughWidth * 1.8}
+                            y={cabinetTopY + 8}
+                            width={config.passThroughWidth * 3.6}
                             height={cabinetHeightPx * 0.45}
-                            fill="#0d1520" 
-                            stroke="#60a5fa" 
+                            fill="#0d1520"
+                            stroke="#60a5fa"
                             strokeWidth="1"
                           />
                         )}
@@ -990,8 +796,8 @@ export default function KitchenBarPlannerV4() {
                         {/* Cabinet sections */}
                         {Array.from({ length: numSections }).map((_, i) => {
                           const sectionX = startX + i * sectionWidth;
-                          const sectionTopY = cabinetTopY + setbackShadow;
-                          const sectionH = cabinetHeightPx - setbackShadow;
+                          const sectionTopY = cabinetTopY;
+                          const sectionH = cabinetHeightPx;
                           
                           // Skip if in pass-through zone
                           if (config.passThrough) {
@@ -1103,70 +909,6 @@ export default function KitchenBarPlannerV4() {
                           </>
                         )}
 
-                        {/* LR Ledge */}
-                        {config.lrLedge && (() => {
-                          const ledgeY = groundY - config.ledgeHeight * 2;
-                          const ledgeThick = 6;
-                          return (
-                            <g>
-                              {/* Ledge surface - runs full bar length */}
-                              <rect
-                                x={startX - 12}
-                                y={ledgeY}
-                                width={barLengthPx + 24}
-                                height={ledgeThick}
-                                fill="#92400e"
-                                stroke="#b45309"
-                                strokeWidth="1"
-                              />
-                              {/* Support brackets */}
-                              <rect x={startX + 20} y={ledgeY + ledgeThick} width="3" height="12" fill="#9ca3af"/>
-                              <rect x={startX + barLengthPx - 23} y={ledgeY + ledgeThick} width="3" height="12" fill="#9ca3af"/>
-                              {/* Height dimension */}
-                              <text x={startX + barLengthPx + 20} y={ledgeY + 3} fill="#22d3ee" fontSize="9" fontFamily="monospace">{config.ledgeHeight}"</text>
-                            </g>
-                          );
-                        })()}
-
-                        {/* LR Floating Shelves */}
-                        {config.lrShelves && (() => {
-                          const shelfY = groundY - config.shelfHeight * 2;
-                          const shelfThick = 4;
-                          const shelfSegmentWidth = (barLengthPx - 40) / 3;
-                          return (
-                            <g>
-                              {/* Three shelf segments across the bar */}
-                              {[0, 1, 2].map((i) => (
-                                <rect
-                                  key={i}
-                                  x={startX + 10 + i * (shelfSegmentWidth + 10)}
-                                  y={shelfY}
-                                  width={shelfSegmentWidth}
-                                  height={shelfThick}
-                                  fill="#4a6a8a"
-                                  stroke="#60a5fa"
-                                  strokeWidth="1"
-                                />
-                              ))}
-                              {/* Upper shelf row */}
-                              {[0, 1, 2].map((i) => (
-                                <rect
-                                  key={`upper-${i}`}
-                                  x={startX + 10 + i * (shelfSegmentWidth + 10)}
-                                  y={shelfY - 25}
-                                  width={shelfSegmentWidth}
-                                  height={shelfThick}
-                                  fill="#4a6a8a"
-                                  stroke="#60a5fa"
-                                  strokeWidth="1"
-                                />
-                              ))}
-                              {/* Height dimension */}
-                              <text x={startX + barLengthPx + 20} y={shelfY + 2} fill="#a78bfa" fontSize="9" fontFamily="monospace">{config.shelfHeight}"</text>
-                            </g>
-                          );
-                        })()}
-
                         {/* Dimensions */}
                         <g>
                           <line x1={startX} y1={groundY + 15} x2={startX + barLengthPx} y2={groundY + 15} stroke="#fb923c" strokeWidth="1"/>
@@ -1211,7 +953,6 @@ export default function KitchenBarPlannerV4() {
                     
                     const kneeSpacePx = kneeSpaceKitchen * scale;
                     const cabinetDepthPx = config.cabinetDepth * scale;
-                    const setbackPx = config.cabinetSetback * scale;
                     const totalDepthPx = config.barDepth * scale;
 
                     return (
@@ -1221,21 +962,13 @@ export default function KitchenBarPlannerV4() {
                         {/* Bar top outline */}
                         <rect x={startX} y={topY} width={barLengthPx} height={totalDepthPx} fill="#92400e" stroke="#b45309" strokeWidth="2" opacity="0.6"/>
 
-                        {/* Knee space zone */}
+                        {/* Knee space zone (overhang for seating) */}
                         <rect x={startX} y={topY} width={barLengthPx} height={kneeSpacePx} fill="none" stroke="#4ade80" strokeWidth="1" strokeDasharray="4,2"/>
-                        <text x={startX + barLengthPx / 2} y={topY + kneeSpacePx / 2 + 4} textAnchor="middle" fill="#4ade80" fontSize="9">KNEE SPACE ({kneeSpaceKitchen}")</text>
+                        <text x={startX + barLengthPx / 2} y={topY + kneeSpacePx / 2 + 4} textAnchor="middle" fill="#4ade80" fontSize="9">OVERHANG ({kneeSpaceKitchen}")</text>
 
                         {/* Cabinet zone */}
                         <rect x={startX} y={topY + kneeSpacePx} width={barLengthPx} height={cabinetDepthPx} fill="#2d4a6a" stroke="#60a5fa" strokeWidth="1" strokeDasharray="4,2"/>
                         <text x={startX + barLengthPx / 2} y={topY + kneeSpacePx + cabinetDepthPx / 2 + 4} textAnchor="middle" fill="#60a5fa" fontSize="9">CABINETS ({config.cabinetDepth}")</text>
-
-                        {/* Living room overhang */}
-                        {config.cabinetSetback > 0 && (
-                          <>
-                            <rect x={startX} y={topY + kneeSpacePx + cabinetDepthPx} width={barLengthPx} height={setbackPx} fill="none" stroke="#f472b6" strokeWidth="1" strokeDasharray="4,2"/>
-                            <text x={startX + barLengthPx / 2} y={topY + kneeSpacePx + cabinetDepthPx + setbackPx / 2 + 4} textAnchor="middle" fill="#f472b6" fontSize="8">OVERHANG ({config.cabinetSetback}")</text>
-                          </>
-                        )}
 
                         {/* Stools */}
                         {Array.from({ length: Math.floor(config.barLength / 24) }).map((_, i) => (
@@ -1261,42 +994,6 @@ export default function KitchenBarPlannerV4() {
                               opacity="0.8"
                             />
                             <text x={startX + barLengthPx / 2} y={topY + totalDepthPx - 5} textAnchor="middle" fill="#fbbf24" fontSize="7">RAISED +{config.raisedBarHeight}"</text>
-                          </g>
-                        )}
-
-                        {/* LR Ledge (beyond bar depth) */}
-                        {config.lrLedge && (
-                          <g>
-                            <rect
-                              x={startX}
-                              y={topY + totalDepthPx + 25}
-                              width={barLengthPx}
-                              height={config.ledgeDepth * scale * 0.4}
-                              fill="#92400e"
-                              stroke="#22d3ee"
-                              strokeWidth="1"
-                              opacity="0.7"
-                            />
-                            <text x={startX + barLengthPx / 2} y={topY + totalDepthPx + 25 + config.ledgeDepth * scale * 0.2 + 3} textAnchor="middle" fill="#22d3ee" fontSize="7">LEDGE ({config.ledgeDepth}")</text>
-                          </g>
-                        )}
-
-                        {/* LR Floating Shelves (beyond bar depth) */}
-                        {config.lrShelves && (
-                          <g>
-                            {[0, 1, 2].map((i) => (
-                              <rect
-                                key={i}
-                                x={startX + 20 + i * (barLengthPx - 60) / 2.5}
-                                y={topY + totalDepthPx + (config.lrLedge ? 50 : 25)}
-                                width={(barLengthPx - 80) / 3}
-                                height="8"
-                                fill="#4a6a8a"
-                                stroke="#a78bfa"
-                                strokeWidth="1"
-                              />
-                            ))}
-                            <text x={startX + barLengthPx / 2} y={topY + totalDepthPx + (config.lrLedge ? 70 : 45)} textAnchor="middle" fill="#a78bfa" fontSize="7">FLOATING SHELVES</text>
                           </g>
                         )}
 
@@ -1367,7 +1064,7 @@ export default function KitchenBarPlannerV4() {
                         <rect x={stepX + 8} y={barTopY + 20} width={cabinetDepthPx - 10} height={groundY - 12 - barTopY - 20} fill="none" stroke="#60a5fa" strokeWidth="1" strokeDasharray="4,2"/>
 
                         {/* Bar top */}
-                        <rect x={stepX - config.cabinetSetback * scale} y={barTopY} width={config.barDepth * scale} height={Math.max(config.barTopThickness * scale * 2, 8)} fill="#92400e" stroke="#b45309" strokeWidth="1.5"/>
+                        <rect x={stepX} y={barTopY} width={config.barDepth * scale} height={Math.max(config.barTopThickness * scale * 2, 8)} fill="#92400e" stroke="#b45309" strokeWidth="1.5"/>
 
                         {/* Steel bracket */}
                         <path d={`M ${stepX + cabinetDepthPx + 2} ${barTopY + 10} L ${stepX + cabinetDepthPx + 2} ${barTopY + 35} L ${stepX + cabinetDepthPx + 25} ${barTopY + 35}`} fill="none" stroke="#9ca3af" strokeWidth="3"/>
@@ -1387,46 +1084,12 @@ export default function KitchenBarPlannerV4() {
                           return (
                             <g>
                               {/* Raised section vertical studs */}
-                              <rect x={stepX - config.cabinetSetback * scale} y={raisedTopY + 10} width="4" height={config.raisedBarHeight * scale} fill="#d4a574" stroke="#a07850" strokeWidth="0.5"/>
-                              <rect x={stepX - config.cabinetSetback * scale + 20} y={raisedTopY + 10} width="4" height={config.raisedBarHeight * scale} fill="#d4a574" stroke="#a07850" strokeWidth="0.5"/>
+                              <rect x={stepX} y={raisedTopY + 10} width="4" height={config.raisedBarHeight * scale} fill="#d4a574" stroke="#a07850" strokeWidth="0.5"/>
+                              <rect x={stepX + 20} y={raisedTopY + 10} width="4" height={config.raisedBarHeight * scale} fill="#d4a574" stroke="#a07850" strokeWidth="0.5"/>
                               {/* Raised bar top */}
-                              <rect x={stepX - config.cabinetSetback * scale - 5} y={raisedTopY} width={35} height={Math.max(config.barTopThickness * scale * 2, 8)} fill="#92400e" stroke="#b45309" strokeWidth="1.5"/>
+                              <rect x={stepX - 5} y={raisedTopY} width={35} height={Math.max(config.barTopThickness * scale * 2, 8)} fill="#92400e" stroke="#b45309" strokeWidth="1.5"/>
                               {/* Label */}
-                              <text x={stepX - config.cabinetSetback * scale + 10} y={raisedTopY - 5} textAnchor="middle" fill="#f472b6" fontSize="8">+{config.raisedBarHeight}"</text>
-                            </g>
-                          );
-                        })()}
-
-                        {/* LR Ledge construction */}
-                        {config.lrLedge && (() => {
-                          const ledgeY = groundY - config.ledgeHeight * scale;
-                          const ledgeDepthPx = config.ledgeDepth * scale;
-                          return (
-                            <g>
-                              {/* Ledge surface */}
-                              <rect x={stepX - ledgeDepthPx - 5} y={ledgeY} width={ledgeDepthPx + 5} height="6" fill="#92400e" stroke="#b45309" strokeWidth="1"/>
-                              {/* Mounting bracket */}
-                              <path d={`M ${stepX} ${ledgeY + 6} L ${stepX} ${ledgeY + 25} L ${stepX - ledgeDepthPx + 8} ${ledgeY + 6}`} fill="none" stroke="#9ca3af" strokeWidth="2.5"/>
-                              {/* Height dimension */}
-                              <text x={stepX - ledgeDepthPx - 10} y={ledgeY + 3} textAnchor="end" fill="#22d3ee" fontSize="8">{config.ledgeHeight}"</text>
-                            </g>
-                          );
-                        })()}
-
-                        {/* LR Floating shelves construction */}
-                        {config.lrShelves && (() => {
-                          const shelfY = groundY - config.shelfHeight * scale;
-                          const shelfWidth = 35;
-                          return (
-                            <g>
-                              {/* Lower shelf */}
-                              <rect x={stepX - shelfWidth - 5} y={shelfY} width={shelfWidth} height="4" fill="#4a6a8a" stroke="#60a5fa" strokeWidth="1"/>
-                              {/* Upper shelf */}
-                              <rect x={stepX - shelfWidth - 5} y={shelfY - 25} width={shelfWidth} height="4" fill="#4a6a8a" stroke="#60a5fa" strokeWidth="1"/>
-                              {/* Mounting rail */}
-                              <rect x={stepX - 5} y={shelfY - 28} width="4" height={32} fill="#9ca3af"/>
-                              {/* Height dimension */}
-                              <text x={stepX - shelfWidth - 12} y={shelfY + 2} textAnchor="end" fill="#a78bfa" fontSize="8">{config.shelfHeight}"</text>
+                              <text x={stepX + 10} y={raisedTopY - 5} textAnchor="middle" fill="#f472b6" fontSize="8">+{config.raisedBarHeight}"</text>
                             </g>
                           );
                         })()}
@@ -1442,8 +1105,6 @@ export default function KitchenBarPlannerV4() {
                           <text y="95" fill="#94a3b8" fontSize="9">• Cabinet boxes installed separately</text>
                           {config.waterfallEdge && <text y="110" fill="#94a3b8" fontSize="9">• Miter joints for waterfall edges</text>}
                           {config.tieredBar && <text y={config.waterfallEdge ? 125 : 110} fill="#f472b6" fontSize="9">• Raised section: add blocking for tier</text>}
-                          {config.lrLedge && <text y={(config.waterfallEdge ? 125 : 110) + (config.tieredBar ? 15 : 0)} fill="#22d3ee" fontSize="9">• Ledge: steel L-bracket @ 16" O.C.</text>}
-                          {config.lrShelves && <text y={(config.waterfallEdge ? 125 : 110) + (config.tieredBar ? 15 : 0) + (config.lrLedge ? 15 : 0)} fill="#a78bfa" fontSize="9">• Shelves: French cleat or floating mounts</text>}
                         </g>
 
                         <g transform="translate(300, 180)">
@@ -1478,10 +1139,6 @@ export default function KitchenBarPlannerV4() {
             <div>
               <strong style={{ color: '#60a5fa' }}>Butcher Block</strong>
               <p style={{ margin: '4px 0 0' }}>Use 1.5"+ thickness for {config.barLength}" span. Support every 24-36". Allow 1/8" gap at walls.</p>
-            </div>
-            <div>
-              <strong style={{ color: '#60a5fa' }}>Cabinet Setback</strong>
-              <p style={{ margin: '4px 0 0' }}>Your {config.cabinetSetback}" setback creates a living room overhang for leaning or resting drinks.</p>
             </div>
             <div>
               <strong style={{ color: '#60a5fa' }}>Electrical</strong>

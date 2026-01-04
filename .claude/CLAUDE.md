@@ -9,27 +9,22 @@ This is a **home improvement design project** for a split-level kitchen bar. The
 Key project requirements:
 - Seating on the **kitchen side** (looking out to living room)
 - Butcher block countertop
-- Storage cabinets accessible from living room or kitchen
+- Continuous cabinet from bar top to living room floor (maximizes storage)
 - Electrical outlets for laptops/devices
-- Approximately 84" (7 ft) bar length, 25"+ depth
+- Approximately 84" (7 ft) bar length, 28" depth
 
 ## Project Structure
 
 ```
 docs/
-  kitchen-bar-project-brief.md   # Complete project requirements and constraints
-  rough-notes.md                  # Initial brainstorm notes
-  images/                         # Reference photos (.heic and .jpg)
-  research/                       # Research on tools and capabilities
+  design-spec.md                  # Current baseline design spec
+  kitchen-bar-project-brief.md    # Complete project requirements and constraints
+  images/                         # Reference photos
 
-visualization/
-  jsx/                            # Source React components (primary)
-    hybrid-bar-options.jsx
-    kitchen-bar-planner-v3.jsx
-    kitchen-floor-cabinet-options.jsx
-  threejs/
-    kitchen-bar-v1.html           # 3D interactive visualization
-  *.html                          # Legacy standalone HTML (may be outdated)
+visualization/jsx/
+  kitchen-bar-planner-v4.jsx      # Main design tool (loads as "kitchen-bar-planner")
+  kitchen-floor-cabinets-sketch.jsx
+  archive/                        # Old iterations (v1, v2, v3)
 
 src/
   main.jsx                        # React entry point
@@ -40,77 +35,50 @@ vite.config.js                    # Vite configuration
 index.html                        # Dev server entry point
 ```
 
-## Use Playwright Skill to access this project
-
-`C:\Users\nateg\.claude\plugins\marketplaces\playwright-skill`
-
-```
-playwright-skill/              # Plugin root
-├── .claude-plugin/           # Plugin metadata
-└── skills/
-    └── playwright-skill/     # The actual skill
-        └── SKILL.md
-```
-
-
 ## Running Visualizations
 
-### Vite Dev Server (Recommended)
 ```bash
 npm run dev
 ```
-Opens at http://localhost:5173 with a dropdown to switch between all visualizations. Hot reload on JSX changes.
+Opens at http://localhost:5173. Default view is `kitchen-bar-planner`.
 
-### Adding New Artifacts
-1. Save JSX from Claude to `visualization/jsx/new-viz.jsx`
-2. Add import to `src/App.jsx`:
-   ```js
-   'new-viz': lazy(() => import('../visualization/jsx/new-viz.jsx')),
-   ```
-3. Appears in dropdown automatically
+## Use Playwright Skill for Screenshots
 
-### Three.js 3D Visualization
-Open `visualization/threejs/kitchen-bar-v1.html` directly in a browser. Controls: drag to rotate, scroll to zoom, right-drag to pan.
-
-### Legacy HTML Files
-The standalone `.html` files in `visualization/` may be outdated compared to the JSX source. Use the Vite dev server instead.
+```bash
+# From skill directory
+cd C:/Users/nateg/.claude/plugins/cache/playwright-skill/playwright-skill/4.1.0/skills/playwright-skill
+node run.js /tmp/your-script.js
+```
 
 ## Key Design Parameters
 
-From `docs/kitchen-bar-project-brief.md`:
-
-| Parameter | Baseline Value | Notes |
-|-----------|---------------|-------|
-| Step height | 23.5" | Living room floor to kitchen floor |
-| Bar length | 84" | ~7 feet, fits 3-4 people (24" per seat) |
+| Parameter | Value | Notes |
+|-----------|-------|-------|
+| Step height | 23.5" | Fixed - living room to kitchen floor |
+| Bar length | 84" | ~7 feet, fits 3 people |
 | Bar top height | 40" | From kitchen floor (range: 36-42") |
-| Total bar depth | 28" | |
-| Kitchen overhang | 12" | For knee clearance when seated |
-| Bar top thickness | 1.5" | Butcher block minimum for this span |
+| Total depth | 28" | Front to back |
+| Cabinet depth | 12" | Storage section |
+| Knee space | 16" | Overhang for seating |
+| Bar top thickness | 1.5" | Butcher block |
 
-## Design Configurations
+## Design Configuration
 
-The visualizations explore these cabinet placement options:
+**Baseline: Flush**
+- Single-level counter aligned with step
+- Continuous cabinet from bar top to LR floor
+- No tiered section
 
-1. **Living-Room-Side Cabinets** - Cabinets mount below step, face into living room. Most flexible bar height but complex construction.
+**Alternative: Tiered**
+- Adds +6" raised bar section facing living room
+- True bar height, hides kitchen mess
 
-2. **Kitchen-Floor Cabinets** - Standard base cabinets on kitchen floor. Simpler but limited to counter height (~36").
-   - Flush Peninsula - Cabinets align with step edge
-   - Setback Peninsula - Cabinets pulled back, step visible
-   - Tiered Top - Two-level: counter (36") + raised bar (42")
-   - Ledge + Cabinets - Add separate LR-side shelf for drinks
-   - Upper + Lower - Base cabinets + floating display shelves
+## Working with the Visualization
 
-## Working with Visualizations
+The main file is `visualization/jsx/kitchen-bar-planner-v4.jsx`:
 
-When modifying the JSX visualizations:
-- All use the same slider/control pattern with state management
-- SVG diagrams use inline calculations based on config values
-- Scale factor typically 1.8-2.5 (inches to pixels)
-- Color scheme: dark background (#0a1628), blue accents (#60a5fa), amber for wood (#92400e)
-
-The visualizations calculate and display derived values:
-- Bar height from living room floor (step + bar height)
-- Knee clearance for seating
-- Seating capacity (bar length / 24")
-- Stool height recommendations
+- Config state at top controls all dimensions
+- Step height is fixed (not adjustable - it's the actual floor)
+- Presets: Flush (default), Tiered
+- Side Section View is the primary design view (scale 2.4)
+- Person faces toward living room

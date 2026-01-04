@@ -1,15 +1,12 @@
 import React, { useState, lazy, Suspense } from 'react'
 
 const visualizations = {
-  'kitchen-bar-planner-v4': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v4.jsx')),
-  'hybrid-bar-options': lazy(() => import('../visualization/jsx/hybrid-bar-options.jsx')),
-  'kitchen-bar-planner-v3': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v3.jsx')),
-  'kitchen-bar-planner-v2': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v2.jsx')),
-  'kitchen-bar-planner': lazy(() => import('../visualization/jsx/kitchen-bar-planner.jsx')),
+  'kitchen-bar-planner': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v4.jsx')),
+  'kitchen-floor-cabinets-sketch': lazy(() => import('../visualization/jsx/kitchen-floor-cabinets-sketch.jsx')),
 }
 
 export default function App() {
-  const [current, setCurrent] = useState('kitchen-bar-planner-v4')
+  const [current, setCurrent] = useState('kitchen-bar-planner')
   const Visualization = visualizations[current]
 
   return (
