@@ -143,6 +143,16 @@
         color: 0xffffff,  // white
         roughness: 0.5
       }),
+      cabinet: new THREE.MeshStandardMaterial({
+        color: 0x2d4a6a,  // dark blue-gray
+        roughness: 0.7,
+        metalness: 0.1
+      }),
+      butcherBlock: new THREE.MeshStandardMaterial({
+        color: 0x92400e,  // warm brown
+        roughness: 0.4,
+        metalness: 0.0
+      }),
     };
 
     // ============================================
@@ -199,6 +209,100 @@
     // Add room to scene
     const room = createRoom();
     scene.add(room);
+
+    // ============================================
+    // BAR GEOMETRY
+    // ============================================
+    function createBar(isTiered = false) {
+      const bar = new THREE.Group();
+      bar.name = isTiered ? 'bar-tiered' : 'bar-flush';
+
+      const cabinetWidth = CONFIG.cabinetDepth;
+      const cabinetHeight = CONFIG.cabinetHeight;
+      const cabinetLength = CONFIG.barLength;
+
+      // Cabinet box - extends from LR floor to underside of bar top
+      const cabinetGeo = new THREE.BoxGeometry(cabinetLength, cabinetHeight, cabinetWidth);
+      const cabinet = new THREE.Mesh(cabinetGeo, materials.cabinet);
+      // Position: centered on X, bottom at Y=0 (LR floor), front edge at Z=0 (step line)
+      cabinet.position.set(
+        cabinetLength / 2,
+        cabinetHeight / 2,
+        -cabinetWidth / 2
+      );
+      cabinet.castShadow = true;
+      cabinet.receiveShadow = true;
+      bar.add(cabinet);
+
+      // Butcher block top
+      const barTopWidth = CONFIG.barDepth;
+      const barTopThick = CONFIG.barTopThickness;
+      const barTopY = CONFIG.stepHeight + CONFIG.barTopHeight;
+
+      if (isTiered) {
+        // Counter level (kitchen side) - over the overhang area
+        const counterGeo = new THREE.BoxGeometry(cabinetLength, barTopThick, CONFIG.kneeSpace);
+        const counter = new THREE.Mesh(counterGeo, materials.butcherBlock);
+        counter.position.set(
+          cabinetLength / 2,
+          barTopY - barTopThick / 2,
+          -CONFIG.cabinetDepth - CONFIG.kneeSpace / 2
+        );
+        counter.castShadow = true;
+        counter.receiveShadow = true;
+        bar.add(counter);
+
+        // Raised bar section (living room side)
+        const raisedY = barTopY + CONFIG.raisedBarHeight;
+        const raisedGeo = new THREE.BoxGeometry(cabinetLength, barTopThick, CONFIG.cabinetDepth);
+        const raised = new THREE.Mesh(raisedGeo, materials.butcherBlock);
+        raised.position.set(
+          cabinetLength / 2,
+          raisedY - barTopThick / 2,
+          -CONFIG.cabinetDepth / 2
+        );
+        raised.castShadow = true;
+        raised.receiveShadow = true;
+        bar.add(raised);
+
+        // Vertical transition piece between levels
+        const vertGeo = new THREE.BoxGeometry(cabinetLength, CONFIG.raisedBarHeight, barTopThick);
+        const vert = new THREE.Mesh(vertGeo, materials.butcherBlock);
+        vert.position.set(
+          cabinetLength / 2,
+          barTopY + CONFIG.raisedBarHeight / 2 - barTopThick / 2,
+          -CONFIG.cabinetDepth
+        );
+        vert.castShadow = true;
+        bar.add(vert);
+
+      } else {
+        // Flush - single continuous bar top
+        const barTopGeo = new THREE.BoxGeometry(cabinetLength, barTopThick, barTopWidth);
+        const barTop = new THREE.Mesh(barTopGeo, materials.butcherBlock);
+        barTop.position.set(
+          cabinetLength / 2,
+          barTopY - barTopThick / 2,
+          -barTopWidth / 2
+        );
+        barTop.castShadow = true;
+        barTop.receiveShadow = true;
+        bar.add(barTop);
+      }
+
+      return bar;
+    }
+
+    // Create both versions, show flush by default
+    const barFlush = createBar(false);
+    const barTiered = createBar(true);
+    barTiered.visible = false;
+
+    scene.add(barFlush);
+    scene.add(barTiered);
+
+    // State
+    let currentPreset = 'flush';
 
     // Update camera target to center on bar
     controls.target.set(CONFIG.barLength / 2, 30, 0);
