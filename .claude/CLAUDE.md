@@ -73,6 +73,15 @@ node run.js /tmp/your-script.js
 - Adds +6" raised bar section facing living room
 - True bar height, hides kitchen mess
 
+## Git Worktrees
+
+Worktree directory: `.worktrees/` (project-local)
+
+Create feature branches in isolation:
+```bash
+git worktree add .worktrees/<branch-name> -b <branch-name>
+```
+
 ## Working with the Visualization
 
 The main file is `visualization/jsx/kitchen-bar-planner-v4.jsx`:
