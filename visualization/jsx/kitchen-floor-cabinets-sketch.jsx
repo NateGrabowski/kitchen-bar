@@ -604,6 +604,182 @@ export default function KitchenFloorCabinetsSketch() {
           </div>
           </>
           )}
+
+          {activeView === 'front' && (
+          <>
+            <svg viewBox="0 0 600 380" style={{ width: '100%', background: '#0d1520', borderRadius: 4 }}>
+              <defs>
+                <pattern id={`${uniqueId}-grid-front`} width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a2a3a" strokeWidth="0.5"/>
+                </pattern>
+              </defs>
+              <rect width="600" height="380" fill={`url(#${uniqueId}-grid-front)`}/>
+
+              {(() => {
+                const scale = 1.8
+                const barLengthPx = config.barLength * scale
+                const cabinetHeightPx = cabinetHeight * scale
+                const stepHeightPx = config.stepHeight * scale
+                const counterThickPx = config.counterThickness * scale * 2
+
+                const startX = (600 - barLengthPx) / 2
+                const groundY = 340  // LR floor
+                const kitchenFloorY = groundY - stepHeightPx
+                const cabinetTopY = kitchenFloorY - cabinetHeightPx
+                const counterTopY = cabinetTopY - counterThickPx
+
+                // Door layout: 3 equal sections for 84" = 28" each
+                const numDoors = 3
+                const doorWidth = barLengthPx / numDoors
+
+                return (
+                  <g>
+                    {/* Labels */}
+                    <text x="30" y="25" fill="#60a5fa" fontSize="12" fontWeight="600">FRONT VIEW</text>
+                    <text x="30" y="42" fill="#64748b" fontSize="10">From living room looking at cabinet face</text>
+
+                    {/* Living room floor */}
+                    <rect x="20" y={groundY} width="560" height="30" fill="#1e3a5f"/>
+                    <text x="300" y={groundY + 20} textAnchor="middle" fill="#3b5a7a" fontSize="10">LIVING ROOM FLOOR</text>
+
+                    {/* Step panel (below kitchen floor) */}
+                    {config.showStepPanel && (
+                      <rect
+                        x={startX}
+                        y={kitchenFloorY}
+                        width={barLengthPx}
+                        height={stepHeightPx}
+                        fill={config.stepPanelStyle === 'match' ? '#2d4a6a' : '#1a1a2e'}
+                        stroke="#60a5fa"
+                        strokeWidth="1"
+                      />
+                    )}
+
+                    {/* Cabinet face with doors */}
+                    <rect
+                      x={startX}
+                      y={cabinetTopY}
+                      width={barLengthPx}
+                      height={cabinetHeightPx}
+                      fill="#2d4a6a"
+                      stroke="#60a5fa"
+                      strokeWidth="1.5"
+                    />
+
+                    {/* Door divisions and handles */}
+                    {Array.from({ length: numDoors }).map((_, i) => {
+                      const doorX = startX + i * doorWidth
+                      const handleY = cabinetTopY + cabinetHeightPx * 0.35
+                      return (
+                        <g key={i}>
+                          {/* Door outline */}
+                          <rect
+                            x={doorX + 4}
+                            y={cabinetTopY + 4}
+                            width={doorWidth - 8}
+                            height={cabinetHeightPx - 8}
+                            fill="none"
+                            stroke="#4a6a8a"
+                            strokeWidth="1"
+                            rx="2"
+                          />
+                          {/* Handle */}
+                          <rect
+                            x={doorX + doorWidth - 20}
+                            y={handleY}
+                            width="8"
+                            height="24"
+                            fill="#60a5fa"
+                            rx="2"
+                          />
+                          {/* Door number */}
+                          <text
+                            x={doorX + doorWidth / 2}
+                            y={cabinetTopY + cabinetHeightPx / 2}
+                            textAnchor="middle"
+                            fill="#4a6a8a"
+                            fontSize="10"
+                          >
+                            {Math.round(doorWidth / scale)}"
+                          </text>
+                        </g>
+                      )
+                    })}
+
+                    {/* Countertop */}
+                    <rect
+                      x={startX - config.overhangTowardLR * scale}
+                      y={counterTopY}
+                      width={barLengthPx + config.overhangTowardLR * scale}
+                      height={counterThickPx}
+                      fill="#92400e"
+                      stroke="#b45309"
+                      strokeWidth="1.5"
+                    />
+
+                    {/* Dimension: bar length */}
+                    <g>
+                      <line x1={startX} y1={counterTopY - 20} x2={startX + barLengthPx} y2={counterTopY - 20} stroke="#fbbf24" strokeWidth="1"/>
+                      <line x1={startX} y1={counterTopY - 25} x2={startX} y2={counterTopY - 15} stroke="#fbbf24" strokeWidth="1"/>
+                      <line x1={startX + barLengthPx} y1={counterTopY - 25} x2={startX + barLengthPx} y2={counterTopY - 15} stroke="#fbbf24" strokeWidth="1"/>
+                      <text x={startX + barLengthPx / 2} y={counterTopY - 28} textAnchor="middle" fill="#fbbf24" fontSize="11" fontFamily="monospace">{config.barLength}" length</text>
+                    </g>
+
+                    {/* Dimension: cabinet height */}
+                    <g>
+                      <line x1={startX + barLengthPx + 15} y1={kitchenFloorY} x2={startX + barLengthPx + 15} y2={cabinetTopY} stroke="#4ade80" strokeWidth="1"/>
+                      <line x1={startX + barLengthPx + 10} y1={kitchenFloorY} x2={startX + barLengthPx + 20} y2={kitchenFloorY} stroke="#4ade80" strokeWidth="1"/>
+                      <line x1={startX + barLengthPx + 10} y1={cabinetTopY} x2={startX + barLengthPx + 20} y2={cabinetTopY} stroke="#4ade80" strokeWidth="1"/>
+                      <text x={startX + barLengthPx + 25} y={(kitchenFloorY + cabinetTopY) / 2} fill="#4ade80" fontSize="10" fontFamily="monospace">{cabinetHeight}"</text>
+                    </g>
+
+                    {/* Dimension: step height */}
+                    <g>
+                      <line x1={startX - 15} y1={groundY} x2={startX - 15} y2={kitchenFloorY} stroke="#fb923c" strokeWidth="1"/>
+                      <line x1={startX - 20} y1={groundY} x2={startX - 10} y2={groundY} stroke="#fb923c" strokeWidth="1"/>
+                      <line x1={startX - 20} y1={kitchenFloorY} x2={startX - 10} y2={kitchenFloorY} stroke="#fb923c" strokeWidth="1"/>
+                      <text x={startX - 25} y={(groundY + kitchenFloorY) / 2} textAnchor="end" fill="#fb923c" fontSize="10" fontFamily="monospace">{config.stepHeight}"</text>
+                    </g>
+
+                    {/* Seating positions (3 stools) */}
+                    {[0.2, 0.5, 0.8].map((pos, i) => (
+                      <g key={i} opacity="0.5">
+                        <ellipse
+                          cx={startX + barLengthPx * pos}
+                          cy={counterTopY - 60}
+                          rx="12"
+                          ry="14"
+                          fill="#5a7a9a"
+                        />
+                        <text
+                          x={startX + barLengthPx * pos}
+                          y={counterTopY - 80}
+                          textAnchor="middle"
+                          fill="#64748b"
+                          fontSize="8"
+                        >
+                          seat {i + 1}
+                        </text>
+                      </g>
+                    ))}
+                  </g>
+                )
+              })()}
+            </svg>
+
+            {/* Explanation */}
+            <div style={{ marginTop: 16, padding: 12, background: '#0d1520', borderRadius: 6, fontSize: 12, lineHeight: 1.6 }}>
+              <strong style={{ color: '#60a5fa' }}>Front View Notes:</strong>
+              <ul style={{ margin: '8px 0 0 0', paddingLeft: 20, color: '#94a3b8' }}>
+                <li>Cabinet spans <span style={{ color: '#fbbf24' }}>{config.barLength}"</span> (fits ~3 people at 24" each)</li>
+                <li>3 cabinet doors, each ~{Math.round(config.barLength / 3)}" wide</li>
+                <li>Doors face living room for easy access</li>
+                <li>Countertop overhangs {config.overhangTowardLR}" toward you (viewer)</li>
+                {config.showStepPanel && <li>Step panel ({config.stepPanelStyle}) visible below cabinet</li>}
+              </ul>
+            </div>
+          </>
+          )}
         </div>
       </div>
     </div>
