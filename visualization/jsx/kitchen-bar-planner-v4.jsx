@@ -800,6 +800,46 @@ export default function KitchenBarPlannerV4() {
                           );
                         })()}
 
+                        {/* LR Floating Shelves */}
+                        {config.lrShelves && (() => {
+                          const shelfY = groundY - config.shelfHeight * scale;
+                          const shelfWidth = 30;
+                          const shelfThick = 3;
+                          return (
+                            <g>
+                              {/* Primary shelf */}
+                              <rect
+                                x={stepX - shelfWidth}
+                                y={shelfY}
+                                width={shelfWidth}
+                                height={shelfThick}
+                                fill="#4a6a8a"
+                                stroke="#60a5fa"
+                                strokeWidth="1"
+                              />
+                              {/* Secondary shelf (higher) */}
+                              <rect
+                                x={stepX - shelfWidth}
+                                y={shelfY - 25}
+                                width={shelfWidth}
+                                height={shelfThick}
+                                fill="#4a6a8a"
+                                stroke="#60a5fa"
+                                strokeWidth="1"
+                              />
+                              {/* Shelf brackets */}
+                              <rect x={stepX - 3} y={shelfY - 25} width="3" height={28 + shelfThick} fill="#9ca3af"/>
+                              {/* Height dimension */}
+                              <g>
+                                <line x1={stepX - shelfWidth - 10} y1={groundY} x2={stepX - shelfWidth - 10} y2={shelfY} stroke="#a78bfa" strokeWidth="1"/>
+                                <line x1={stepX - shelfWidth - 15} y1={groundY} x2={stepX - shelfWidth - 5} y2={groundY} stroke="#a78bfa" strokeWidth="1"/>
+                                <line x1={stepX - shelfWidth - 15} y1={shelfY} x2={stepX - shelfWidth - 5} y2={shelfY} stroke="#a78bfa" strokeWidth="1"/>
+                                <text x={stepX - shelfWidth - 18} y={(groundY + shelfY) / 2 + 3} textAnchor="end" fill="#a78bfa" fontSize="9" fontFamily="monospace">{config.shelfHeight}"</text>
+                              </g>
+                            </g>
+                          );
+                        })()}
+
                         {/* Person on stool */}
                         {config.showPerson && (() => {
                           const stoolY = kitchenFloorY - config.stoolHeight * scale;
