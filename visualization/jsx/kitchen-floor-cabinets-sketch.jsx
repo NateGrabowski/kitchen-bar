@@ -780,6 +780,175 @@ export default function KitchenFloorCabinetsSketch() {
             </div>
           </>
           )}
+
+          {activeView === 'plan' && (
+          <>
+            <svg viewBox="0 0 600 350" style={{ width: '100%', background: '#0d1520', borderRadius: 4 }}>
+              <defs>
+                <pattern id={`${uniqueId}-grid-plan`} width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a2a3a" strokeWidth="0.5"/>
+                </pattern>
+              </defs>
+              <rect width="600" height="350" fill={`url(#${uniqueId}-grid-plan)`}/>
+
+              {(() => {
+                const scale = 1.6
+                const barLengthPx = config.barLength * scale
+                const totalDepthPx = totalDepth * scale
+                const cabinetDepthPx = config.cabinetDepth * scale
+                const lrOverhangPx = config.overhangTowardLR * scale
+                const kneeSpacePx = config.overhangTowardKitchen * scale
+
+                const startX = (600 - barLengthPx) / 2
+                const stepEdgeY = 180  // Where step edge is (kitchen/LR boundary)
+                const counterFrontY = stepEdgeY + lrOverhangPx  // Counter extends toward LR
+                const cabinetFrontY = stepEdgeY  // Cabinet at step edge
+                const cabinetBackY = stepEdgeY - cabinetDepthPx
+                const counterBackY = cabinetBackY - kneeSpacePx
+
+                return (
+                  <g>
+                    {/* Labels */}
+                    <text x="30" y="25" fill="#60a5fa" fontSize="12" fontWeight="600">PLAN VIEW</text>
+                    <text x="30" y="42" fill="#64748b" fontSize="10">Bird's eye view showing zones</text>
+
+                    {/* Living room zone */}
+                    <rect x="20" y={stepEdgeY} width="560" height="140" fill="#1e3a5f" opacity="0.3"/>
+                    <text x="300" y={stepEdgeY + 120} textAnchor="middle" fill="#3b5a7a" fontSize="12">LIVING ROOM</text>
+
+                    {/* Kitchen zone */}
+                    <rect x="20" y="60" width="560" height={stepEdgeY - 60} fill="#234060" opacity="0.3"/>
+                    <text x="300" y="80" textAnchor="middle" fill="#3b5a7a" fontSize="12">KITCHEN</text>
+
+                    {/* Step edge line */}
+                    <line x1="20" y1={stepEdgeY} x2="580" y2={stepEdgeY} stroke="#fb923c" strokeWidth="2" strokeDasharray="8,4"/>
+                    <text x="590" y={stepEdgeY + 4} fill="#fb923c" fontSize="9">step edge</text>
+
+                    {/* Cabinet footprint */}
+                    <rect
+                      x={startX}
+                      y={cabinetBackY}
+                      width={barLengthPx}
+                      height={cabinetDepthPx}
+                      fill="#2d4a6a"
+                      stroke="#60a5fa"
+                      strokeWidth="1.5"
+                    />
+                    <text x={startX + barLengthPx / 2} y={cabinetBackY + cabinetDepthPx / 2 + 4} textAnchor="middle" fill="#60a5fa" fontSize="10">CABINET</text>
+
+                    {/* Counter footprint (full) */}
+                    <rect
+                      x={startX}
+                      y={counterBackY}
+                      width={barLengthPx}
+                      height={totalDepthPx}
+                      fill="none"
+                      stroke="#b45309"
+                      strokeWidth="2"
+                      strokeDasharray="4,2"
+                    />
+
+                    {/* Knee space zone (hatched) */}
+                    <rect
+                      x={startX}
+                      y={counterBackY}
+                      width={barLengthPx}
+                      height={kneeSpacePx}
+                      fill="#4ade80"
+                      opacity="0.15"
+                    />
+                    <text x={startX + barLengthPx / 2} y={counterBackY + kneeSpacePx / 2 + 4} textAnchor="middle" fill="#4ade80" fontSize="9">KNEE SPACE</text>
+
+                    {/* LR overhang zone */}
+                    {config.overhangTowardLR > 0 && (
+                      <>
+                        <rect
+                          x={startX}
+                          y={stepEdgeY}
+                          width={barLengthPx}
+                          height={lrOverhangPx}
+                          fill="#fbbf24"
+                          opacity="0.15"
+                        />
+                        <text x={startX + barLengthPx / 2} y={stepEdgeY + lrOverhangPx / 2 + 4} textAnchor="middle" fill="#fbbf24" fontSize="9">OVERHANG</text>
+                      </>
+                    )}
+
+                    {/* Seating positions (3 stools from above) */}
+                    {[0.2, 0.5, 0.8].map((pos, i) => (
+                      <g key={i}>
+                        <circle
+                          cx={startX + barLengthPx * pos}
+                          cy={counterBackY - 20}
+                          r="14"
+                          fill="#5a7a9a"
+                          opacity="0.6"
+                        />
+                        <text
+                          x={startX + barLengthPx * pos}
+                          y={counterBackY - 17}
+                          textAnchor="middle"
+                          fill="#e2e8f0"
+                          fontSize="8"
+                        >
+                          {i + 1}
+                        </text>
+                      </g>
+                    ))}
+
+                    {/* Dimension: bar length */}
+                    <g>
+                      <line x1={startX} y1={counterFrontY + 25} x2={startX + barLengthPx} y2={counterFrontY + 25} stroke="#fbbf24" strokeWidth="1"/>
+                      <line x1={startX} y1={counterFrontY + 20} x2={startX} y2={counterFrontY + 30} stroke="#fbbf24" strokeWidth="1"/>
+                      <line x1={startX + barLengthPx} y1={counterFrontY + 20} x2={startX + barLengthPx} y2={counterFrontY + 30} stroke="#fbbf24" strokeWidth="1"/>
+                      <text x={startX + barLengthPx / 2} y={counterFrontY + 40} textAnchor="middle" fill="#fbbf24" fontSize="10" fontFamily="monospace">{config.barLength}"</text>
+                    </g>
+
+                    {/* Dimension: total depth */}
+                    <g>
+                      <line x1={startX + barLengthPx + 20} y1={counterBackY} x2={startX + barLengthPx + 20} y2={counterFrontY} stroke="#60a5fa" strokeWidth="1"/>
+                      <line x1={startX + barLengthPx + 15} y1={counterBackY} x2={startX + barLengthPx + 25} y2={counterBackY} stroke="#60a5fa" strokeWidth="1"/>
+                      <line x1={startX + barLengthPx + 15} y1={counterFrontY} x2={startX + barLengthPx + 25} y2={counterFrontY} stroke="#60a5fa" strokeWidth="1"/>
+                      <text x={startX + barLengthPx + 30} y={(counterBackY + counterFrontY) / 2 + 4} fill="#60a5fa" fontSize="10" fontFamily="monospace">{totalDepth}"</text>
+                    </g>
+
+                    {/* Dimension: cabinet depth */}
+                    <g>
+                      <line x1={startX - 20} y1={cabinetBackY} x2={startX - 20} y2={cabinetFrontY} stroke="#4ade80" strokeWidth="1"/>
+                      <line x1={startX - 25} y1={cabinetBackY} x2={startX - 15} y2={cabinetBackY} stroke="#4ade80" strokeWidth="1"/>
+                      <line x1={startX - 25} y1={cabinetFrontY} x2={startX - 15} y2={cabinetFrontY} stroke="#4ade80" strokeWidth="1"/>
+                      <text x={startX - 30} y={(cabinetBackY + cabinetFrontY) / 2 + 4} textAnchor="end" fill="#4ade80" fontSize="10" fontFamily="monospace">{config.cabinetDepth}"</text>
+                    </g>
+
+                    {/* Legend */}
+                    <g transform="translate(30, 290)">
+                      <rect x="0" y="0" width="12" height="12" fill="#2d4a6a" stroke="#60a5fa"/>
+                      <text x="18" y="10" fill="#94a3b8" fontSize="9">Cabinet</text>
+                      <rect x="80" y="0" width="12" height="12" fill="#4ade80" opacity="0.3"/>
+                      <text x="98" y="10" fill="#94a3b8" fontSize="9">Knee space</text>
+                      <rect x="170" y="0" width="12" height="12" fill="#fbbf24" opacity="0.3"/>
+                      <text x="188" y="10" fill="#94a3b8" fontSize="9">LR overhang</text>
+                      <circle cx="276" cy="6" r="6" fill="#5a7a9a" opacity="0.6"/>
+                      <text x="288" y="10" fill="#94a3b8" fontSize="9">Seating</text>
+                    </g>
+                  </g>
+                )
+              })()}
+            </svg>
+
+            {/* Explanation */}
+            <div style={{ marginTop: 16, padding: 12, background: '#0d1520', borderRadius: 6, fontSize: 12, lineHeight: 1.6 }}>
+              <strong style={{ color: '#60a5fa' }}>Plan View Notes:</strong>
+              <ul style={{ margin: '8px 0 0 0', paddingLeft: 20, color: '#94a3b8' }}>
+                <li>Total footprint: <span style={{ color: '#fbbf24' }}>{config.barLength}" x {totalDepth}"</span></li>
+                <li>Cabinet: {config.barLength}" x {config.cabinetDepth}" (sits on kitchen floor at step edge)</li>
+                <li>Knee space: {config.overhangTowardKitchen}" overhang into kitchen</li>
+                <li>LR overhang: {config.overhangTowardLR}" past step edge</li>
+                <li>Seating capacity: ~3 people (at 24" per person)</li>
+              </ul>
+            </div>
+          </>
+          )}
         </div>
       </div>
     </div>
