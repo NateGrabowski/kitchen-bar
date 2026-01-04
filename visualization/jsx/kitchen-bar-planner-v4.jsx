@@ -692,18 +692,67 @@ export default function KitchenBarPlannerV4() {
                           />
                         )}
 
-                        {/* Bar top */}
-                        <rect 
-                          x={barLeft} 
-                          y={barTopY} 
-                          width={barRight - barLeft} 
-                          height={barThickPx} 
-                          fill="#92400e" 
-                          stroke="#b45309" 
-                          strokeWidth="1.5"
-                        />
-                        {/* Wood grain */}
-                        <line x1={barLeft + 5} y1={barTopY + 3} x2={barRight - 5} y2={barTopY + 3} stroke="#78350f" strokeWidth="0.5" opacity="0.5"/>
+                        {/* Bar top - conditional tiered rendering */}
+                        {config.tieredBar ? (
+                          <>
+                            {/* Counter level (kitchen side) */}
+                            <rect
+                              x={stepX}
+                              y={barTopY}
+                              width={barRight - stepX}
+                              height={barThickPx}
+                              fill="#92400e"
+                              stroke="#b45309"
+                              strokeWidth="1.5"
+                            />
+                            {/* Raised bar level (living room side) */}
+                            <rect
+                              x={barLeft}
+                              y={barTopY - config.raisedBarHeight * scale}
+                              width={stepX - barLeft}
+                              height={barThickPx}
+                              fill="#92400e"
+                              stroke="#b45309"
+                              strokeWidth="1.5"
+                            />
+                            {/* Vertical transition piece */}
+                            <rect
+                              x={stepX - barThickPx / 2}
+                              y={barTopY - config.raisedBarHeight * scale}
+                              width={barThickPx}
+                              height={config.raisedBarHeight * scale + barThickPx}
+                              fill="#92400e"
+                              stroke="#b45309"
+                              strokeWidth="1"
+                            />
+                            {/* Wood grain - counter */}
+                            <line x1={stepX + 5} y1={barTopY + 3} x2={barRight - 5} y2={barTopY + 3} stroke="#78350f" strokeWidth="0.5" opacity="0.5"/>
+                            {/* Wood grain - raised */}
+                            <line x1={barLeft + 5} y1={barTopY - config.raisedBarHeight * scale + 3} x2={stepX - 5} y2={barTopY - config.raisedBarHeight * scale + 3} stroke="#78350f" strokeWidth="0.5" opacity="0.5"/>
+                            {/* Raised height dimension */}
+                            <g>
+                              <line x1={barLeft - 15} y1={barTopY} x2={barLeft - 15} y2={barTopY - config.raisedBarHeight * scale} stroke="#f472b6" strokeWidth="1"/>
+                              <line x1={barLeft - 20} y1={barTopY} x2={barLeft - 10} y2={barTopY} stroke="#f472b6" strokeWidth="1"/>
+                              <line x1={barLeft - 20} y1={barTopY - config.raisedBarHeight * scale} x2={barLeft - 10} y2={barTopY - config.raisedBarHeight * scale} stroke="#f472b6" strokeWidth="1"/>
+                              <text x={barLeft - 25} y={barTopY - config.raisedBarHeight * scale / 2 + 3} textAnchor="end" fill="#f472b6" fontSize="9" fontFamily="monospace">+{config.raisedBarHeight}"</text>
+                            </g>
+                          </>
+                        ) : (
+                          <>
+                            {/* Standard single-level bar top */}
+                            <rect
+                              x={barLeft}
+                              y={barTopY}
+                              width={barRight - barLeft}
+                              height={barThickPx}
+                              fill="#92400e"
+                              stroke="#b45309"
+                              strokeWidth="1.5"
+                            />
+                            {/* Wood grain */}
+                            <line x1={barLeft + 5} y1={barTopY + 3} x2={barRight - 5} y2={barTopY + 3} stroke="#78350f" strokeWidth="0.5" opacity="0.5"/>
+                          </>
+                        )}
 
                         {/* Waterfall edges */}
                         {config.waterfallEdge && (
