@@ -7,27 +7,59 @@ description: Use when creating or validating construction documentation for wood
 
 ## Overview
 
-**This skill validates existing construction views or creates new ones.** Always runs the Reality-Check Protocol against reference photos first.
+**Create construction documentation that accurately represents the ACTUAL design.** Never copy patterns blindly - understand the design first, build documentation that matches, then verify the output.
 
 ## Workflow
 
 ```
 START
   ↓
+1. UNDERSTAND THE DESIGN
+   Read Side Section, Front View, config
+   What is actually being built?
+  ↓
+2. REALITY-CHECK (photos)
+   What exists? What's new?
+  ↓
 Does construction view exist?
   ↓ YES                    ↓ NO
   VALIDATE                 CREATE
   ↓                        ↓
-Reality-Check Protocol     Reality-Check Protocol
+Check components           Build components
   ↓                        ↓
-Give feedback              Build components
-  ↓                        ↓
-Offer to update?           Show result
-  ↓ YES
-  Make changes
+Report issues              Show result
+  ↓
+Offer to update?
+  ↓
+3. CREATE/UPDATE construction view
+   Diagrams must match the design
+  ↓
+4. POST-COMPLETION REVIEW ← CRITICAL
+   Run 3 perspectives on YOUR OUTPUT
+   Does it match the design?
+  ↓
+   If issues → Fix → Review again
+  ↓
+DONE
 ```
 
-## Reality-Check Protocol (ALWAYS RUN FIRST)
+## Step 1: UNDERSTAND THE DESIGN (Do This First!)
+
+**Before touching construction view, answer:**
+- What type of structure is this? (cabinet on floor? continuous structure? built-in?)
+- Where does it attach? (floor? wall? existing structure?)
+- What are the key dimensions and how do they relate?
+- Read the Side Section view - this IS the design
+
+**Different designs need different construction approaches:**
+
+| Design Type | Construction Approach |
+|-------------|----------------------|
+| Cabinet on floor | Standard cabinet carcass, sits on subfloor |
+| Continuous structure | Full-height framing, anchored at multiple points |
+| Built-in modification | Works with existing structure |
+
+## Step 2: Reality-Check Protocol (ALWAYS RUN)
 
 1. **Find and view reference photos** in `docs/images/` or ask user for photos
 2. **Identify existing structures** - walls, finishes, framing already in place
@@ -57,37 +89,77 @@ Offer to update?           Show result
 4. **Report what's missing or incorrect**
 5. Ask: "Want me to update the construction view?"
 
-## CREATE Flow (empty/new view)
+## Step 3: Create/Update Construction View
 
-Build these components in order:
+### Required Components (adapt to YOUR design)
 
-### 1. Framing Diagrams (2x2 grid)
+**1. FRAMING DIAGRAMS** (2x2 grid)
 ```jsx
 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-  {/* Cabinet Carcass */}
-  {/* Face Frame */}
-  {/* Counter Attachment */}
-  {/* Site Prep / Existing Wall Prep */}
+  {/* Component 1: Structure type (cabinet carcass, full-height frame, etc.) */}
+  {/* Component 2: Face frame OR panel layout */}
+  {/* Component 3: Counter attachment method */}
+  {/* Component 4: Site prep / existing wall integration */}
 </div>
 ```
 
-### 2. Cross-Section with Callouts
-- Side view showing all layers
-- Callout boxes with leader lines pointing to materials
-- Dimension lines (cyan `#38bdf8`)
+**2. CROSS-SECTION WITH CALLOUTS**
+- Full side section matching the design's Side Section view
+- Callout boxes with leader lines pointing to each component
+- Callouts include: name, dimensions, material
+- Dimension lines for key measurements
 - Show EXISTING structures in cream `#d4c5b0`
 
-### 3. Connection Details (3 panels)
-Zoomed views of critical joints:
-- Counter attachment (L-brackets, slotted holes)
-- Cabinet positioning (relationship to existing structures)
+**3. CONNECTION DETAILS** (3-column grid)
+- Zoomed views of critical joints
+- Counter-to-structure attachment (L-brackets, slotted holes)
+- Structure-to-floor/wall attachment
 - Overhang support (if applicable)
 
-### 4. Supporting Info
-- Materials table: Item | Size | Qty | Notes
-- Build sequence: Numbered steps
-- Key dimensions: 6-box summary grid
-- Considerations: Warnings, code requirements
+**4. MATERIALS TABLE**
+- Item, Size, Qty, Notes columns
+- Dynamic values from config
+- Flag non-standard sizes
+
+**5. BUILD SEQUENCE**
+- Numbered steps in logical order
+- Reference existing structures first
+- Assembly order that makes physical sense
+
+**6. KEY DIMENSIONS** (grid)
+- 6 most important measurements
+- Show notes (e.g., "CUSTOM", "ideal", "check")
+
+**7. CONSIDERATIONS**
+- Warnings about non-standard dimensions
+- Requirements for structural support
+- Material-specific notes
+
+**CRITICAL: Every diagram must represent the ACTUAL design, not a generic pattern.**
+
+## Step 4: POST-COMPLETION REVIEW (Run This!)
+
+**After creating/updating, run three perspectives on YOUR OUTPUT:**
+
+| Perspective | Question |
+|-------------|----------|
+| **Interior Designer** | Does this construction view match the design aesthetic? |
+| **Architect** | Does the cross-section match the Side Section view? Are the structural connections correct for this design? |
+| **Contractor** | Can I actually build this? Does it make physical sense? |
+
+**Physical reality checks (CRITICAL):**
+- [ ] Structure actually touches the ground (no floating frames)
+- [ ] Where do people sit/stand? Nothing poking into that space
+- [ ] Brackets/supports are hidden or positioned logically
+- [ ] A human could actually use this without injury
+
+**Consistency checks:**
+- [ ] Cross-section matches Side Section view
+- [ ] Framing diagrams show correct structure type
+- [ ] Dimensions in construction view match config values
+- [ ] Materials list is appropriate for THIS design
+
+**If ANY check fails → Fix and review again**
 
 ## Color Scheme (Dark Theme)
 
@@ -110,6 +182,15 @@ See `visualization/jsx/kitchen-floor-cabinets-sketch.jsx` Construction tab for c
 - Dynamic materials table
 - 10-step build sequence
 
-## Critical Mistake to Avoid
+**Do NOT copy it directly for other design types** - adapt the patterns to match the actual design.
 
-**Assuming blank slate**: Most home improvement builds ON existing structures. The v4 construction view assumed new framing was needed, but photos revealed a finished drywall half-wall already existed. Reality-check catches this.
+## Critical Mistakes
+
+| Mistake | Why It Happens | Fix |
+|---------|----------------|-----|
+| **Assuming blank slate** | Didn't check photos for existing structures | Reality-check catches this - most builds work WITH existing |
+| **Copying patterns blindly** | Reference impl looks good, just use it | UNDERSTAND design first, adapt patterns |
+| **Cross-section doesn't match Side Section** | Didn't read the actual design views | Compare output against Side Section |
+| **Skipping post-completion review** | "Looks done, ship it" | ALWAYS run 3 perspectives on output |
+| **Wrong structure type** | Didn't identify design type | Step 1: What type of structure is this? |
+| **Physical impossibilities** | Floating frames, brackets in leg space | Physical reality checks catch these |
