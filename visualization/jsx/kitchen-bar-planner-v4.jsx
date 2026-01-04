@@ -17,12 +17,74 @@ export default function KitchenBarPlannerV4() {
     passThrough: false,
     passThroughWidth: 24,
     wineStorage: false,
+    // NEW: Preset tracking
+    activePreset: 'flush',
+    // NEW: Tiered bar
+    tieredBar: false,
+    raisedBarHeight: 6,
+    // NEW: LR ledge
+    lrLedge: false,
+    ledgeHeight: 42,
+    ledgeDepth: 10,
+    // NEW: LR shelves
+    lrShelves: false,
+    shelfHeight: 42,
   });
 
   const [activeView, setActiveView] = useState('all');
   const uniqueId = useId();
 
   const update = (key, value) => setConfig(prev => ({ ...prev, [key]: value }));
+
+  // Preset definitions
+  const presets = {
+    flush: {
+      name: 'Flush',
+      desc: 'Cabinets align with step edge',
+      pros: ['Simplest build', 'Standard cabinets'],
+      cons: ['No LR function', 'Counter height only'],
+      values: { cabinetSetback: 0, tieredBar: false, lrLedge: false, lrShelves: false }
+    },
+    setback: {
+      name: 'Setback',
+      desc: 'Step edge stays visible',
+      pros: ['Natural boundary', 'Easier step navigation'],
+      cons: ['May collect debris', 'Counter height only'],
+      values: { cabinetSetback: 4, tieredBar: false, lrLedge: false, lrShelves: false }
+    },
+    tiered: {
+      name: 'Tiered',
+      desc: 'Counter + raised bar section',
+      pros: ['True bar height', 'Hides kitchen mess'],
+      cons: ['More complex', 'Crumb gap'],
+      values: { cabinetSetback: 0, tieredBar: true, raisedBarHeight: 6, lrLedge: false, lrShelves: false }
+    },
+    ledge: {
+      name: 'Ledge',
+      desc: 'Add LR drink shelf',
+      pros: ['LR functionality', 'Standing-friendly'],
+      cons: ['Needs secure mounting', 'Two separate elements'],
+      values: { cabinetSetback: 0, tieredBar: false, lrLedge: true, ledgeHeight: 42, ledgeDepth: 10, lrShelves: false }
+    },
+    floating: {
+      name: 'Floating',
+      desc: 'Add LR display shelves',
+      pros: ['Display storage', 'Modern look'],
+      cons: ['Visible clutter', 'Dust accumulation'],
+      values: { cabinetSetback: 0, tieredBar: false, lrLedge: false, lrShelves: true, shelfHeight: 42 }
+    },
+  };
+
+  const applyPreset = (presetId) => {
+    const preset = presets[presetId];
+    if (preset) {
+      setConfig(prev => ({
+        ...prev,
+        activePreset: presetId,
+        ...preset.values
+      }));
+    }
+  };
 
   // Calculated values with safety bounds
   const kneeSpaceKitchen = Math.max(0, config.barDepth - config.cabinetDepth - config.cabinetSetback);
