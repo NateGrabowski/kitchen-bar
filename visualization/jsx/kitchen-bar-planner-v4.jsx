@@ -1361,6 +1361,56 @@ export default function KitchenBarPlannerV4() {
                           <rect x={stepX + 5} y={barTopY + 12} width={cabinetDepthPx - 8} height="3" fill="#fbbf24" opacity="0.8"/>
                         )}
 
+                        {/* Tiered bar raised section framing */}
+                        {config.tieredBar && (() => {
+                          const raisedTopY = barTopY - config.raisedBarHeight * scale;
+                          return (
+                            <g>
+                              {/* Raised section vertical studs */}
+                              <rect x={stepX - config.cabinetSetback * scale} y={raisedTopY + 10} width="4" height={config.raisedBarHeight * scale} fill="#d4a574" stroke="#a07850" strokeWidth="0.5"/>
+                              <rect x={stepX - config.cabinetSetback * scale + 20} y={raisedTopY + 10} width="4" height={config.raisedBarHeight * scale} fill="#d4a574" stroke="#a07850" strokeWidth="0.5"/>
+                              {/* Raised bar top */}
+                              <rect x={stepX - config.cabinetSetback * scale - 5} y={raisedTopY} width={35} height={Math.max(config.barTopThickness * scale * 2, 8)} fill="#92400e" stroke="#b45309" strokeWidth="1.5"/>
+                              {/* Label */}
+                              <text x={stepX - config.cabinetSetback * scale + 10} y={raisedTopY - 5} textAnchor="middle" fill="#f472b6" fontSize="8">+{config.raisedBarHeight}"</text>
+                            </g>
+                          );
+                        })()}
+
+                        {/* LR Ledge construction */}
+                        {config.lrLedge && (() => {
+                          const ledgeY = groundY - config.ledgeHeight * scale;
+                          const ledgeDepthPx = config.ledgeDepth * scale;
+                          return (
+                            <g>
+                              {/* Ledge surface */}
+                              <rect x={stepX - ledgeDepthPx - 5} y={ledgeY} width={ledgeDepthPx + 5} height="6" fill="#92400e" stroke="#b45309" strokeWidth="1"/>
+                              {/* Mounting bracket */}
+                              <path d={`M ${stepX} ${ledgeY + 6} L ${stepX} ${ledgeY + 25} L ${stepX - ledgeDepthPx + 8} ${ledgeY + 6}`} fill="none" stroke="#9ca3af" strokeWidth="2.5"/>
+                              {/* Height dimension */}
+                              <text x={stepX - ledgeDepthPx - 10} y={ledgeY + 3} textAnchor="end" fill="#22d3ee" fontSize="8">{config.ledgeHeight}"</text>
+                            </g>
+                          );
+                        })()}
+
+                        {/* LR Floating shelves construction */}
+                        {config.lrShelves && (() => {
+                          const shelfY = groundY - config.shelfHeight * scale;
+                          const shelfWidth = 35;
+                          return (
+                            <g>
+                              {/* Lower shelf */}
+                              <rect x={stepX - shelfWidth - 5} y={shelfY} width={shelfWidth} height="4" fill="#4a6a8a" stroke="#60a5fa" strokeWidth="1"/>
+                              {/* Upper shelf */}
+                              <rect x={stepX - shelfWidth - 5} y={shelfY - 25} width={shelfWidth} height="4" fill="#4a6a8a" stroke="#60a5fa" strokeWidth="1"/>
+                              {/* Mounting rail */}
+                              <rect x={stepX - 5} y={shelfY - 28} width="4" height={32} fill="#9ca3af"/>
+                              {/* Height dimension */}
+                              <text x={stepX - shelfWidth - 12} y={shelfY + 2} textAnchor="end" fill="#a78bfa" fontSize="8">{config.shelfHeight}"</text>
+                            </g>
+                          );
+                        })()}
+
                         {/* LEGEND & NOTES */}
                         <g transform="translate(300, 50)">
                           <text fill="#60a5fa" fontSize="11" fontWeight="600">CONSTRUCTION NOTES</text>
@@ -1371,6 +1421,9 @@ export default function KitchenBarPlannerV4() {
                           <text y="80" fill="#94a3b8" fontSize="9">• Pre-wire electrical before closing</text>
                           <text y="95" fill="#94a3b8" fontSize="9">• Cabinet boxes installed separately</text>
                           {config.waterfallEdge && <text y="110" fill="#94a3b8" fontSize="9">• Miter joints for waterfall edges</text>}
+                          {config.tieredBar && <text y={config.waterfallEdge ? 125 : 110} fill="#f472b6" fontSize="9">• Raised section: add blocking for tier</text>}
+                          {config.lrLedge && <text y={(config.waterfallEdge ? 125 : 110) + (config.tieredBar ? 15 : 0)} fill="#22d3ee" fontSize="9">• Ledge: steel L-bracket @ 16" O.C.</text>}
+                          {config.lrShelves && <text y={(config.waterfallEdge ? 125 : 110) + (config.tieredBar ? 15 : 0) + (config.lrLedge ? 15 : 0)} fill="#a78bfa" fontSize="9">• Shelves: French cleat or floating mounts</text>}
                         </g>
 
                         <g transform="translate(300, 180)">
