@@ -3,10 +3,15 @@ import React, { useState, lazy, Suspense } from 'react'
 const visualizations = {
   'kitchen-bar-planner': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v4.jsx')),
   'kitchen-floor-cabinets-sketch': lazy(() => import('../visualization/jsx/kitchen-floor-cabinets-sketch.jsx')),
-  // Phase 2 Concept Sketches
+  // Phase 2 Concept Sketches - Round 1 (Materials & Features)
   'concept-live-edge-waterfall': lazy(() => import('../visualization/jsx/concept-live-edge-waterfall.jsx')),
   'concept-chevron-speakeasy': lazy(() => import('../visualization/jsx/concept-chevron-speakeasy.jsx')),
   'concept-floating-cantilever': lazy(() => import('../visualization/jsx/concept-floating-cantilever.jsx')),
+  // Phase 2 Concept Sketches - Round 2 (Structural Variations)
+  'concept-kitchen-floor-cabinets': lazy(() => import('../visualization/jsx/concept-kitchen-floor-cabinets.jsx')),
+  'concept-open-shelving': lazy(() => import('../visualization/jsx/concept-open-shelving.jsx')),
+  'concept-angled-bar': lazy(() => import('../visualization/jsx/concept-angled-bar.jsx')),
+  'concept-sliding-bar': lazy(() => import('../visualization/jsx/concept-sliding-bar.jsx')),
 }
 
 export default function App() {
