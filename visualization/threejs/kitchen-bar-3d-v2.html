@@ -108,14 +108,6 @@
     fillLight.position.set(-30, 40, -20);
     scene.add(fillLight);
 
-    // Temporary test sphere to verify lighting
-    const testGeo = new THREE.SphereGeometry(15, 32, 32);
-    const testMat = new THREE.MeshStandardMaterial({ color: 0x3b82f6 });
-    const testSphere = new THREE.Mesh(testGeo, testMat);
-    testSphere.position.set(42, 30, 0);
-    testSphere.castShadow = true;
-    scene.add(testSphere);
-
     // Axes helper for development
     const axesHelper = new THREE.AxesHelper(50);
     scene.add(axesHelper);
@@ -123,6 +115,94 @@
     // Grid helper for development
     const gridHelper = new THREE.GridHelper(200, 20, 0x3b82f6, 0x1e3a5f);
     scene.add(gridHelper);
+
+    // ============================================
+    // MATERIALS
+    // ============================================
+    const materials = {
+      livingRoomFloor: new THREE.MeshStandardMaterial({
+        color: 0x8b7355,  // warm oak
+        roughness: 0.8,
+        metalness: 0.0
+      }),
+      kitchenFloor: new THREE.MeshStandardMaterial({
+        color: 0xd4c4a8,  // cream tile
+        roughness: 0.6,
+        metalness: 0.0
+      }),
+      stepFace: new THREE.MeshStandardMaterial({
+        color: 0xf5f5f5,  // white trim
+        roughness: 0.5
+      }),
+      wall: new THREE.MeshStandardMaterial({
+        color: 0xd4c4a8,  // beige
+        roughness: 0.9,
+        side: THREE.DoubleSide
+      }),
+      column: new THREE.MeshStandardMaterial({
+        color: 0xffffff,  // white
+        roughness: 0.5
+      }),
+    };
+
+    // ============================================
+    // ROOM GEOMETRY
+    // ============================================
+    function createRoom() {
+      const room = new THREE.Group();
+      room.name = 'room';
+
+      // Living room floor (origin level, Y=0)
+      const lrFloorGeo = new THREE.BoxGeometry(120, 2, 80);
+      const lrFloor = new THREE.Mesh(lrFloorGeo, materials.livingRoomFloor);
+      lrFloor.position.set(60, -1, 40);
+      lrFloor.receiveShadow = true;
+      room.add(lrFloor);
+
+      // Kitchen floor (elevated by stepHeight)
+      const kitchenFloorGeo = new THREE.BoxGeometry(120, 2, 60);
+      const kitchenFloor = new THREE.Mesh(kitchenFloorGeo, materials.kitchenFloor);
+      kitchenFloor.position.set(60, CONFIG.stepHeight - 1, -30);
+      kitchenFloor.receiveShadow = true;
+      room.add(kitchenFloor);
+
+      // Step face (vertical face between floors)
+      const stepFaceGeo = new THREE.BoxGeometry(CONFIG.barLength, CONFIG.stepHeight, 2);
+      const stepFace = new THREE.Mesh(stepFaceGeo, materials.stepFace);
+      stepFace.position.set(CONFIG.barLength / 2, CONFIG.stepHeight / 2, 0);
+      room.add(stepFace);
+
+      // Back wall
+      const backWallGeo = new THREE.PlaneGeometry(200, 96);
+      const backWall = new THREE.Mesh(backWallGeo, materials.wall);
+      backWall.position.set(100, 48, -60);
+      backWall.receiveShadow = true;
+      room.add(backWall);
+
+      // Left wall (partial)
+      const leftWallGeo = new THREE.PlaneGeometry(120, 96);
+      const leftWall = new THREE.Mesh(leftWallGeo, materials.wall);
+      leftWall.position.set(0, 48, 0);
+      leftWall.rotation.y = Math.PI / 2;
+      room.add(leftWall);
+
+      // White column at bar end
+      const columnGeo = new THREE.BoxGeometry(6, 96, 6);
+      const column = new THREE.Mesh(columnGeo, materials.column);
+      column.position.set(CONFIG.barLength + 3, 48, 0);
+      column.castShadow = true;
+      room.add(column);
+
+      return room;
+    }
+
+    // Add room to scene
+    const room = createRoom();
+    scene.add(room);
+
+    // Update camera target to center on bar
+    controls.target.set(CONFIG.barLength / 2, 30, 0);
+    controls.update();
 
     // ============================================
     // ANIMATION LOOP
