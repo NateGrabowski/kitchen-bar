@@ -1044,8 +1044,36 @@ export default function KitchenBarPlannerV4() {
                           );
                         })}
 
-                        {/* Bar top */}
-                        <rect x={startX - 8} y={barTopY} width={barLengthPx + 16} height="10" fill="#92400e" stroke="#b45309" strokeWidth="1.5"/>
+                        {/* Bar top - conditional tiered rendering */}
+                        {config.tieredBar ? (
+                          <>
+                            {/* Raised bar section (front portion, higher) */}
+                            <rect
+                              x={startX - 8}
+                              y={barTopY - config.raisedBarHeight * 2}
+                              width={barLengthPx + 16}
+                              height="10"
+                              fill="#92400e"
+                              stroke="#b45309"
+                              strokeWidth="1.5"
+                            />
+                            {/* Counter level (back, lower - visible behind) */}
+                            <rect
+                              x={startX - 4}
+                              y={barTopY}
+                              width={barLengthPx + 8}
+                              height="6"
+                              fill="#78350f"
+                              stroke="#92400e"
+                              strokeWidth="1"
+                              opacity="0.7"
+                            />
+                            {/* Raised height indicator */}
+                            <text x={startX + barLengthPx + 15} y={barTopY - config.raisedBarHeight + 5} fill="#f472b6" fontSize="9" fontFamily="monospace">+{config.raisedBarHeight}"</text>
+                          </>
+                        ) : (
+                          <rect x={startX - 8} y={barTopY} width={barLengthPx + 16} height="10" fill="#92400e" stroke="#b45309" strokeWidth="1.5"/>
+                        )}
 
                         {/* Waterfall edges */}
                         {config.waterfallEdge && (
