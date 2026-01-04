@@ -60,6 +60,38 @@
       border-color: #3b82f6;
       color: white;
     }
+    #ui-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 20px;
+      background: rgba(10, 22, 40, 0.9);
+      border-top: 1px solid #243447;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      z-index: 100;
+    }
+    .camera-btn {
+      padding: 8px 14px;
+      font-size: 11px;
+      background: #111d2e;
+      border: 1px solid #243447;
+      color: #64748b;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .camera-btn:hover {
+      border-color: #3b82f6;
+      color: #60a5fa;
+    }
+    .camera-btn.active {
+      background: #1e3a5f;
+      border-color: #3b82f6;
+      color: #60a5fa;
+    }
   </style>
 </head>
 <body>
@@ -385,6 +417,68 @@
     });
 
     // ============================================
+    // CAMERA PRESETS
+    // ============================================
+    const CAMERA_PRESETS = {
+      livingroom: { pos: [-60, 48, 80], target: [42, 30, 0], fov: 45 },
+      kitchen: { pos: [100, 60, -30], target: [42, 30, 0], fov: 45 },
+      birdseye: { pos: [42, 120, 42], target: [42, 20, 0], fov: 50 },
+      seated: { pos: [60, 53.5, -10], target: [0, 40, 40], fov: 60 },
+      contractor: { pos: [-80, 36, 0], target: [42, 30, 0], fov: 40 },
+    };
+
+    let currentView = null;
+    let cameraAnimating = false;
+
+    function animateCamera(targetPos, targetLookAt, targetFov, duration = 500) {
+      if (cameraAnimating) return;
+      cameraAnimating = true;
+
+      const startPos = camera.position.clone();
+      const startTarget = controls.target.clone();
+      const startFov = camera.fov;
+      const startTime = performance.now();
+
+      function update() {
+        const elapsed = performance.now() - startTime;
+        const t = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const ease = 1 - Math.pow(1 - t, 3);
+
+        camera.position.lerpVectors(startPos, new THREE.Vector3(...targetPos), ease);
+        controls.target.lerpVectors(startTarget, new THREE.Vector3(...targetLookAt), ease);
+        camera.fov = startFov + (targetFov - startFov) * ease;
+        camera.updateProjectionMatrix();
+        controls.update();
+
+        if (t < 1) {
+          requestAnimationFrame(update);
+        } else {
+          cameraAnimating = false;
+        }
+      }
+      update();
+    }
+
+    // ============================================
+    // UI: CAMERA BUTTONS
+    // ============================================
+    document.querySelectorAll('.camera-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const view = btn.dataset.view;
+        const preset = CAMERA_PRESETS[view];
+        if (!preset) return;
+
+        // Update button states
+        document.querySelectorAll('.camera-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        animateCamera(preset.pos, preset.target, preset.fov);
+        currentView = view;
+      });
+    });
+
+    // ============================================
     // ANIMATION LOOP
     // ============================================
     function animate() {
@@ -405,5 +499,13 @@
 
     console.log('Kitchen Bar 3D - Config:', CONFIG);
   </script>
+
+  <div id="ui-bottom">
+    <button class="camera-btn" data-view="livingroom">Living Room</button>
+    <button class="camera-btn" data-view="kitchen">Kitchen</button>
+    <button class="camera-btn" data-view="birdseye">Bird's Eye</button>
+    <button class="camera-btn" data-view="seated">Seated POV</button>
+    <button class="camera-btn" data-view="contractor">Detail</button>
+  </div>
 </body>
 </html>
