@@ -235,6 +235,58 @@ export default function KitchenBarPlannerV4() {
         @media (max-width: 900px) {
           .main-grid { grid-template-columns: 1fr !important; }
         }
+        .preset-row {
+          display: flex;
+          gap: 6px;
+          flex-wrap: wrap;
+          margin-bottom: 12px;
+        }
+        .preset-btn {
+          flex: 1;
+          min-width: 50px;
+          padding: 8px 6px;
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          background: transparent;
+          border: 1px solid #334155;
+          color: #94a3b8;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: all 0.15s;
+        }
+        .preset-btn:hover {
+          border-color: #60a5fa;
+          color: #e2e8f0;
+        }
+        .preset-btn.active {
+          background: #1e3a5f;
+          border-color: #3b82f6;
+          color: #60a5fa;
+        }
+        .preset-info {
+          background: #0d1520;
+          border-radius: 4px;
+          padding: 10px;
+          margin-top: 4px;
+        }
+        .preset-desc {
+          font-size: 12px;
+          color: #e2e8f0;
+          margin-bottom: 8px;
+        }
+        .preset-pros-cons {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          font-size: 10px;
+        }
+        .preset-pro {
+          color: #4ade80;
+        }
+        .preset-con {
+          color: #fb923c;
+        }
       `}</style>
 
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -270,6 +322,35 @@ export default function KitchenBarPlannerV4() {
         <div className="main-grid" style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: 16 }}>
           {/* Left Panel - Controls */}
           <div>
+            {/* Configuration Presets */}
+            <div className="panel">
+              <div className="panel-title">Configuration Presets</div>
+              <div className="preset-row">
+                {Object.entries(presets).map(([id, preset]) => (
+                  <button
+                    key={id}
+                    className={`preset-btn ${config.activePreset === id ? 'active' : ''}`}
+                    onClick={() => applyPreset(id)}
+                  >
+                    {preset.name}
+                  </button>
+                ))}
+              </div>
+              {config.activePreset && presets[config.activePreset] && (
+                <div className="preset-info">
+                  <div className="preset-desc">{presets[config.activePreset].desc}</div>
+                  <div className="preset-pros-cons">
+                    {presets[config.activePreset].pros.map((pro, i) => (
+                      <span key={`pro-${i}`} className="preset-pro">✓ {pro}</span>
+                    ))}
+                    {presets[config.activePreset].cons.map((con, i) => (
+                      <span key={`con-${i}`} className="preset-con">⚠ {con}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div className="panel">
               <div className="panel-title">Dimensions</div>
               
