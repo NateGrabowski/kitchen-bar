@@ -17,9 +17,59 @@
       width: 100vw;
       height: 100vh;
     }
+    #ui-top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 20px;
+      background: rgba(10, 22, 40, 0.9);
+      border-bottom: 1px solid #243447;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+    #ui-top h1 {
+      font-size: 18px;
+      font-weight: 500;
+      color: #f1f5f9;
+    }
+    .preset-group {
+      display: flex;
+      gap: 8px;
+    }
+    .preset-btn {
+      padding: 8px 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: transparent;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .preset-btn:hover {
+      border-color: #60a5fa;
+      color: #e2e8f0;
+    }
+    .preset-btn.active {
+      background: #3b82f6;
+      border-color: #3b82f6;
+      color: white;
+    }
   </style>
 </head>
 <body>
+  <div id="ui-top">
+    <h1>Kitchen Bar 3D Planner</h1>
+    <div class="preset-group">
+      <button class="preset-btn active" data-preset="flush">Flush</button>
+      <button class="preset-btn" data-preset="tiered">Tiered</button>
+    </div>
+  </div>
   <canvas id="canvas"></canvas>
 
   <script type="importmap">
@@ -307,6 +357,32 @@
     // Update camera target to center on bar
     controls.target.set(CONFIG.barLength / 2, 30, 0);
     controls.update();
+
+    // ============================================
+    // UI: PRESET TOGGLE
+    // ============================================
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const preset = btn.dataset.preset;
+        if (preset === currentPreset) return;
+
+        // Update buttons
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Toggle geometry
+        if (preset === 'flush') {
+          barFlush.visible = true;
+          barTiered.visible = false;
+        } else {
+          barFlush.visible = false;
+          barTiered.visible = true;
+        }
+
+        currentPreset = preset;
+        console.log('Preset changed to:', preset);
+      });
+    });
 
     // ============================================
     // ANIMATION LOOP
