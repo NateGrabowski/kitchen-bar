@@ -589,6 +589,26 @@ export default function KitchenBarPlannerV4() {
                 <span>~{Math.floor(config.barLength / 24)}</span>
               </div>
 
+              {/* New feature calculated values */}
+              {config.tieredBar && (
+                <div className="calc-row" style={{ color: '#f472b6' }}>
+                  <span>Raised bar from LR floor</span>
+                  <span>{barFromLivingRoom + config.raisedBarHeight}"</span>
+                </div>
+              )}
+              {config.lrLedge && (
+                <div className="calc-row" style={{ color: '#22d3ee' }}>
+                  <span>Ledge from LR floor</span>
+                  <span>{config.ledgeHeight}"</span>
+                </div>
+              )}
+              {config.lrShelves && (
+                <div className="calc-row" style={{ color: '#a78bfa' }}>
+                  <span>Shelves from LR floor</span>
+                  <span>{config.shelfHeight}"</span>
+                </div>
+              )}
+
               <div className={kneeSpaceKitchen >= 12 ? 'status-ok' : 'status-warn'}>
                 {kneeSpaceKitchen >= 12 ? '✓' : '⚠'} Knee space {kneeSpaceKitchen >= 12 ? 'comfortable' : 'may be tight'} (12"+ recommended)
               </div>
