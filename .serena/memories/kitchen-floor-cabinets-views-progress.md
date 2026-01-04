@@ -18,13 +18,36 @@
 - `47a9a56` - feat(sketch): complete multi-view kitchen floor cabinets visualization
 - `684cd9c` - feat(sketch): add exploded assembly diagram to construction view
 
-## Needs Rework
+## Completed Rework
 
-**Construction View Diagram** - The "exploded assembly" diagram at `684cd9c` doesn't work well:
-- User feedback: "doesn't really make any sense or apply very well"
-- May need to split into multiple diagrams
-- Current approach: vertically stacked components with dashed lines
-- Consider alternatives: labeled cross-section, cut list, or isometric assembly
+**Framing Diagrams** - Replaced abstract exploded assembly with 4 practical framing views:
+1. **Cabinet Carcass** - 3D-ish box skeleton (sides, bottom, stretchers, dado locations)
+2. **Face Frame** - Rails/stiles with door openings and hinge positions
+3. **Counter Attachment** - L-brackets, slotted holes, steel support bracket
+4. **Step Panel Framing** - Cleats (2x2), screw locations, panel attachment
+
+User feedback: "This construction view is a LOT better"
+
+## Completed Improvements (Jan 4, 2026)
+
+**Construction Side Section with Callouts** - Added cross-section diagram showing:
+- Material callouts (Butcher Block, Cabinet Box, Step Panel, Knee Space, L-Brackets)
+- Dimension lines (step height, counter height, total from LR)
+- Interior cabinet details (shelves, sides, cleats)
+
+**Connection Details** - Added 3-panel zoomed detail views:
+1. **Counter Attachment** - L-brackets with slotted holes for wood movement, screw placement
+2. **Step Panel Mount** - Cleats screwed to step face, removable panel design
+3. **Overhang Support** - Steel bracket for LR overhang >6", dynamic based on config
+
+## Final Construction View Structure
+1. Framing Diagrams (2x2 grid): Cabinet Carcass, Face Frame, Counter Attachment, Step Panel Framing
+2. Construction Side Section: Cross-section with callout boxes and dimension lines
+3. Connection Details: 3 zoomed detail views of critical joints
+4. Materials Table: Dynamic based on configuration
+5. Build Sequence: 10-step numbered list
+6. Key Dimensions: 6 summary boxes
+7. Considerations: Warnings and notes
 
 ## Design Context
 
@@ -39,11 +62,6 @@ Key calculated values used across views:
 - `totalDepth` = cabinetDepth + overhangTowardLR + overhangTowardKitchen
 - `counterFromLRFloor` = stepHeight + counterHeight
 
-## Next Steps
+## Status: COMPLETE
 
-Redesign the Construction view diagram to be more useful. Options discussed:
-- A. Exploded Assembly (current - needs improvement)
-- B. Labeled Cross-Section (like Side Section but with construction callouts)
-- C. Cut List Layout (flat pieces with dimensions)
-
-User may prefer splitting into multiple focused diagrams rather than one complex one.
+Construction view redesign complete. User mentioned wanting to create a skill from this work for future construction diagram creation.
