@@ -5,11 +5,17 @@ export default function KitchenFloorCabinetsSketch() {
     stepHeight: 23.5,           // Fixed - living room to kitchen floor
     counterHeight: 40,          // PRIMARY: counter height from kitchen floor (range: 36-42")
     counterThickness: 1.5,      // Butcher block
-    cabinetDepth: 12,           // Cabinet depth (doors face LR side)
-    overhangTowardLR: 8,        // How far counter extends past cabinet toward LR
+    cabinetDepth: 16,           // Cabinet depth (doors face LR side)
+    overhangTowardLR: 0,        // How far counter extends past cabinet toward LR
     overhangTowardKitchen: 12,  // Knee space on kitchen side
     barLength: 84,
-    stoolHeight: 30,
+    stoolHeight: 28,
+    // Recessed herb planter
+    planterEnabled: false,
+    planterLength: 20,          // Length along bar (inches)
+    planterWidth: 6,            // Width/depth into counter (inches)
+    planterDepth: 4,            // How deep the insert sits (inches)
+    planterOffset: 6,           // Distance from left end of bar (inches)
   })
 
   const [activeView, setActiveView] = useState('side')
@@ -290,6 +296,77 @@ export default function KitchenFloorCabinetsSketch() {
           </div>
 
           <div className="panel">
+            <div className="panel-title">Herb Planter</div>
+
+            <div className="slider-group">
+              <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={config.planterEnabled}
+                  onChange={e => update('planterEnabled', e.target.checked)}
+                  style={{ width: 16, height: 16 }}
+                />
+                <span style={{ color: config.planterEnabled ? '#22c55e' : '#64748b' }}>
+                  Recessed planter enabled
+                </span>
+              </label>
+            </div>
+
+            {config.planterEnabled && (
+              <>
+                <div className="slider-group">
+                  <div className="slider-label">
+                    <span>Planter Length</span>
+                    <span className="slider-value">{config.planterLength}"</span>
+                  </div>
+                  <input type="range" min="12" max="36" value={config.planterLength}
+                    onChange={e => update('planterLength', +e.target.value)}
+                  />
+                  <div className="slider-note">Length along bar</div>
+                </div>
+
+                <div className="slider-group">
+                  <div className="slider-label">
+                    <span>Planter Width</span>
+                    <span className="slider-value">{config.planterWidth}"</span>
+                  </div>
+                  <input type="range" min="4" max="10" value={config.planterWidth}
+                    onChange={e => update('planterWidth', +e.target.value)}
+                  />
+                  <div className="slider-note">Depth into counter</div>
+                </div>
+
+                <div className="slider-group">
+                  <div className="slider-label">
+                    <span>Insert Depth</span>
+                    <span className="slider-value">{config.planterDepth}"</span>
+                  </div>
+                  <input type="range" min="3" max="6" value={config.planterDepth}
+                    onChange={e => update('planterDepth', +e.target.value)}
+                  />
+                  <div className="slider-note">How deep insert sits below counter</div>
+                </div>
+
+                <div className="slider-group">
+                  <div className="slider-label">
+                    <span>Position from Left</span>
+                    <span className="slider-value">{config.planterOffset}"</span>
+                  </div>
+                  <input type="range" min="0" max={config.barLength - config.planterLength} value={config.planterOffset}
+                    onChange={e => update('planterOffset', +e.target.value)}
+                  />
+                  <div className="slider-note">Distance from left end of bar</div>
+                </div>
+
+                <div style={{ marginTop: 8, padding: 8, background: '#0d1520', borderRadius: 4, fontSize: 11 }}>
+                  <div style={{ color: '#22c55e', marginBottom: 4 }}>Stainless steel insert with drain</div>
+                  <div style={{ color: '#64748b' }}>Total depth: {config.counterThickness + config.planterDepth}" (counter + insert)</div>
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="panel">
             <div className="panel-title">Calculated Values</div>
 
             <div className="calc-row">
@@ -466,6 +543,59 @@ export default function KitchenFloorCabinetsSketch() {
                   />
                   {/* Wood grain */}
                   <line x1={counterLeft + 8} y1={counterTopY + 3} x2={counterRight - 8} y2={counterTopY + 3} stroke="#78350f" strokeWidth="0.5" opacity="0.5"/>
+
+                  {/* Recessed Herb Planter - Cross Section */}
+                  {config.planterEnabled && (() => {
+                    const planterWidthPx = config.planterWidth * scale
+                    const planterDepthPx = config.planterDepth * scale
+                    const counterThickPx = config.counterThickness * scale * 2
+                    // Position planter centered on cabinet, toward LR side
+                    const planterCenterX = stepX + config.cabinetDepth * scale * 0.4
+                    const planterLeft = planterCenterX - planterWidthPx / 2
+                    return (
+                      <g>
+                        {/* Cutout showing depth */}
+                        <rect
+                          x={planterLeft}
+                          y={counterTopY}
+                          width={planterWidthPx}
+                          height={counterThickPx + planterDepthPx}
+                          fill="#1e3a5f"
+                          stroke="#475569"
+                          strokeWidth="1"
+                        />
+                        {/* Stainless steel insert */}
+                        <rect
+                          x={planterLeft + 2}
+                          y={counterTopY + 2}
+                          width={planterWidthPx - 4}
+                          height={counterThickPx + planterDepthPx - 4}
+                          fill="#334155"
+                          stroke="#94a3b8"
+                          strokeWidth="1.5"
+                          rx="1"
+                        />
+                        {/* Soil/herbs indicator */}
+                        <rect
+                          x={planterLeft + 4}
+                          y={counterTopY + counterThickPx - 4}
+                          width={planterWidthPx - 8}
+                          height={planterDepthPx - 6}
+                          fill="#3d2817"
+                          rx="1"
+                        />
+                        {/* Herb sprouts */}
+                        <path d={`M ${planterCenterX - 6} ${counterTopY + counterThickPx - 8} q 0 -8 4 -14`} stroke="#22c55e" strokeWidth="1.5" fill="none"/>
+                        <path d={`M ${planterCenterX + 2} ${counterTopY + counterThickPx - 8} q 0 -10 -3 -16`} stroke="#22c55e" strokeWidth="1.5" fill="none"/>
+                        <path d={`M ${planterCenterX + 8} ${counterTopY + counterThickPx - 8} q 0 -6 2 -12`} stroke="#22c55e" strokeWidth="1.5" fill="none"/>
+                        {/* Dimension line for planter depth */}
+                        <line x1={planterLeft - 8} y1={counterTopY} x2={planterLeft - 8} y2={counterTopY + counterThickPx + planterDepthPx} stroke="#22c55e" strokeWidth="0.5"/>
+                        <text x={planterLeft - 12} y={counterTopY + (counterThickPx + planterDepthPx) / 2} textAnchor="end" fill="#22c55e" fontSize="8" fontFamily="monospace">{config.planterDepth + config.counterThickness}"</text>
+                        {/* Label */}
+                        <text x={planterCenterX} y={counterTopY - 8} textAnchor="middle" fill="#22c55e" fontSize="8">planter</text>
+                      </g>
+                    )
+                  })()}
 
                   {/* Support bracket for LR overhang (if > 6") */}
                   {config.overhangTowardLR > 6 && (
@@ -698,6 +828,43 @@ export default function KitchenFloorCabinetsSketch() {
                       stroke="#b45309"
                       strokeWidth="1.5"
                     />
+
+                    {/* Recessed Herb Planter */}
+                    {config.planterEnabled && (() => {
+                      const planterX = startX + config.planterOffset * scale
+                      const planterW = config.planterLength * scale
+                      return (
+                        <g>
+                          {/* Cutout in butcher block */}
+                          <rect
+                            x={planterX}
+                            y={counterTopY + 2}
+                            width={planterW}
+                            height={counterThickPx - 4}
+                            fill="#1e3a5f"
+                            stroke="#475569"
+                            strokeWidth="1"
+                          />
+                          {/* Stainless steel insert rim */}
+                          <rect
+                            x={planterX + 2}
+                            y={counterTopY + 3}
+                            width={planterW - 4}
+                            height={counterThickPx - 6}
+                            fill="none"
+                            stroke="#94a3b8"
+                            strokeWidth="1.5"
+                            rx="1"
+                          />
+                          {/* Herb icons */}
+                          <text x={planterX + planterW * 0.25} y={counterTopY + counterThickPx / 2 + 2} textAnchor="middle" fill="#22c55e" fontSize="8">🌿</text>
+                          <text x={planterX + planterW * 0.5} y={counterTopY + counterThickPx / 2 + 2} textAnchor="middle" fill="#22c55e" fontSize="8">🌱</text>
+                          <text x={planterX + planterW * 0.75} y={counterTopY + counterThickPx / 2 + 2} textAnchor="middle" fill="#22c55e" fontSize="8">🌿</text>
+                          {/* Label */}
+                          <text x={planterX + planterW / 2} y={counterTopY - 8} textAnchor="middle" fill="#22c55e" fontSize="9" fontFamily="monospace">{config.planterLength}" planter</text>
+                        </g>
+                      )
+                    })()}
 
                     {/* Dimension: bar length */}
                     <g>

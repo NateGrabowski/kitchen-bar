@@ -3,6 +3,8 @@ import React, { useState, lazy, Suspense } from 'react'
 const visualizations = {
   'kitchen-bar-planner': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v4.jsx')),
   'kitchen-floor-cabinets-sketch': lazy(() => import('../visualization/jsx/kitchen-floor-cabinets-sketch.jsx')),
+  'kitchen-design-enhanced': lazy(() => import('../visualization/jsx/kitchen-design-enhanced.jsx')),
+  'nook-terrace-concepts': lazy(() => import('../visualization/jsx/nook-terrace-concepts-explorer.jsx')),
   // Baseline template (copy of chevron-speakeasy for consistency)
   'concept-baseline': lazy(() => import('../visualization/jsx/concept-baseline.jsx')),
   // Phase 2 Concept Sketches - Round 1 (Materials & Features)
