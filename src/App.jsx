@@ -1,8 +1,9 @@
-import React, { useState, lazy, Suspense } from 'react'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
+import { NotesButton, NotesModal } from './NotesViewer'
 
 const visualizations = {
+  'current-goal': lazy(() => import('../visualization/jsx/kitchen-floor-cabinets-sketch.jsx')),
   'kitchen-bar-planner': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v4.jsx')),
-  'kitchen-floor-cabinets-sketch': lazy(() => import('../visualization/jsx/kitchen-floor-cabinets-sketch.jsx')),
   'kitchen-design-enhanced': lazy(() => import('../visualization/jsx/kitchen-design-enhanced.jsx')),
   'nook-terrace-concepts': lazy(() => import('../visualization/jsx/nook-terrace-concepts-explorer.jsx')),
   // Baseline template (copy of chevron-speakeasy for consistency)
@@ -19,8 +20,18 @@ const visualizations = {
 }
 
 export default function App() {
-  const [current, setCurrent] = useState('kitchen-bar-planner')
+  const [current, setCurrent] = useState('current-goal')
+  const [notesOpen, setNotesOpen] = useState(window.location.hash === '#notes')
   const Visualization = visualizations[current]
+
+  // Sync URL hash with notes modal state
+  useEffect(() => {
+    if (notesOpen) {
+      window.location.hash = 'notes'
+    } else if (window.location.hash === '#notes') {
+      history.replaceState(null, '', window.location.pathname + window.location.search)
+    }
+  }, [notesOpen])
 
   return (
     <div>
@@ -55,7 +66,11 @@ export default function App() {
             <option key={key} value={key}>{key}</option>
           ))}
         </select>
+        <div style={{ marginLeft: 'auto' }}>
+          <NotesButton onClick={() => setNotesOpen(true)} />
+        </div>
       </div>
+      <NotesModal isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
       <div style={{ paddingTop: 50 }}>
         <Suspense fallback={<div style={{ color: '#94a3b8', padding: 20 }}>Loading...</div>}>
           <Visualization />
