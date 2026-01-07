@@ -14,6 +14,13 @@ const CONFIG = {
     { path: `${BASE}notes/1.jpg`, alt: 'Reference photo 1' },
     { path: `${BASE}notes/2.jpg`, alt: 'Reference photo 2' },
     { path: `${BASE}notes/3.jpg`, alt: 'Reference photo 3' },
+  ],
+  // Add idea photos here: { path: `${BASE}notes/ideas/filename.jpg`, alt: 'Description' }
+  ideaImages: [
+    { path: `${BASE}notes/ideas/nice.jpg`, alt: 'Description' },
+    { path: `${BASE}notes/ideas/cabinets.jpg`, alt: 'Description' },
+    { path: `${BASE}notes/ideas/idea.jpg`, alt: 'Description' },
+    { path: `${BASE}notes/ideas/idea2.jpg`, alt: 'Description' },
   ]
 }
 
@@ -190,6 +197,7 @@ export function NotesModal({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState('docs')
   const [markdownContent, setMarkdownContent] = useState({})
   const [lightboxIndex, setLightboxIndex] = useState(null)
+  const [lightboxSource, setLightboxSource] = useState('images') // 'images' or 'ideas'
 
   // Load markdown files
   useEffect(() => {
@@ -220,7 +228,8 @@ export function NotesModal({ isOpen, onClose }) {
 
   const tabs = [
     ...CONFIG.docs.map(d => ({ id: 'doc-' + d.path, label: d.title, type: 'doc', data: d })),
-    { id: 'photos', label: 'Reference Photos', type: 'photos' }
+    { id: 'photos', label: 'Reference Photos', type: 'photos' },
+    { id: 'ideas', label: 'Idea Photos', type: 'ideas' }
   ]
 
   const activeTabData = tabs.find(t => t.id === activeTab) || tabs[0]
@@ -260,45 +269,70 @@ export function NotesModal({ isOpen, onClose }) {
                     src={img.path}
                     alt={img.alt}
                     style={styles.thumbnail}
-                    onClick={() => setLightboxIndex(idx)}
+                    onClick={() => { setLightboxSource('images'); setLightboxIndex(idx) }}
                     onMouseOver={e => e.target.style.borderColor = '#3b82f6'}
                     onMouseOut={e => e.target.style.borderColor = 'transparent'}
                   />
                 ))}
               </div>
             )}
+            {activeTabData.type === 'ideas' && (
+              CONFIG.ideaImages.length > 0 ? (
+                <div style={styles.imageGrid}>
+                  {CONFIG.ideaImages.map((img, idx) => (
+                    <img
+                      key={img.path}
+                      src={img.path}
+                      alt={img.alt}
+                      style={styles.thumbnail}
+                      onClick={() => { setLightboxSource('ideas'); setLightboxIndex(idx) }}
+                      onMouseOver={e => e.target.style.borderColor = '#3b82f6'}
+                      onMouseOut={e => e.target.style.borderColor = 'transparent'}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div style={{ color: '#94a3b8', textAlign: 'center', padding: 40 }}>
+                  <p>No idea photos yet.</p>
+                  <p style={{ fontSize: 13, marginTop: 8 }}>Add images to <code style={{ background: '#1e293b', padding: '2px 6px', borderRadius: 4 }}>public/notes/ideas/</code></p>
+                </div>
+              )
+            )}
           </div>
         </div>
       </div>
 
       {/* Lightbox */}
-      {lightboxIndex !== null && (
-        <div style={styles.lightbox} onClick={() => setLightboxIndex(null)}>
-          <button style={styles.lightboxClose} onClick={() => setLightboxIndex(null)}>&times;</button>
-          {CONFIG.images.length > 1 && (
-            <>
-              <button
-                style={{ ...styles.lightboxNav, left: 20 }}
-                onClick={e => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + CONFIG.images.length) % CONFIG.images.length) }}
-              >
-                &#8249;
-              </button>
-              <button
-                style={{ ...styles.lightboxNav, right: 20 }}
-                onClick={e => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % CONFIG.images.length) }}
-              >
-                &#8250;
-              </button>
-            </>
-          )}
-          <img
-            src={CONFIG.images[lightboxIndex].path}
-            alt={CONFIG.images[lightboxIndex].alt}
-            style={styles.lightboxImage}
-            onClick={e => e.stopPropagation()}
-          />
-        </div>
-      )}
+      {lightboxIndex !== null && (() => {
+        const imageList = lightboxSource === 'ideas' ? CONFIG.ideaImages : CONFIG.images
+        return (
+          <div style={styles.lightbox} onClick={() => setLightboxIndex(null)}>
+            <button style={styles.lightboxClose} onClick={() => setLightboxIndex(null)}>&times;</button>
+            {imageList.length > 1 && (
+              <>
+                <button
+                  style={{ ...styles.lightboxNav, left: 20 }}
+                  onClick={e => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + imageList.length) % imageList.length) }}
+                >
+                  &#8249;
+                </button>
+                <button
+                  style={{ ...styles.lightboxNav, right: 20 }}
+                  onClick={e => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % imageList.length) }}
+                >
+                  &#8250;
+                </button>
+              </>
+            )}
+            <img
+              src={imageList[lightboxIndex].path}
+              alt={imageList[lightboxIndex].alt}
+              style={styles.lightboxImage}
+              onClick={e => e.stopPropagation()}
+            />
+          </div>
+        )
+      })()}
     </>
   )
 }

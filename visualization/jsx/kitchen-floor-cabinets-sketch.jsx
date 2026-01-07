@@ -3,10 +3,10 @@ import React, { useState, useId } from 'react'
 export default function KitchenFloorCabinetsSketch() {
   const [config, setConfig] = useState({
     stepHeight: 23.5,           // Fixed - living room to kitchen floor
-    counterHeight: 40,          // PRIMARY: counter height from kitchen floor (range: 36-42")
+    counterHeight: 38.5,          // PRIMARY: counter height from kitchen floor (range: 36-42")
     counterThickness: 1.5,      // Butcher block
-    cabinetDepth: 16,           // Cabinet depth (doors face LR side)
-    overhangTowardLR: 0,        // How far counter extends past cabinet toward LR
+    cabinetDepth: 14,           // Cabinet depth (doors face LR side)
+    overhangTowardLR: 3,        // How far counter extends past cabinet toward LR
     overhangTowardKitchen: 12,  // Knee space on kitchen side
     barLength: 84,
     stoolHeight: 28,
