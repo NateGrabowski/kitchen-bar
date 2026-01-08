@@ -23,10 +23,12 @@ I've got the basic layout figured out (check out the visualization tool - that's
 I don't want this to look too boxy or like a kitchen island that got lost. The cabinet face is what everyone will see from the living room, so it needs to look intentional.
 
 **I'm thinking about a layered approach:**
+
 - **Top row:** Open shelving with LED lighting (display stuff, looks airy)
 - **Bottom row:** Drawers or doors (practical storage)
 
 **But what's the layout?** Something like...
+
 - `[glass] [door] [drawer]` repeated?
 - `[open shelf] [open shelf] [doors below]`?
 - Symmetrical or asymmetrical?
@@ -52,6 +54,7 @@ From the **living room side**, the bar top will be about 5 feet up - so it's mor
 ## What This Bar Needs To Do
 
 Basically everything:
+
 - Homework station
 - Work-from-home spot
 - Eating meals
@@ -89,11 +92,12 @@ Features I want to incorporate:
 
 ---
 
-## Help Me Out!
+## Help Me Out
 
 Play with the visualization, check out the reference photos, and let me know what you think.
 
 **What I really need help with:**
+
 - **Cabinet face layout** - What combination of glass/doors/drawers/open shelves would look best?
 - **Modern farmhouse tips** - How do I make this feel cohesive with that aesthetic?
 - **Dimension checks** - Does anything look off or feel wrong in the visualization?
