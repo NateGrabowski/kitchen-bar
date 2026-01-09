@@ -67,6 +67,35 @@ When agent completes:
 ### State File Location
 `.orchestrator/state.json` — Source of truth for status tracking
 
+### Context Limits & Session Management
+
+**Recommendation:** Keep auto-compact **OFF**
+
+**Why:** Auto-compact summarizes and loses nuance. For orchestrator work, you want full context until a natural checkpoint.
+
+**What to do instead:**
+
+If I say "context is getting full" or you see warnings:
+1. **Don't panic** — I'll checkpoint first
+2. I will:
+   - Update `state.json` with current status
+   - Write any in-progress work to output files
+   - Update SESSION-LOG.md
+   - Tell you exactly what's done vs pending
+3. You start a new session and say "Run the kitchen bar orchestrator"
+4. I read state.json and resume from checkpoint
+
+**Natural checkpoints (good times to end session):**
+- After all parallel agents return
+- After a gate clears
+- After validation completes
+- If stuck waiting for human input
+
+**If context runs out mid-agent:**
+- Background agents may still be running
+- Check their output files in `docs/agent-outputs/`
+- Start new session, I'll consolidate
+
 ### Validation Checklists
 - `docs/validation/ws1-checklist.md`
 - `docs/validation/ws2-checklist.md`
@@ -655,6 +684,23 @@ The orchestrator MUST leverage superpowers and document skills. Check skills bef
 | WS6: Finishing | `deep-research`, `writing-clearly-and-concisely` | N/A (text guide) |
 | WS7: Electrical | `web-research` | JSX/SVG for wire routing |
 | WS8: Build Manual | `pdf`, `writing-clearly-and-concisely`, `xlsx` | Compile JSX screenshots |
+
+### Design Reference Images
+
+**Location:** `public/notes/ideas/`
+
+Before generating cabinet face designs (WS1), the orchestrator MUST:
+1. Read all images in `public/notes/ideas/`
+2. Extract style elements the human likes
+3. Incorporate these into design options
+4. Reference specific images in recommendation reasoning
+
+**Human:** When adding new inspiration images, note in `docs/human-notes.md`:
+```
+## 2026-01-XX: Added idea images
+- idea10.jpg: Like the X-frame detail
+- idea11.jpg: This door proportion feels right
+```
 
 ### Aesthetic Standards
 
