@@ -3,12 +3,13 @@ import React, { useState, useId } from 'react'
 export default function KitchenFloorCabinetsSketch() {
   const [config, setConfig] = useState({
     stepHeight: 23.5,           // Fixed - living room to kitchen floor
-    counterHeight: 38.5,          // PRIMARY: counter height from kitchen floor (range: 36-42")
+    counterHeight: 40,          // PRIMARY: counter height from kitchen floor (range: 36-42")
     counterThickness: 1.5,      // Butcher block
+    toeKickHeight: 4,           // Standard toe kick height
     cabinetDepth: 14,           // Cabinet depth (doors face LR side)
     overhangTowardLR: 3,        // How far counter extends past cabinet toward LR
     overhangTowardKitchen: 12,  // Knee space on kitchen side
-    barLength: 84,
+    barLength: 90,              // Updated to 90"
     stoolHeight: 28,
     // Recessed herb planter
     planterEnabled: false,
@@ -23,8 +24,9 @@ export default function KitchenFloorCabinetsSketch() {
   const uniqueId = useId()
   const update = (key, val) => setConfig(prev => ({ ...prev, [key]: val }))
 
-  // Calculated values - cabinet height is DERIVED from counter height
-  const cabinetHeight = config.counterHeight - config.counterThickness
+  // Calculated values - cabinet body height is DERIVED from counter height minus toe kick
+  const cabinetBodyHeight = config.counterHeight - config.counterThickness - config.toeKickHeight
+  const totalCabinetHeight = cabinetBodyHeight + config.toeKickHeight  // For display purposes
   const counterFromLRFloor = config.stepHeight + config.counterHeight
   const totalDepth = config.cabinetDepth + config.overhangTowardLR + config.overhangTowardKitchen
 
@@ -32,16 +34,16 @@ export default function KitchenFloorCabinetsSketch() {
   const seatToCounter = config.counterHeight - config.stoolHeight
   const kneeSpace = config.overhangTowardKitchen
 
-  // Standard cabinet sizes for comparison
+  // Standard cabinet sizes for comparison (body height, not including toe kick)
   const standardCabinetSizes = [
     { size: 30, label: '30" (vanity)' },
     { size: 34.5, label: '34.5" (standard base)' },
     { size: 36, label: '36" (tall base)' },
   ]
   const closestStandard = standardCabinetSizes.reduce((prev, curr) =>
-    Math.abs(curr.size - cabinetHeight) < Math.abs(prev.size - cabinetHeight) ? curr : prev
+    Math.abs(curr.size - cabinetBodyHeight) < Math.abs(prev.size - cabinetBodyHeight) ? curr : prev
   )
-  const cabinetDiff = cabinetHeight - closestStandard.size
+  const cabinetDiff = cabinetBodyHeight - closestStandard.size
   const needsCustom = Math.abs(cabinetDiff) > 1
 
   return (
@@ -209,7 +211,7 @@ export default function KitchenFloorCabinetsSketch() {
 
       <h1 style={{ color: '#60a5fa', marginBottom: 8, fontSize: 20 }}>Kitchen Floor Cabinets — Sketch</h1>
       <p style={{ color: '#94a3b8', marginBottom: 20, fontSize: 13 }}>
-        Simpler alternative: standard cabinets on kitchen floor with counter overhang
+        Standard cabinets on kitchen floor with counter overhang • 90" × 40"
       </p>
 
       <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: 20 }}>
@@ -248,6 +250,17 @@ export default function KitchenFloorCabinetsSketch() {
                 onChange={e => update('counterThickness', +e.target.value)}
               />
               <div className="slider-note">Butcher block (1.5"+ recommended)</div>
+            </div>
+
+            <div className="slider-group">
+              <div className="slider-label">
+                <span>Toe Kick Height</span>
+                <span className="slider-value">{config.toeKickHeight}"</span>
+              </div>
+              <input type="range" min="3" max="6" step="0.5" value={config.toeKickHeight}
+                onChange={e => update('toeKickHeight', +e.target.value)}
+              />
+              <div className="slider-note">Standard: 4" (furniture-like appearance)</div>
             </div>
 
             <div className="slider-group">
@@ -370,8 +383,16 @@ export default function KitchenFloorCabinetsSketch() {
             <div className="panel-title">Calculated Values</div>
 
             <div className="calc-row">
-              <span>Required cabinet height</span>
-              <span>{cabinetHeight}"</span>
+              <span>Cabinet body height</span>
+              <span>{cabinetBodyHeight}"</span>
+            </div>
+            <div className="calc-row">
+              <span>Toe kick height</span>
+              <span>{config.toeKickHeight}"</span>
+            </div>
+            <div className="calc-row">
+              <span>Total cabinet + toe kick</span>
+              <span>{totalCabinetHeight}"</span>
             </div>
             <div className="calc-row">
               <span>Counter from LR floor</span>
@@ -388,16 +409,16 @@ export default function KitchenFloorCabinetsSketch() {
 
             {/* Standard cabinet size indicator */}
             <div style={{ marginTop: 12, padding: 10, background: '#0d1520', borderRadius: 6 }}>
-              <div style={{ fontSize: 10, color: '#64748b', marginBottom: 6 }}>CABINET SIZE CHECK</div>
+              <div style={{ fontSize: 10, color: '#64748b', marginBottom: 6 }}>CABINET BODY SIZE CHECK</div>
               <div style={{ fontSize: 12, color: needsCustom ? '#fb923c' : '#4ade80' }}>
                 {needsCustom ? (
-                  <>⚠ Requires custom: {cabinetHeight}" ({cabinetDiff > 0 ? '+' : ''}{cabinetDiff.toFixed(1)}" from {closestStandard.label})</>
+                  <>⚠ Requires custom: {cabinetBodyHeight}" ({cabinetDiff > 0 ? '+' : ''}{cabinetDiff.toFixed(1)}" from {closestStandard.label})</>
                 ) : (
                   <>✓ Close to standard: {closestStandard.label}</>
                 )}
               </div>
               <div style={{ fontSize: 10, color: '#64748b', marginTop: 6 }}>
-                Standard sizes: 30" (vanity), 34.5" (base), 36" (tall)
+                Standard body sizes: 30" (vanity), 34.5" (base), 36" (tall)
               </div>
             </div>
 
@@ -410,6 +431,37 @@ export default function KitchenFloorCabinetsSketch() {
             </div>
           </div>
 
+          {/* Height breakdown box */}
+          <div className="panel" style={{ background: '#0d1520', border: '1px solid #334155' }}>
+            <div className="panel-title" style={{ color: '#f472b6' }}>Height Breakdown</div>
+            <div style={{ fontFamily: 'monospace', fontSize: 11, lineHeight: 1.8, color: '#94a3b8' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>Butcher Block</span>
+                <span style={{ color: '#b45309' }}>{config.counterThickness}"</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>Cabinet Body</span>
+                <span style={{ color: '#60a5fa' }}>{cabinetBodyHeight}"</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>Toe Kick</span>
+                <span style={{ color: '#a855f7' }}>{config.toeKickHeight}"</span>
+              </div>
+              <div style={{ borderTop: '1px solid #334155', marginTop: 8, paddingTop: 8, display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#e2e8f0' }}>Total (from kitchen)</span>
+                <span style={{ color: '#4ade80' }}>{config.counterHeight}"</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#64748b' }}>
+                <span>+ Step height</span>
+                <span>{config.stepHeight}"</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4 }}>
+                <span style={{ color: '#e2e8f0' }}>From LR floor</span>
+                <span style={{ color: '#f472b6' }}>{counterFromLRFloor}"</span>
+              </div>
+            </div>
+          </div>
+
           {/* Comparison box */}
           <div className="comparison-box">
             <div className="comparison-title">THIS APPROACH vs. CONTINUOUS CABINET</div>
@@ -419,6 +471,9 @@ export default function KitchenFloorCabinetsSketch() {
               </div>
               <div style={{ marginBottom: 8 }}>
                 <strong style={{ color: '#4ade80' }}>✓ Off-the-shelf:</strong> Can use pre-made cabinet boxes
+              </div>
+              <div style={{ marginBottom: 8 }}>
+                <strong style={{ color: '#4ade80' }}>✓ Furniture look:</strong> Toe kick adds dimension
               </div>
               <div style={{ marginBottom: 8 }}>
                 <strong style={{ color: '#fb923c' }}>✗ Less storage:</strong> Step area not utilized
@@ -451,7 +506,7 @@ export default function KitchenFloorCabinetsSketch() {
 
           {activeView === 'side' && (
           <>
-          <svg viewBox="0 0 520 350" style={{ width: '100%', background: '#0d1520', borderRadius: 4 }}>
+          <svg viewBox="0 0 520 380" style={{ width: '100%', background: '#0d1520', borderRadius: 4 }}>
             <defs>
               <pattern id={`${uniqueId}-grid`} width="20" height="20" patternUnits="userSpaceOnUse">
                 <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a2a3a" strokeWidth="0.5"/>
@@ -461,13 +516,14 @@ export default function KitchenFloorCabinetsSketch() {
                 <stop offset="100%" stopColor="#fbbf24" stopOpacity="0"/>
               </linearGradient>
             </defs>
-            <rect width="520" height="350" fill={`url(#${uniqueId}-grid)`}/>
+            <rect width="520" height="380" fill={`url(#${uniqueId}-grid)`}/>
 
             {(() => {
               const scale = 2.4
-              const groundY = 300  // LR floor level
+              const groundY = 320  // LR floor level
               const kitchenFloorY = groundY - config.stepHeight * scale
-              const cabinetTopY = kitchenFloorY - cabinetHeight * scale
+              const toeKickTopY = kitchenFloorY - config.toeKickHeight * scale
+              const cabinetTopY = toeKickTopY - cabinetBodyHeight * scale
               const counterTopY = cabinetTopY - config.counterThickness * scale
 
               const stepX = 220  // Where step edge is
@@ -508,27 +564,57 @@ export default function KitchenFloorCabinetsSketch() {
                   <rect x={stepX} y={kitchenFloorY} width="260" height={groundY - kitchenFloorY + 40} fill="#234060"/>
                   <text x={stepX + 130} y={kitchenFloorY + 20} fill="#3b5a7a" fontSize="10">KITCHEN</text>
 
-                  {/* Cabinet box - sits ON kitchen floor */}
+                  {/* Toe kick - recessed darker area */}
+                  <rect
+                    x={cabinetLeft + 6}
+                    y={toeKickTopY}
+                    width={config.cabinetDepth * scale - 12}
+                    height={config.toeKickHeight * scale}
+                    fill="#0f172a"
+                    stroke="#1e293b"
+                    strokeWidth="1"
+                  />
+                  {/* Toe kick side panels */}
+                  <rect
+                    x={cabinetLeft}
+                    y={toeKickTopY}
+                    width="6"
+                    height={config.toeKickHeight * scale}
+                    fill="#2d4a6a"
+                    stroke="#60a5fa"
+                    strokeWidth="1"
+                  />
+                  <rect
+                    x={cabinetRight - 6}
+                    y={toeKickTopY}
+                    width="6"
+                    height={config.toeKickHeight * scale}
+                    fill="#2d4a6a"
+                    stroke="#60a5fa"
+                    strokeWidth="1"
+                  />
+
+                  {/* Cabinet box - sits ON toe kick */}
                   <rect
                     x={cabinetLeft}
                     y={cabinetTopY}
                     width={config.cabinetDepth * scale}
-                    height={cabinetHeight * scale}
+                    height={cabinetBodyHeight * scale}
                     fill="#2d4a6a"
                     stroke="#60a5fa"
                     strokeWidth="1.5"
                   />
                   {/* Cabinet interior (cross-section view - shelves visible) */}
-                  <line x1={cabinetLeft + 4} y1={cabinetTopY + cabinetHeight * scale * 0.4}
-                        x2={cabinetRight - 4} y2={cabinetTopY + cabinetHeight * scale * 0.4}
+                  <line x1={cabinetLeft + 4} y1={cabinetTopY + cabinetBodyHeight * scale * 0.4}
+                        x2={cabinetRight - 4} y2={cabinetTopY + cabinetBodyHeight * scale * 0.4}
                         stroke="#4a6a8a" strokeWidth="1" strokeDasharray="4,2"/>
-                  <line x1={cabinetLeft + 4} y1={cabinetTopY + cabinetHeight * scale * 0.7}
-                        x2={cabinetRight - 4} y2={cabinetTopY + cabinetHeight * scale * 0.7}
+                  <line x1={cabinetLeft + 4} y1={cabinetTopY + cabinetBodyHeight * scale * 0.7}
+                        x2={cabinetRight - 4} y2={cabinetTopY + cabinetBodyHeight * scale * 0.7}
                         stroke="#4a6a8a" strokeWidth="1" strokeDasharray="4,2"/>
                   {/* Arrow indicating door access from LR */}
-                  <path d={`M ${cabinetLeft - 8} ${(cabinetTopY + kitchenFloorY) / 2} l -12 -6 l 0 12 z`}
+                  <path d={`M ${cabinetLeft - 8} ${(cabinetTopY + toeKickTopY) / 2} l -12 -6 l 0 12 z`}
                         fill="#60a5fa" opacity="0.6"/>
-                  <text x={cabinetLeft - 25} y={(cabinetTopY + kitchenFloorY) / 2 + 4}
+                  <text x={cabinetLeft - 25} y={(cabinetTopY + toeKickTopY) / 2 + 4}
                         textAnchor="end" fill="#60a5fa" fontSize="8">doors</text>
 
                   {/* Countertop */}
@@ -637,13 +723,22 @@ export default function KitchenFloorCabinetsSketch() {
                     <text x="50" y={(groundY + kitchenFloorY) / 2 + 16} textAnchor="end" fill="#64748b" fontSize="8">step</text>
                   </g>
 
-                  {/* Cabinet height */}
+                  {/* Toe kick height */}
                   <g>
-                    <line x1={cabinetRight + 15} y1={kitchenFloorY} x2={cabinetRight + 15} y2={cabinetTopY} stroke="#4ade80" strokeWidth="1"/>
-                    <line x1={cabinetRight + 10} y1={kitchenFloorY} x2={cabinetRight + 20} y2={kitchenFloorY} stroke="#4ade80" strokeWidth="1"/>
-                    <line x1={cabinetRight + 10} y1={cabinetTopY} x2={cabinetRight + 20} y2={cabinetTopY} stroke="#4ade80" strokeWidth="1"/>
-                    <text x={cabinetRight + 25} y={(kitchenFloorY + cabinetTopY) / 2} fill="#4ade80" fontSize="10" fontFamily="monospace">{cabinetHeight}"</text>
-                    <text x={cabinetRight + 25} y={(kitchenFloorY + cabinetTopY) / 2 + 12} fill="#64748b" fontSize="8">cabinet</text>
+                    <line x1={cabinetRight + 15} y1={kitchenFloorY} x2={cabinetRight + 15} y2={toeKickTopY} stroke="#a855f7" strokeWidth="1"/>
+                    <line x1={cabinetRight + 10} y1={kitchenFloorY} x2={cabinetRight + 20} y2={kitchenFloorY} stroke="#a855f7" strokeWidth="1"/>
+                    <line x1={cabinetRight + 10} y1={toeKickTopY} x2={cabinetRight + 20} y2={toeKickTopY} stroke="#a855f7" strokeWidth="1"/>
+                    <text x={cabinetRight + 25} y={(kitchenFloorY + toeKickTopY) / 2 + 4} fill="#a855f7" fontSize="9" fontFamily="monospace">{config.toeKickHeight}"</text>
+                    <text x={cabinetRight + 25} y={(kitchenFloorY + toeKickTopY) / 2 + 14} fill="#64748b" fontSize="7">toe kick</text>
+                  </g>
+
+                  {/* Cabinet body height */}
+                  <g>
+                    <line x1={cabinetRight + 50} y1={toeKickTopY} x2={cabinetRight + 50} y2={cabinetTopY} stroke="#4ade80" strokeWidth="1"/>
+                    <line x1={cabinetRight + 45} y1={toeKickTopY} x2={cabinetRight + 55} y2={toeKickTopY} stroke="#4ade80" strokeWidth="1"/>
+                    <line x1={cabinetRight + 45} y1={cabinetTopY} x2={cabinetRight + 55} y2={cabinetTopY} stroke="#4ade80" strokeWidth="1"/>
+                    <text x={cabinetRight + 60} y={(toeKickTopY + cabinetTopY) / 2} fill="#4ade80" fontSize="10" fontFamily="monospace">{cabinetBodyHeight}"</text>
+                    <text x={cabinetRight + 60} y={(toeKickTopY + cabinetTopY) / 2 + 12} fill="#64748b" fontSize="8">cabinet</text>
                   </g>
 
                   {/* Counter height from kitchen floor */}
@@ -684,7 +779,7 @@ export default function KitchenFloorCabinetsSketch() {
 
                   {/* Labels */}
                   <text x="30" y="25" fill="#60a5fa" fontSize="12" fontWeight="600">SIDE SECTION</text>
-                  <text x="30" y="42" fill="#64748b" fontSize="10">Cabinet on kitchen floor, counter overhangs both sides</text>
+                  <text x="30" y="42" fill="#64748b" fontSize="10">Cabinet on kitchen floor with toe kick, counter overhangs both sides</text>
 
                   {/* Step panel label */}
                 </g>
@@ -696,13 +791,14 @@ export default function KitchenFloorCabinetsSketch() {
           <div style={{ marginTop: 16, padding: 12, background: '#0d1520', borderRadius: 6, fontSize: 12, lineHeight: 1.6 }}>
             <strong style={{ color: '#60a5fa' }}>How this design works:</strong>
             <ul style={{ margin: '8px 0 0 0', paddingLeft: 20, color: '#94a3b8' }}>
-              <li>Standard cabinets ({cabinetHeight}" tall) sit on <span style={{ color: '#4ade80' }}>kitchen floor</span></li>
+              <li>Standard cabinet body ({cabinetBodyHeight}" tall) sits on <span style={{ color: '#a855f7' }}>{config.toeKickHeight}" toe kick</span></li>
+              <li>Total cabinet height: {totalCabinetHeight}" on <span style={{ color: '#4ade80' }}>kitchen floor</span></li>
               <li><span style={{ color: '#60a5fa' }}>Cabinet doors face living room</span> (access from LR side)</li>
               <li>Countertop overhangs <span style={{ color: '#fbbf24' }}>{config.overhangTowardLR}"</span> toward living room</li>
               <li>Seating on kitchen side with <span style={{ color: '#4ade80' }}>{config.overhangTowardKitchen}" knee space</span></li>
               <li><span style={{ color: '#d4c5b0' }}>Existing drywall half-wall</span> stays in place (just remove metal railing)</li>
               {config.overhangTowardLR > 6 && <li>Steel bracket supports the LR overhang</li>}
-              {needsCustom && <li style={{ color: '#fb923c' }}>Note: {cabinetHeight}" cabinet requires custom build (not standard size)</li>}
+              {!needsCustom && <li style={{ color: '#4ade80' }}>✓ Uses standard {closestStandard.label} cabinet size!</li>}
             </ul>
           </div>
           </>
@@ -710,28 +806,30 @@ export default function KitchenFloorCabinetsSketch() {
 
           {activeView === 'front' && (
           <>
-            <svg viewBox="0 0 600 380" style={{ width: '100%', background: '#0d1520', borderRadius: 4 }}>
+            <svg viewBox="0 0 600 420" style={{ width: '100%', background: '#0d1520', borderRadius: 4 }}>
               <defs>
                 <pattern id={`${uniqueId}-grid-front`} width="20" height="20" patternUnits="userSpaceOnUse">
                   <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a2a3a" strokeWidth="0.5"/>
                 </pattern>
               </defs>
-              <rect width="600" height="380" fill={`url(#${uniqueId}-grid-front)`}/>
+              <rect width="600" height="420" fill={`url(#${uniqueId}-grid-front)`}/>
 
               {(() => {
                 const scale = 1.8
                 const barLengthPx = config.barLength * scale
-                const cabinetHeightPx = cabinetHeight * scale
+                const cabinetBodyHeightPx = cabinetBodyHeight * scale
+                const toeKickHeightPx = config.toeKickHeight * scale
                 const stepHeightPx = config.stepHeight * scale
                 const counterThickPx = config.counterThickness * scale * 2
 
                 const startX = (600 - barLengthPx) / 2
-                const groundY = 340  // LR floor
+                const groundY = 370  // LR floor
                 const kitchenFloorY = groundY - stepHeightPx
-                const cabinetTopY = kitchenFloorY - cabinetHeightPx
+                const toeKickTopY = kitchenFloorY - toeKickHeightPx
+                const cabinetTopY = toeKickTopY - cabinetBodyHeightPx
                 const counterTopY = cabinetTopY - counterThickPx
 
-                // Door layout: 3 equal sections for 84" = 28" each
+                // Door layout: 3 equal sections for 90" = 30" each
                 const numDoors = 3
                 const doorWidth = barLengthPx / numDoors
 
@@ -767,12 +865,31 @@ export default function KitchenFloorCabinetsSketch() {
                     />
                     <text x={startX + barLengthPx / 2} y={kitchenFloorY + stepHeightPx / 2 + 4} textAnchor="middle" fill="#8b7355" fontSize="10">EXISTING DRYWALL HALF-WALL</text>
 
+                    {/* Toe kick */}
+                    <rect
+                      x={startX}
+                      y={toeKickTopY}
+                      width={barLengthPx}
+                      height={toeKickHeightPx}
+                      fill="#1e293b"
+                      stroke="#334155"
+                      strokeWidth="1"
+                    />
+                    {/* Recessed toe kick area */}
+                    <rect
+                      x={startX + 6}
+                      y={toeKickTopY + 2}
+                      width={barLengthPx - 12}
+                      height={toeKickHeightPx - 4}
+                      fill="#0f172a"
+                    />
+
                     {/* Cabinet face with doors */}
                     <rect
                       x={startX}
                       y={cabinetTopY}
                       width={barLengthPx}
-                      height={cabinetHeightPx}
+                      height={cabinetBodyHeightPx}
                       fill="#2d4a6a"
                       stroke="#60a5fa"
                       strokeWidth="1.5"
@@ -781,7 +898,7 @@ export default function KitchenFloorCabinetsSketch() {
                     {/* Door divisions and handles */}
                     {Array.from({ length: numDoors }).map((_, i) => {
                       const doorX = startX + i * doorWidth
-                      const handleY = cabinetTopY + cabinetHeightPx * 0.35
+                      const handleY = cabinetTopY + cabinetBodyHeightPx * 0.35
                       return (
                         <g key={i}>
                           {/* Door outline */}
@@ -789,7 +906,7 @@ export default function KitchenFloorCabinetsSketch() {
                             x={doorX + 4}
                             y={cabinetTopY + 4}
                             width={doorWidth - 8}
-                            height={cabinetHeightPx - 8}
+                            height={cabinetBodyHeightPx - 8}
                             fill="none"
                             stroke="#4a6a8a"
                             strokeWidth="1"
@@ -807,7 +924,7 @@ export default function KitchenFloorCabinetsSketch() {
                           {/* Door number */}
                           <text
                             x={doorX + doorWidth / 2}
-                            y={cabinetTopY + cabinetHeightPx / 2}
+                            y={cabinetTopY + cabinetBodyHeightPx / 2}
                             textAnchor="middle"
                             fill="#4a6a8a"
                             fontSize="10"
@@ -874,12 +991,20 @@ export default function KitchenFloorCabinetsSketch() {
                       <text x={startX + barLengthPx / 2} y={counterTopY - 28} textAnchor="middle" fill="#fbbf24" fontSize="11" fontFamily="monospace">{config.barLength}" length</text>
                     </g>
 
-                    {/* Dimension: cabinet height */}
+                    {/* Dimension: cabinet body height */}
                     <g>
-                      <line x1={startX + barLengthPx + 15} y1={kitchenFloorY} x2={startX + barLengthPx + 15} y2={cabinetTopY} stroke="#4ade80" strokeWidth="1"/>
-                      <line x1={startX + barLengthPx + 10} y1={kitchenFloorY} x2={startX + barLengthPx + 20} y2={kitchenFloorY} stroke="#4ade80" strokeWidth="1"/>
+                      <line x1={startX + barLengthPx + 15} y1={toeKickTopY} x2={startX + barLengthPx + 15} y2={cabinetTopY} stroke="#4ade80" strokeWidth="1"/>
+                      <line x1={startX + barLengthPx + 10} y1={toeKickTopY} x2={startX + barLengthPx + 20} y2={toeKickTopY} stroke="#4ade80" strokeWidth="1"/>
                       <line x1={startX + barLengthPx + 10} y1={cabinetTopY} x2={startX + barLengthPx + 20} y2={cabinetTopY} stroke="#4ade80" strokeWidth="1"/>
-                      <text x={startX + barLengthPx + 25} y={(kitchenFloorY + cabinetTopY) / 2} fill="#4ade80" fontSize="10" fontFamily="monospace">{cabinetHeight}"</text>
+                      <text x={startX + barLengthPx + 25} y={(toeKickTopY + cabinetTopY) / 2} fill="#4ade80" fontSize="10" fontFamily="monospace">{cabinetBodyHeight}"</text>
+                      <text x={startX + barLengthPx + 25} y={(toeKickTopY + cabinetTopY) / 2 + 12} fill="#64748b" fontSize="8">cabinet</text>
+                    </g>
+
+                    {/* Dimension: toe kick height */}
+                    <g>
+                      <line x1={startX + barLengthPx + 15} y1={kitchenFloorY} x2={startX + barLengthPx + 15} y2={toeKickTopY} stroke="#a855f7" strokeWidth="1"/>
+                      <line x1={startX + barLengthPx + 10} y1={kitchenFloorY} x2={startX + barLengthPx + 20} y2={kitchenFloorY} stroke="#a855f7" strokeWidth="1"/>
+                      <text x={startX + barLengthPx + 25} y={(kitchenFloorY + toeKickTopY) / 2 + 4} fill="#a855f7" fontSize="9" fontFamily="monospace">{config.toeKickHeight}"</text>
                     </g>
 
                     {/* Dimension: step height */}
@@ -920,9 +1045,10 @@ export default function KitchenFloorCabinetsSketch() {
             <div style={{ marginTop: 16, padding: 12, background: '#0d1520', borderRadius: 6, fontSize: 12, lineHeight: 1.6 }}>
               <strong style={{ color: '#60a5fa' }}>Front View Notes:</strong>
               <ul style={{ margin: '8px 0 0 0', paddingLeft: 20, color: '#94a3b8' }}>
-                <li>Cabinet spans <span style={{ color: '#fbbf24' }}>{config.barLength}"</span> (fits ~3 people at 24" each)</li>
+                <li>Cabinet spans <span style={{ color: '#fbbf24' }}>{config.barLength}"</span> (fits ~3 people at 30" each)</li>
                 <li>3 cabinet doors, each ~{Math.round(config.barLength / 3)}" wide</li>
                 <li>Doors face living room for easy access</li>
+                <li><span style={{ color: '#a855f7' }}>{config.toeKickHeight}" toe kick</span> creates furniture-like appearance</li>
                 <li>Countertop overhangs {config.overhangTowardLR}" toward you (viewer)</li>
                 <li>Existing drywall half-wall remains below cabinet (railing removed)</li>
               </ul>
@@ -1093,7 +1219,7 @@ export default function KitchenFloorCabinetsSketch() {
                 <li>Cabinet: {config.barLength}" x {config.cabinetDepth}" (sits on kitchen floor at step edge)</li>
                 <li>Knee space: {config.overhangTowardKitchen}" overhang into kitchen</li>
                 <li>LR overhang: {config.overhangTowardLR}" past step edge</li>
-                <li>Seating capacity: ~3 people (at 24" per person)</li>
+                <li>Seating capacity: ~3 people (at 30" per person)</li>
               </ul>
             </div>
           </>
@@ -1111,16 +1237,23 @@ export default function KitchenFloorCabinetsSketch() {
                 {(() => {
                   // Cabinet box skeleton - 3D-ish view
                   const boxW = 180
-                  const boxH = 120
+                  const boxH = 100
+                  const toeKickH = 20
                   const boxD = 40  // depth for 3D effect
                   const startX = 50
-                  const startY = 50
-                  const matThick = 6  // 3/4" material thickness shown
+                  const startY = 40
 
                   return (
                     <g>
                       <text x="14" y="20" fill="#60a5fa" fontSize="10" fontWeight="600">CABINET CARCASS</text>
-                      <text x="14" y="32" fill="#64748b" fontSize="8">Box skeleton (3/4" plywood)</text>
+                      <text x="14" y="32" fill="#64748b" fontSize="8">Box skeleton with toe kick (3/4" plywood)</text>
+
+                      {/* Toe kick base */}
+                      <rect x={startX} y={startY + boxH + boxD} width={boxW} height={toeKickH} fill="#1e293b" stroke="#334155" strokeWidth="1"/>
+                      <rect x={startX + boxD} y={startY + boxH} width={boxW} height={toeKickH} fill="#1e293b" stroke="#334155" strokeWidth="1"/>
+                      {/* Toe kick recessed area */}
+                      <rect x={startX + 8} y={startY + boxH + boxD + 2} width={boxW - 16} height={toeKickH - 4} fill="#0a0f18"/>
+                      <text x={startX + boxW/2} y={startY + boxH + boxD + toeKickH/2 + 3} fill="#a855f7" fontSize="7" textAnchor="middle">TOE KICK</text>
 
                       {/* Back panel (behind) */}
                       <rect x={startX + boxD} y={startY} width={boxW} height={boxH} fill="none" stroke="#4a6a8a" strokeWidth="1.5"/>
@@ -1143,7 +1276,7 @@ export default function KitchenFloorCabinetsSketch() {
                         points={`${startX},${startY + boxH + boxD} ${startX + boxD},${startY + boxH} ${startX + boxW + boxD},${startY + boxH} ${startX + boxW},${startY + boxH + boxD}`}
                         fill="none" stroke="#4ade80" strokeWidth="2"
                       />
-                      <text x={startX + boxW/2 + boxD/2} y={startY + boxH + boxD + 14} fill="#4ade80" fontSize="7" textAnchor="middle">BOTTOM</text>
+                      <text x={startX + boxW/2 + boxD/2} y={startY + boxH + boxD - 6} fill="#4ade80" fontSize="7" textAnchor="middle">BOTTOM</text>
 
                       {/* Top stretchers (not full panel - just front/back rails) */}
                       <line x1={startX} y1={startY + boxD} x2={startX + boxW} y2={startY + boxD} stroke="#fbbf24" strokeWidth="2"/>
@@ -1156,19 +1289,20 @@ export default function KitchenFloorCabinetsSketch() {
                       <text x={startX + boxD + 4} y={startY + boxH * 0.55} fill="#f472b6" fontSize="6">dadoes</text>
 
                       {/* Legend */}
-                      <g transform="translate(14, 165)">
+                      <g transform="translate(14, 175)">
                         <line x1="0" y1="0" x2="12" y2="0" stroke="#60a5fa" strokeWidth="2"/>
                         <text x="16" y="3" fill="#94a3b8" fontSize="7">Sides</text>
-                        <line x1="55" y1="0" x2="67" y2="0" stroke="#4ade80" strokeWidth="2"/>
-                        <text x="71" y="3" fill="#94a3b8" fontSize="7">Bottom</text>
-                        <line x1="110" y1="0" x2="122" y2="0" stroke="#fbbf24" strokeWidth="2"/>
-                        <text x="126" y="3" fill="#94a3b8" fontSize="7">Stretchers</text>
+                        <line x1="50" y1="0" x2="62" y2="0" stroke="#4ade80" strokeWidth="2"/>
+                        <text x="66" y="3" fill="#94a3b8" fontSize="7">Bottom</text>
+                        <line x1="100" y1="0" x2="112" y2="0" stroke="#a855f7" strokeWidth="2"/>
+                        <text x="116" y="3" fill="#94a3b8" fontSize="7">Toe kick</text>
                       </g>
 
                       {/* Dimensions */}
-                      <text x="265" y="85" fill="#64748b" fontSize="8" textAnchor="end">{cabinetHeight}"h</text>
-                      <text x="265" y="97" fill="#64748b" fontSize="8" textAnchor="end">{config.cabinetDepth}"d</text>
-                      <text x="265" y="109" fill="#64748b" fontSize="8" textAnchor="end">{config.barLength}"w</text>
+                      <text x="265" y="75" fill="#64748b" fontSize="8" textAnchor="end">{cabinetBodyHeight}"h</text>
+                      <text x="265" y="87" fill="#64748b" fontSize="8" textAnchor="end">{config.cabinetDepth}"d</text>
+                      <text x="265" y="99" fill="#64748b" fontSize="8" textAnchor="end">{config.barLength}"w</text>
+                      <text x="265" y="111" fill="#a855f7" fontSize="8" textAnchor="end">{config.toeKickHeight}" kick</text>
                     </g>
                   )
                 })()}
@@ -1178,9 +1312,10 @@ export default function KitchenFloorCabinetsSketch() {
               <svg viewBox="0 0 280 200" style={{ width: '100%', background: '#0a0f18', borderRadius: 4 }}>
                 {(() => {
                   const frameW = 200
-                  const frameH = 130
+                  const frameH = 110
+                  const toeKickH = 16
                   const startX = 40
-                  const startY = 45
+                  const startY = 40
                   const stileW = 8
                   const railH = 8
                   const numDoors = 3
@@ -1189,7 +1324,12 @@ export default function KitchenFloorCabinetsSketch() {
                   return (
                     <g>
                       <text x="14" y="20" fill="#60a5fa" fontSize="10" fontWeight="600">FACE FRAME</text>
-                      <text x="14" y="32" fill="#64748b" fontSize="8">Rails and stiles (3/4" x 1.5" hardwood)</text>
+                      <text x="14" y="32" fill="#64748b" fontSize="8">Rails, stiles, and toe kick (3/4" x 1.5" hardwood)</text>
+
+                      {/* Toe kick frame */}
+                      <rect x={startX} y={startY + frameH} width={frameW} height={toeKickH} fill="none" stroke="#a855f7" strokeWidth="2"/>
+                      {/* Recessed toe kick */}
+                      <rect x={startX + 6} y={startY + frameH + 2} width={frameW - 12} height={toeKickH - 4} fill="#0a0f18"/>
 
                       {/* Top rail */}
                       <rect x={startX} y={startY} width={frameW} height={railH} fill="none" stroke="#fbbf24" strokeWidth="2"/>
@@ -1197,7 +1337,7 @@ export default function KitchenFloorCabinetsSketch() {
 
                       {/* Bottom rail */}
                       <rect x={startX} y={startY + frameH - railH} width={frameW} height={railH} fill="none" stroke="#fbbf24" strokeWidth="2"/>
-                      <text x={startX + frameW/2} y={startY + frameH + 12} fill="#fbbf24" fontSize="7" textAnchor="middle">BOTTOM RAIL</text>
+                      <text x={startX + frameW/2} y={startY + frameH + toeKickH + 12} fill="#fbbf24" fontSize="7" textAnchor="middle">BOTTOM RAIL</text>
 
                       {/* Stiles (vertical) */}
                       {Array.from({ length: numDoors + 1 }).map((_, i) => {
@@ -1235,11 +1375,13 @@ export default function KitchenFloorCabinetsSketch() {
                       {/* Legend */}
                       <g transform="translate(14, 185)">
                         <rect x="0" y="-4" width="10" height="6" fill="none" stroke="#fbbf24" strokeWidth="1.5"/>
-                        <text x="14" y="0" fill="#94a3b8" fontSize="7">Rails (horiz)</text>
-                        <rect x="75" y="-4" width="6" height="10" fill="none" stroke="#60a5fa" strokeWidth="1.5"/>
-                        <text x="85" y="2" fill="#94a3b8" fontSize="7">Stiles (vert)</text>
-                        <circle cx="150" cy="0" r="3" fill="#f472b6"/>
-                        <text x="156" y="2" fill="#94a3b8" fontSize="7">Hinges</text>
+                        <text x="14" y="0" fill="#94a3b8" fontSize="7">Rails</text>
+                        <rect x="50" y="-4" width="6" height="10" fill="none" stroke="#60a5fa" strokeWidth="1.5"/>
+                        <text x="60" y="2" fill="#94a3b8" fontSize="7">Stiles</text>
+                        <rect x="95" y="-4" width="12" height="6" fill="none" stroke="#a855f7" strokeWidth="1.5"/>
+                        <text x="111" y="0" fill="#94a3b8" fontSize="7">Toe kick</text>
+                        <circle cx="160" cy="0" r="3" fill="#f472b6"/>
+                        <text x="166" y="2" fill="#94a3b8" fontSize="7">Hinges</text>
                       </g>
                     </g>
                   )
@@ -1250,10 +1392,11 @@ export default function KitchenFloorCabinetsSketch() {
               <svg viewBox="0 0 280 200" style={{ width: '100%', background: '#0a0f18', borderRadius: 4 }}>
                 {(() => {
                   const cabinetW = 140
-                  const cabinetH = 70
+                  const cabinetH = 55
+                  const toeKickH = 15
                   const counterH = 12
                   const startX = 70
-                  const startY = 70
+                  const startY = 55
                   const overhangL = 30  // LR side
                   const overhangR = 40  // Kitchen side
 
@@ -1261,6 +1404,10 @@ export default function KitchenFloorCabinetsSketch() {
                     <g>
                       <text x="14" y="20" fill="#60a5fa" fontSize="10" fontWeight="600">COUNTER ATTACHMENT</text>
                       <text x="14" y="32" fill="#64748b" fontSize="8">How butcher block secures to cabinet</text>
+
+                      {/* Toe kick */}
+                      <rect x={startX} y={startY + cabinetH} width={cabinetW} height={toeKickH} fill="#1e293b" stroke="#334155" strokeWidth="1"/>
+                      <rect x={startX + 6} y={startY + cabinetH + 2} width={cabinetW - 12} height={toeKickH - 4} fill="#0a0f18"/>
 
                       {/* Cabinet box (side section view) */}
                       <rect x={startX} y={startY} width={cabinetW} height={cabinetH} fill="#1e3a5f" stroke="#4a6a8a" strokeWidth="1.5"/>
@@ -1288,14 +1435,14 @@ export default function KitchenFloorCabinetsSketch() {
                       <text x={startX + cabinetW + 8} y={startY + 8} fill="#64748b" fontSize="6">(screw up)</text>
 
                       {/* Slotted holes note for wood movement */}
-                      <g transform={`translate(${startX + 45}, ${startY + 15})`}>
+                      <g transform={`translate(${startX + 45}, ${startY + 12})`}>
                         <rect x="0" y="0" width="50" height="20" fill="#0a0f18" stroke="#fbbf24" strokeWidth="1" rx="2"/>
                         <text x="25" y="9" fill="#fbbf24" fontSize="6" textAnchor="middle">SLOTTED</text>
                         <text x="25" y="16" fill="#fbbf24" fontSize="6" textAnchor="middle">HOLES</text>
                       </g>
-                      <path d={`M ${startX + 70} ${startY + 35} L ${startX + 70} ${startY + 45}`} stroke="#fbbf24" strokeWidth="1"/>
-                      <text x={startX + 72} y={startY + 55} fill="#64748b" fontSize="6">allows wood</text>
-                      <text x={startX + 72} y={startY + 63} fill="#64748b" fontSize="6">expansion</text>
+                      <path d={`M ${startX + 70} ${startY + 32} L ${startX + 70} ${startY + 42}`} stroke="#fbbf24" strokeWidth="1"/>
+                      <text x={startX + 72} y={startY + 50} fill="#64748b" fontSize="6">allows wood</text>
+                      <text x={startX + 72} y={startY + 58} fill="#64748b" fontSize="6">expansion</text>
 
                       {/* LR overhang support bracket (if needed) */}
                       {config.overhangTowardLR > 6 && (
@@ -1316,8 +1463,8 @@ export default function KitchenFloorCabinetsSketch() {
                       </g>
 
                       {/* Zone labels */}
-                      <text x={startX - overhangL/2} y={startY + cabinetH + 15} fill="#64748b" fontSize="7" textAnchor="middle">LR SIDE</text>
-                      <text x={startX + cabinetW + overhangR/2} y={startY + cabinetH + 15} fill="#64748b" fontSize="7" textAnchor="middle">KITCHEN</text>
+                      <text x={startX - overhangL/2} y={startY + cabinetH + toeKickH + 15} fill="#64748b" fontSize="7" textAnchor="middle">LR SIDE</text>
+                      <text x={startX + cabinetW + overhangR/2} y={startY + cabinetH + toeKickH + 15} fill="#64748b" fontSize="7" textAnchor="middle">KITCHEN</text>
 
                       {/* Legend */}
                       <g transform="translate(14, 175)">
@@ -1377,372 +1524,6 @@ export default function KitchenFloorCabinetsSketch() {
               </svg>
             </div>
 
-            {/* Construction Side Section with Callouts */}
-            <div style={{ marginBottom: 20 }}>
-              <h4 style={{ color: '#4ade80', margin: '0 0 8px 0', fontSize: 12, textTransform: 'uppercase' }}>Construction Side Section</h4>
-              <svg viewBox="0 0 700 380" style={{ width: '100%', background: '#0a0f18', borderRadius: 4 }}>
-                {(() => {
-                  const scale = 2.2
-                  const groundY = 320
-                  const kitchenFloorY = groundY - config.stepHeight * scale
-                  const cabinetTopY = kitchenFloorY - cabinetHeight * scale
-                  const counterTopY = cabinetTopY - config.counterThickness * scale
-
-                  const stepX = 250
-                  const cabinetLeft = stepX
-                  const cabinetRight = stepX + config.cabinetDepth * scale
-                  const counterLeft = stepX - config.overhangTowardLR * scale
-                  const counterRight = cabinetRight + config.overhangTowardKitchen * scale
-
-                  // Callout positions
-                  const callouts = [
-                    { id: 1, x: counterLeft + 40, y: counterTopY + 4, label: 'Butcher Block', detail: `${config.counterThickness}" thick`, color: '#b45309', targetX: counterLeft + 80, targetY: counterTopY + 8 },
-                    { id: 2, x: cabinetLeft + config.cabinetDepth * scale / 2, y: cabinetTopY + cabinetHeight * scale / 2, label: 'Cabinet Box', detail: `${cabinetHeight}"h × ${config.cabinetDepth}"d`, color: '#60a5fa', targetX: cabinetLeft + 20, targetY: cabinetTopY + 40 },
-                    { id: 3, x: stepX - 10, y: kitchenFloorY + (groundY - kitchenFloorY) / 2, label: 'Existing Wall', detail: `drywall, ${config.stepHeight}"h`, color: '#b8a890', targetX: stepX - 6, targetY: kitchenFloorY + 30 },
-                    { id: 4, x: cabinetRight + config.overhangTowardKitchen * scale / 2, y: counterTopY - 15, label: 'Knee Space', detail: `${config.overhangTowardKitchen}" overhang`, color: '#4ade80', targetX: cabinetRight + 15, targetY: counterTopY + 5 },
-                  ]
-
-                  return (
-                    <g>
-                      {/* Title */}
-                      <text x="20" y="25" fill="#60a5fa" fontSize="11" fontWeight="600">CROSS-SECTION WITH CALLOUTS</text>
-                      <text x="20" y="40" fill="#64748b" fontSize="9">Material thicknesses and connection points</text>
-
-                      {/* Living room floor */}
-                      <rect x="40" y={groundY} width={stepX - 40} height="35" fill="#1e3a5f"/>
-                      <text x="120" y={groundY + 22} fill="#3b5a7a" fontSize="10">LR FLOOR</text>
-
-                      {/* Existing drywall half-wall */}
-                      <rect
-                        x={stepX - 10}
-                        y={kitchenFloorY}
-                        width="10"
-                        height={groundY - kitchenFloorY}
-                        fill="#d4c5b0"
-                        stroke="#b8a890"
-                        strokeWidth="1"
-                      />
-                      {/* Wood cap on half-wall */}
-                      <rect
-                        x={stepX - 12}
-                        y={kitchenFloorY - 4}
-                        width="14"
-                        height="5"
-                        fill="#8b6914"
-                        stroke="#a07d1a"
-                        strokeWidth="0.5"
-                      />
-
-                      {/* Kitchen floor */}
-                      <rect x={stepX} y={kitchenFloorY} width="280" height={groundY - kitchenFloorY + 35} fill="#234060"/>
-                      <text x={stepX + 140} y={kitchenFloorY + 18} fill="#3b5a7a" fontSize="10">KITCHEN FLOOR</text>
-
-                      {/* Cabinet box - with interior detail */}
-                      <rect
-                        x={cabinetLeft}
-                        y={cabinetTopY}
-                        width={config.cabinetDepth * scale}
-                        height={cabinetHeight * scale}
-                        fill="#1e3a5f"
-                        stroke="#60a5fa"
-                        strokeWidth="2"
-                      />
-                      {/* Cabinet sides (3/4" thick) */}
-                      <rect x={cabinetLeft} y={cabinetTopY} width="4" height={cabinetHeight * scale} fill="#2d4a6a" stroke="#4a6a8a" strokeWidth="0.5"/>
-                      <rect x={cabinetRight - 4} y={cabinetTopY} width="4" height={cabinetHeight * scale} fill="#2d4a6a" stroke="#4a6a8a" strokeWidth="0.5"/>
-                      {/* Cabinet bottom */}
-                      <rect x={cabinetLeft} y={kitchenFloorY - 4} width={config.cabinetDepth * scale} height="4" fill="#2d4a6a" stroke="#4a6a8a" strokeWidth="0.5"/>
-                      {/* Shelves */}
-                      <line x1={cabinetLeft + 6} y1={cabinetTopY + cabinetHeight * scale * 0.4} x2={cabinetRight - 6} y2={cabinetTopY + cabinetHeight * scale * 0.4} stroke="#4a6a8a" strokeWidth="2"/>
-                      <line x1={cabinetLeft + 6} y1={cabinetTopY + cabinetHeight * scale * 0.7} x2={cabinetRight - 6} y2={cabinetTopY + cabinetHeight * scale * 0.7} stroke="#4a6a8a" strokeWidth="2"/>
-
-                      {/* Countertop */}
-                      <rect
-                        x={counterLeft}
-                        y={counterTopY}
-                        width={counterRight - counterLeft}
-                        height={config.counterThickness * scale * 2.5}
-                        fill="#92400e"
-                        stroke="#b45309"
-                        strokeWidth="2"
-                      />
-                      {/* Wood grain */}
-                      <line x1={counterLeft + 10} y1={counterTopY + 4} x2={counterRight - 10} y2={counterTopY + 4} stroke="#78350f" strokeWidth="0.5" opacity="0.6"/>
-
-                      {/* L-brackets (counter to cabinet) */}
-                      <g>
-                        <path d={`M ${cabinetLeft + 15} ${cabinetTopY} L ${cabinetLeft + 15} ${cabinetTopY - 6} L ${cabinetLeft + 25} ${cabinetTopY - 6}`} fill="none" stroke="#4ade80" strokeWidth="3"/>
-                        <path d={`M ${cabinetRight - 15} ${cabinetTopY} L ${cabinetRight - 15} ${cabinetTopY - 6} L ${cabinetRight - 25} ${cabinetTopY - 6}`} fill="none" stroke="#4ade80" strokeWidth="3"/>
-                      </g>
-
-                      {/* Support bracket for LR overhang (if > 6") */}
-                      {config.overhangTowardLR > 6 && (
-                        <g>
-                          <path
-                            d={`M ${stepX} ${counterTopY + config.counterThickness * scale * 2.5}
-                                L ${stepX} ${counterTopY + 50}
-                                L ${counterLeft + 15} ${counterTopY + config.counterThickness * scale * 2.5}`}
-                            fill="none" stroke="#9ca3af" strokeWidth="4"
-                          />
-                          <text x={stepX - 25} y={counterTopY + 40} fill="#9ca3af" fontSize="8" textAnchor="end">STEEL</text>
-                          <text x={stepX - 25} y={counterTopY + 50} fill="#9ca3af" fontSize="8" textAnchor="end">BRACKET</text>
-                        </g>
-                      )}
-
-                      {/* Cleats for step panel */}
-                      {config.showStepPanel && (
-                        <g>
-                          <rect x={stepX - 2} y={kitchenFloorY + 8} width="8" height="8" fill="none" stroke="#4ade80" strokeWidth="1.5"/>
-                          <rect x={stepX - 2} y={groundY - 20} width="8" height="8" fill="none" stroke="#4ade80" strokeWidth="1.5"/>
-                          <text x={stepX + 12} y={kitchenFloorY + 15} fill="#4ade80" fontSize="7">cleat</text>
-                        </g>
-                      )}
-
-                      {/* CALLOUT LINES AND LABELS */}
-                      {/* Callout 1: Butcher Block */}
-                      <g>
-                        <line x1={counterLeft + 60} y1={counterTopY - 25} x2={counterLeft + 60} y2={counterTopY + 3} stroke="#b45309" strokeWidth="1"/>
-                        <circle cx={counterLeft + 60} cy={counterTopY + 3} r="3" fill="#b45309"/>
-                        <rect x={counterLeft + 20} y={counterTopY - 55} width="80" height="28" fill="#0a0f18" stroke="#b45309" strokeWidth="1" rx="3"/>
-                        <text x={counterLeft + 60} y={counterTopY - 42} fill="#b45309" fontSize="9" textAnchor="middle" fontWeight="600">BUTCHER BLOCK</text>
-                        <text x={counterLeft + 60} y={counterTopY - 30} fill="#94a3b8" fontSize="8" textAnchor="middle">{config.counterThickness}" thick × {totalDepth}"d</text>
-                      </g>
-
-                      {/* Callout 2: Cabinet Box */}
-                      <g>
-                        <line x1={cabinetRight + 25} y1={cabinetTopY + cabinetHeight * scale / 2} x2={cabinetRight + 60} y2={cabinetTopY + cabinetHeight * scale / 2} stroke="#60a5fa" strokeWidth="1"/>
-                        <circle cx={cabinetRight + 2} cy={cabinetTopY + cabinetHeight * scale / 2} r="3" fill="#60a5fa"/>
-                        <rect x={cabinetRight + 62} y={cabinetTopY + cabinetHeight * scale / 2 - 22} width="95" height="44" fill="#0a0f18" stroke="#60a5fa" strokeWidth="1" rx="3"/>
-                        <text x={cabinetRight + 110} y={cabinetTopY + cabinetHeight * scale / 2 - 8} fill="#60a5fa" fontSize="9" textAnchor="middle" fontWeight="600">CABINET BOX</text>
-                        <text x={cabinetRight + 110} y={cabinetTopY + cabinetHeight * scale / 2 + 5} fill="#94a3b8" fontSize="8" textAnchor="middle">{cabinetHeight}"h × {config.cabinetDepth}"d</text>
-                        <text x={cabinetRight + 110} y={cabinetTopY + cabinetHeight * scale / 2 + 17} fill="#64748b" fontSize="7" textAnchor="middle">3/4" plywood</text>
-                      </g>
-
-                      {/* Callout 3: Existing Wall */}
-                      <g>
-                        <line x1={stepX - 45} y1={kitchenFloorY + (groundY - kitchenFloorY) / 2} x2={stepX - 10} y2={kitchenFloorY + (groundY - kitchenFloorY) / 2} stroke="#b8a890" strokeWidth="1"/>
-                        <circle cx={stepX - 8} cy={kitchenFloorY + (groundY - kitchenFloorY) / 2} r="3" fill="#b8a890"/>
-                        <rect x={stepX - 130} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 - 22} width="82" height="44" fill="#0a0f18" stroke="#b8a890" strokeWidth="1" rx="3"/>
-                        <text x={stepX - 89} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 - 8} fill="#d4c5b0" fontSize="9" textAnchor="middle" fontWeight="600">EXISTING WALL</text>
-                        <text x={stepX - 89} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 + 5} fill="#94a3b8" fontSize="8" textAnchor="middle">{config.stepHeight}"h drywall</text>
-                        <text x={stepX - 89} y={kitchenFloorY + (groundY - kitchenFloorY) / 2 + 17} fill="#64748b" fontSize="7" textAnchor="middle">railing removed</text>
-                      </g>
-
-                      {/* Callout 4: Knee Space */}
-                      <g>
-                        <line x1={cabinetRight + config.overhangTowardKitchen * scale / 2} y1={counterTopY - 30} x2={cabinetRight + config.overhangTowardKitchen * scale / 2} y2={counterTopY + 3} stroke="#4ade80" strokeWidth="1"/>
-                        <circle cx={cabinetRight + config.overhangTowardKitchen * scale / 2} cy={counterTopY + 3} r="3" fill="#4ade80"/>
-                        <rect x={cabinetRight + config.overhangTowardKitchen * scale / 2 - 45} y={counterTopY - 58} width="90" height="26" fill="#0a0f18" stroke="#4ade80" strokeWidth="1" rx="3"/>
-                        <text x={cabinetRight + config.overhangTowardKitchen * scale / 2} y={counterTopY - 45} fill="#4ade80" fontSize="9" textAnchor="middle" fontWeight="600">KNEE SPACE</text>
-                        <text x={cabinetRight + config.overhangTowardKitchen * scale / 2} y={counterTopY - 34} fill="#94a3b8" fontSize="8" textAnchor="middle">{config.overhangTowardKitchen}" overhang</text>
-                      </g>
-
-                      {/* Callout 5: L-Brackets */}
-                      <g>
-                        <line x1={cabinetLeft + 20} y1={cabinetTopY - 25} x2={cabinetLeft + 20} y2={cabinetTopY - 8} stroke="#4ade80" strokeWidth="1"/>
-                        <rect x={cabinetLeft - 15} y={cabinetTopY - 50} width="70" height="24" fill="#0a0f18" stroke="#4ade80" strokeWidth="1" rx="3"/>
-                        <text x={cabinetLeft + 20} y={cabinetTopY - 37} fill="#4ade80" fontSize="8" textAnchor="middle" fontWeight="600">L-BRACKETS</text>
-                        <text x={cabinetLeft + 20} y={cabinetTopY - 27} fill="#64748b" fontSize="7" textAnchor="middle">slotted holes</text>
-                      </g>
-
-                      {/* Dimension lines */}
-                      {/* Step height */}
-                      <g>
-                        <line x1="70" y1={groundY} x2="70" y2={kitchenFloorY} stroke="#fb923c" strokeWidth="1"/>
-                        <line x1="65" y1={groundY} x2="75" y2={groundY} stroke="#fb923c" strokeWidth="1"/>
-                        <line x1="65" y1={kitchenFloorY} x2="75" y2={kitchenFloorY} stroke="#fb923c" strokeWidth="1"/>
-                        <text x="60" y={(groundY + kitchenFloorY) / 2 + 4} textAnchor="end" fill="#fb923c" fontSize="10" fontFamily="monospace">{config.stepHeight}"</text>
-                      </g>
-
-                      {/* Counter height from kitchen */}
-                      <g>
-                        <line x1={counterRight + 175} y1={kitchenFloorY} x2={counterRight + 175} y2={counterTopY} stroke="#60a5fa" strokeWidth="1"/>
-                        <line x1={counterRight + 170} y1={kitchenFloorY} x2={counterRight + 180} y2={kitchenFloorY} stroke="#60a5fa" strokeWidth="1"/>
-                        <line x1={counterRight + 170} y1={counterTopY} x2={counterRight + 180} y2={counterTopY} stroke="#60a5fa" strokeWidth="1"/>
-                        <text x={counterRight + 185} y={(kitchenFloorY + counterTopY) / 2} fill="#60a5fa" fontSize="10" fontFamily="monospace">{config.counterHeight}"</text>
-                        <text x={counterRight + 185} y={(kitchenFloorY + counterTopY) / 2 + 12} fill="#64748b" fontSize="8">counter</text>
-                      </g>
-
-                      {/* Total from LR floor */}
-                      <g>
-                        <line x1="40" y1={groundY} x2="40" y2={counterTopY} stroke="#f472b6" strokeWidth="1"/>
-                        <line x1="35" y1={groundY} x2="45" y2={groundY} stroke="#f472b6" strokeWidth="1"/>
-                        <line x1="35" y1={counterTopY} x2="45" y2={counterTopY} stroke="#f472b6" strokeWidth="1"/>
-                        <text x="30" y={(groundY + counterTopY) / 2} textAnchor="end" fill="#f472b6" fontSize="10" fontFamily="monospace">{counterFromLRFloor}"</text>
-                        <text x="30" y={(groundY + counterTopY) / 2 + 12} textAnchor="end" fill="#64748b" fontSize="8">from LR</text>
-                      </g>
-                    </g>
-                  )
-                })()}
-              </svg>
-            </div>
-
-            {/* Detail Callouts - Zoomed Connection Details */}
-            <div style={{ marginBottom: 20 }}>
-              <h4 style={{ color: '#4ade80', margin: '0 0 8px 0', fontSize: 12, textTransform: 'uppercase' }}>Connection Details</h4>
-              <p style={{ color: '#94a3b8', fontSize: 11, margin: '0 0 12px 0' }}>Zoomed views of critical joints</p>
-
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
-                {/* Detail 1: Counter-to-Cabinet (L-Brackets) */}
-                <div style={{ background: '#1e293b', borderRadius: 4, padding: 8 }}>
-                  <div style={{ color: '#60a5fa', fontSize: 10, fontWeight: 600, marginBottom: 6, textTransform: 'uppercase' }}>Counter Attachment</div>
-                  <svg viewBox="0 0 180 140" style={{ width: '100%', background: '#0a0f18', borderRadius: 4 }}>
-                    {/* Cabinet top (cross section) */}
-                    <rect x="20" y="70" width="140" height="12" fill="#334155" stroke="#475569" strokeWidth="1"/>
-                    <text x="90" y="79" fill="#64748b" fontSize="7" textAnchor="middle">cabinet top (3/4" ply)</text>
-
-                    {/* Butcher block */}
-                    <rect x="15" y="35" width="150" height="30" fill="#854d0e" stroke="#a16207" strokeWidth="1"/>
-                    <line x1="25" y1="40" x2="155" y2="40" stroke="#a16207" strokeWidth="0.5" strokeDasharray="2,2"/>
-                    <line x1="25" y1="50" x2="155" y2="50" stroke="#a16207" strokeWidth="0.5" strokeDasharray="2,2"/>
-                    <text x="90" y="52" fill="#fcd34d" fontSize="7" textAnchor="middle">butcher block</text>
-
-                    {/* L-Bracket 1 */}
-                    <g transform="translate(45, 65)">
-                      <path d="M0,0 L0,-20 L-8,-20 L-8,-23 L3,-23 L3,0 Z" fill="#9ca3af" stroke="#d1d5db" strokeWidth="0.5"/>
-                      {/* Slotted hole */}
-                      <ellipse cx="-2" cy="-10" rx="2" ry="4" fill="#0a0f18"/>
-                      {/* Screw into countertop */}
-                      <line x1="-2" y1="-23" x2="-2" y2="-30" stroke="#60a5fa" strokeWidth="1.5"/>
-                      <circle cx="-2" cy="-31" r="2" fill="#60a5fa"/>
-                    </g>
-
-                    {/* L-Bracket 2 */}
-                    <g transform="translate(125, 65)">
-                      <path d="M0,0 L0,-20 L-8,-20 L-8,-23 L3,-23 L3,0 Z" fill="#9ca3af" stroke="#d1d5db" strokeWidth="0.5"/>
-                      <ellipse cx="-2" cy="-10" rx="2" ry="4" fill="#0a0f18"/>
-                      <line x1="-2" y1="-23" x2="-2" y2="-30" stroke="#60a5fa" strokeWidth="1.5"/>
-                      <circle cx="-2" cy="-31" r="2" fill="#60a5fa"/>
-                    </g>
-
-                    {/* Callout: slotted hole */}
-                    <line x1="43" y1="55" x2="30" y2="25" stroke="#4ade80" strokeWidth="0.5"/>
-                    <text x="18" y="20" fill="#4ade80" fontSize="6">slotted hole</text>
-                    <text x="18" y="27" fill="#64748b" fontSize="5">(wood movement)</text>
-
-                    {/* Callout: screw */}
-                    <line x1="123" y1="35" x2="145" y2="15" stroke="#60a5fa" strokeWidth="0.5"/>
-                    <text x="147" y="12" fill="#60a5fa" fontSize="6">#10 screw</text>
-                    <text x="147" y="19" fill="#64748b" fontSize="5">into block</text>
-
-                    {/* Legend */}
-                    <rect x="20" y="100" width="8" height="8" fill="#9ca3af" stroke="#d1d5db" strokeWidth="0.5"/>
-                    <text x="32" y="107" fill="#94a3b8" fontSize="6">L-bracket</text>
-
-                    <rect x="20" y="115" width="8" height="8" fill="#854d0e"/>
-                    <text x="32" y="122" fill="#94a3b8" fontSize="6">Butcher block</text>
-
-                    <text x="90" y="135" fill="#64748b" fontSize="7" textAnchor="middle">4-6 brackets along length</text>
-                  </svg>
-                </div>
-
-                {/* Detail 2: Cabinet Positioning */}
-                <div style={{ background: '#1e293b', borderRadius: 4, padding: 8 }}>
-                  <div style={{ color: '#d4c5b0', fontSize: 10, fontWeight: 600, marginBottom: 6, textTransform: 'uppercase' }}>Cabinet Position</div>
-                  <svg viewBox="0 0 180 140" style={{ width: '100%', background: '#0a0f18', borderRadius: 4 }}>
-                    {/* Kitchen floor */}
-                    <rect x="60" y="55" width="120" height="15" fill="#234060" stroke="#3b5a7a" strokeWidth="1"/>
-                    <text x="120" y="66" fill="#3b5a7a" fontSize="7" textAnchor="middle">kitchen floor</text>
-
-                    {/* Existing drywall half-wall */}
-                    <rect x="30" y="35" width="12" height="70" fill="#d4c5b0" stroke="#b8a890" strokeWidth="1"/>
-                    <text x="36" y="75" fill="#8b7355" fontSize="5" textAnchor="middle" transform="rotate(-90 36 75)">EXISTING WALL</text>
-
-                    {/* Wood cap */}
-                    <rect x="28" y="32" width="16" height="4" fill="#8b6914" stroke="#a07d1a" strokeWidth="0.5"/>
-
-                    {/* LR floor */}
-                    <rect x="0" y="105" width="60" height="10" fill="#1e3a5f" stroke="#3b5a7a" strokeWidth="1"/>
-                    <text x="30" y="113" fill="#3b5a7a" fontSize="6" textAnchor="middle">LR floor</text>
-
-                    {/* Cabinet */}
-                    <rect x="60" y="20" width="30" height="35" fill="#2d4a6a" stroke="#60a5fa" strokeWidth="1.5"/>
-                    <text x="75" y="42" fill="#60a5fa" fontSize="6" textAnchor="middle">CABINET</text>
-
-                    {/* Gap indicator */}
-                    <line x1="42" y1="35" x2="60" y2="35" stroke="#4ade80" strokeWidth="1" strokeDasharray="2,2"/>
-                    <line x1="42" y1="32" x2="42" y2="38" stroke="#4ade80" strokeWidth="1"/>
-                    <line x1="60" y1="32" x2="60" y2="38" stroke="#4ade80" strokeWidth="1"/>
-
-                    {/* Callout */}
-                    <line x1="51" y1="35" x2="51" y2="18" stroke="#4ade80" strokeWidth="0.5"/>
-                    <text x="51" y="14" fill="#4ade80" fontSize="6" textAnchor="middle">gap behind</text>
-
-                    {/* Countertop */}
-                    <rect x="25" y="15" width="90" height="6" fill="#854d0e" stroke="#a16207" strokeWidth="1"/>
-
-                    {/* Notes */}
-                    <text x="90" y="90" fill="#94a3b8" fontSize="6" textAnchor="middle">Cabinet sits ON kitchen floor</text>
-                    <text x="90" y="100" fill="#94a3b8" fontSize="6" textAnchor="middle">BEHIND existing half-wall</text>
-
-                    {/* Legend */}
-                    <rect x="120" y="75" width="6" height="6" fill="#d4c5b0"/>
-                    <text x="130" y="80" fill="#94a3b8" fontSize="5">Existing wall</text>
-
-                    <rect x="120" y="85" width="6" height="6" fill="#2d4a6a"/>
-                    <text x="130" y="90" fill="#94a3b8" fontSize="5">Cabinet</text>
-
-                    <text x="90" y="135" fill="#64748b" fontSize="7" textAnchor="middle">Front of cabinet aligns with step edge</text>
-                  </svg>
-                </div>
-
-                {/* Detail 3: LR Overhang Support */}
-                <div style={{ background: '#1e293b', borderRadius: 4, padding: 8 }}>
-                  <div style={{ color: '#fb923c', fontSize: 10, fontWeight: 600, marginBottom: 6, textTransform: 'uppercase' }}>Overhang Support</div>
-                  <svg viewBox="0 0 180 140" style={{ width: '100%', background: '#0a0f18', borderRadius: 4 }}>
-                    {/* Butcher block (cross section showing overhang) */}
-                    <rect x="30" y="25" width="130" height="20" fill="#854d0e" stroke="#a16207" strokeWidth="1"/>
-                    <line x1="40" y1="30" x2="150" y2="30" stroke="#a16207" strokeWidth="0.5" strokeDasharray="2,2"/>
-
-                    {/* Cabinet box (partial) */}
-                    <rect x="80" y="45" width="80" height="50" fill="#334155" stroke="#475569" strokeWidth="1"/>
-                    <text x="120" y="75" fill="#64748b" fontSize="7" textAnchor="middle">cabinet</text>
-
-                    {/* Existing wall */}
-                    <rect x="30" y="45" width="8" height="55" fill="#d4c5b0" stroke="#b8a890" strokeWidth="0.5"/>
-
-                    {/* LR floor */}
-                    <rect x="0" y="100" width="80" height="10" fill="#334155" stroke="#475569" strokeWidth="1"/>
-                    <text x="40" y="108" fill="#64748b" fontSize="6" textAnchor="middle">LR floor</text>
-
-                    {/* Steel bracket - triangular support */}
-                    <g transform="translate(45, 45)">
-                      <path d="M0,0 L25,0 L25,5 L5,5 L5,40 L0,40 Z" fill="#9ca3af" stroke="#d1d5db" strokeWidth="0.5"/>
-                      {/* Diagonal brace */}
-                      <line x1="5" y1="5" x2="25" y2="0" stroke="#d1d5db" strokeWidth="2"/>
-                      {/* Screws */}
-                      <circle cx="15" cy="2" r="1.5" fill="#60a5fa"/>
-                      <circle cx="2" cy="15" r="1.5" fill="#60a5fa"/>
-                      <circle cx="2" cy="30" r="1.5" fill="#60a5fa"/>
-                    </g>
-
-                    {/* Dimension: overhang */}
-                    <line x1="35" y1="50" x2="35" y2="20" stroke="#fb923c" strokeWidth="0.5"/>
-                    <line x1="35" y1="20" x2="80" y2="20" stroke="#fb923c" strokeWidth="0.5"/>
-                    <line x1="80" y1="18" x2="80" y2="22" stroke="#fb923c" strokeWidth="0.5"/>
-                    <text x="57" y="18" fill="#fb923c" fontSize="7" textAnchor="middle">{config.overhangTowardLR}"</text>
-
-                    {/* Callout */}
-                    <line x1="70" y1="60" x2="100" y2="55" stroke="#9ca3af" strokeWidth="0.5"/>
-                    <text x="102" y="52" fill="#9ca3af" fontSize="6">steel bracket</text>
-                    <text x="102" y="59" fill="#64748b" fontSize="5">(if overhang &gt;6")</text>
-
-                    {/* Legend */}
-                    <rect x="110" y="75" width="6" height="6" fill="#9ca3af"/>
-                    <text x="120" y="80" fill="#94a3b8" fontSize="6">Bracket</text>
-
-                    <rect x="110" y="85" width="6" height="6" fill="#854d0e"/>
-                    <text x="120" y="90" fill="#94a3b8" fontSize="6">Block</text>
-
-                    <text x="90" y="125" fill={config.overhangTowardLR > 6 ? '#fb923c' : '#4ade80'} fontSize="7" textAnchor="middle">
-                      {config.overhangTowardLR > 6 ? `${config.overhangTowardLR}" overhang - REQUIRED` : `${config.overhangTowardLR}" overhang - optional`}
-                    </text>
-                    <text x="90" y="135" fill="#64748b" fontSize="6" textAnchor="middle">Space every 24-36" along length</text>
-                  </svg>
-                </div>
-              </div>
-            </div>
-
             {/* Materials List */}
             <div style={{ marginBottom: 20 }}>
               <h4 style={{ color: '#4ade80', margin: '0 0 8px 0', fontSize: 12, textTransform: 'uppercase' }}>Materials</h4>
@@ -1763,12 +1544,18 @@ export default function KitchenFloorCabinetsSketch() {
                     <td style={{ padding: '8px 12px', color: '#94a3b8' }}>Seal with food-safe finish</td>
                   </tr>
                   <tr style={{ borderBottom: '1px solid #1e293b' }}>
-                    <td style={{ padding: '8px 12px' }}>Base cabinet</td>
-                    <td style={{ padding: '8px 12px', fontFamily: 'monospace' }}>{config.barLength}" x {config.cabinetDepth}" x {cabinetHeight}"</td>
+                    <td style={{ padding: '8px 12px' }}>Base cabinet body</td>
+                    <td style={{ padding: '8px 12px', fontFamily: 'monospace' }}>{config.barLength}" x {config.cabinetDepth}" x {cabinetBodyHeight}"</td>
                     <td style={{ padding: '8px 12px' }}>1</td>
-                    <td style={{ padding: '8px 12px', color: needsCustom ? '#fb923c' : '#94a3b8' }}>
-                      {needsCustom ? `Custom height (standard is ${closestStandard.size}")` : `Near standard ${closestStandard.label}`}
+                    <td style={{ padding: '8px 12px', color: needsCustom ? '#fb923c' : '#4ade80' }}>
+                      {needsCustom ? `Custom height (standard is ${closestStandard.size}")` : `Standard ${closestStandard.label}`}
                     </td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #1e293b' }}>
+                    <td style={{ padding: '8px 12px' }}>Toe kick frame</td>
+                    <td style={{ padding: '8px 12px', fontFamily: 'monospace' }}>{config.barLength}" x {config.cabinetDepth}" x {config.toeKickHeight}"</td>
+                    <td style={{ padding: '8px 12px' }}>1</td>
+                    <td style={{ padding: '8px 12px', color: '#a855f7' }}>Recessed 3" for furniture look</td>
                   </tr>
                   {config.overhangTowardLR > 6 && (
                     <tr style={{ borderBottom: '1px solid #1e293b' }}>
@@ -1794,7 +1581,8 @@ export default function KitchenFloorCabinetsSketch() {
               <ol style={{ margin: 0, paddingLeft: 20, color: '#e2e8f0', fontSize: 12, lineHeight: 2 }}>
                 <li>Remove existing metal railing from half-wall</li>
                 <li>Patch screw holes in drywall, touch up paint</li>
-                <li>Position cabinet on kitchen floor, behind existing half-wall</li>
+                <li>Build toe kick frame and position on kitchen floor</li>
+                <li>Position cabinet body on toe kick, behind existing half-wall</li>
                 <li>Secure cabinet to floor and wall (if applicable)</li>
                 {config.overhangTowardLR > 6 && <li>Install support brackets for LR overhang</li>}
                 <li>Place butcher block on cabinet, mark for overhang</li>
@@ -1813,8 +1601,8 @@ export default function KitchenFloorCabinetsSketch() {
                   { label: 'Counter height', value: `${config.counterHeight}"`, note: 'from kitchen floor' },
                   { label: 'Counter from LR', value: `${counterFromLRFloor}"`, note: 'from LR floor' },
                   { label: 'Total depth', value: `${totalDepth}"`, note: 'front to back' },
-                  { label: 'Cabinet height', value: `${cabinetHeight}"`, note: needsCustom ? 'CUSTOM' : 'near standard' },
-                  { label: 'Knee space', value: `${config.overhangTowardKitchen}"`, note: kneeSpace >= 12 ? 'OK' : 'tight' },
+                  { label: 'Cabinet body', value: `${cabinetBodyHeight}"`, note: needsCustom ? 'CUSTOM' : 'standard base' },
+                  { label: 'Toe kick', value: `${config.toeKickHeight}"`, note: 'furniture look' },
                   { label: 'Seat-to-counter', value: `${seatToCounter}"`, note: seatToCounter >= 10 && seatToCounter <= 14 ? 'ideal' : 'check' },
                 ].map((dim, i) => (
                   <div key={i} style={{ background: '#1e293b', padding: 12, borderRadius: 4 }}>
@@ -1832,7 +1620,12 @@ export default function KitchenFloorCabinetsSketch() {
               <ul style={{ margin: 0, paddingLeft: 20, color: '#94a3b8', fontSize: 12, lineHeight: 1.8 }}>
                 {needsCustom && (
                   <li style={{ color: '#fb923c' }}>
-                    Cabinet height {cabinetHeight}" is non-standard. Consider building custom or using {closestStandard.label} with filler.
+                    Cabinet body height {cabinetBodyHeight}" is non-standard. Consider building custom or using {closestStandard.label} with filler.
+                  </li>
+                )}
+                {!needsCustom && (
+                  <li style={{ color: '#4ade80' }}>
+                    ✓ Cabinet body height {cabinetBodyHeight}" matches standard {closestStandard.label}!
                   </li>
                 )}
                 {config.overhangTowardLR > 6 && (
@@ -1840,6 +1633,7 @@ export default function KitchenFloorCabinetsSketch() {
                 )}
                 <li>Butcher block needs 1/8" gap at walls for expansion</li>
                 <li>Run electrical before securing countertop</li>
+                <li>Toe kick should be recessed ~3" from cabinet face</li>
                 <li>This design does NOT use the step area for storage (see "continuous cabinet" alternative)</li>
               </ul>
             </div>

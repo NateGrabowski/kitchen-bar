@@ -26,3 +26,6 @@ npm-debug.log*
 
 # Archive
 docs/.archive/
+
+# Generated files
+public/notes/manifest.json

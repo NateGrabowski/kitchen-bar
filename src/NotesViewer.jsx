@@ -5,22 +5,10 @@ import remarkGfm from 'remark-gfm'
 // Base URL from Vite (handles /kitchen-bar/ prefix on GitHub Pages)
 const BASE = import.meta.env.BASE_URL
 
-// Configuration - add more content here
+// Configuration for docs (static) - images are loaded dynamically from manifest
 const CONFIG = {
   docs: [
     { title: 'Project Brief', path: `${BASE}notes/kitchen-bar-project-brief.md` }
-  ],
-  images: [
-    { path: `${BASE}notes/1.jpg`, alt: 'Reference photo 1' },
-    { path: `${BASE}notes/2.jpg`, alt: 'Reference photo 2' },
-    { path: `${BASE}notes/3.jpg`, alt: 'Reference photo 3' },
-  ],
-  ideaImages: [
-    { path: `${BASE}notes/ideas/idea.jpg`, alt: 'Idea 1' },
-    { path: `${BASE}notes/ideas/idea2.jpg`, alt: 'Idea 2' },
-    { path: `${BASE}notes/ideas/idea3.jpg`, alt: 'Idea 3' },
-    { path: `${BASE}notes/ideas/idea4.jpg`, alt: 'Idea 4' },
-    { path: `${BASE}notes/ideas/idea5.jpg`, alt: 'Idea 5' },
   ]
 }
 
@@ -197,7 +185,26 @@ export function NotesModal({ isOpen, onClose }) {
   const [activeTab, setActiveTab] = useState('docs')
   const [markdownContent, setMarkdownContent] = useState({})
   const [lightboxIndex, setLightboxIndex] = useState(null)
-  const [lightboxSource, setLightboxSource] = useState('images') // 'images' or 'ideas'
+  const [lightboxSource, setLightboxSource] = useState('images')
+  const [images, setImages] = useState([])
+  const [ideaImages, setIdeaImages] = useState([])
+
+  // Load image manifest
+  useEffect(() => {
+    fetch(`${BASE}notes/manifest.json`)
+      .then(res => res.json())
+      .then(manifest => {
+        setImages(manifest.images.map(file => ({
+          path: `${BASE}notes/${file}`,
+          alt: file.replace(/\.[^.]+$/, '')
+        })))
+        setIdeaImages(manifest.ideaImages.map(file => ({
+          path: `${BASE}notes/ideas/${file}`,
+          alt: file.replace(/\.[^.]+$/, '')
+        })))
+      })
+      .catch(err => console.warn('Could not load image manifest:', err))
+  }, [])
 
   // Load markdown files
   useEffect(() => {
@@ -262,24 +269,31 @@ export function NotesModal({ isOpen, onClose }) {
               </div>
             )}
             {activeTabData.type === 'photos' && (
-              <div style={styles.imageGrid}>
-                {CONFIG.images.map((img, idx) => (
-                  <img
-                    key={img.path}
-                    src={img.path}
-                    alt={img.alt}
-                    style={styles.thumbnail}
-                    onClick={() => { setLightboxSource('images'); setLightboxIndex(idx) }}
-                    onMouseOver={e => e.target.style.borderColor = '#3b82f6'}
-                    onMouseOut={e => e.target.style.borderColor = 'transparent'}
-                  />
-                ))}
-              </div>
+              images.length > 0 ? (
+                <div style={styles.imageGrid}>
+                  {images.map((img, idx) => (
+                    <img
+                      key={img.path}
+                      src={img.path}
+                      alt={img.alt}
+                      style={styles.thumbnail}
+                      onClick={() => { setLightboxSource('images'); setLightboxIndex(idx) }}
+                      onMouseOver={e => e.target.style.borderColor = '#3b82f6'}
+                      onMouseOut={e => e.target.style.borderColor = 'transparent'}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div style={{ color: '#94a3b8', textAlign: 'center', padding: 40 }}>
+                  <p>No reference photos yet.</p>
+                  <p style={{ fontSize: 13, marginTop: 8 }}>Add images to <code style={{ background: '#1e293b', padding: '2px 6px', borderRadius: 4 }}>public/notes/</code></p>
+                </div>
+              )
             )}
             {activeTabData.type === 'ideas' && (
-              CONFIG.ideaImages.length > 0 ? (
+              ideaImages.length > 0 ? (
                 <div style={styles.imageGrid}>
-                  {CONFIG.ideaImages.map((img, idx) => (
+                  {ideaImages.map((img, idx) => (
                     <img
                       key={img.path}
                       src={img.path}
@@ -304,7 +318,7 @@ export function NotesModal({ isOpen, onClose }) {
 
       {/* Lightbox */}
       {lightboxIndex !== null && (() => {
-        const imageList = lightboxSource === 'ideas' ? CONFIG.ideaImages : CONFIG.images
+        const imageList = lightboxSource === 'ideas' ? ideaImages : images
         return (
           <div style={styles.lightbox} onClick={() => setLightboxIndex(null)}>
             <button style={styles.lightboxClose} onClick={() => setLightboxIndex(null)}>&times;</button>

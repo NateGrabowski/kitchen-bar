@@ -140,6 +140,5 @@ Thanks for looking!
 - How to do cabinet doors?
 - Cabinet face?
 - How are we going to build the frame?
-- Clean out garage / go to dump 
-	- maybe Saturday
+- Clean out garage / go to dump - maybe Saturday
 - Kitchen Express (erie blvd)
