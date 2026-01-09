@@ -8,7 +8,8 @@ const BASE = import.meta.env.BASE_URL
 // Configuration for docs (static) - images are loaded dynamically from manifest
 const CONFIG = {
   docs: [
-    { title: 'Project Brief', path: `${BASE}notes/kitchen-bar-project-brief.md` }
+    { title: 'Project Brief', path: `${BASE}notes/kitchen-bar-project-brief.md` },
+    { title: 'TODO List', path: `${BASE}notes/TODO-kitchen-bar.md` }
   ]
 }
 
