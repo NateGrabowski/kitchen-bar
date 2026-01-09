@@ -12,7 +12,65 @@
 To start a session, say:
 > "Run the kitchen bar orchestrator"
 
-The orchestrator will read this file, assess state, dispatch agents, and update upon completion.
+### Bootstrap Procedure (What Actually Happens)
+
+**Step 1: Read State**
+```
+1. Read this file (MASTER-kitchen-bar-agentic-plan.md)
+2. Read .orchestrator/state.json for current status
+3. Read docs/human-notes.md for any offline updates
+```
+
+**Step 2: Check Gates**
+```
+For each gate in [gate0, gate1, gate2, gate3, gate4, gate5]:
+  - If PENDING and has human input in human-notes.md → process decision
+  - Update state.json with gate status
+```
+
+**Step 3: Identify Eligible Work Streams**
+```
+For each work stream:
+  - Check depends_on in state.json
+  - If ALL dependencies are CLEARED/COMPLETE → eligible
+  - If any dependency PENDING → not eligible (skip)
+```
+
+**Step 4: Dispatch Agents**
+```
+For each eligible work stream with status NOT_STARTED or FAILED:
+  - Use superpowers:dispatching-parallel-agents skill
+  - Create agent with prompt from this plan's success criteria
+  - Set model: sonnet
+  - Record agent_id in state.json
+  - Mark status: IN_PROGRESS
+```
+
+**Step 5: Monitor and Validate**
+```
+When agent completes:
+  - Read output files from docs/agent-outputs/ws{N}/
+  - Run validation checklist from docs/validation/ws{N}-checklist.md
+  - If score >= 48/50: mark COMPLETE, update state.json
+  - If score < 48: identify gaps, iterate (max 3 times)
+  - If 3 iterations fail: mark BLOCKED, flag for human
+```
+
+**Step 6: Update State**
+```
+- Update state.json with all changes
+- Update this master plan's status fields
+- Append to docs/agent-outputs/SESSION-LOG.md
+- If gates ready for human: list decisions needed
+```
+
+### State File Location
+`.orchestrator/state.json` — Source of truth for status tracking
+
+### Validation Checklists
+- `docs/validation/ws1-checklist.md`
+- `docs/validation/ws2-checklist.md`
+- `docs/validation/ws3-checklist.md`
 
 ---
 
@@ -121,39 +179,45 @@ Build Manual:     ░░░░░░░░░░ 0%
 ### WS1: Cabinet Face Design
 **Status:** ⚪ NOT_STARTED
 **Priority:** HIGH
-**Depends On:** None
-**Blocks:** WS4, WS8
+**Depends On:** Gate 0 (structural column decision)
+**Blocks:** Gate 1, WS4, WS5, WS7, WS8
 
 **Objective:** Generate 3-5 cabinet face layout options with visual renders, evaluate against modern farmhouse aesthetic, recommend best option.
 
 **Success Criteria:**
 - Minimum 3 distinct layout options as JSX renders
 - Each option shows door/drawer/shelf configuration
+- All designs respect locked dimensions (14" depth, 92" length, 40" height)
+- If column must stay: all designs incorporate column
 - Side-by-side comparison render
 - Recommendation with reasoning (proportion, balance, functionality)
-- Could show to a client and get approval
+- All designs buildable with tools from WS3 (iterate after WS3 completes)
+- Must pass validation checklist (48/50+ score)
 
 **Output Location:** `docs/agent-outputs/ws1-cabinet-face/`
+**Validation:** `docs/validation/ws1-checklist.md`
 
 ---
 
 ### WS2: Butcher Block Research
 **Status:** ⚪ NOT_STARTED
 **Priority:** HIGH
-**Depends On:** None
-**Blocks:** Gate 2
+**Depends On:** None (can start immediately)
+**Blocks:** Gate 2, WS8
 
 **Objective:** Comprehensive sourcing research for 92" x 30" butcher block top, comparing chevron vs plain, retail vs custom, with pricing and availability.
 
 **Success Criteria:**
-- Minimum 5 vendor options with pricing
+- Minimum 5 vendor options with pricing (specific $ amounts)
 - Chevron vs plain comparison (pros, cons, thickness options)
-- Single slab vs joining analysis
+- Single slab vs joining analysis (if joining needed: method specified)
+- Attachment method researched (countertop bolts, figure-8, etc.)
 - Decision matrix with clear recommendation
-- Know exactly what to buy, from where, for how much
+- Know exactly what to buy, from where, for how much, delivery time
+- Must pass validation checklist (48/50+ score)
 
 **Output Location:** `docs/agent-outputs/ws2-butcher-block/`
-
+**Validation:** `docs/validation/ws2-checklist.md`
 **Reference Material:** `docs/research/2026-01-08-butcher-block-sourcing.md`
 
 ---
@@ -161,37 +225,44 @@ Build Manual:     ░░░░░░░░░░ 0%
 ### WS3: Construction Techniques
 **Status:** ⚪ NOT_STARTED
 **Priority:** HIGH
-**Depends On:** None
-**Blocks:** Gate 3, WS4, WS8
+**Depends On:** Gate 0 (structural column affects mounting approach)
+**Blocks:** Gate 3, WS4, WS5, WS6, WS8
 
 **Objective:** Research and synthesize cabinet building techniques from expert sources, determine optimal build approach for this project.
 
 **Success Criteria:**
-- Summaries of top 3-5 YouTube tutorials
-- Technique comparison (pocket hole vs dado vs etc.)
-- Recommended build sequence
+- Summaries of top 3-5 tutorials (text-based guides, not video-dependent)
+- Technique comparison (pocket hole vs dado vs other) with clear recommendation
+- Joinery method locked and documented
+- Cabinet mounting method specified (wall attachment, floor anchoring, leveling)
 - Complete tool list with "must have" vs "nice to have"
 - Cheat sheet of pro DIY tips
-- Could hand to competent DIYer and they'd succeed
+- Build sequence defined (order of operations)
+- Could hand to competent DIYer (has built furniture but not cabinets) and they'd succeed
+- Must pass validation checklist (48/50+ score)
 
 **Output Location:** `docs/agent-outputs/ws3-construction/`
-
+**Validation:** `docs/validation/ws3-checklist.md`
 **Reference Material:** `docs/research/2026-01-08-cabinet-options.md`
+
+**Note on YouTube:** Research text-based tutorials primarily. For video content, extract titles/descriptions and recommend specific videos for human to watch.
 
 ---
 
 ### WS4: Cut Lists & Materials
 **Status:** ⚪ NOT_STARTED
 **Priority:** MEDIUM
-**Depends On:** WS1 (cabinet face design), WS3 (construction approach)
-**Blocks:** Gate 4, WS8
+**Depends On:** Gate 1 [HARD], Gate 3 [HARD], Gate 4 [HARD]
+**Blocks:** WS8
 
 **Objective:** Generate complete cut lists for all lumber and plywood, optimize sheet layouts, create shopping lists organized by store.
 
 **Success Criteria:**
-- Every piece labeled (A1, A2, B1, etc.) with dimensions
-- Plywood sheet layout showing cuts with waste calculation
-- Kerf allowance included
+- Every piece labeled (A1, A2, B1, etc.) with dimensions in inches
+- Plywood sheet layout diagram showing cuts with waste calculation (visual, not just data)
+- Kerf allowance included (1/8" standard)
+- Edge banding requirements listed
+- Face frame lumber cuts included
 - Shopping list by store (Home Depot, Lowe's, specialty)
 - Quantity calculations with 10% waste buffer
 - Zero ambiguity - could hand to lumber yard
@@ -309,35 +380,58 @@ Kitchen Bar Build Manual
 
 ## 5. Critical Decisions Queue
 
+### Gate 0: Structural Column Assessment
+**Status:** PENDING
+**Trigger:** BEFORE any design work begins
+**Blocks:** WS1, WS3 (cannot design without knowing column constraint)
+**Human Input Required:**
+- Inspect column and post photos
+- Consult contractor/engineer if unsure
+- Decision: Column is [REMOVABLE / MUST STAY / UNCERTAIN-ASSUME STAYS]
+
+**Why This Gate Exists:** If the column is structural and must stay, the entire cabinet design changes. Designing first and discovering later = total rework.
+
+**How to Clear:**
+1. Human physically inspects column
+2. Posts findings in `docs/human-notes.md`
+3. Orchestrator records decision in state
+4. If UNCERTAIN: Assume column stays (safer to design around it)
+
+---
+
 ### Gate 1: Final Cabinet Face Design
 **Status:** PENDING
-**Trigger:** WS1 generates 3-5 options with renders
+**Trigger:** WS1 generates 3-5 options with renders AND passes validation checklist
 **Blocks:** WS4, WS5, WS7, WS8
 **Human Input Required:** Pick layout, request modifications, or ask for more options
+**Validation:** Must score 48/50+ on `docs/validation/ws1-checklist.md`
 
 ---
 
 ### Gate 2: Butcher Block Commitment
 **Status:** PENDING
-**Trigger:** WS2 completes sourcing research
-**Blocks:** Material ordering
+**Trigger:** WS2 completes sourcing research AND passes validation checklist
+**Blocks:** Material ordering, WS8
 **Human Input Required:** Approve recommendation or pick alternative
+**Validation:** Must score 48/50+ on `docs/validation/ws2-checklist.md`
 
 ---
 
 ### Gate 3: Construction Approach Lock
 **Status:** PENDING
-**Trigger:** WS3 finishes technique research
-**Blocks:** WS4
-**Human Input Required:** Confirm tools available, approve approach
+**Trigger:** WS3 finishes technique research AND passes validation checklist
+**Blocks:** WS4, WS5, WS6
+**Human Input Required:** Confirm tools available, approve joinery method (pocket holes vs dado vs other)
+**Validation:** Must score 48/50+ on `docs/validation/ws3-checklist.md`
 
 ---
 
 ### Gate 4: Final Dimensions Sign-off
 **Status:** PENDING
-**Trigger:** Before WS4 generates cut lists
-**Blocks:** WS4 completion
-**Human Input Required:** Confirm or adjust final specs
+**Trigger:** AFTER Gate 1 + Gate 3 clear, BEFORE WS4 starts (not before completion)
+**Blocks:** WS4 start
+**Human Input Required:** Review locked specs one final time before cut list generation
+**Note:** This is a confirmation gate, not a design gate. All dimensions should already be locked.
 
 ---
 
@@ -351,12 +445,23 @@ Kitchen Bar Build Manual
 
 ## 6. Next Session Priorities
 
-**Session 1 Queue:**
+**Pre-Session 1: Gate 0 Must Clear**
+- ⚠️ Human must assess structural column BEFORE Session 1 starts
+- Post findings to `docs/human-notes.md`
+- Orchestrator will not dispatch WS1/WS3 until Gate 0 clears
+
+**Session 1 Queue (after Gate 0):**
 1. 🚀 WS1: Cabinet Face Design - dispatch exploration agent
-2. 🚀 WS2: Butcher Block Research - dispatch research agent
+2. 🚀 WS2: Butcher Block Research - dispatch research agent (can start immediately, no Gate 0 dependency)
 3. 🚀 WS3: Construction Techniques - dispatch research agent
 
-**Rationale:** These three have no dependencies and can run fully parallel. They unlock all downstream work.
+**Parallel Execution Note:**
+- WS2 can run independently (no column dependency)
+- WS1 and WS3 have potential feedback loop: tool availability (WS3) constrains design options (WS1)
+- After WS3 completes, WS1 must review designs against tool constraints
+- Add to WS1 success criteria: "All designs buildable with tools from WS3"
+
+**Rationale:** WS2 fully independent. WS1+WS3 run parallel but iterate after WS3 findings.
 
 ---
 
@@ -509,38 +614,47 @@ The orchestrator MUST leverage superpowers and document skills. Check skills bef
 |-------|----------------|----------------------------|
 | `document-skills:pdf` | Creating print-ready manual | WS8 final build manual export |
 | `document-skills:xlsx` | Structured data with formulas | WS4 cut lists, shopping lists, cost calculations |
-| `document-skills:frontend-design` | Creating polished visualizations | WS1 cabinet face renders, diagrams |
-| `document-skills:pptx` | Presenting design options | Gate 1 cabinet face comparison deck |
-| `document-skills:canvas-design` | Creating visual diagrams | Exploded views, assembly diagrams |
+| `document-skills:pptx` | Presenting design options | Gate 1 cabinet face comparison (optional) |
 | `elements-of-style:writing-clearly-and-concisely` | Any prose for humans | WS8 manual chapters, instructions |
+
+**Visualization Approach (IMPORTANT):**
+
+| Task | Method | NOT This |
+|------|--------|----------|
+| Cabinet face renders | **Existing JSX code** (`visualization/jsx/`) | ~~frontend-design~~ (makes websites) |
+| Cut list sheet layouts | **JSX/SVG diagrams** with measurements | ~~canvas-design~~ (makes art) |
+| Technical diagrams | **JSX/SVG with labeled dimensions** | ~~canvas-design~~ (no measurements) |
+| Screenshots for review | `playwright-skill` to capture browser | - |
+
+**Why:** `frontend-design` creates web UI components. `canvas-design` creates artistic visuals. Neither produces technical woodworking diagrams with measurements. Use existing JSX visualization code and extend it.
 
 **Browser/Testing Skills:**
 
 | Skill | When to Invoke | Application to This Project |
 |-------|----------------|----------------------------|
-| `playwright-skill:playwright-skill` | Capturing visualization screenshots | Rendering JSX to images for review |
-| `superpowers-chrome:browsing` | Live web content extraction | Scraping current pricing from vendors |
+| `playwright-skill:playwright-skill` | Capturing visualization screenshots | Rendering JSX to PNG for review/docs |
+| `superpowers-chrome:browsing` | Only if web-research fails | Fallback for JS-heavy vendor sites |
 
 **Skill Invocation Rules:**
 
 1. **Check before action:** If a skill MIGHT apply, invoke it
 2. **Research skills first:** `deep-research` before synthesizing vendor info
-3. **Process skills for quality:** `verification-before-completion` before ANY green checkmark
+3. **Process skills for quality:** `verification-before-completion` + validation checklist before ANY green checkmark
 4. **Document skills for output:** Match output format to deliverable need (xlsx for data, pdf for manual)
-5. **Never skip:** Even if "just a quick task" - skills prevent rework
+5. **Visualizations via JSX:** Extend existing visualization code, NOT document-skills
 
-**Work Stream → Skill Mapping:**
+**Work Stream → Skill Mapping (Corrected):**
 
-| Work Stream | Primary Skills |
-|-------------|---------------|
-| WS1: Cabinet Face | `brainstorming`, `frontend-design`, `playwright-skill` |
-| WS2: Butcher Block | `deep-research`, `xlsx` |
-| WS3: Construction | `deep-research`, `writing-clearly-and-concisely` |
-| WS4: Cut Lists | `xlsx`, `verification-before-completion` |
-| WS5: Doors/Drawers | `web-research`, `xlsx` |
-| WS6: Finishing | `deep-research`, `writing-clearly-and-concisely` |
-| WS7: Electrical | `web-research`, `canvas-design` |
-| WS8: Build Manual | `pdf`, `writing-clearly-and-concisely`, `canvas-design`, `xlsx` |
+| Work Stream | Primary Skills | Visualization Method |
+|-------------|---------------|---------------------|
+| WS1: Cabinet Face | `brainstorming`, `playwright-skill` | Extend existing JSX |
+| WS2: Butcher Block | `deep-research`, `xlsx` | N/A (data only) |
+| WS3: Construction | `deep-research`, `writing-clearly-and-concisely` | N/A (text guides) |
+| WS4: Cut Lists | `xlsx`, `verification-before-completion` | JSX/SVG for sheet layouts |
+| WS5: Doors/Drawers | `deep-research`, `xlsx` | N/A (research + data) |
+| WS6: Finishing | `deep-research`, `writing-clearly-and-concisely` | N/A (text guide) |
+| WS7: Electrical | `web-research` | JSX/SVG for wire routing |
+| WS8: Build Manual | `pdf`, `writing-clearly-and-concisely`, `xlsx` | Compile JSX screenshots |
 
 ### Aesthetic Standards
 

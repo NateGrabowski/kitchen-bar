@@ -1,0 +1,146 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-01-09T00:00:00Z",
+  "current_session": 0,
+  "gates": {
+    "gate0": {
+      "name": "Structural Column Assessment",
+      "status": "PENDING",
+      "resolved_at": null,
+      "decision": null,
+      "notes": null
+    },
+    "gate1": {
+      "name": "Final Cabinet Face Design",
+      "status": "PENDING",
+      "resolved_at": null,
+      "decision": null,
+      "validation_score": null
+    },
+    "gate2": {
+      "name": "Butcher Block Commitment",
+      "status": "PENDING",
+      "resolved_at": null,
+      "decision": null,
+      "validation_score": null
+    },
+    "gate3": {
+      "name": "Construction Approach Lock",
+      "status": "PENDING",
+      "resolved_at": null,
+      "decision": null,
+      "validation_score": null
+    },
+    "gate4": {
+      "name": "Final Dimensions Sign-off",
+      "status": "PENDING",
+      "resolved_at": null,
+      "decision": null
+    },
+    "gate5": {
+      "name": "Build Manual Review",
+      "status": "PENDING",
+      "resolved_at": null,
+      "decision": null
+    }
+  },
+  "work_streams": {
+    "ws1": {
+      "name": "Cabinet Face Design",
+      "status": "NOT_STARTED",
+      "depends_on": ["gate0"],
+      "started_at": null,
+      "completed_at": null,
+      "current_iteration": 0,
+      "iterations": [],
+      "current_agent_id": null,
+      "validation_score": null,
+      "blocking_issues": []
+    },
+    "ws2": {
+      "name": "Butcher Block Research",
+      "status": "NOT_STARTED",
+      "depends_on": [],
+      "started_at": null,
+      "completed_at": null,
+      "current_iteration": 0,
+      "iterations": [],
+      "current_agent_id": null,
+      "validation_score": null,
+      "blocking_issues": []
+    },
+    "ws3": {
+      "name": "Construction Techniques",
+      "status": "NOT_STARTED",
+      "depends_on": ["gate0"],
+      "started_at": null,
+      "completed_at": null,
+      "current_iteration": 0,
+      "iterations": [],
+      "current_agent_id": null,
+      "validation_score": null,
+      "blocking_issues": []
+    },
+    "ws4": {
+      "name": "Cut Lists & Materials",
+      "status": "NOT_STARTED",
+      "depends_on": ["gate1", "gate3", "gate4"],
+      "started_at": null,
+      "completed_at": null,
+      "current_iteration": 0,
+      "iterations": [],
+      "current_agent_id": null,
+      "validation_score": null,
+      "blocking_issues": []
+    },
+    "ws5": {
+      "name": "Door & Drawer Options",
+      "status": "NOT_STARTED",
+      "depends_on": ["gate1", "gate3"],
+      "started_at": null,
+      "completed_at": null,
+      "current_iteration": 0,
+      "iterations": [],
+      "current_agent_id": null,
+      "validation_score": null,
+      "blocking_issues": []
+    },
+    "ws6": {
+      "name": "Finishing & Aesthetics",
+      "status": "NOT_STARTED",
+      "depends_on": ["gate3"],
+      "started_at": null,
+      "completed_at": null,
+      "current_iteration": 0,
+      "iterations": [],
+      "current_agent_id": null,
+      "validation_score": null,
+      "blocking_issues": []
+    },
+    "ws7": {
+      "name": "Electrical & Features",
+      "status": "NOT_STARTED",
+      "depends_on": ["gate1", "ws4"],
+      "started_at": null,
+      "completed_at": null,
+      "current_iteration": 0,
+      "iterations": [],
+      "current_agent_id": null,
+      "validation_score": null,
+      "blocking_issues": []
+    },
+    "ws8": {
+      "name": "Build Manual",
+      "status": "NOT_STARTED",
+      "depends_on": ["ws1", "ws3", "ws4", "ws5", "ws6", "ws7", "gate1", "gate2", "gate3", "gate4"],
+      "started_at": null,
+      "completed_at": null,
+      "current_iteration": 0,
+      "iterations": [],
+      "current_agent_id": null,
+      "validation_score": null,
+      "blocking_issues": []
+    }
+  },
+  "sessions": []
+}

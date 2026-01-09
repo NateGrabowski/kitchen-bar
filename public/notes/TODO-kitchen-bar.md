@@ -10,11 +10,10 @@
 
 ### Cabinet Design
 
-- [ ] **Decide on cabinet approach**
-  - ~~IKEA SEKTION hybrid~~ — likely OUT due to height issues (30" frames need 8-9" base platform)
-  - **Full custom DIY** — build boxes to exact height needed (most flexible)
-  - **J Collection from Home Depot** — 34.5" height, 14" depth, pre-assembled
-  - *Note: Custom DIY = any height you want. J Collection = fast but needs ~4" toe kick to hit 40"*
+- [x] **Decide on cabinet approach** ✓ CUSTOM BUILD
+  - ~~IKEA SEKTION hybrid~~ — OUT (height issues)
+  - **Full custom DIY** — ✓ CHOSEN — build boxes to exact height needed
+  - ~~J Collection from Home Depot~~ — backup option if time gets tight
 
 - [ ] **Decide on cabinet face orientation/layout**
   - How many doors vs drawers?
@@ -22,11 +21,9 @@
   - Farmhouse X-panel? Shaker? Sliding barn door style?
   - *Note: Living room side is what guests see — this is the "money shot"*
 
-- [ ] **Lock in total bar height**
-  - Current target: 40" (from kitchen floor)
-  - **Custom DIY math:** 40" - 1.5" butcher block - 4" toe kick = **34.5" cabinet body**
-  - **J Collection math:** 34.5" cabinet + 4" toe kick + 1.5" top = **40" exactly** ✓
-  - *Note: Custom DIY gives you any height; J Collection happens to work perfectly for 40"*
+- [x] **Lock in total bar height** ✓ 40" CONFIRMED
+  - **40" total** (from kitchen floor)
+  - **Custom build math:** 40" - 1.5" butcher block - 4" toe kick = **34.5" cabinet body**
 
 ### Butcher Block
 
@@ -48,10 +45,10 @@
 ---
 
 ## Phase 2: Research & Learning
-*DIY cabinet builds are simpler than you think*
+*Custom build confirmed — this is your playbook*
 
 ### Cabinet Building Techniques
-*If going custom DIY (likely), this section is key*
+*CRITICAL SECTION — learn these before cutting*
 
 - [ ] **Watch cabinet building tutorials**
   - Woodshop Diaries: Basic plywood cabinets (beginner-friendly)
@@ -91,11 +88,11 @@
   - *Note: Do this AFTER final dimensions are locked*
 
 - [ ] **Create shopping list**
-  - Lumber (2x4s, plywood)
-  - Hardware (hinges, drawer slides, screws)
-  - IKEA components (if hybrid approach)
-  - Finishing supplies (paint, stain, polyurethane)
-  - *Note: See IKEA shopping list in `docs/research/2026-01-08-ikea-sektion-guide.md`*
+  - Plywood: 3/4" birch or maple (cabinet boxes)
+  - Lumber: 2x4s (base platform), 1x2s/1x3s (face frame, trim)
+  - Hardware: soft-close hinges, drawer slides, Kreg screws, pocket hole screws
+  - Finishing: primer, paint, polyurethane, edge banding
+  - *Note: Custom build = more plywood, less prefab components*
 
 ### Build Documentation
 
@@ -123,11 +120,12 @@
 *See things in person before buying*
 
 - [ ] **Visit Home Depot (priority)**
-  - Check J Collection Laramie 14" depth cabinets in person
-  - Hardware aisle: hinges, soft-close drawer slides, Kreg screws
-  - Grab Titebond III
-  - Plywood selection (3/4" birch for custom boxes)
-  - *Note: J Collection is pre-assembled — could save a lot of time*
+  - **Plywood:** 3/4" birch or maple sheets (cabinet boxes)
+  - **Lumber:** 2x4s, 1x2s, 1x3s
+  - **Hardware:** soft-close hinges, drawer slides, Kreg pocket hole jig + screws
+  - **Glue:** Titebond III
+  - **Edge banding:** iron-on birch veneer
+  - *Note: Get plywood cut to rough size in-store (easier to transport)*
 
 - [ ] **Visit Lowe's**
   - See chevron butcher block in person (Allen + Roth)
@@ -253,4 +251,4 @@
 
 ---
 
-*Last updated: 2026-01-08*
+*Last updated: 2026-01-09*
