@@ -1,26 +1,21 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { NotesButton, NotesModal } from './NotesViewer'
 
-const visualizations = {
-  'current-goal': lazy(() => import('../visualization/jsx/kitchen-floor-cabinets-sketch.jsx')),
-  'kitchen-bar-planner': lazy(() => import('../visualization/jsx/kitchen-bar-planner-v4.jsx')),
-  'kitchen-design-enhanced': lazy(() => import('../visualization/jsx/kitchen-design-enhanced.jsx')),
-  'nook-terrace-concepts': lazy(() => import('../visualization/jsx/nook-terrace-concepts-explorer.jsx')),
-  // Baseline template (copy of chevron-speakeasy for consistency)
-  'concept-baseline': lazy(() => import('../visualization/jsx/concept-baseline.jsx')),
-  // Phase 2 Concept Sketches - Round 1 (Materials & Features)
-  'concept-live-edge-waterfall': lazy(() => import('../visualization/jsx/concept-live-edge-waterfall.jsx')),
-  'concept-chevron-speakeasy': lazy(() => import('../visualization/jsx/concept-chevron-speakeasy.jsx')),
-  'concept-floating-cantilever': lazy(() => import('../visualization/jsx/concept-floating-cantilever.jsx')),
-  // Phase 2 Concept Sketches - Round 2 (Structural Variations)
-  'concept-kitchen-floor-cabinets': lazy(() => import('../visualization/jsx/concept-kitchen-floor-cabinets.jsx')),
-  'concept-open-shelving': lazy(() => import('../visualization/jsx/concept-open-shelving.jsx')),
-  'concept-angled-bar': lazy(() => import('../visualization/jsx/concept-angled-bar.jsx')),
-  'concept-sliding-bar': lazy(() => import('../visualization/jsx/concept-sliding-bar.jsx')),
+// Auto-discover all JSX visualizations in the folder
+const modules = import.meta.glob('../visualization/jsx/*.jsx')
+
+// Build visualization map from discovered files
+const visualizations = {}
+for (const path in modules) {
+  // Extract filename without extension: '../visualization/jsx/foo.jsx' -> 'foo'
+  const name = path.split('/').pop().replace('.jsx', '')
+  visualizations[name] = React.lazy(modules[path])
 }
 
+const defaultViz = Object.keys(visualizations)[0]
+
 export default function App() {
-  const [current, setCurrent] = useState('current-goal')
+  const [current, setCurrent] = useState(defaultViz)
   const [notesOpen, setNotesOpen] = useState(window.location.hash === '#notes')
   const Visualization = visualizations[current]
 
@@ -32,6 +27,9 @@ export default function App() {
       history.replaceState(null, '', window.location.pathname + window.location.search)
     }
   }, [notesOpen])
+
+  const vizKeys = Object.keys(visualizations)
+  const showSelector = vizKeys.length > 1
 
   return (
     <div>
@@ -48,24 +46,30 @@ export default function App() {
         alignItems: 'center',
         gap: 12,
       }}>
-        <label style={{ color: '#94a3b8', fontSize: 13 }}>Visualization:</label>
-        <select
-          value={current}
-          onChange={e => setCurrent(e.target.value)}
-          style={{
-            background: '#1e293b',
-            color: '#e2e8f0',
-            border: '1px solid #3b82f6',
-            borderRadius: 4,
-            padding: '6px 12px',
-            fontSize: 13,
-            cursor: 'pointer',
-          }}
-        >
-          {Object.keys(visualizations).map(key => (
-            <option key={key} value={key}>{key}</option>
-          ))}
-        </select>
+        {showSelector ? (
+          <>
+            <label style={{ color: '#94a3b8', fontSize: 13 }}>Visualization:</label>
+            <select
+              value={current}
+              onChange={e => setCurrent(e.target.value)}
+              style={{
+                background: '#1e293b',
+                color: '#e2e8f0',
+                border: '1px solid #3b82f6',
+                borderRadius: 4,
+                padding: '6px 12px',
+                fontSize: 13,
+                cursor: 'pointer',
+              }}
+            >
+              {vizKeys.map(key => (
+                <option key={key} value={key}>{key}</option>
+              ))}
+            </select>
+          </>
+        ) : (
+          <span style={{ color: '#e2e8f0', fontSize: 14, fontWeight: 500 }}>Kitchen Bar Design</span>
+        )}
         <div style={{ marginLeft: 'auto' }}>
           <NotesButton onClick={() => setNotesOpen(true)} />
         </div>
@@ -73,7 +77,7 @@ export default function App() {
       <NotesModal isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
       <div style={{ paddingTop: 50 }}>
         <Suspense fallback={<div style={{ color: '#94a3b8', padding: 20 }}>Loading...</div>}>
-          <Visualization />
+          {Visualization && <Visualization />}
         </Suspense>
       </div>
     </div>
