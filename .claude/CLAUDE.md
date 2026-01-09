@@ -9,31 +9,9 @@ This is a **home improvement design project** for a split-level kitchen bar. The
 Key project requirements:
 - Seating on the **kitchen side** (looking out to living room)
 - Butcher block countertop
-- Continuous cabinet from bar top to living room floor (maximizes storage)
+- Continuous cabinet from bar top to kitchen floor (maximizes storage)
 - Electrical outlets for laptops/devices
 - Approximately 84" (7 ft) bar length, 28" depth
-
-## Project Structure
-
-```
-docs/
-  design-spec.md                  # Current baseline design spec
-  kitchen-bar-project-brief.md    # Complete project requirements and constraints
-  images/                         # Reference photos
-
-visualization/jsx/
-  kitchen-bar-planner-v4.jsx      # Main design tool (loads as "kitchen-bar-planner")
-  kitchen-floor-cabinets-sketch.jsx
-  archive/                        # Old iterations (v1, v2, v3)
-
-src/
-  main.jsx                        # React entry point
-  App.jsx                         # Visualization switcher with dropdown
-
-package.json                      # Vite + React dependencies
-vite.config.js                    # Vite configuration
-index.html                        # Dev server entry point
-```
 
 ## Running Visualizations
 
@@ -52,26 +30,17 @@ node run.js /tmp/your-script.js
 
 ## Key Design Parameters
 
-| Parameter | Value | Notes |
-|-----------|-------|-------|
-| Step height | 23.5" | Fixed - living room to kitchen floor |
-| Bar length | 84" | ~7 feet, fits 3 people |
-| Bar top height | 40" | From kitchen floor (range: 36-42") |
-| Total depth | 28" | Front to back |
-| Cabinet depth | 12" | Storage section |
-| Knee space | 16" | Overhang for seating |
-| Bar top thickness | 1.5" | Butcher block |
+Quick Stats
 
-## Design Configuration
+| What          | Measurement                               |
+| ------------- | ----------------------------------------- |
+| Step height   | 23.5" (can't change this - it's my floor) |
+| Bar length    | ~92" (fits 3-4 people comfortably)          |
+| Bar depth     | 28" total                                 |
+| Bar top       | Butcher block, 1.5" thick                 |
+| Bar height    | ~40"                                      |
+| Cabinet Depth | ~15"                                      |
 
-**Baseline: Flush**
-- Single-level counter aligned with step
-- Continuous cabinet from bar top to LR floor
-- No tiered section
-
-**Alternative: Tiered**
-- Adds +6" raised bar section facing living room
-- True bar height, hides kitchen mess
 
 ## Git Worktrees
 
@@ -84,7 +53,7 @@ git worktree add .worktrees/<branch-name> -b <branch-name>
 
 ## Working with the Visualization
 
-The main file is `visualization/jsx/kitchen-bar-planner-v4.jsx`:
+The main file is `visualization/jsx/kitchen-floor-cabinets-sketch.jsx`:
 
 - Config state at top controls all dimensions
 - Step height is fixed (not adjustable - it's the actual floor)

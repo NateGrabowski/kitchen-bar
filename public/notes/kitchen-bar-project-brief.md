@@ -1,3 +1,12 @@
+2026-01-08 17:16
+
+Status:
+
+Tags:
+
+---
+## Kitchen Bar Project Brief
+
 # The Kitchen Bar Project
 
 ## What's This All About?
@@ -39,13 +48,14 @@ I honestly don't know what will look best. If you have opinions or examples, sen
 
 ## The Quick Stats
 
-| What | Measurement |
-|------|-------------|
-| Step height | 23.5" (can't change this - it's my floor) |
-| Bar length | ~84" (fits 3 people comfortably) |
-| Bar depth | 28" total |
-| Bar top | Butcher block, 1.5" thick |
-| Bar height | ~40" |
+| What          | Measurement                               |
+| ------------- | ----------------------------------------- |
+| Step height   | 23.5" (can't change this - it's my floor) |
+| Bar length    | ~92" (fits 3-4 people comfortably)        |
+| Bar depth     | 28" total                                 |
+| Bar top       | Butcher block, 1.5" thick                 |
+| Bar height    | ~40"                                      |
+| Cabinet Depth | ~15"                                      |
 
 From the **living room side**, the bar top will be about 5 feet up - so it's more like a half-wall with storage than a traditional bar.
 
@@ -75,10 +85,22 @@ Oh, and I need **electrical outlets** in the top for laptops and charging. Non-n
 
 Features I want to incorporate:
 
-- **Mixed cabinet style** - some open shelves, some closed
-- LED lights (under overhang + inside cabinets)
-- **Foot rail** under the bar top
-- Decorative corbels for support
+- [x] **Mixed cabinet style** - some open shelves, some closed
+- [x] LED lights (under overhang + inside cabinets)
+- [x] **Foot rail** under the bar top
+- [ ] Decorative corbels for support
+- [ ] Hidden storage somewhere
+- [ ] 'X' frame on outside (as you're walking up)
+
+---
+
+## Face options
+
+We like
+
+- Farmhouse X-Panel
+- Sliding Barn Door
+- Asymmetric Interest
 
 ---
 

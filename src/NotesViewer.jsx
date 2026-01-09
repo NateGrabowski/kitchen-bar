@@ -17,10 +17,11 @@ const CONFIG = {
   ],
   // Add idea photos here: { path: `${BASE}notes/ideas/filename.jpg`, alt: 'Description' }
   ideaImages: [
-    { path: `${BASE}notes/ideas/nice.jpg`, alt: 'Description' },
-    { path: `${BASE}notes/ideas/cabinets.jpg`, alt: 'Description' },
-    { path: `${BASE}notes/ideas/idea.jpg`, alt: 'Description' },
+    { path: `${BASE}notes/ideas/idea1.jpg`, alt: 'Description' },
     { path: `${BASE}notes/ideas/idea2.jpg`, alt: 'Description' },
+    { path: `${BASE}notes/ideas/idea3.jpg`, alt: 'Description' },
+    { path: `${BASE}notes/ideas/idea4.jpg`, alt: 'Description' },
+    { path: `${BASE}notes/ideas/idea5.jpg`, alt: 'Description' },
   ]
 }
 
