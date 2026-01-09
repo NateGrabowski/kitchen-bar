@@ -48,14 +48,17 @@ I honestly don't know what will look best. If you have opinions or examples, sen
 
 ## The Quick Stats
 
-| What          | Measurement                               |
-| ------------- | ----------------------------------------- |
-| Step height   | 23.5" (can't change this - it's my floor) |
-| Bar length    | ~92" (fits 3-4 people comfortably)        |
-| Bar depth     | 28" total                                 |
-| Bar top       | Butcher block, 1.5" thick                 |
-| Bar height    | ~40"                                      |
-| Cabinet Depth | ~15"                                      |
+| What               | Measurement                                                             |
+| ------------------ | ----------------------------------------------------------------------- |
+| Step height        | 23.5" (can't change this - it's my floor)                               |
+| Bar length         | ~92" (fits 3-4 people comfortably)                                      |
+| Bar top depth      | ~30"                                                                    |
+| Bar top            | Butcher block, 1.5" thick (bigger is ideal but not sure about sourcing) |
+| Bar height         | ~40"                                                                    |
+| Cabinet Depth      | ~15"                                                                    |
+| Overhang toward LR | ~3"                                                                     |
+| Knee Space         | ~12"                                                                    |
+|                    |                                                                         |
 
 From the **living room side**, the bar top will be about 5 feet up - so it's more like a half-wall with storage than a traditional bar.
 
@@ -91,6 +94,7 @@ Features I want to incorporate:
 - [ ] Decorative corbels for support
 - [ ] Hidden storage somewhere
 - [ ] 'X' frame on outside (as you're walking up)
+- [ ] Cabinet Doors can be made using floor panels
 
 ---
 
@@ -127,3 +131,15 @@ Play with the visualization, check out the reference photos, and let me know wha
 Or just hit me with "have you considered..." ideas. I'm all ears!
 
 Thanks for looking!
+
+## TODO:
+
+- Spacing of the doors and where to place hinges
+- 30 inch top board
+- Youtube video how to build cabinet
+- How to do cabinet doors?
+- Cabinet face?
+- How are we going to build the frame?
+- Clean out garage / go to dump 
+	- maybe Saturday
+- Kitchen Express (erie blvd)
