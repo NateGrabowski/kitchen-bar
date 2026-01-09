@@ -479,6 +479,69 @@ The orchestrator uses everything available:
 | **Grep/Glob** | Search existing research, find relevant prior work |
 | **Memory Systems** | Track decisions, context across sessions |
 
+### Skills Integration
+
+The orchestrator MUST leverage superpowers and document skills. Check skills before any action.
+
+**Workflow Skills (Process):**
+
+| Skill | When to Invoke | Application to This Project |
+|-------|----------------|----------------------------|
+| `superpowers:brainstorming` | Before any new design exploration | WS1 cabinet face ideation, feature decisions |
+| `superpowers:writing-plans` | Before executing multi-step work | Breaking work streams into 2-5 min tasks |
+| `superpowers:executing-plans` | When running implementation plans | Systematic execution with checkpoints |
+| `superpowers:dispatching-parallel-agents` | 2+ independent tasks identified | WS1+WS2+WS3 parallel kickoff |
+| `superpowers:subagent-driven-development` | Independent tasks in current session | Distributing research across agents |
+| `superpowers:verification-before-completion` | Before marking ANY stream complete | 96% confidence verification |
+| `superpowers:systematic-debugging` | If visualization/code breaks | Fixing JSX render issues |
+| `superpowers:requesting-code-review` | After major visualization work | Review JSX against design intent |
+
+**Research Skills:**
+
+| Skill | When to Invoke | Application to This Project |
+|-------|----------------|----------------------------|
+| `deep-research` / `web-research` | Comprehensive sourcing needed | WS2 butcher block vendors, WS3 tutorials |
+| `episodic-memory:remembering-conversations` | Recalling past decisions | Checking prior design discussions |
+
+**Document Skills (Output Generation):**
+
+| Skill | When to Invoke | Application to This Project |
+|-------|----------------|----------------------------|
+| `document-skills:pdf` | Creating print-ready manual | WS8 final build manual export |
+| `document-skills:xlsx` | Structured data with formulas | WS4 cut lists, shopping lists, cost calculations |
+| `document-skills:frontend-design` | Creating polished visualizations | WS1 cabinet face renders, diagrams |
+| `document-skills:pptx` | Presenting design options | Gate 1 cabinet face comparison deck |
+| `document-skills:canvas-design` | Creating visual diagrams | Exploded views, assembly diagrams |
+| `elements-of-style:writing-clearly-and-concisely` | Any prose for humans | WS8 manual chapters, instructions |
+
+**Browser/Testing Skills:**
+
+| Skill | When to Invoke | Application to This Project |
+|-------|----------------|----------------------------|
+| `playwright-skill:playwright-skill` | Capturing visualization screenshots | Rendering JSX to images for review |
+| `superpowers-chrome:browsing` | Live web content extraction | Scraping current pricing from vendors |
+
+**Skill Invocation Rules:**
+
+1. **Check before action:** If a skill MIGHT apply, invoke it
+2. **Research skills first:** `deep-research` before synthesizing vendor info
+3. **Process skills for quality:** `verification-before-completion` before ANY green checkmark
+4. **Document skills for output:** Match output format to deliverable need (xlsx for data, pdf for manual)
+5. **Never skip:** Even if "just a quick task" - skills prevent rework
+
+**Work Stream → Skill Mapping:**
+
+| Work Stream | Primary Skills |
+|-------------|---------------|
+| WS1: Cabinet Face | `brainstorming`, `frontend-design`, `playwright-skill` |
+| WS2: Butcher Block | `deep-research`, `xlsx` |
+| WS3: Construction | `deep-research`, `writing-clearly-and-concisely` |
+| WS4: Cut Lists | `xlsx`, `verification-before-completion` |
+| WS5: Doors/Drawers | `web-research`, `xlsx` |
+| WS6: Finishing | `deep-research`, `writing-clearly-and-concisely` |
+| WS7: Electrical | `web-research`, `canvas-design` |
+| WS8: Build Manual | `pdf`, `writing-clearly-and-concisely`, `canvas-design`, `xlsx` |
+
 ### Aesthetic Standards
 
 What "looks GOOD" means for this project:
