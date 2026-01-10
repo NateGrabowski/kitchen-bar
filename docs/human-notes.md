@@ -164,4 +164,7 @@ Issue: Background Agents Failed to Write Output
 - **Gate 1** — CLEAR. Design looks good.
 - **Gate 3** — Looks good. I'm okay with the hybrid approach.
 - Overall I'm happier with WS3 after the refire. I do think that WS8 will probably need Opus to stitch everything together well. Also I'm concerned that there may be new revelations in WS4-7 that could impact WS8. Perhaps we should make WS8 -> WS9 (Opus) and have the new WS8 (Opus) smartly prepare/compile/validate information and explore any new revelations or gaps that were found.
+
+## 2026-01-09: Improve Quality, Clarity of Outputs, Fail Faster, Fail Smarter
+- Use Opus for all agents going forward.
   

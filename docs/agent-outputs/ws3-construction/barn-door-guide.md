@@ -797,6 +797,61 @@ For 30" door:
 
 ---
 
+## WS5 Hardware Integration Notes
+
+**Cross-Reference:** See `docs/agent-outputs/ws5-doors-drawers/barn-door-hardware.md` for complete hardware specifications.
+
+### Hardware Timing in Build Sequence
+
+| Phase | Hardware Action | Why This Timing |
+|-------|-----------------|-----------------|
+| Before cutting | Order barn door hardware kit online | 3-5 day shipping; hardware dictates door size |
+| Before door construction | Verify roller bracket dimensions | Door width must account for bracket offset |
+| After living room panel installed | Mount track to panel | Panel provides structural backing for track |
+| After paint fully cured (48h) | Hang door on track | Prevents finish damage |
+| Last barn door step | Install soft-close mechanism | Requires door operating to adjust |
+
+### Track Installation Critical Points
+
+**Living Room Panel Backing Requirement:**
+- Track must mount to solid backing, not just 3/4" plywood
+- Living room panel sits on cabinet box structure
+- Track screws go through panel INTO cabinet box framing
+- Verify cabinet dividers align with track screw locations where possible
+
+**Level Is Everything:**
+- Use 4-foot level when mounting track
+- Even 1/8" out of level causes door to drift
+- Shim behind track if panel is not flat
+
+### Door Sizing with Hardware
+
+**Account for roller bracket offset:**
+- Most brackets add 1-2" to door height at mount point
+- Door top edge + bracket height must clear track
+- Standard: Door top 2" below track rail center
+
+**Floor clearance:**
+- Floor guide determines minimum gap
+- Typical guide needs 1/2" clearance
+- Consider floor level variations (carpet vs. hardwood transition)
+
+### Soft-Close Mechanism Installation
+
+**Install AFTER door operation is verified:**
+1. Hang door on track
+2. Slide door full length both directions
+3. Verify smooth operation
+4. THEN install soft-close damper
+5. Adjust damper engagement point for smooth deceleration
+
+**Adjustment Tips:**
+- Damper too close to closed position = abrupt stop
+- Damper too far = door doesn't fully close
+- Most kits allow 1-2" position adjustment
+
+---
+
 ## Sources
 
 - [How to Build a Barn Door | Ana White](https://www.ana-white.com/woodworking-projects/how-build-barn-door)

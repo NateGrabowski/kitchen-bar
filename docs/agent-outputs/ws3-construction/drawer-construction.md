@@ -807,6 +807,58 @@ Compare to buying pre-made drawers: $200-350
 
 ---
 
+## WS5 Hardware Integration Notes
+
+**Cross-Reference:** See `docs/agent-outputs/ws5-doors-drawers/HARDWARE-RECOMMENDATION.md` for complete hardware specifications.
+
+### Hardware Timing in Build Sequence
+
+| Phase | Hardware Action | Why This Timing |
+|-------|-----------------|-----------------|
+| Before cabinet assembly | Order drawer slides online | 3-5 day shipping; slides must arrive before installation |
+| After cabinet painting cures | Install cabinet-side slides | Paint must be hard enough to not mar |
+| Before drawer installation | Install drawer-side slides | Can do on bench, easier than in cabinet |
+| After drawer slides verified | Attach drawer fronts | Need working drawer to position front correctly |
+| Last step | Install drawer pulls | Fronts must be attached first |
+
+### Slide Mounting Clearance Verification
+
+**BEFORE cutting drawer box parts, verify these measurements:**
+
+1. **Cabinet interior width:** Measure actual interior (may vary from plan)
+2. **Slide clearance needed:** Check slide specifications (typically 1/2" total, 1/4" per side)
+3. **Drawer box width:** Interior width minus slide clearance
+
+**Example calculation:**
+- Cabinet interior: 30" (actual measured)
+- Slide clearance: 0.5" (per manufacturer spec)
+- Drawer box width: 30" - 0.5" = 29.5"
+
+### Pre-Finishing Drawer Fronts
+
+**Finish drawer fronts BEFORE attaching to boxes:**
+- Easier to sand and paint on flat surface
+- No masking of drawer box required
+- Touch-ups possible before installation
+- Drill handle holes BEFORE finishing (cleaner holes)
+
+### Applied Front Adjustment Method
+
+**For perfect drawer front alignment:**
+1. Install drawer box on slides
+2. Verify drawer operates smoothly
+3. Cut 1/16" spacer strips
+4. Position front on box face with spacers for consistent reveal
+5. Tape front temporarily in position
+6. From inside drawer, drive 2 screws through box into front
+7. Remove tape, verify alignment
+8. Add 4 more screws for permanent attachment
+9. Remove spacers
+
+**If alignment is wrong:** Remove screws, reposition, re-drill new holes
+
+---
+
 ## Sources
 
 - [How to Build Drawer Boxes | Ana White](https://www.ana-white.com/woodworking-projects/how-build-drawer-boxes)
