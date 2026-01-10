@@ -1,15 +1,9 @@
 {
   "version": "1.0",
-  "last_updated": "2026-01-10T14:00:00Z",
-  "current_session": 5,
-  "project_status": "COMPLETE",
-  "completed_at": "2026-01-10T14:00:00Z",
-  "total_sessions": 5,
-  "files_validated": 58,
-  "validation_confidence": "96%+",
-  "contractor_test": "PASSED",
-  "visual_documentation": "COMPLETE",
-  "primary_deliverable": "docs/agent-outputs/ws9-build-manual/BUILD-MANUAL.md",
+  "last_updated": "2026-01-10T16:00:00Z",
+  "current_session": 6,
+  "project_status": "IN_PROGRESS",
+  "primary_deliverable": "docs/agent-outputs/ws10-publication/kitchen-bar-build-manual.pdf",
   "gates": {
     "gate0": {
       "name": "Structural Column Assessment",
@@ -51,10 +45,10 @@
     },
     "gate5": {
       "name": "Build Manual Review",
-      "status": "CLEARED",
-      "resolved_at": "2026-01-10",
-      "decision": "APPROVED - Contractor Test PASSED after revision",
-      "notes": "WS10 contractor test initially FAILED (7 blocking issues). Manual revised to v1.1. Re-run PASSED. All blocking issues resolved. Living Room Panel chapter added. 4 technical diagrams created."
+      "status": "REOPENED",
+      "resolved_at": null,
+      "decision": null,
+      "notes": "Session 6: Gate reopened. Previous markdown format rejected. Orchestrator decision: PDF publication required. ASCII diagrams unacceptable."
     }
   },
   "work_streams": {
@@ -65,14 +59,6 @@
       "started_at": "2026-01-09",
       "completed_at": "2026-01-09",
       "current_iteration": 2,
-      "iterations": [
-        {"session": 1, "score": 48, "notes": "3 options created, Option B recommended - REJECTED by human"},
-        {"session": 2, "score": null, "notes": "Human-specified design documented. Visualization already existed. FINAL-DESIGN.md created."},
-        {"session": 3, "score": null, "notes": "APPROVED by human - Gate 1 cleared"}
-      ],
-      "current_agent_id": null,
-      "validation_score": null,
-      "blocking_issues": [],
       "outputs": [
         "visualization/jsx/cabinet-face-final.jsx",
         "docs/agent-outputs/ws1-cabinet-face/FINAL-DESIGN.md"
@@ -85,10 +71,6 @@
       "started_at": "2026-01-09",
       "completed_at": "2026-01-09",
       "current_iteration": 1,
-      "iterations": [{"session": 1, "score": 50, "notes": "5 vendors, Lowe's + lamination recommended - APPROVED by human"}],
-      "current_agent_id": "ab00ed5",
-      "validation_score": 50,
-      "blocking_issues": [],
       "human_decision": "Buy 2x Lowe's Allen+Roth Chevron Acacia 72\"x39\"x1.5\", join them"
     },
     "ws3": {
@@ -97,31 +79,7 @@
       "depends_on": ["gate0"],
       "started_at": "2026-01-09",
       "completed_at": "2026-01-09",
-      "current_iteration": 4,
-      "iterations": [
-        {"session": 1, "score": 50, "notes": "Pocket holes locked, 4-weekend build sequence - NEEDED UPDATE"},
-        {"session": 2, "score": null, "notes": "Refire complete: no-table-saw workflow, drawer construction, barn door guide, X-frame panels, BUILD-SEQUENCE-v2"},
-        {"session": 3, "score": null, "notes": "Opus rerun: Ruthless optimization. Build time reduced 45-50h to 35-40h. Added BEST-PRACTICES, CRITICAL-PATH, INTEGRATION-CHECKLIST, BUILD-SEQUENCE-FINAL."},
-        {"session": 4, "score": null, "notes": "Fixed tool-list.md: Removed incorrect table saw reference, updated to no-table-saw build."}
-      ],
-      "current_agent_id": null,
-      "validation_score": null,
-      "blocking_issues": [],
-      "outputs": [
-        "docs/agent-outputs/ws3-construction/BUILD-SEQUENCE-FINAL.md",
-        "docs/agent-outputs/ws3-construction/CONSTRUCTION-BEST-PRACTICES.md",
-        "docs/agent-outputs/ws3-construction/CRITICAL-PATH.md",
-        "docs/agent-outputs/ws3-construction/INTEGRATION-CHECKLIST.md",
-        "docs/agent-outputs/ws3-construction/drawer-construction.md",
-        "docs/agent-outputs/ws3-construction/barn-door-guide.md",
-        "docs/agent-outputs/ws3-construction/x-frame-panels.md",
-        "docs/agent-outputs/ws3-construction/ADDENDUM-no-table-saw.md",
-        "docs/agent-outputs/ws3-construction/BUILD-SEQUENCE-v2.md",
-        "docs/agent-outputs/ws3-construction/technique-comparison.md",
-        "docs/agent-outputs/ws3-construction/tool-list.md",
-        "docs/agent-outputs/ws3-construction/pro-tips.md",
-        "docs/agent-outputs/ws3-construction/BUILD-SEQUENCE.md"
-      ]
+      "current_iteration": 4
     },
     "ws4": {
       "name": "Cut Lists & Materials",
@@ -129,21 +87,7 @@
       "depends_on": ["gate1", "gate3", "gate4"],
       "started_at": "2026-01-09",
       "completed_at": "2026-01-09",
-      "current_iteration": 2,
-      "iterations": [
-        {"session": 3, "score": null, "notes": "Sonnet: Initial cut lists, plywood layouts, shopping lists"},
-        {"session": 3, "score": null, "notes": "Opus rerun: Cross-referenced all WS1-WS7. Added foot rail backing, wire routing holes, electrical integration, updated costs."}
-      ],
-      "current_agent_id": "ab02417",
-      "validation_score": null,
-      "blocking_issues": [],
-      "outputs": [
-        "docs/agent-outputs/ws4-cut-lists/MASTER-CUT-LIST.md",
-        "docs/agent-outputs/ws4-cut-lists/plywood-layout.md",
-        "docs/agent-outputs/ws4-cut-lists/shopping-list.md",
-        "docs/agent-outputs/ws4-cut-lists/cutting-sequence.md",
-        "docs/agent-outputs/ws4-cut-lists/README.md"
-      ]
+      "current_iteration": 2
     },
     "ws5": {
       "name": "Door & Drawer Options",
@@ -151,17 +95,7 @@
       "depends_on": ["gate1", "gate3"],
       "started_at": "2026-01-09",
       "completed_at": "2026-01-09",
-      "current_iteration": 1,
-      "iterations": [{"session": 3, "score": null, "notes": "Hardware research complete: barn door kit, hinges, pulls, pre-made vs DIY analysis. Matte black hardware throughout."}],
-      "current_agent_id": "a0eb63e",
-      "validation_score": null,
-      "blocking_issues": [],
-      "outputs": [
-        "docs/agent-outputs/ws5-doors-drawers/HARDWARE-RECOMMENDATION.md",
-        "docs/agent-outputs/ws5-doors-drawers/barn-door-hardware.md",
-        "docs/agent-outputs/ws5-doors-drawers/hinges-and-pulls.md",
-        "docs/agent-outputs/ws5-doors-drawers/pre-made-vs-diy-doors.md"
-      ]
+      "current_iteration": 1
     },
     "ws6": {
       "name": "Finishing & Aesthetics",
@@ -169,17 +103,7 @@
       "depends_on": ["gate3"],
       "started_at": "2026-01-09",
       "completed_at": "2026-01-09",
-      "current_iteration": 1,
-      "iterations": [{"session": 3, "score": null, "notes": "Opus agent: Paint colors (Hale Navy selected), butcher block finish (Rubio Monocoat), 4-week finishing sequence. ~$502 materials."}],
-      "current_agent_id": "ad3acb0",
-      "validation_score": null,
-      "blocking_issues": [],
-      "outputs": [
-        "docs/agent-outputs/ws6-finishing/FINISHING-GUIDE.md",
-        "docs/agent-outputs/ws6-finishing/paint-colors.md",
-        "docs/agent-outputs/ws6-finishing/butcher-block-finish.md",
-        "docs/agent-outputs/ws6-finishing/finishing-sequence.md"
-      ]
+      "current_iteration": 1
     },
     "ws7": {
       "name": "Electrical & Features",
@@ -187,18 +111,7 @@
       "depends_on": ["gate1", "ws4"],
       "started_at": "2026-01-09",
       "completed_at": "2026-01-09",
-      "current_iteration": 1,
-      "iterations": [{"session": 3, "score": null, "notes": "Opus agent: Pop-up outlet ($295), LED lighting 2-zone ($184), foot rail 2\" matte black ($240). Wire routing diagrams. ~$840 total."}],
-      "current_agent_id": "a04d410",
-      "validation_score": null,
-      "blocking_issues": [],
-      "outputs": [
-        "docs/agent-outputs/ws7-electrical/ELECTRICAL-PLAN.md",
-        "docs/agent-outputs/ws7-electrical/outlet-options.md",
-        "docs/agent-outputs/ws7-electrical/led-lighting.md",
-        "docs/agent-outputs/ws7-electrical/foot-rail.md",
-        "docs/agent-outputs/ws7-electrical/wire-routing.md"
-      ]
+      "current_iteration": 1
     },
     "ws8": {
       "name": "Integration & Validation (Opus)",
@@ -206,18 +119,7 @@
       "depends_on": ["ws1", "ws3", "ws4", "ws5", "ws6", "ws7", "gate1", "gate2", "gate3", "gate4"],
       "started_at": "2026-01-10",
       "completed_at": "2026-01-10",
-      "current_iteration": 1,
-      "iterations": [{"session": 4, "score": null, "notes": "Opus: Complete validation of 41+ files. 96% confidence. Fixed tool-list.md table saw reference. Created VALIDATION-REPORT, CONSOLIDATED-BOM, CONSOLIDATED-TOOL-LIST, PHASE-INTEGRATION-MAP, WS9-PREPARATION-BRIEF."}],
-      "current_agent_id": "aec8ca4",
-      "validation_score": null,
-      "blocking_issues": [],
-      "outputs": [
-        "docs/agent-outputs/ws8-integration/VALIDATION-REPORT.md",
-        "docs/agent-outputs/ws8-integration/CONSOLIDATED-BOM.md",
-        "docs/agent-outputs/ws8-integration/CONSOLIDATED-TOOL-LIST.md",
-        "docs/agent-outputs/ws8-integration/PHASE-INTEGRATION-MAP.md",
-        "docs/agent-outputs/ws8-integration/WS9-PREPARATION-BRIEF.md"
-      ]
+      "current_iteration": 1
     },
     "ws9": {
       "name": "Build Manual (Opus)",
@@ -226,46 +128,30 @@
       "started_at": "2026-01-10",
       "completed_at": "2026-01-10",
       "current_iteration": 2,
-      "iterations": [
-        {"session": 4, "score": null, "notes": "Opus: Complete 63KB build manual with 11 chapters + appendices. Print-ready."},
-        {"session": 5, "score": null, "notes": "Revised to v1.1: Fixed 7 blocking issues. Added Living Room Panel chapter. Created 4 SVG diagrams. Contractor Test PASSED."}
-      ],
-      "current_agent_id": "a96a646",
-      "validation_score": null,
-      "blocking_issues": [],
-      "outputs": [
-        "docs/agent-outputs/ws9-build-manual/BUILD-MANUAL.md",
-        "docs/agent-outputs/ws9-build-manual/QUICK-REFERENCE.md",
-        "docs/agent-outputs/ws9-build-manual/SHOPPING-CHECKLIST.md",
-        "docs/agent-outputs/ws9-build-manual/BUILD-TRACKER.md",
-        "docs/agent-outputs/ws9-build-manual/LIVING-ROOM-PANEL-CHAPTER.md",
-        "docs/agent-outputs/ws9-build-manual/DIMENSION-FIXES.md",
-        "docs/agent-outputs/ws9-build-manual/diagrams/pocket-hole-placement.svg",
-        "docs/agent-outputs/ws9-build-manual/diagrams/electrical-routing.svg",
-        "docs/agent-outputs/ws9-build-manual/diagrams/cabinet-sections.svg",
-        "docs/agent-outputs/ws9-build-manual/diagrams/toe-kick-platform.svg"
-      ]
+      "notes": "Content complete but format rejected. Will be re-synthesized into PDF."
     },
     "ws10": {
-      "name": "Project Closeout",
-      "status": "COMPLETE",
-      "depends_on": ["ws9", "gate5"],
+      "name": "Publication (PDF Build Manual)",
+      "status": "IN_PROGRESS",
+      "depends_on": ["ws9"],
       "started_at": "2026-01-10",
-      "completed_at": "2026-01-10",
-      "current_iteration": 1,
-      "iterations": [{"session": 5, "score": null, "notes": "WS10 complete. Initial Contractor Test FAILED (7 issues). Fixes applied. Re-run PASSED. Gate 5 CLEARED. Project COMPLETE."}],
+      "completed_at": null,
+      "current_iteration": 2,
+      "iterations": [
+        {"session": 5, "score": null, "notes": "REJECTED - Markdown with ASCII diagrams unacceptable. Not publication quality."},
+        {"session": 6, "score": null, "notes": "REFIRE - PDF publication format. Consolidated document. Real diagrams. Professional layout."}
+      ],
       "current_agent_id": null,
       "validation_score": null,
       "blocking_issues": [],
-      "outputs": [
-        "docs/agent-outputs/ws10-closeout/CONTRACTOR-TEST.md",
-        "docs/agent-outputs/ws10-closeout/CONTRACTOR-TEST-RERUN.md",
-        "docs/agent-outputs/ws10-closeout/VISUAL-DOCUMENTATION-STATUS.md",
-        "docs/DELIVERABLES.md",
-        "docs/GOAL-SUMMARY.md",
-        "docs/LESSONS-LEARNED.md",
-        "docs/PROJECT-COMPLETE.md"
-      ]
+      "publication_spec": {
+        "format": "PDF",
+        "consolidation": "Single document with all chapters including Living Room Panel",
+        "diagrams": "SVG rendered to images, NO ASCII, NO code blocks",
+        "layout": "Professional with title blocks, visual hierarchy, dimension callouts",
+        "standards": "AWI-inspired: every question answered before shop floor"
+      },
+      "outputs": []
     }
   },
   "sessions": [
@@ -302,7 +188,20 @@
       "date": "2026-01-10",
       "work_streams_dispatched": ["ws10"],
       "gates_cleared": ["gate5"],
-      "notes": "Session 5: WS10 Project Closeout. Initial Contractor Test FAILED (7 blocking issues). Dispatched 4 parallel Opus agents for fixes. Living Room Panel chapter added. 4 SVG diagrams created. Manual revised to v1.1. Re-run PASSED. Gate 5 CLEARED. PROJECT COMPLETE."
+      "notes": "Session 5: WS10 Project Closeout. Initial Contractor Test FAILED (7 blocking issues). Dispatched 4 parallel Opus agents for fixes. Living Room Panel chapter added. 4 SVG diagrams created. Manual revised to v1.1. REJECTED BY HUMAN - markdown format unacceptable."
+    },
+    {
+      "id": 6,
+      "date": "2026-01-10",
+      "work_streams_dispatched": ["ws10"],
+      "gates_cleared": [],
+      "notes": "Session 6: WS10 REFIRE. Orchestrator research completed - PDF is industry standard. ASCII diagrams rejected. Will consolidate all content into single professional PDF publication. Gate 5 reopened pending new publication format.",
+      "orchestrator_decision": {
+        "output_format": "PDF",
+        "diagram_standard": "Rendered SVG/images - NO ASCII",
+        "structure": "Single consolidated document",
+        "quality_standard": "AWI-inspired professional woodworking plans"
+      }
     }
   ]
 }
