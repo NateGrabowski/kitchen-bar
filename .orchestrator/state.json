@@ -5,10 +5,10 @@
   "gates": {
     "gate0": {
       "name": "Structural Column Assessment",
-      "status": "PENDING",
-      "resolved_at": null,
-      "decision": null,
-      "notes": null
+      "status": "CLEARED",
+      "resolved_at": "2026-01-09",
+      "decision": "UNCERTAIN-ASSUME-STAYS",
+      "notes": "Human reported column stud doesn't go into soffit, awaiting contractor opinion. Per orchestrator rules: assume column stays for safer design."
     },
     "gate1": {
       "name": "Final Cabinet Face Design",
@@ -47,38 +47,38 @@
   "work_streams": {
     "ws1": {
       "name": "Cabinet Face Design",
-      "status": "NOT_STARTED",
+      "status": "PENDING_HUMAN_REVIEW",
       "depends_on": ["gate0"],
-      "started_at": null,
-      "completed_at": null,
-      "current_iteration": 0,
-      "iterations": [],
-      "current_agent_id": null,
-      "validation_score": null,
+      "started_at": "2026-01-09",
+      "completed_at": "2026-01-09",
+      "current_iteration": 1,
+      "iterations": [{"session": 1, "score": 48, "notes": "3 options created, Option B recommended"}],
+      "current_agent_id": "aa7fb55",
+      "validation_score": 48,
       "blocking_issues": []
     },
     "ws2": {
       "name": "Butcher Block Research",
-      "status": "NOT_STARTED",
+      "status": "PENDING_HUMAN_REVIEW",
       "depends_on": [],
-      "started_at": null,
-      "completed_at": null,
-      "current_iteration": 0,
-      "iterations": [],
-      "current_agent_id": null,
-      "validation_score": null,
+      "started_at": "2026-01-09",
+      "completed_at": "2026-01-09",
+      "current_iteration": 1,
+      "iterations": [{"session": 1, "score": 50, "notes": "5 vendors, Lowe's + lamination recommended"}],
+      "current_agent_id": "ab00ed5",
+      "validation_score": 50,
       "blocking_issues": []
     },
     "ws3": {
       "name": "Construction Techniques",
-      "status": "NOT_STARTED",
+      "status": "PENDING_HUMAN_REVIEW",
       "depends_on": ["gate0"],
-      "started_at": null,
-      "completed_at": null,
-      "current_iteration": 0,
-      "iterations": [],
-      "current_agent_id": null,
-      "validation_score": null,
+      "started_at": "2026-01-09",
+      "completed_at": "2026-01-09",
+      "current_iteration": 1,
+      "iterations": [{"session": 1, "score": 50, "notes": "Pocket holes locked, 4-weekend build sequence"}],
+      "current_agent_id": "a40b453",
+      "validation_score": 50,
       "blocking_issues": []
     },
     "ws4": {
