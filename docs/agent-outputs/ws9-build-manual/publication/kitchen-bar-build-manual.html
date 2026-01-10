@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Bar Cabinet - Complete Build Manual</title>
+    <style>
+        /* Print-optimized professional styling */
+        @page {
+            size: letter;
+            margin: 1in 0.75in;
+        }
+
+        @media print {
+            body { font-size: 11pt; }
+            .no-print { display: none; }
+            h1 { page-break-before: always; }
+            h1:first-of-type { page-break-before: avoid; }
+            .quality-checkpoint { break-inside: avoid; }
+            figure { break-inside: avoid; }
+            table { break-inside: avoid; }
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: "Georgia", "Times New Roman", serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            background: #fff;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Helvetica Neue", "Arial", sans-serif;
+            color: #1a1a2e;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2rem;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 0.3em;
+            margin-top: 2em;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #34495e;
+            border-bottom: 1px solid #bdc3c7;
+            padding-bottom: 0.2em;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            color: #2c3e50;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        /* Title page styling */
+        .title-page {
+            text-align: center;
+            padding: 3in 0 2in 0;
+            page-break-after: always;
+        }
+
+        .title-page h1 {
+            font-size: 2.5rem;
+            border: none;
+            margin-bottom: 0.5em;
+        }
+
+        .title-page .subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 2em;
+        }
+
+        .title-page .specs {
+            text-align: left;
+            max-width: 4in;
+            margin: 2em auto;
+            padding: 1.5em;
+            background: #f8f9fa;
+            border-left: 4px solid #2c3e50;
+        }
+
+        .title-page .specs p {
+            margin: 0.5em 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+            font-size: 0.95em;
+        }
+
+        th, td {
+            padding: 0.5em 0.75em;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #2c3e50;
+            color: white;
+            font-family: "Helvetica Neue", "Arial", sans-serif;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        /* Figures and diagrams */
+        figure {
+            margin: 1.5em 0;
+            padding: 1em;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        figure svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        figcaption {
+            font-family: "Helvetica Neue", "Arial", sans-serif;
+            font-size: 0.9em;
+            font-style: italic;
+            color: #666;
+            margin-top: 0.75em;
+            padding-top: 0.5em;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Quality checkpoints */
+        .quality-checkpoint {
+            background: #e8f4f8;
+            border: 2px solid #3498db;
+            border-radius: 4px;
+            padding: 1em 1.5em;
+            margin: 1.5em 0;
+        }
+
+        .quality-checkpoint h4 {
+            color: #2980b9;
+            margin-top: 0;
+            font-style: normal;
+        }
+
+        .quality-checkpoint ul {
+            margin-bottom: 0;
+        }
+
+        /* Safety notes */
+        .safety-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1em 1.5em;
+            margin: 1em 0;
+        }
+
+        .safety-note strong {
+            color: #856404;
+        }
+
+        /* Critical notes */
+        .critical {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 1em 1.5em;
+            margin: 1em 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1em 0;
+            padding-left: 1.5em;
+        }
+
+        li {
+            margin: 0.4em 0;
+        }
+
+        /* Checklist style */
+        ul.checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.checklist li {
+            padding-left: 1.5em;
+            position: relative;
+        }
+
+        ul.checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Table of contents */
+        .toc {
+            background: #f8f9fa;
+            padding: 1.5em 2em;
+            margin: 2em 0;
+            border: 1px solid #e0e0e0;
+        }
+
+        .toc h2 {
+            border: none;
+            margin-top: 0;
+        }
+
+        .toc ol {
+            columns: 2;
+            column-gap: 2em;
+        }
+
+        .toc li {
+            break-inside: avoid;
+        }
+
+        /* Dimension callouts */
+        .dimension {
+            font-family: "Courier New", monospace;
+            background: #e8e8e8;
+            padding: 0.1em 0.3em;
+            border-radius: 2px;
+        }
+
+        /* Pro tips */
+        .pro-tip {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 1em 1.5em;
+            margin: 1em 0;
+        }
+
+        .pro-tip strong {
+            color: #155724;
+        }
+
+        /* Appendix styling */
+        .appendix {
+            border-top: 3px double #2c3e50;
+            padding-top: 1em;
+        }
+
+        /* Footer */
+        .page-footer {
+            text-align: center;
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 3em;
+            padding-top: 1em;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<!-- TITLE PAGE -->
+<div class="title-page">
+    <h1>Kitchen Bar Cabinet</h1>
+    <p class="subtitle">Complete Build Manual</p>
+
+    <div class="specs">
+        <p><strong>Version:</strong> 1.1 (Revised)</p>
+        <p><strong>Date:</strong> January 2026</p>
+        <p><strong>Difficulty:</strong> Intermediate</p>
+        <p><strong>Estimated Time:</strong> 35-40 hours (4-5 weekends)</p>
+        <p><strong>Total Cost:</strong> $2,900-3,500</p>
+    </div>
+
+    <p style="margin-top: 3em; font-size: 0.9em; color: #666;">
+        Modern Farmhouse Split-Level Kitchen Bar<br>
+        92" Length | 40" Height | Butcher Block Countertop
+    </p>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<nav class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="#chapter1">Project Overview</a></li>
+        <li><a href="#chapter2">Tools &amp; Materials</a></li>
+        <li><a href="#chapter3">Cut Lists</a></li>
+        <li><a href="#chapter4">Base Platform Construction</a></li>
+        <li><a href="#chapter5">Cabinet Box Assembly</a></li>
+        <li><a href="#chapter5b">Living Room Panel</a></li>
+        <li><a href="#chapter6">Drawer Construction</a></li>
+        <li><a href="#chapter7">Barn Door Section</a></li>
+        <li><a href="#chapter8">Doors &amp; Hardware</a></li>
+        <li><a href="#chapter9">Countertop Installation</a></li>
+        <li><a href="#chapter10">Electrical &amp; Features</a></li>
+        <li><a href="#chapter11">Finishing</a></li>
+    </ol>
+    <h3 style="margin-top: 1em;">Appendices</h3>
+    <ol type="A">
+        <li><a href="#appendixA">Troubleshooting</a></li>
+        <li><a href="#appendixB">Quick Reference Cards</a></li>
+        <li><a href="#appendixC">Resources</a></li>
+        <li><a href="#appendixD">Technical Diagrams</a></li>
+    </ol>
+</nav>
+
+<!-- ============================================ -->
+<!-- CHAPTER 1: PROJECT OVERVIEW -->
+<!-- ============================================ -->
+<h1 id="chapter1">Chapter 1: Project Overview</h1>
+
+<h2>Design Summary</h2>
+
+<p>This build manual guides you through constructing a split-level kitchen bar cabinet that replaces an existing metal railing. The cabinet features modern farmhouse styling with X-frame accents, a sliding barn door, and a butcher block countertop.</p>
+
+<h3>Key Dimensions</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Dimension</th>
+            <th>Measurement</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Total Length</strong></td>
+            <td><span class="dimension">92"</span></td>
+            <td>Three cabinet sections</td>
+        </tr>
+        <tr>
+            <td><strong>Total Height</strong></td>
+            <td><span class="dimension">40"</span></td>
+            <td>From kitchen floor</td>
+        </tr>
+        <tr>
+            <td><strong>Cabinet Height</strong></td>
+            <td><span class="dimension">34-1/2"</span></td>
+            <td>Standard counter height minus top</td>
+        </tr>
+        <tr>
+            <td><strong>Toe Kick Height</strong></td>
+            <td><span class="dimension">4-1/4"</span></td>
+            <td>2x4 flat (3-1/2") + 3/4" plywood top</td>
+        </tr>
+        <tr>
+            <td><strong>Countertop Thickness</strong></td>
+            <td><span class="dimension">1-1/2"</span></td>
+            <td>Butcher block</td>
+        </tr>
+        <tr>
+            <td><strong>Cabinet Depth</strong></td>
+            <td><span class="dimension">14"</span></td>
+            <td>Shallow for walkway</td>
+        </tr>
+        <tr>
+            <td><strong>Countertop Depth</strong></td>
+            <td><span class="dimension">30"</span></td>
+            <td>12" knee space + 14" cabinet + 3" overhang + 1" wall clearance</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Cabinet Sections</h3>
+
+<figure>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" width="900" height="700">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #000; }
+    .title { font-size: 18px; font-weight: bold; }
+    .subtitle { font-size: 14px; font-weight: bold; }
+    .label { font-size: 12px; }
+    .dimension { font-size: 11px; fill: #333; }
+    .note { font-size: 10px; fill: #555; font-style: italic; }
+    .section-a { fill: #e3f2fd; stroke: #1976d2; stroke-width: 2; }
+    .section-b { fill: #e8f5e9; stroke: #388e3c; stroke-width: 2; }
+    .section-c { fill: #fff3e0; stroke: #f57c00; stroke-width: 2; }
+    .divider { fill: #f5f5f5; stroke: #000; stroke-width: 1.5; }
+  </style>
+  <rect width="900" height="700" fill="white"/>
+  <text x="450" y="30" text-anchor="middle" class="title">CABINET SECTION CONNECTION DIAGRAM</text>
+  <text x="450" y="50" text-anchor="middle" class="note">Three-Section Assembly with Shared Dividers</text>
+  <text x="450" y="85" text-anchor="middle" class="subtitle">Assembled View (Top)</text>
+  <line x1="100" y1="100" x2="800" y2="100" stroke="#000" stroke-width="1"/>
+  <line x1="100" y1="95" x2="100" y2="105" stroke="#000" stroke-width="1"/>
+  <line x1="800" y1="95" x2="800" y2="105" stroke="#000" stroke-width="1"/>
+  <text x="450" y="97" text-anchor="middle" class="dimension">92" Total Length</text>
+  <rect x="100" y="115" width="700" height="100" fill="none" stroke="#000" stroke-width="2"/>
+  <rect x="100" y="115" width="228" height="100" class="section-a"/>
+  <text x="214" y="170" text-anchor="middle" class="label">Section A</text>
+  <rect x="328" y="115" width="15" height="100" class="divider"/>
+  <rect x="343" y="115" width="213" height="100" class="section-b"/>
+  <text x="450" y="170" text-anchor="middle" class="label">Section B</text>
+  <rect x="556" y="115" width="15" height="100" class="divider"/>
+  <rect x="571" y="115" width="229" height="100" class="section-c"/>
+  <text x="685" y="170" text-anchor="middle" class="label">Section C</text>
+  <line x1="100" y1="230" x2="328" y2="230" stroke="#000" stroke-width="1"/>
+  <text x="214" y="245" text-anchor="middle" class="dimension">30"</text>
+  <line x1="343" y1="230" x2="556" y2="230" stroke="#000" stroke-width="1"/>
+  <text x="450" y="245" text-anchor="middle" class="dimension">30"</text>
+  <line x1="571" y1="230" x2="800" y2="230" stroke="#000" stroke-width="1"/>
+  <text x="685" y="245" text-anchor="middle" class="dimension">32"</text>
+  <text x="835" y="170" text-anchor="middle" class="dimension" transform="rotate(90, 835, 170)">14" Depth</text>
+  <rect x="50" y="670" width="800" height="25" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="65" y="687" class="label">Assembly Order: Build each section box independently, then join sections using pocket holes through shared dividers (4-6" spacing)</text>
+</svg>
+    <figcaption>Figure 1.1: Cabinet Section Layout - Three sections totaling 92" (30" + 30" + 32")</figcaption>
+</figure>
+
+<p><strong>Section 1 (Left - 30"):</strong> Triple drawer bank for storage<br>
+<strong>Section 2 (Center - 30"):</strong> Sliding barn door with shelves<br>
+<strong>Section 3 (Right - 32"):</strong> Double-door cabinet with shelves</p>
+
+<h3>Design Features</h3>
+
+<ul>
+    <li><strong>X-frame end panels</strong> on barn door and living room panel</li>
+    <li><strong>Sliding barn door</strong> with soft-close track</li>
+    <li><strong>LED lighting</strong> under counter overhang and inside cabinet</li>
+    <li><strong>Pop-up outlet</strong> in countertop with USB ports</li>
+    <li><strong>Foot rail</strong> (2" matte black stainless)</li>
+    <li><strong>Chevron butcher block</strong> countertop (acacia)</li>
+    <li><strong>Modern farmhouse aesthetic</strong> (Benjamin Moore Hale Navy HC-154, warm wood accents)</li>
+</ul>
+
+<h2>Before You Begin Checklist</h2>
+
+<ul class="checklist">
+    <li>Read this entire manual once through</li>
+    <li>Verify all measurements against your actual space</li>
+    <li>Purchase all materials (allow 2-3 weeks for special orders)</li>
+    <li>Set up a clean, flat workspace (garage or driveway)</li>
+    <li>Test fit major components (butcher block slabs)</li>
+    <li>Confirm electrical source location and capacity</li>
+    <li>Check local permit requirements for electrical work</li>
+</ul>
+
+<h2>Safety Notes</h2>
+
+<div class="safety-note">
+    <strong>Personal Protective Equipment Required:</strong>
+    <ul>
+        <li><strong>Cutting plywood:</strong> Safety glasses, hearing protection</li>
+        <li><strong>Routing/drilling:</strong> Safety glasses, dust mask</li>
+        <li><strong>Sanding:</strong> Safety glasses, N95 respirator</li>
+        <li><strong>Painting/staining:</strong> Nitrile gloves, N95 respirator</li>
+        <li><strong>Finishing (shellac):</strong> Nitrile gloves, respirator, ventilation</li>
+    </ul>
+</div>
+
+<h2>Project Timeline</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Weekend</th>
+            <th>Tasks</th>
+            <th>Hours</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Weekend 1</strong></td>
+            <td>Shopping, organizing materials, cutting lumber, build toe kick platform</td>
+            <td>6-8</td>
+        </tr>
+        <tr>
+            <td><strong>Weekend 2</strong></td>
+            <td>Cut all plywood, drill pocket holes, assemble cabinet boxes, install backs</td>
+            <td>8-10</td>
+        </tr>
+        <tr>
+            <td><strong>Weekend 3</strong></td>
+            <td>Build drawer boxes, install slides, build barn door, install track</td>
+            <td>6-8</td>
+        </tr>
+        <tr>
+            <td><strong>Weekend 4</strong></td>
+            <td>Sand and prime all cabinet components, first paint coat</td>
+            <td>6-8</td>
+        </tr>
+        <tr>
+            <td><strong>Weekend 5</strong></td>
+            <td>Final paint coat, install cabinets, install countertop, hardware, electrical</td>
+            <td>8-10</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- ============================================ -->
+<!-- CHAPTER 2: TOOLS & MATERIALS -->
+<!-- ============================================ -->
+<h1 id="chapter2">Chapter 2: Tools &amp; Materials</h1>
+
+<h2>Tool List</h2>
+
+<h3>Must-Have Tools</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Tool</th>
+            <th>Purpose</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Circular saw</strong></td>
+            <td>Ripping plywood</td>
+            <td>7-1/4" blade, good quality</td>
+        </tr>
+        <tr>
+            <td><strong>Miter saw</strong></td>
+            <td>Crosscuts, trim</td>
+            <td>10" minimum</td>
+        </tr>
+        <tr>
+            <td><strong>Drill/driver</strong></td>
+            <td>Screws, pocket holes</td>
+            <td>Cordless 18V+</td>
+        </tr>
+        <tr>
+            <td><strong>Kreg pocket hole jig</strong></td>
+            <td>All cabinet joinery</td>
+            <td>K4 or K5 model</td>
+        </tr>
+        <tr>
+            <td><strong>Random orbital sander</strong></td>
+            <td>Surface prep</td>
+            <td>5" with dust collection</td>
+        </tr>
+        <tr>
+            <td><strong>Router</strong></td>
+            <td>Edge profiles, wire holes</td>
+            <td>1-1/4 HP minimum</td>
+        </tr>
+        <tr>
+            <td><strong>Tape measure</strong></td>
+            <td>Measuring</td>
+            <td>25' length</td>
+        </tr>
+        <tr>
+            <td><strong>Speed square</strong></td>
+            <td>Layout, marking</td>
+            <td>7"</td>
+        </tr>
+        <tr>
+            <td><strong>Clamps</strong></td>
+            <td>Assembly</td>
+            <td>4-6 bar clamps (24"+)</td>
+        </tr>
+        <tr>
+            <td><strong>Level</strong></td>
+            <td>Platform, installation</td>
+            <td>4' level</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Master Bill of Materials</h2>
+
+<h3>Grand Total Summary</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Plywood</td><td>$340</td></tr>
+        <tr><td>Dimensional Lumber</td><td>$93</td></tr>
+        <tr><td>Drawer Hardware</td><td>$60</td></tr>
+        <tr><td>Barn Door Hardware</td><td>$85</td></tr>
+        <tr><td>Cabinet Door Hardware</td><td>$136</td></tr>
+        <tr><td>Fasteners</td><td>$68</td></tr>
+        <tr><td>Butcher Block</td><td>$750</td></tr>
+        <tr><td>Finishing Materials</td><td>$396</td></tr>
+        <tr><td>Electrical &amp; Features</td><td>$758</td></tr>
+        <tr style="font-weight: bold; background: #e8f4f8;">
+            <td><strong>GRAND TOTAL</strong></td>
+            <td><strong>$2,686</strong></td>
+        </tr>
+        <tr>
+            <td>With 10% contingency</td>
+            <td>$2,955</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- ============================================ -->
+<!-- CHAPTER 3: CUT LISTS -->
+<!-- ============================================ -->
+<h1 id="chapter3">Chapter 3: Cut Lists</h1>
+
+<h2>Master Cut List</h2>
+
+<h3>Cabinet Box Parts - 3/4" Plywood</h3>
+
+<h4>Section 1: Drawer Cabinet (30" wide)</h4>
+
+<table>
+    <thead>
+        <tr>
+            <th>Label</th>
+            <th>Part</th>
+            <th>Dimensions</th>
+            <th>Qty</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>A1</td><td>Left side</td><td>14" x 34-1/2"</td><td>1</td><td>Good face out</td></tr>
+        <tr><td>A2</td><td>Right side/divider</td><td>14" x 34-1/2"</td><td>1</td><td>Good face both sides</td></tr>
+        <tr><td>A3</td><td>Top</td><td>28-1/2" x 14"</td><td>1</td><td>Interior width</td></tr>
+        <tr><td>A4</td><td>Bottom</td><td>28-1/2" x 14"</td><td>1</td><td>Interior width</td></tr>
+        <tr><td>A5</td><td>Back</td><td>30" x 34-1/2"</td><td>1</td><td>1/4" plywood</td></tr>
+    </tbody>
+</table>
+
+<p><strong>Interior width calculation:</strong> 30" - (2 x 3/4") = <span class="dimension">28-1/2"</span></p>
+
+<h4>Section 2: Barn Door Cabinet (30" wide)</h4>
+
+<table>
+    <thead>
+        <tr>
+            <th>Label</th>
+            <th>Part</th>
+            <th>Dimensions</th>
+            <th>Qty</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>B1</td><td>Left side/divider</td><td>14" x 34-1/2"</td><td>1</td><td>Shared with A2</td></tr>
+        <tr><td>B2</td><td>Right side/divider</td><td>14" x 34-1/2"</td><td>1</td><td>Good face both sides</td></tr>
+        <tr><td>B3</td><td>Top</td><td>28-1/2" x 14"</td><td>1</td><td>Interior width</td></tr>
+        <tr><td>B4</td><td>Bottom</td><td>28-1/2" x 14"</td><td>1</td><td>Interior width</td></tr>
+        <tr><td>B5</td><td>Shelf 1</td><td>28-1/2" x 13"</td><td>1</td><td>At 11-1/2" height</td></tr>
+        <tr><td>B6</td><td>Shelf 2</td><td>28-1/2" x 13"</td><td>1</td><td>At 23" height</td></tr>
+        <tr><td>B7</td><td>Back</td><td>30" x 34-1/2"</td><td>1</td><td>1/4" plywood</td></tr>
+    </tbody>
+</table>
+
+<h4>Section 3: Double Door Cabinet (32" wide)</h4>
+
+<table>
+    <thead>
+        <tr>
+            <th>Label</th>
+            <th>Part</th>
+            <th>Dimensions</th>
+            <th>Qty</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>C1</td><td>Left side/divider</td><td>14" x 34-1/2"</td><td>1</td><td>Shared with B2</td></tr>
+        <tr><td>C2</td><td>Right side</td><td>14" x 34-1/2"</td><td>1</td><td>Good face out</td></tr>
+        <tr><td>C3</td><td>Top</td><td>30-1/2" x 14"</td><td>1</td><td>Interior width</td></tr>
+        <tr><td>C4</td><td>Bottom</td><td>30-1/2" x 14"</td><td>1</td><td>Interior width</td></tr>
+        <tr><td>C5</td><td>Back</td><td>32" x 34-1/2"</td><td>1</td><td>1/4" plywood</td></tr>
+    </tbody>
+</table>
+
+<p><strong>Interior width calculation:</strong> 32" - (2 x 3/4") = <span class="dimension">30-1/2"</span></p>
+
+<div class="quality-checkpoint">
+    <h4>Quality Checkpoint: Cut List Verification</h4>
+    <p>Before proceeding to assembly, verify:</p>
+    <ul class="checklist">
+        <li>All pieces cut to exact dimensions (measure twice!)</li>
+        <li>All pieces labeled clearly (painter's tape + marker)</li>
+        <li>Cabinet sides identical (stack and verify edges align)</li>
+        <li>Large panels are square (diagonals equal within 1/8")</li>
+        <li>Wire holes drilled and grommets installed</li>
+        <li>Good faces marked on all pieces</li>
+    </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- CHAPTER 4: BASE PLATFORM CONSTRUCTION -->
+<!-- ============================================ -->
+<h1 id="chapter4">Chapter 4: Base Platform Construction</h1>
+
+<p>The toe kick platform provides a solid, level base for the cabinet and elevates it to proper height.</p>
+
+<h2>Platform Specifications</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Dimension</th>
+            <th>Measurement</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Length</td><td><span class="dimension">92"</span></td></tr>
+        <tr><td>Depth</td><td><span class="dimension">14"</span></td></tr>
+        <tr><td>Height</td><td><span class="dimension">3-1/2"</span> (2x4 on flat)</td></tr>
+        <tr><td>Top</td><td>3/4" plywood = <span class="dimension">4-1/4"</span> total</td></tr>
+    </tbody>
+</table>
+
+<figure>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 500" width="850" height="500">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #000; }
+    .title { font-size: 18px; font-weight: bold; }
+    .subtitle { font-size: 14px; font-weight: bold; }
+    .label { font-size: 12px; }
+    .dimension { font-size: 11px; fill: #333; }
+    .note { font-size: 10px; fill: #555; font-style: italic; }
+    .frame-2x4 { fill: #f5e6d3; stroke: #8b7355; stroke-width: 2; }
+    .plywood { fill: #d4a574; stroke: #000; stroke-width: 1.5; }
+    .leveling-pad { fill: #666; stroke: #333; stroke-width: 1; }
+  </style>
+  <rect width="850" height="500" fill="white"/>
+  <text x="425" y="30" text-anchor="middle" class="title">TOE KICK PLATFORM DIAGRAM</text>
+  <text x="425" y="50" text-anchor="middle" class="note">2x4 Frame with 3/4" Plywood Top - 4-1/4" Total Height</text>
+  <text x="425" y="85" text-anchor="middle" class="subtitle">Top View - 2x4 Frame Layout</text>
+  <rect x="75" y="100" width="700" height="90" fill="none" stroke="#000" stroke-width="2"/>
+  <rect x="75" y="100" width="700" height="15" class="frame-2x4"/>
+  <text x="425" y="112" text-anchor="middle" class="label" style="font-size:10px">Front Rail (92")</text>
+  <rect x="75" y="175" width="700" height="15" class="frame-2x4"/>
+  <text x="425" y="187" text-anchor="middle" class="label" style="font-size:10px">Back Rail (92")</text>
+  <rect x="75" y="115" width="15" height="60" class="frame-2x4"/>
+  <rect x="760" y="115" width="15" height="60" class="frame-2x4"/>
+  <rect x="190" y="115" width="15" height="60" class="frame-2x4"/>
+  <rect x="340" y="115" width="15" height="60" class="frame-2x4"/>
+  <rect x="490" y="115" width="15" height="60" class="frame-2x4"/>
+  <rect x="640" y="115" width="15" height="60" class="frame-2x4"/>
+  <text x="425" y="225" text-anchor="middle" class="dimension">92" Total Length</text>
+  <text x="425" y="280" text-anchor="middle" class="subtitle">Side View - Height Stack-up</text>
+  <line x1="150" y1="400" x2="700" y2="400" stroke="#000" stroke-width="2"/>
+  <text x="720" y="405" class="label">Floor</text>
+  <rect x="200" y="345" width="450" height="55" class="frame-2x4"/>
+  <text x="425" y="378" text-anchor="middle" class="label">2x4 Frame (3-1/2" actual)</text>
+  <rect x="175" y="330" width="500" height="15" class="plywood"/>
+  <text x="425" y="343" text-anchor="middle" class="label" style="font-size:10px; fill:#fff">3/4" Plywood</text>
+  <text x="760" y="370" text-anchor="middle" class="dimension" style="font-weight:bold">4-1/4" Total</text>
+  <rect x="50" y="440" width="750" height="50" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="65" y="458" class="subtitle">Construction Notes:</text>
+  <text x="65" y="475" class="label">1. Assemble 2x4 frame with 3" screws | 2. Space cross braces 15-18" apart | 3. Attach plywood with 1-5/8" screws | 4. Level before cabinet install</text>
+</svg>
+    <figcaption>Figure 4.1: Toe Kick Platform - 2x4 frame with 3/4" plywood top provides 4-1/4" total height</figcaption>
+</figure>
+
+<h2>Step-by-Step Instructions</h2>
+
+<h3>Step 1: Cut Frame Members</h3>
+<ol>
+    <li>Cut two 2x4s to <span class="dimension">92"</span> length (front and back rails)</li>
+    <li>Cut six 2x4s to <span class="dimension">11"</span> length (cross supports)</li>
+    <li>Cut three 2x4 blocks at 3-1/2" x 3-1/2" (foot rail backing)</li>
+</ol>
+
+<h3>Step 2: Assemble Frame</h3>
+<ol>
+    <li>Lay front rail (TK-F) flat on work surface</li>
+    <li>Position cross supports at: 0" (flush with left end), 16", 32", 48", 64", 88-1/2" (flush with right end)</li>
+    <li>Pre-drill two holes through front rail into each cross support</li>
+    <li>Drive 2-1/2" screws (2 per joint)</li>
+    <li>Flip assembly, attach back rail the same way</li>
+</ol>
+
+<h3>Step 3: Install Foot Rail Backing Blocks</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Block</th>
+            <th>Position from Left</th>
+            <th>Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>FR-BLK1</td><td>3"</td><td>Left foot rail bracket</td></tr>
+        <tr><td>FR-BLK2</td><td>46"</td><td>Center foot rail bracket</td></tr>
+        <tr><td>FR-BLK3</td><td>89"</td><td>Right foot rail bracket</td></tr>
+    </tbody>
+</table>
+
+<div class="quality-checkpoint">
+    <h4>Quality Checkpoint: Platform</h4>
+    <p>Before proceeding to cabinet assembly, verify:</p>
+    <ul class="checklist">
+        <li>Platform is perfectly level (check multiple locations)</li>
+        <li>Platform is 92" x 14" exact dimensions</li>
+        <li>All joints are tight and secure</li>
+        <li>Foot rail backing blocks are installed</li>
+        <li>Platform is secured to floor (or plan for securing)</li>
+    </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- CHAPTER 5: CABINET BOX ASSEMBLY -->
+<!-- ============================================ -->
+<h1 id="chapter5">Chapter 5: Cabinet Box Assembly</h1>
+
+<h2>Overview</h2>
+
+<p>Build three cabinet sections that will be joined together on the platform. Each section uses pocket hole joinery throughout.</p>
+
+<h2>Pocket Hole Setup</h2>
+
+<figure>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #000; }
+    .title { font-size: 18px; font-weight: bold; }
+    .subtitle { font-size: 14px; font-weight: bold; }
+    .label { font-size: 12px; }
+    .dimension { font-size: 11px; fill: #333; }
+    .note { font-size: 10px; fill: #555; font-style: italic; }
+  </style>
+  <rect width="800" height="450" fill="white"/>
+  <text x="400" y="30" text-anchor="middle" class="title">POCKET HOLE PLACEMENT DIAGRAM</text>
+  <text x="400" y="50" text-anchor="middle" class="note">For 3/4" Plywood Cabinet Construction</text>
+  <text x="150" y="85" text-anchor="middle" class="subtitle">Edge Distance Detail</text>
+  <rect x="50" y="100" width="200" height="80" fill="none" stroke="#000" stroke-width="2"/>
+  <text x="150" y="145" text-anchor="middle" class="label">3/4" Plywood</text>
+  <ellipse cx="90" cy="140" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 90, 140)"/>
+  <ellipse cx="150" cy="140" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 150, 140)"/>
+  <ellipse cx="210" cy="140" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 210, 140)"/>
+  <text x="70" y="210" text-anchor="middle" class="dimension">3/4" from edge</text>
+  <text x="550" y="85" text-anchor="middle" class="subtitle">Cabinet Box Joint Spacing</text>
+  <rect x="320" y="100" width="400" height="60" fill="none" stroke="#000" stroke-width="2"/>
+  <text x="520" y="135" text-anchor="middle" class="label">Side Panel</text>
+  <ellipse cx="360" cy="130" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 360, 130)"/>
+  <ellipse cx="430" cy="130" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 430, 130)"/>
+  <ellipse cx="500" cy="130" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 500, 130)"/>
+  <ellipse cx="570" cy="130" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 570, 130)"/>
+  <ellipse cx="640" cy="130" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 640, 130)"/>
+  <text x="395" y="190" text-anchor="middle" class="dimension">4-6" typical spacing</text>
+  <rect x="30" y="380" width="740" height="60" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="45" y="400" class="subtitle">Key Notes:</text>
+  <text x="45" y="418" class="label">1. Kreg K4/K5 jig set for 3/4" material | 2. Screw: 1-1/4" coarse thread | 3. Apply wood glue before assembly</text>
+  <text x="45" y="433" class="label">4. Face frame: 2-3 holes per joint | 5. Cabinet box: Space 4-6" apart | 6. Keep holes 3/4" minimum from edges</text>
+</svg>
+    <figcaption>Figure 5.1: Pocket Hole Placement - Edge distances and spacing patterns for cabinet construction</figcaption>
+</figure>
+
+<p><strong>For 3/4" plywood:</strong></p>
+<ul>
+    <li>Jig setting: 3/4" material</li>
+    <li>Drill bit collar: Per jig instructions</li>
+    <li>Screw length: 1-1/4" coarse thread</li>
+</ul>
+
+<p><strong>Pocket hole locations:</strong></p>
+<ul>
+    <li>Ends of top/bottom pieces: 3 holes per end (into sides)</li>
+    <li>Shelf ends: 3 holes per end (into sides)</li>
+    <li>No pocket holes in sides</li>
+</ul>
+
+<h2>Assembly Process</h2>
+
+<h3>Step 1: Drill Pocket Holes</h3>
+<ol>
+    <li>Drill 3 pocket holes in each end of top (A3) - 6 total</li>
+    <li>Drill 3 pocket holes in each end of bottom (A4) - 6 total</li>
+    <li>Holes face INSIDE cabinet</li>
+</ol>
+
+<h3>Step 2: Dry Fit Assembly</h3>
+<ol>
+    <li>Stand both sides upright, parallel, 28-1/2" apart (interior)</li>
+    <li>Position top between sides, flush with top edges</li>
+    <li>Position bottom between sides, 4" up from bottom edges</li>
+    <li>Verify everything fits - adjust if needed</li>
+</ol>
+
+<h3>Step 3: Assemble Box</h3>
+<ol>
+    <li>Apply wood glue to end of top (A3)</li>
+    <li>Position top against left side (A1), flush with top and front edges</li>
+    <li>Clamp in place</li>
+    <li>Drive 1-1/4" pocket screws (3)</li>
+    <li>Repeat for right side (A2)</li>
+    <li>Repeat process for bottom (A4)</li>
+</ol>
+
+<h3>Step 4: Square the Box</h3>
+<ol>
+    <li>Measure both diagonals (corner to corner)</li>
+    <li>Diagonals should be equal within 1/16"</li>
+    <li>If not square, rack box gently until equal</li>
+    <li>Clamp in squared position</li>
+</ol>
+
+<div class="critical">
+    <strong>Critical:</strong> Backs are flush-mounted to exterior edges (not recessed into rabbets). The back overlaps the edges of sides, top, and bottom and holds the cabinet square.
+</div>
+
+<div class="quality-checkpoint">
+    <h4>Quality Checkpoint: Cabinet Boxes</h4>
+    <p>Before proceeding to drawer construction, verify:</p>
+    <ul class="checklist">
+        <li>All cabinet boxes are square (diagonals equal)</li>
+        <li>Interior dimensions match cut list</li>
+        <li>Shelves are level and at correct heights</li>
+        <li>All joints are tight with no gaps</li>
+        <li>Backs are fully attached and hold boxes square</li>
+        <li>Wire holes have grommets installed</li>
+        <li>Sections are aligned and joined (or ready to join)</li>
+    </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- CHAPTER 5B: LIVING ROOM PANEL -->
+<!-- ============================================ -->
+<h1 id="chapter5b">Chapter 5B: Living Room Panel Construction &amp; Installation</h1>
+
+<p><strong>Purpose:</strong> This chapter covers the construction and installation of the Living Room Panel - a major 92" x 34-1/2" structural element that finishes the living room side of the cabinet and supports the barn door track.</p>
+
+<div class="critical">
+    <strong>Position in Build Sequence:</strong> Complete this AFTER cabinet box assembly (Chapter 5) and BEFORE barn door installation (Chapter 7).
+</div>
+
+<h2>Overview</h2>
+
+<h3>What Is the Living Room Panel?</h3>
+
+<p>The Living Room Panel is the full-width face of the cabinet that faces your living room. It serves three critical functions:</p>
+
+<ol>
+    <li><strong>Structural:</strong> Creates a rigid mounting surface for the barn door track</li>
+    <li><strong>Aesthetic:</strong> Presents a finished, decorative face to the living room</li>
+    <li><strong>Concealing:</strong> Hides the backs of the three cabinet boxes from view</li>
+</ol>
+
+<figure>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 400" width="920" height="400">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #333; }
+    .title { font-size: 16px; font-weight: bold; }
+    .dimension { font-size: 12px; fill: #666; }
+    .label { font-size: 11px; }
+    .panel { fill: #2c3e50; stroke: #1a252f; stroke-width: 2; }
+    .xframe { stroke: #8b7355; stroke-width: 8; fill: none; stroke-linecap: round; }
+    .frame { stroke: #6b5344; stroke-width: 12; fill: none; }
+  </style>
+  <rect width="920" height="400" fill="#fafafa"/>
+  <text x="460" y="25" text-anchor="middle" class="title">LIVING ROOM PANEL - FRONT VIEW</text>
+  <text x="460" y="42" text-anchor="middle" class="dimension">92" x 34-1/2" with X-Frame Overlay</text>
+  <rect x="50" y="70" width="820" height="280" class="panel"/>
+  <rect x="50" y="70" width="820" height="280" class="frame"/>
+  <line x1="323" y1="70" x2="323" y2="350" stroke="#6b5344" stroke-width="6"/>
+  <line x1="596" y1="70" x2="596" y2="350" stroke="#6b5344" stroke-width="6"/>
+  <line x1="75" y1="95" x2="298" y2="325" class="xframe"/>
+  <line x1="298" y1="95" x2="75" y2="325" class="xframe"/>
+  <line x1="348" y1="95" x2="571" y2="325" class="xframe"/>
+  <line x1="571" y1="95" x2="348" y2="325" class="xframe"/>
+  <line x1="621" y1="95" x2="845" y2="325" class="xframe"/>
+  <line x1="845" y1="95" x2="621" y2="325" class="xframe"/>
+  <text x="186" y="215" text-anchor="middle" class="label" fill="#fff">Section 1</text>
+  <text x="186" y="232" text-anchor="middle" class="dimension" fill="#ccc">30"</text>
+  <text x="459" y="215" text-anchor="middle" class="label" fill="#fff">Section 2</text>
+  <text x="459" y="232" text-anchor="middle" class="dimension" fill="#ccc">30"</text>
+  <text x="733" y="215" text-anchor="middle" class="label" fill="#fff">Section 3</text>
+  <text x="733" y="232" text-anchor="middle" class="dimension" fill="#ccc">32"</text>
+  <text x="460" y="388" text-anchor="middle" class="dimension">92" Total Width</text>
+  <text x="905" y="215" class="dimension" transform="rotate(90, 905, 215)">34-1/2" Height</text>
+</svg>
+    <figcaption>Figure 5B.1: Living Room Panel Front View - 92" x 34-1/2" panel with three X-frame sections</figcaption>
+</figure>
+
+<h3>Panel Specifications</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Specification</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><strong>Width</strong></td><td><span class="dimension">92"</span> (full cabinet length)</td></tr>
+        <tr><td><strong>Height</strong></td><td><span class="dimension">34-1/2"</span> (cabinet body height)</td></tr>
+        <tr><td><strong>Thickness</strong></td><td>3/4" plywood + 3/4" trim = <span class="dimension">1-1/2"</span> total</td></tr>
+        <tr><td><strong>Material</strong></td><td>Cabinet-grade birch plywood</td></tr>
+        <tr><td><strong>Surface</strong></td><td>Three-section X-frame overlay</td></tr>
+        <tr><td><strong>Finish</strong></td><td>Painted to match cabinet (Hale Navy HC-154)</td></tr>
+    </tbody>
+</table>
+
+<h2>X-Frame Construction</h2>
+
+<figure>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 400" width="920" height="400">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #333; }
+    .title { font-size: 16px; font-weight: bold; }
+    .subtitle { font-size: 13px; font-weight: bold; }
+    .dimension { font-size: 11px; fill: #666; }
+    .label { font-size: 10px; }
+    .note { font-size: 9px; fill: #888; font-style: italic; }
+    .panel-bg { fill: #e8e8e8; stroke: #999; stroke-width: 1; }
+    .frame-1x6 { fill: #d4a574; stroke: #8b6914; stroke-width: 1; }
+    .divider-1x4 { fill: #c9956e; stroke: #8b6914; stroke-width: 1; }
+    .diagonal-1x4 { fill: none; stroke: #b8860b; stroke-width: 6; stroke-linecap: round; }
+  </style>
+  <rect width="920" height="400" fill="#fafafa"/>
+  <text x="460" y="25" text-anchor="middle" class="title">X-FRAME LAYOUT - DETAILED DIMENSIONS</text>
+  <rect x="50" y="50" width="820" height="220" class="panel-bg"/>
+  <rect x="50" y="50" width="820" height="35" class="frame-1x6"/>
+  <text x="460" y="73" text-anchor="middle" class="label">Top Frame - 1x6 (5-1/2" actual)</text>
+  <rect x="50" y="235" width="820" height="35" class="frame-1x6"/>
+  <text x="460" y="258" text-anchor="middle" class="label">Bottom Frame - 1x6 (5-1/2" actual)</text>
+  <rect x="50" y="50" width="35" height="220" class="frame-1x6"/>
+  <rect x="835" y="50" width="35" height="220" class="frame-1x6"/>
+  <rect x="315" y="85" width="25" height="150" class="divider-1x4"/>
+  <rect x="580" y="85" width="25" height="150" class="divider-1x4"/>
+  <line x1="100" y1="95" x2="300" y2="225" class="diagonal-1x4"/>
+  <line x1="300" y1="95" x2="100" y2="225" class="diagonal-1x4"/>
+  <line x1="355" y1="95" x2="565" y2="225" class="diagonal-1x4"/>
+  <line x1="565" y1="95" x2="355" y2="225" class="diagonal-1x4"/>
+  <line x1="620" y1="95" x2="820" y2="225" class="diagonal-1x4"/>
+  <line x1="820" y1="95" x2="620" y2="225" class="diagonal-1x4"/>
+  <text x="200" y="300" text-anchor="middle" class="dimension">27" (interior)</text>
+  <text x="460" y="300" text-anchor="middle" class="dimension">27" (interior)</text>
+  <text x="720" y="300" text-anchor="middle" class="dimension">27" (interior)</text>
+  <text x="460" y="330" text-anchor="middle" class="dimension">92" Total</text>
+  <rect x="50" y="340" width="820" height="50" fill="#fff" stroke="#ccc" stroke-width="1"/>
+  <text x="60" y="358" class="subtitle">CUT LIST:</text>
+  <text x="60" y="373" class="label">1x6 Frame: 2 pcs @ 92" (top/bottom), 2 pcs @ 34-1/2" (sides) - miter corners at 45 deg</text>
+  <text x="60" y="385" class="label">1x4 Dividers: 2 pcs @ 23-1/2" (vertical) | 1x4 Diagonals: 6 pcs @ ~36" (cut to fit)</text>
+</svg>
+    <figcaption>Figure 5B.2: X-Frame Layout - Detailed dimensions for 1x6 perimeter frame and 1x4 dividers/diagonals</figcaption>
+</figure>
+
+<h3>Cut Perimeter Frame Pieces (1x6)</h3>
+
+<p>With 5-1/2" frame on all sides, interior dimensions are:</p>
+<ul>
+    <li>Interior width: 92" - (2 x 5.5") = <span class="dimension">81"</span></li>
+    <li>Interior height: 34.5" - (2 x 5.5") = <span class="dimension">23.5"</span></li>
+</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th>Piece</th>
+            <th>Length (long point to long point)</th>
+            <th>Miter</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Top frame</td><td><span class="dimension">92"</span></td><td>45 degrees, both ends</td></tr>
+        <tr><td>Bottom frame</td><td><span class="dimension">92"</span></td><td>45 degrees, both ends</td></tr>
+        <tr><td>Left frame</td><td><span class="dimension">34-1/2"</span></td><td>45 degrees, both ends</td></tr>
+        <tr><td>Right frame</td><td><span class="dimension">34-1/2"</span></td><td>45 degrees, both ends</td></tr>
+    </tbody>
+</table>
+
+<h3>Cut Vertical Dividers (1x4)</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Piece</th>
+            <th>Length</th>
+            <th>End Cuts</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Divider 1</td><td><span class="dimension">23-1/2"</span></td><td>Square cuts (fits between top and bottom frame)</td></tr>
+        <tr><td>Divider 2</td><td><span class="dimension">23-1/2"</span></td><td>Square cuts</td></tr>
+    </tbody>
+</table>
+
+<h3>Cut X-Diagonal Pieces (1x4)</h3>
+
+<p>Each section interior after frame: Width: <span class="dimension">27"</span>, Height: <span class="dimension">23-1/2"</span></p>
+
+<p>Diagonal length calculation: sqrt(27^2 + 23.5^2) = sqrt(1281.25) = <span class="dimension">35.8"</span> (round up to 36" and cut to fit)</p>
+
+<p>Cut 6 diagonal pieces at approximately 36-38" - trim to fit during installation.</p>
+
+<h2>Barn Door Track Preparation</h2>
+
+<figure>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 350" width="920" height="350">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #333; }
+    .title { font-size: 16px; font-weight: bold; }
+    .subtitle { font-size: 12px; }
+    .dimension { font-size: 11px; fill: #666; }
+    .label { font-size: 10px; }
+    .note { font-size: 9px; fill: #888; font-style: italic; }
+    .panel { fill: #2c3e50; stroke: #1a252f; stroke-width: 2; }
+    .track { fill: #333; stroke: #111; stroke-width: 1; }
+    .door-closed { fill: #8b7355; stroke: #5d4e37; stroke-width: 2; opacity: 0.9; }
+    .door-open { fill: #8b7355; stroke: #5d4e37; stroke-width: 2; opacity: 0.4; stroke-dasharray: 5,3; }
+    .opening { fill: #4a5568; stroke: #2d3748; stroke-width: 1; }
+  </style>
+  <rect width="920" height="350" fill="#fafafa"/>
+  <text x="460" y="25" text-anchor="middle" class="title">BARN DOOR TRACK POSITIONING</text>
+  <text x="460" y="42" text-anchor="middle" class="subtitle">60" Track on 92" Cabinet - Door Slides LEFT to Open</text>
+  <rect x="50" y="80" width="820" height="200" class="panel"/>
+  <text x="186" y="185" text-anchor="middle" class="label" fill="#ccc">Section 1</text>
+  <text x="186" y="200" text-anchor="middle" class="dimension" fill="#888">DRAWERS</text>
+  <text x="459" y="185" text-anchor="middle" class="label" fill="#ccc">Section 2</text>
+  <text x="459" y="200" text-anchor="middle" class="dimension" fill="#888">OPENING</text>
+  <text x="733" y="185" text-anchor="middle" class="label" fill="#ccc">Section 3</text>
+  <text x="733" y="200" text-anchor="middle" class="dimension" fill="#888">DOORS</text>
+  <rect x="323" y="95" width="267" height="170" class="opening"/>
+  <text x="456" y="180" text-anchor="middle" class="label" fill="#fff">30" Opening</text>
+  <rect x="190" y="65" width="533" height="8" class="track"/>
+  <text x="456" y="60" text-anchor="middle" class="dimension">60" Track</text>
+  <rect x="323" y="75" width="267" height="200" class="door-closed"/>
+  <text x="456" y="175" text-anchor="middle" class="label" fill="#fff">BARN DOOR</text>
+  <text x="456" y="190" text-anchor="middle" class="note" fill="#ddd">(Closed Position)</text>
+  <rect x="56" y="75" width="267" height="200" class="door-open"/>
+  <text x="189" y="175" text-anchor="middle" class="label" fill="#666">Door Open</text>
+  <text x="189" y="190" text-anchor="middle" class="note" fill="#888">(Slides Left)</text>
+  <text x="245" y="310" text-anchor="middle" class="label" fill="#e74c3c">Door slides left to open</text>
+  <text x="120" y="335" text-anchor="middle" class="dimension">~16" from left</text>
+  <text x="796" y="335" text-anchor="middle" class="dimension">~16" from right</text>
+  <text x="460" y="288" text-anchor="middle" class="dimension" fill="#fff">92" Cabinet Width</text>
+  <rect x="680" y="75" width="185" height="75" fill="#fff" stroke="#ccc" stroke-width="1" rx="3"/>
+  <text x="690" y="92" class="subtitle" font-weight="bold">CRITICAL:</text>
+  <text x="690" y="107" class="label">Track level is CRITICAL</text>
+  <text x="690" y="120" class="label">Use laser level</text>
+  <text x="690" y="133" class="label">Pre-drill into panel</text>
+  <text x="690" y="146" class="label">Screws into solid backing</text>
+</svg>
+    <figcaption>Figure 5B.3: Barn Door Track Positioning - 60" track centered for door to slide left and clear 30" opening</figcaption>
+</figure>
+
+<div class="critical">
+    <strong>Critical:</strong> Track MUST be perfectly level or door will drift. Use a laser level for best results. Pre-drill into panel and ensure screws hit solid backing - the barn door weighs 30-50 lbs.
+</div>
+
+<div class="quality-checkpoint">
+    <h4>Quality Checkpoint: Living Room Panel Complete</h4>
+    <p>Before proceeding to barn door installation (Chapter 7), verify:</p>
+    <ul class="checklist">
+        <li>Panel dimensions exactly 92" x 34-1/2"</li>
+        <li>Panel is square (diagonals equal)</li>
+        <li>X-frame sections are equal width (~27" each)</li>
+        <li>All X-diagonals cross at center of sections</li>
+        <li>No gaps in mitered frame corners</li>
+        <li>All nail holes filled and sanded</li>
+        <li>Panel is plumb (vertical) with level</li>
+        <li>Panel does not flex when pressed</li>
+        <li>Track line marked and perfectly level</li>
+        <li>Mounting holes pre-drilled into solid backing</li>
+    </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- CHAPTER 6: DRAWER CONSTRUCTION -->
+<!-- ============================================ -->
+<h1 id="chapter6">Chapter 6: Drawer Construction</h1>
+
+<h2>Drawer Specifications</h2>
+
+<p><strong>Drawer box dimensions (all 3 identical):</strong></p>
+<ul>
+    <li>Width: <span class="dimension">29-1/2"</span> (cabinet interior minus slide clearance)</li>
+    <li>Height: <span class="dimension">10"</span></li>
+    <li>Depth: <span class="dimension">13"</span></li>
+    <li>Material: 1/2" plywood</li>
+</ul>
+
+<p><strong>Drawer front dimensions (applied):</strong></p>
+<ul>
+    <li>Width: <span class="dimension">30"</span> (full opening width)</li>
+    <li>Height: <span class="dimension">10-1/2"</span> (covers opening plus overlap)</li>
+    <li>Material: 3/4" plywood</li>
+</ul>
+
+<h2>Slide Installation</h2>
+
+<p><strong>Slide specifications:</strong> Side-mount, full-extension, soft-close, 14" length</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Drawer</th>
+            <th>Slide Bottom Position</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Bottom drawer</td><td>2" up from cabinet bottom</td></tr>
+        <tr><td>Middle drawer</td><td>12-1/2" up</td></tr>
+        <tr><td>Top drawer</td><td>23" up</td></tr>
+    </tbody>
+</table>
+
+<div class="critical">
+    <strong>Critical:</strong> Both slides must be at identical heights! Use a level to verify.
+</div>
+
+<div class="quality-checkpoint">
+    <h4>Quality Checkpoint: Drawers</h4>
+    <p>Before proceeding to barn door, verify:</p>
+    <ul class="checklist">
+        <li>All drawer boxes are square</li>
+        <li>Drawers slide smoothly without binding</li>
+        <li>Soft-close engages properly</li>
+        <li>Drawer fronts have consistent 1/16" reveals</li>
+        <li>Pulls are aligned and secure</li>
+    </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- CHAPTER 7: BARN DOOR SECTION -->
+<!-- ============================================ -->
+<h1 id="chapter7">Chapter 7: Barn Door Section</h1>
+
+<h2>Barn Door Specifications</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Dimension</th>
+            <th>Measurement</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Width</td><td><span class="dimension">30"</span></td></tr>
+        <tr><td>Height</td><td><span class="dimension">35"</span></td></tr>
+        <tr><td>Thickness</td><td>3/4" plywood + 3/4" trim = <span class="dimension">1-1/2"</span></td></tr>
+    </tbody>
+</table>
+
+<h2>Part 1: Build the Door Panel</h2>
+
+<h3>Step 1: Verify Panel is Square</h3>
+<ol>
+    <li>Measure diagonals of 30" x 35" panel</li>
+    <li>Must be equal within 1/16"</li>
+    <li>If not square, trim with circular saw</li>
+</ol>
+
+<h3>Step 2: Build Perimeter Frame</h3>
+
+<p><strong>Cut frame pieces (1x4):</strong></p>
+<ul>
+    <li>Top: 30" with 45-degree miters both ends</li>
+    <li>Bottom: 30" with 45-degree miters both ends</li>
+    <li>Left: 35" with 45-degree miters both ends</li>
+    <li>Right: 35" with 45-degree miters both ends</li>
+</ul>
+
+<h3>Step 3: Create X-Diagonal Trim</h3>
+
+<ol>
+    <li>Measure interior of frame (inside the 1x4 border)</li>
+    <li>Mark X from corner to corner</li>
+    <li>Place 1x4 from top-left to bottom-right, mark cut angles</li>
+    <li>Cut angle on miter saw (approximately 40-45 degrees)</li>
+    <li>Test fit, trim if needed</li>
+    <li>Repeat for second diagonal (top-right to bottom-left)</li>
+</ol>
+
+<h2>Part 2: Install Barn Door Hardware</h2>
+
+<div class="pro-tip">
+    <strong>Pro Tip:</strong> The track mounts to the Living Room Panel (Chapter 5B), NOT directly to the cabinet boxes. This provides a continuous mounting surface across all three sections.
+</div>
+
+<div class="quality-checkpoint">
+    <h4>Quality Checkpoint: Barn Door</h4>
+    <p>Before proceeding to cabinet doors, verify:</p>
+    <ul class="checklist">
+        <li>Door panel is square and flat</li>
+        <li>X-frame trim is secure and gaps filled</li>
+        <li>Track is perfectly level</li>
+        <li>Door hangs plumb</li>
+        <li>Door slides smoothly full length</li>
+        <li>Soft-close engages gently</li>
+        <li>Floor guide prevents swinging</li>
+        <li>Door covers opening completely when closed</li>
+        <li>Pull is comfortable and secure</li>
+    </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- CHAPTER 8: DOORS & HARDWARE -->
+<!-- ============================================ -->
+<h1 id="chapter8">Chapter 8: Doors &amp; Hardware</h1>
+
+<h2>Cabinet Door Specifications</h2>
+
+<p><strong>Pre-made shaker doors (recommended):</strong></p>
+<ul>
+    <li>Size: <span class="dimension">15-1/2" W x 34-1/2" H</span> each</li>
+    <li>Quantity: 2</li>
+    <li>Style: Full overlay shaker</li>
+    <li>Material: Paint-grade maple or alder</li>
+    <li>Source: FastCabinetDoors.com</li>
+</ul>
+
+<h2>Hinge Installation</h2>
+
+<p><strong>Hinge specifications:</strong></p>
+<ul>
+    <li>Type: Concealed (European cup style)</li>
+    <li>Opening: 110 degrees</li>
+    <li>Features: Soft-close</li>
+    <li>Finish: Matte black</li>
+</ul>
+
+<p><strong>Hinge positions:</strong></p>
+<ul>
+    <li>Top hinge: 3" from top of door</li>
+    <li>Bottom hinge: 3" from bottom of door</li>
+</ul>
+
+<div class="quality-checkpoint">
+    <h4>Quality Checkpoint: Doors</h4>
+    <p>Before proceeding to countertop, verify:</p>
+    <ul class="checklist">
+        <li>Both doors swing freely without binding</li>
+        <li>Soft-close engages properly</li>
+        <li>Gaps are consistent all around (1/8")</li>
+        <li>Pulls are aligned and secure</li>
+        <li>Doors close flush with each other</li>
+    </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- CHAPTER 9: COUNTERTOP INSTALLATION -->
+<!-- ============================================ -->
+<h1 id="chapter9">Chapter 9: Countertop Installation</h1>
+
+<h2>Butcher Block Specifications</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Specification</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Type</td><td>Chevron pattern acacia</td></tr>
+        <tr><td>Pieces</td><td>2 slabs, 72" x 39" x 1-1/2" each</td></tr>
+        <tr><td>Final size</td><td><span class="dimension">92"+ x 30"</span></td></tr>
+        <tr><td>Overhang (living room)</td><td><span class="dimension">12"</span> (knee space)</td></tr>
+        <tr><td>Overhang (kitchen)</td><td><span class="dimension">3"</span></td></tr>
+    </tbody>
+</table>
+
+<h2>Pop-Up Outlet Hole</h2>
+
+<p><strong>Position:</strong></p>
+<ul>
+    <li>15" from left edge</li>
+    <li>6" from kitchen-side edge</li>
+    <li>Hole size: <span class="dimension">3-3/4" diameter</span></li>
+</ul>
+
+<div class="quality-checkpoint">
+    <h4>Quality Checkpoint: Countertop</h4>
+    <p>Before proceeding to electrical, verify:</p>
+    <ul class="checklist">
+        <li>Joint is flat and invisible (or minimal)</li>
+        <li>Surface is smooth (no scratches or defects)</li>
+        <li>Countertop is level front-to-back</li>
+        <li>Overhangs are correct (12" living room, 3" kitchen)</li>
+        <li>Pop-up outlet hole is clean and correctly positioned</li>
+        <li>Countertop is securely attached but can move with humidity</li>
+    </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- CHAPTER 10: ELECTRICAL & FEATURES -->
+<!-- ============================================ -->
+<h1 id="chapter10">Chapter 10: Electrical &amp; Features</h1>
+
+<div class="safety-note">
+    <strong>Important:</strong> Turn off power at breaker before any electrical work. Verify dead circuit with voltage tester.
+</div>
+
+<h2>Overview</h2>
+
+<p>This chapter covers:</p>
+<ol>
+    <li>Pop-up outlet installation</li>
+    <li>LED lighting system</li>
+    <li>Foot rail installation</li>
+</ol>
+
+<figure>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #000; }
+    .title { font-size: 18px; font-weight: bold; }
+    .subtitle { font-size: 14px; font-weight: bold; }
+    .label { font-size: 12px; }
+    .dimension { font-size: 11px; fill: #333; }
+    .note { font-size: 10px; fill: #555; font-style: italic; }
+    .wire-120v { stroke: #000; stroke-width: 3; fill: none; }
+    .wire-low-v { stroke: #666; stroke-width: 2; fill: none; stroke-dasharray: 8,4; }
+    .component { fill: #e8e8e8; stroke: #000; stroke-width: 1.5; }
+  </style>
+  <rect width="900" height="500" fill="white"/>
+  <text x="450" y="30" text-anchor="middle" class="title">ELECTRICAL WIRE ROUTING DIAGRAM</text>
+  <text x="450" y="50" text-anchor="middle" class="note">Kitchen Bar - 120V and Low Voltage Layout</text>
+  <rect x="680" y="65" width="200" height="90" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="780" y="85" text-anchor="middle" class="subtitle">Legend</text>
+  <line x1="700" y1="100" x2="760" y2="100" class="wire-120v"/>
+  <text x="770" y="104" class="label">120V Line</text>
+  <line x1="700" y1="120" x2="760" y2="120" class="wire-low-v"/>
+  <text x="770" y="124" class="label">Low Voltage (24V DC)</text>
+  <circle cx="730" cy="140" r="8" class="component"/>
+  <text x="770" y="144" class="label">Wire Hole (H1-H6)</text>
+  <text x="400" y="90" text-anchor="middle" class="subtitle">Front View (Living Room Side)</text>
+  <rect x="50" y="110" width="600" height="260" fill="none" stroke="#000" stroke-width="2"/>
+  <line x1="250" y1="110" x2="250" y2="370" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="450" y1="110" x2="450" y2="370" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="150" y="130" text-anchor="middle" class="label">Section A (30")</text>
+  <text x="350" y="130" text-anchor="middle" class="label">Section B (30")</text>
+  <text x="550" y="130" text-anchor="middle" class="label">Section C (32")</text>
+  <rect x="50" y="100" width="600" height="10" fill="#d4a574" stroke="#000" stroke-width="1"/>
+  <text x="350" y="85" text-anchor="middle" class="note">Butcher Block Counter (30" deep)</text>
+  <circle cx="180" cy="350" r="10" class="component"/>
+  <text x="180" y="354" text-anchor="middle" style="font-size:10px; font-weight:bold">H1</text>
+  <circle cx="250" cy="280" r="10" class="component"/>
+  <text x="250" y="284" text-anchor="middle" style="font-size:10px; font-weight:bold">H2</text>
+  <circle cx="350" cy="140" r="10" class="component"/>
+  <text x="350" y="144" text-anchor="middle" style="font-size:10px; font-weight:bold">H3</text>
+  <circle cx="450" cy="280" r="10" class="component"/>
+  <text x="450" y="284" text-anchor="middle" style="font-size:10px; font-weight:bold">H4</text>
+  <circle cx="500" cy="140" r="10" class="component"/>
+  <text x="500" y="144" text-anchor="middle" style="font-size:10px; font-weight:bold">H5</text>
+  <circle cx="550" cy="220" r="10" class="component"/>
+  <text x="550" y="224" text-anchor="middle" style="font-size:10px; font-weight:bold">H6</text>
+  <rect x="100" y="230" width="50" height="70" class="component"/>
+  <text x="125" y="260" text-anchor="middle" style="font-size:10px; font-weight:bold">GFCI</text>
+  <text x="125" y="275" text-anchor="middle" style="font-size:9px">20A</text>
+  <rect x="270" y="300" width="60" height="40" class="component"/>
+  <text x="300" y="318" text-anchor="middle" style="font-size:9px; font-weight:bold">LED PWR</text>
+  <text x="300" y="332" text-anchor="middle" style="font-size:8px">24V DC</text>
+  <rect x="330" y="105" width="40" height="30" fill="#333" stroke="#000" stroke-width="1"/>
+  <text x="350" y="95" text-anchor="middle" class="label">Pop-Up Outlet</text>
+  <line x1="420" y1="115" x2="600" y2="115" stroke="#f90" stroke-width="6" stroke-linecap="round"/>
+  <text x="510" y="108" text-anchor="middle" style="font-size:10px; fill:#c60">LED ZONE 1</text>
+  <line x1="480" y1="230" x2="600" y2="230" stroke="#f90" stroke-width="6" stroke-linecap="round"/>
+  <text x="540" y="245" text-anchor="middle" style="font-size:10px; fill:#c60">LED ZONE 2</text>
+  <rect x="50" y="420" width="800" height="70" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="65" y="440" class="subtitle">Wiring Notes:</text>
+  <text x="65" y="458" class="label">1. 120V circuit: 20A dedicated from kitchen panel, GFCI protected | 2. Wire entry: 1" hole through platform with grommet</text>
+  <text x="65" y="473" class="label">3. LED power: 24V DC, 96W minimum for both zones | 4. All wire holes (H1-H6): 3/4" min diameter with grommets</text>
+  <text x="500" y="458" class="label">Wire Hole Reference:</text>
+  <text x="500" y="473" class="label">H1: Entry | H2: A-B pass | H3: Counter | H4: B-C pass | H5: Zone 1 | H6: Zone 2</text>
+</svg>
+    <figcaption>Figure 10.1: Electrical Wire Routing - 120V and low voltage paths with wire hole positions H1-H6</figcaption>
+</figure>
+
+<h2>Part 1: Pop-Up Outlet Installation</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Model</td><td>Lew Electric PUR20-BK-GFI-2USB-AC</td></tr>
+        <tr><td>Outlets</td><td>2 x 20A GFCI</td></tr>
+        <tr><td>USB ports</td><td>1 USB-A, 1 USB-C</td></tr>
+        <tr><td>Cutout</td><td><span class="dimension">3-3/4" diameter</span></td></tr>
+        <tr><td>Depth</td><td>5-1/2" below countertop</td></tr>
+    </tbody>
+</table>
+
+<h2>Part 2: LED Lighting System</h2>
+
+<h3>Zone 1: Under-Overhang Strip</h3>
+<ul>
+    <li>Location: Under 3" counter overhang (living room side)</li>
+    <li>Length: <span class="dimension">92"</span> (full width)</li>
+    <li>Color: 3000K warm white</li>
+    <li>Control: Inline dimmer</li>
+</ul>
+
+<h3>Zone 2: Inside-Cabinet Strips</h3>
+<ul>
+    <li>Location: Under cabinet top and upper shelf (barn door section)</li>
+    <li>Length: 2 x 28" strips</li>
+    <li>Control: Motion sensor (auto on/off)</li>
+</ul>
+
+<h2>Part 3: Foot Rail Installation</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Diameter</td><td>2" OD</td></tr>
+        <tr><td>Material</td><td>304 stainless steel</td></tr>
+        <tr><td>Finish</td><td>Matte black powder coat</td></tr>
+        <tr><td>Length</td><td><span class="dimension">92"</span> (cut from 96" tube)</td></tr>
+        <tr><td>Height</td><td>6" from floor</td></tr>
+    </tbody>
+</table>
+
+<p><strong>Bracket positions:</strong></p>
+<ul>
+    <li>Left: 3" from left edge</li>
+    <li>Center: 46" (centered)</li>
+    <li>Right: 89" from left edge</li>
+</ul>
+
+<div class="quality-checkpoint">
+    <h4>Quality Checkpoint: Electrical &amp; Features</h4>
+    <p>Before proceeding to finishing, verify:</p>
+    <ul class="checklist">
+        <li>Pop-up outlet works (both outlets tested)</li>
+        <li>GFCI trips and resets properly</li>
+        <li>USB ports charge devices</li>
+        <li>Zone 1 LEDs light up and dim smoothly</li>
+        <li>Zone 2 LEDs activate with motion sensor</li>
+        <li>All wires are secured and concealed</li>
+        <li>Foot rail is level and stable</li>
+        <li>No loose connections or exposed wires</li>
+    </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- CHAPTER 11: FINISHING -->
+<!-- ============================================ -->
+<h1 id="chapter11">Chapter 11: Finishing</h1>
+
+<h2>Overview</h2>
+
+<p>Finishing sequence:</p>
+<ol>
+    <li>Prime and paint cabinet components</li>
+    <li>Stain and clear coat barn door X-frame</li>
+    <li>Finish butcher block (covered in Chapter 9)</li>
+</ol>
+
+<p><strong>Timeline:</strong> Allow 2-3 weeks for finishing (paint cure times)</p>
+
+<h2>Part 1: Cabinet Painting</h2>
+
+<h3>Materials</h3>
+<ul>
+    <li>Zinsser B-I-N Shellac-Based Primer (1 quart)</li>
+    <li>Benjamin Moore Advance Satin Paint (2 gallons)</li>
+    <li>Color: Benjamin Moore Hale Navy (HC-154)</li>
+</ul>
+
+<h3>Application Process</h3>
+
+<ol>
+    <li><strong>Surface Preparation:</strong> Sand with 150 grit, then 220 grit. Fill holes with wood filler. Vacuum and tack cloth.</li>
+    <li><strong>Prime:</strong> Apply B-I-N with brush to edges, roll flat surfaces. Let dry 45 minutes. Light sand with 320 grit.</li>
+    <li><strong>First Coat:</strong> Brush and roll technique. Let dry 16 hours.</li>
+    <li><strong>Sand Between Coats:</strong> 320 grit, remove dust nibs.</li>
+    <li><strong>Final Coat:</strong> Same technique. Let dry 24-48 hours before handling. Full cure: 7-14 days.</li>
+</ol>
+
+<div class="quality-checkpoint">
+    <h4>Quality Checkpoint: Finishing</h4>
+    <p>Before declaring project complete, verify:</p>
+    <ul class="checklist">
+        <li>Paint is smooth with no brush marks, drips, or orange peel</li>
+        <li>Color is consistent across all surfaces</li>
+        <li>Stained wood has even color and full coverage</li>
+        <li>Clear coat is smooth and protected</li>
+        <li>All nail holes and gaps are filled</li>
+        <li>Touch-ups are blended and invisible</li>
+        <li>Full cure time has elapsed before heavy use</li>
+    </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- APPENDIX A: TROUBLESHOOTING -->
+<!-- ============================================ -->
+<h1 id="appendixA" class="appendix">Appendix A: Troubleshooting</h1>
+
+<h2>Cabinet Issues</h2>
+
+<h3>Problem: Cabinet not square</h3>
+<p><strong>Cause:</strong> Assembly error or back not holding square</p>
+<p><strong>Fix:</strong> Measure diagonals - rack cabinet until equal. Remove and reinstall back panel. Add corner braces if needed.</p>
+
+<h3>Problem: Drawers bind or stick</h3>
+<p><strong>Causes:</strong> Slides not at same height, drawer box not square, slide clearance insufficient</p>
+<p><strong>Fixes:</strong> Re-measure slide heights, check drawer box diagonals, sand drawer sides if too tight.</p>
+
+<h2>Barn Door Issues</h2>
+
+<h3>Problem: Door drifts open or closed</h3>
+<p><strong>Cause:</strong> Track not level</p>
+<p><strong>Fix:</strong> Check track with level. Shim behind track to level. Even 1/8" makes a difference.</p>
+
+<h2>Finish Issues</h2>
+
+<h3>Problem: Brush marks in paint</h3>
+<p><strong>Causes:</strong> Paint drying too fast, overworking the paint, poor quality brush</p>
+<p><strong>Fixes:</strong> Work in cooler temperatures, apply and leave alone, use quality brush (Purdy, Wooster).</p>
+
+<!-- ============================================ -->
+<!-- APPENDIX B: QUICK REFERENCE CARDS -->
+<!-- ============================================ -->
+<h1 id="appendixB" class="appendix">Appendix B: Quick Reference Cards</h1>
+
+<h2>Dimension Cheat Sheet</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Dimension</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><strong>Total length</strong></td><td>92"</td></tr>
+        <tr><td><strong>Total height</strong></td><td>40"</td></tr>
+        <tr><td><strong>Cabinet height</strong></td><td>34-1/2"</td></tr>
+        <tr><td><strong>Toe kick height</strong></td><td>4"</td></tr>
+        <tr><td><strong>Countertop thickness</strong></td><td>1-1/2"</td></tr>
+        <tr><td><strong>Cabinet depth</strong></td><td>14"</td></tr>
+        <tr><td><strong>Countertop depth</strong></td><td>30"</td></tr>
+        <tr><td><strong>Section 1 width</strong></td><td>30"</td></tr>
+        <tr><td><strong>Section 2 width</strong></td><td>30"</td></tr>
+        <tr><td><strong>Section 3 width</strong></td><td>32"</td></tr>
+        <tr><td><strong>Drawer box (WxHxD)</strong></td><td>29-1/2" x 10" x 13"</td></tr>
+        <tr><td><strong>Drawer front</strong></td><td>30" x 10-1/2"</td></tr>
+        <tr><td><strong>Barn door</strong></td><td>30" x 35"</td></tr>
+        <tr><td><strong>Cabinet doors (each)</strong></td><td>15-1/2" x 34-1/2"</td></tr>
+    </tbody>
+</table>
+
+<h2>Screw Size Guide</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Application</th>
+            <th>Screw Type</th>
+            <th>Size</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>3/4" plywood pocket</td><td>Coarse thread</td><td>1-1/4"</td></tr>
+        <tr><td>1/2" plywood pocket</td><td>Coarse thread</td><td>5/8"</td></tr>
+        <tr><td>Toe kick assembly</td><td>Construction</td><td>2-1/2"</td></tr>
+        <tr><td>Cabinet to wall</td><td>Cabinet</td><td>3"</td></tr>
+        <tr><td>Drawer front to box</td><td>Wood</td><td>1-1/4"</td></tr>
+        <tr><td>Trim to panel</td><td>Brad nail</td><td>1-1/4"</td></tr>
+    </tbody>
+</table>
+
+<!-- ============================================ -->
+<!-- APPENDIX C: RESOURCES -->
+<!-- ============================================ -->
+<h1 id="appendixC" class="appendix">Appendix C: Resources</h1>
+
+<h2>Product Links</h2>
+
+<h3>Hardware</h3>
+<ul>
+    <li><strong>Drawer slides:</strong> Liberty Hardware at Home Depot</li>
+    <li><strong>Barn door kit:</strong> JELD-WEN DesignGlide at Lowe's</li>
+    <li><strong>Concealed hinges:</strong> Blum at CabinetParts.com</li>
+    <li><strong>Pre-made doors:</strong> FastCabinetDoors.com</li>
+</ul>
+
+<h3>Electrical</h3>
+<ul>
+    <li><strong>Pop-up outlet:</strong> Kitchen Power Pop Ups</li>
+    <li><strong>LED strips:</strong> HitLights</li>
+    <li><strong>Foot rail:</strong> Top Hardware</li>
+</ul>
+
+<h3>Finishing</h3>
+<ul>
+    <li><strong>Benjamin Moore Advance:</strong> Benjamin Moore stores</li>
+    <li><strong>Rubio Monocoat:</strong> Amazon</li>
+</ul>
+
+<h2>Video Tutorial Recommendations</h2>
+<ul>
+    <li><strong>Steve Ramsey - Woodworking for Mere Mortals:</strong> Basic cabinet construction</li>
+    <li><strong>Jay Bates:</strong> Pocket hole cabinet techniques</li>
+    <li><strong>Kreg Tool Company:</strong> Official pocket hole drawer tutorials</li>
+    <li><strong>Rubio Monocoat:</strong> Official application videos</li>
+</ul>
+
+<!-- ============================================ -->
+<!-- APPENDIX D: TECHNICAL DIAGRAMS -->
+<!-- ============================================ -->
+<h1 id="appendixD" class="appendix">Appendix D: Technical Diagrams</h1>
+
+<p>This appendix contains all technical diagrams for quick reference during construction.</p>
+
+<h2>Diagram Index</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Diagram</th>
+            <th>Chapter</th>
+            <th>Purpose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>Cabinet Sections</td><td>Chapter 1</td><td>Three-section layout and connections</td></tr>
+        <tr><td>Toe Kick Platform</td><td>Chapter 4</td><td>2x4 frame layout and height stack-up</td></tr>
+        <tr><td>Pocket Hole Placement</td><td>Chapter 5</td><td>Edge distances and spacing patterns</td></tr>
+        <tr><td>Living Room Panel Front</td><td>Chapter 5B</td><td>X-frame overlay layout</td></tr>
+        <tr><td>X-Frame Layout</td><td>Chapter 5B</td><td>Detailed trim dimensions</td></tr>
+        <tr><td>Barn Door Track Position</td><td>Chapter 5B/7</td><td>60" track positioning</td></tr>
+        <tr><td>Electrical Routing</td><td>Chapter 10</td><td>Wire paths and hole positions</td></tr>
+    </tbody>
+</table>
+
+<!-- FOOTER -->
+<div class="page-footer">
+    <p><em>Kitchen Bar Cabinet - Complete Build Manual</em><br>
+    Version 1.1 (Revised) | January 2026</p>
+    <p>Modern Farmhouse Split-Level Kitchen Bar<br>
+    92" Length | 40" Height | Butcher Block Countertop</p>
+</div>
+
+</body>
+</html>
