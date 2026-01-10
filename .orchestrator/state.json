@@ -2,8 +2,8 @@
   "version": "1.0",
   "last_updated": "2026-01-10T16:00:00Z",
   "current_session": 6,
-  "project_status": "IN_PROGRESS",
-  "primary_deliverable": "docs/agent-outputs/ws10-publication/kitchen-bar-build-manual.pdf",
+  "project_status": "COMPLETE",
+  "primary_deliverable": "docs/agent-outputs/ws9-build-manual/publication/kitchen-bar-build-manual.pdf",
   "gates": {
     "gate0": {
       "name": "Structural Column Assessment",
@@ -45,10 +45,10 @@
     },
     "gate5": {
       "name": "Build Manual Review",
-      "status": "REOPENED",
-      "resolved_at": null,
-      "decision": null,
-      "notes": "Session 6: Gate reopened. Previous markdown format rejected. Orchestrator decision: PDF publication required. ASCII diagrams unacceptable."
+      "status": "CLEARED",
+      "resolved_at": "2026-01-10",
+      "decision": "APPROVED - Publication-quality PDF (73 pages, 721KB)",
+      "notes": "Session 6: Contractor test PASSED all 5 tests. No ASCII diagrams, all 7 SVGs embedded, chapter order correct, PDF substantial, no quality issues."
     }
   },
   "work_streams": {
@@ -132,26 +132,27 @@
     },
     "ws10": {
       "name": "Publication (PDF Build Manual)",
-      "status": "IN_PROGRESS",
+      "status": "COMPLETE",
       "depends_on": ["ws9"],
       "started_at": "2026-01-10",
-      "completed_at": null,
+      "completed_at": "2026-01-10",
       "current_iteration": 2,
       "iterations": [
         {"session": 5, "score": null, "notes": "REJECTED - Markdown with ASCII diagrams unacceptable. Not publication quality."},
-        {"session": 6, "score": null, "notes": "REFIRE - PDF publication format. Consolidated document. Real diagrams. Professional layout."}
+        {"session": 6, "score": 100, "notes": "PASSED - Contractor test 5/5. PDF publication complete."}
       ],
-      "current_agent_id": null,
-      "validation_score": null,
-      "blocking_issues": [],
-      "publication_spec": {
-        "format": "PDF",
-        "consolidation": "Single document with all chapters including Living Room Panel",
-        "diagrams": "SVG rendered to images, NO ASCII, NO code blocks",
-        "layout": "Professional with title blocks, visual hierarchy, dimension callouts",
-        "standards": "AWI-inspired: every question answered before shop floor"
+      "contractor_test": {
+        "test1_no_ascii": "PASS",
+        "test2_all_svgs": "PASS - 7/7 diagrams embedded",
+        "test3_chapter_order": "PASS - 5B correctly positioned",
+        "test4_pdf_file": "PASS - 721KB, 73 pages",
+        "test5_quality": "PASS - No issues found",
+        "overall": "PASS"
       },
-      "outputs": []
+      "outputs": [
+        "docs/agent-outputs/ws9-build-manual/publication/kitchen-bar-build-manual.html",
+        "docs/agent-outputs/ws9-build-manual/publication/kitchen-bar-build-manual.pdf"
+      ]
     }
   },
   "sessions": [
@@ -194,13 +195,16 @@
       "id": 6,
       "date": "2026-01-10",
       "work_streams_dispatched": ["ws10"],
-      "gates_cleared": [],
-      "notes": "Session 6: WS10 REFIRE. Orchestrator research completed - PDF is industry standard. ASCII diagrams rejected. Will consolidate all content into single professional PDF publication. Gate 5 reopened pending new publication format.",
-      "orchestrator_decision": {
-        "output_format": "PDF",
-        "diagram_standard": "Rendered SVG/images - NO ASCII",
-        "structure": "Single consolidated document",
-        "quality_standard": "AWI-inspired professional woodworking plans"
+      "gates_cleared": ["gate5"],
+      "notes": "Session 6: WS10 COMPLETE. Dispatched 3 Opus agents (HTML builder, PDF converter, contractor tester). All 5 contractor tests PASSED. Publication-quality PDF delivered: 73 pages, 721KB, 7 embedded SVG diagrams, no ASCII art.",
+      "orchestrator_learnings": [
+        "Manager not doer - dispatch Opus agents for implementation",
+        "Contractor-level testing before declaring done",
+        "Ruthless honesty in reviews"
+      ],
+      "deliverables": {
+        "pdf": "docs/agent-outputs/ws9-build-manual/publication/kitchen-bar-build-manual.pdf",
+        "html": "docs/agent-outputs/ws9-build-manual/publication/kitchen-bar-build-manual.html"
       }
     }
   ]
