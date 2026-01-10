@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" width="900" height="650">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #000; }
+    .title { font-size: 18px; font-weight: bold; }
+    .subtitle { font-size: 14px; font-weight: bold; }
+    .label { font-size: 12px; }
+    .dimension { font-size: 11px; fill: #333; }
+    .note { font-size: 10px; fill: #555; font-style: italic; }
+    .wire-120v { stroke: #000; stroke-width: 3; fill: none; }
+    .wire-low-v { stroke: #666; stroke-width: 2; fill: none; stroke-dasharray: 8,4; }
+    .component { fill: #e8e8e8; stroke: #000; stroke-width: 1.5; }
+  </style>
+
+  <!-- Background -->
+  <rect width="900" height="650" fill="white"/>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" class="title">ELECTRICAL WIRE ROUTING DIAGRAM</text>
+  <text x="450" y="50" text-anchor="middle" class="note">Kitchen Bar - 120V and Low Voltage Layout</text>
+
+  <!-- Legend -->
+  <rect x="680" y="65" width="200" height="90" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="780" y="85" text-anchor="middle" class="subtitle">Legend</text>
+  <line x1="700" y1="100" x2="760" y2="100" class="wire-120v"/>
+  <text x="770" y="104" class="label">120V Line</text>
+  <line x1="700" y1="120" x2="760" y2="120" class="wire-low-v"/>
+  <text x="770" y="124" class="label">Low Voltage (12V DC)</text>
+  <circle cx="730" cy="140" r="8" class="component"/>
+  <text x="770" y="144" class="label">Wire Hole (H1-H6)</text>
+
+  <!-- Main cabinet structure - Front View -->
+  <text x="400" y="90" text-anchor="middle" class="subtitle">Front View (Living Room Side)</text>
+
+  <!-- Cabinet outline -->
+  <rect x="50" y="110" width="700" height="320" fill="none" stroke="#000" stroke-width="2"/>
+
+  <!-- Section dividers -->
+  <line x1="277" y1="110" x2="277" y2="430" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="504" y1="110" x2="504" y2="430" stroke="#000" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+  <!-- Section labels -->
+  <text x="163" y="130" text-anchor="middle" class="label">Section A (30")</text>
+  <text x="390" y="130" text-anchor="middle" class="label">Section B (30")</text>
+  <text x="602" y="130" text-anchor="middle" class="label">Section C (32")</text>
+
+  <!-- Counter top indication -->
+  <rect x="50" y="100" width="700" height="10" fill="#d4a574" stroke="#000" stroke-width="1"/>
+  <text x="400" y="85" text-anchor="middle" class="note">Butcher Block Counter (30" deep)</text>
+
+  <!-- Toe kick / Platform -->
+  <rect x="50" y="430" width="700" height="35" fill="#ddd" stroke="#000" stroke-width="1.5"/>
+  <text x="400" y="452" text-anchor="middle" class="label">Platform / Toe Kick (4-1/4" height)</text>
+
+  <!-- Floor line -->
+  <line x1="30" y1="465" x2="770" y2="465" stroke="#000" stroke-width="1"/>
+  <text x="785" y="470" class="label">Floor</text>
+
+  <!-- Kitchen floor (higher) -->
+  <rect x="50" y="465" width="700" height="20" fill="#f0f0f0" stroke="#000" stroke-width="1"/>
+  <text x="400" y="480" text-anchor="middle" class="note">Kitchen Floor Level (+23.5" above living room)</text>
+
+  <!-- Wire entry point from kitchen -->
+  <circle cx="200" cy="475" r="12" fill="#fff" stroke="#000" stroke-width="2"/>
+  <text x="200" y="479" text-anchor="middle" class="label" style="font-size:10px">ENTRY</text>
+  <text x="200" y="510" text-anchor="middle" class="label">Wire Entry Point</text>
+  <text x="200" y="525" text-anchor="middle" class="note">Through platform from kitchen circuit</text>
+
+  <!-- Wire holes H1-H6 -->
+  <!-- H1: Entry into cabinet from platform -->
+  <circle cx="200" cy="420" r="10" class="component"/>
+  <text x="200" y="424" text-anchor="middle" style="font-size:10px; font-weight:bold">H1</text>
+
+  <!-- H2: Between Section A and B (for LED run) -->
+  <circle cx="277" cy="350" r="10" class="component"/>
+  <text x="277" y="354" text-anchor="middle" style="font-size:10px; font-weight:bold">H2</text>
+
+  <!-- H3: Up to counter for pop-up outlet -->
+  <circle cx="390" cy="140" r="10" class="component"/>
+  <text x="390" y="144" text-anchor="middle" style="font-size:10px; font-weight:bold">H3</text>
+
+  <!-- H4: Between Section B and C -->
+  <circle cx="504" cy="350" r="10" class="component"/>
+  <text x="504" y="354" text-anchor="middle" style="font-size:10px; font-weight:bold">H4</text>
+
+  <!-- H5: For LED Zone 1 (under counter) -->
+  <circle cx="550" cy="140" r="10" class="component"/>
+  <text x="550" y="144" text-anchor="middle" style="font-size:10px; font-weight:bold">H5</text>
+
+  <!-- H6: For LED Zone 2 (inside cabinet) -->
+  <circle cx="602" cy="250" r="10" class="component"/>
+  <text x="602" y="254" text-anchor="middle" style="font-size:10px; font-weight:bold">H6</text>
+
+  <!-- GFCI Outlet location -->
+  <rect x="120" y="280" width="50" height="70" class="component"/>
+  <text x="145" y="310" text-anchor="middle" style="font-size:10px; font-weight:bold">GFCI</text>
+  <text x="145" y="325" text-anchor="middle" style="font-size:9px">20A</text>
+
+  <!-- Power Supply location -->
+  <rect x="290" y="360" width="60" height="40" class="component"/>
+  <text x="320" y="378" text-anchor="middle" style="font-size:9px; font-weight:bold">LED PWR</text>
+  <text x="320" y="392" text-anchor="middle" style="font-size:8px">12V DC</text>
+
+  <!-- Pop-up outlet -->
+  <rect x="370" y="105" width="40" height="30" fill="#333" stroke="#000" stroke-width="1"/>
+  <text x="390" y="95" text-anchor="middle" class="label">Pop-Up Outlet</text>
+
+  <!-- LED Zone indicators -->
+  <!-- Zone 1: Under counter -->
+  <line x1="470" y1="115" x2="700" y2="115" stroke="#f90" stroke-width="6" stroke-linecap="round"/>
+  <text x="585" y="108" text-anchor="middle" style="font-size:10px; fill:#c60">LED ZONE 1</text>
+
+  <!-- Zone 2: Inside cabinet -->
+  <line x1="530" y1="260" x2="700" y2="260" stroke="#f90" stroke-width="6" stroke-linecap="round"/>
+  <text x="615" y="275" text-anchor="middle" style="font-size:10px; fill:#c60">LED ZONE 2</text>
+
+  <!-- 120V Wire routing (solid black) -->
+  <!-- Entry to H1 -->
+  <path d="M200,463 L200,430" class="wire-120v"/>
+  <!-- H1 to GFCI -->
+  <path d="M200,410 L200,350 L145,350" class="wire-120v"/>
+  <!-- GFCI to H3 area (pop-up feed) -->
+  <path d="M170,315 L250,315 L250,200 L390,200 L390,150" class="wire-120v"/>
+
+  <!-- Low voltage routing (dashed gray) -->
+  <!-- GFCI to Power Supply -->
+  <path d="M170,350 L290,350 L290,360" class="wire-low-v"/>
+  <!-- Power Supply output to H2 -->
+  <path d="M320,400 L320,420 L277,420 L277,360" class="wire-low-v"/>
+  <!-- H2 through to H4 -->
+  <path d="M287,350 L504,350" class="wire-low-v"/>
+  <!-- H4 to H5 (Zone 1) -->
+  <path d="M514,350 L550,350 L550,150" class="wire-low-v"/>
+  <!-- H4 to H6 (Zone 2) -->
+  <path d="M514,340 L560,340 L560,250 L592,250" class="wire-low-v"/>
+
+  <!-- Notes section -->
+  <rect x="50" y="540" width="800" height="95" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="65" y="560" class="subtitle">Wiring Notes:</text>
+  <text x="65" y="580" class="label">1. 120V circuit: 20A dedicated circuit from kitchen panel, GFCI protected at first outlet</text>
+  <text x="65" y="595" class="label">2. Wire entry: Use 1" hole through platform, install grommet for protection</text>
+  <text x="65" y="610" class="label">3. LED power supply: 12V DC, 60W minimum for both zones, mount in Section B for heat dissipation</text>
+  <text x="65" y="625" class="label">4. All wire holes (H1-H6): 3/4" minimum diameter with grommets | Label wires at entry point</text>
+  <text x="500" y="580" class="label">Wire Hole Reference:</text>
+  <text x="500" y="595" class="label">H1: Entry | H2: A-B pass | H3: Counter</text>
+  <text x="500" y="610" class="label">H4: B-C pass | H5: Zone 1 | H6: Zone 2</text>
+</svg>

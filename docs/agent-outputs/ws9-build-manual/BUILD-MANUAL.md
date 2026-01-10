@@ -1,6 +1,6 @@
 # Kitchen Bar Cabinet - Complete Build Manual
 
-**Version:** 1.0
+**Version:** 1.1 (Revised)
 **Date:** January 2026
 **Difficulty:** Intermediate
 **Estimated Time:** 35-40 hours (4-5 weekends)
@@ -24,6 +24,10 @@
 12. [Appendix A: Troubleshooting](#appendix-a-troubleshooting)
 13. [Appendix B: Quick Reference Cards](#appendix-b-quick-reference-cards)
 14. [Appendix C: Resources](#appendix-c-resources)
+15. [Appendix D: Technical Diagrams](#appendix-d-technical-diagrams)
+
+**Supplementary Guides:**
+- [Living Room Panel Installation](LIVING-ROOM-PANEL-CHAPTER.md) - Complete X-frame panel construction and installation
 
 ---
 
@@ -40,10 +44,10 @@ This build manual guides you through constructing a split-level kitchen bar cabi
 | **Total Length** | 92" | Three cabinet sections |
 | **Total Height** | 40" | From kitchen floor |
 | **Cabinet Height** | 34-1/2" | Standard counter height minus top |
-| **Toe Kick Height** | 4" | 2x4 platform |
+| **Toe Kick Height** | 4-1/4" | 2x4 flat (3-1/2") + 3/4" plywood top |
 | **Countertop Thickness** | 1-1/2" | Butcher block |
 | **Cabinet Depth** | 14" | Shallow for walkway |
-| **Countertop Depth** | 30" | 12" knee space + 14" cabinet + 3" overhang + 1" |
+| **Countertop Depth** | 30" | 12" knee space + 14" cabinet + 3" overhang + 1" wall clearance |
 
 ### Cabinet Sections
 
@@ -67,7 +71,7 @@ This build manual guides you through constructing a split-level kitchen bar cabi
 - **Pop-up outlet** in countertop with USB ports
 - **Foot rail** (2" matte black stainless)
 - **Chevron butcher block** countertop (acacia)
-- **Modern farmhouse aesthetic** (navy/charcoal paint, warm wood accents)
+- **Modern farmhouse aesthetic** (Benjamin Moore Hale Navy HC-154, warm wood accents)
 
 ---
 
@@ -823,6 +827,8 @@ Build three cabinet sections that will be joined together on the platform. Each 
 4. Brad nail or staple back panel every 6" around perimeter
 5. Back panel will hold cabinet square
 
+**Note:** Backs are flush-mounted to exterior edges (not recessed into rabbets). This is why back dimensions match cabinet exterior width. The back overlaps the edges of sides, top, and bottom.
+
 ### Step 6: Install Wire Grommets
 
 If not already done:
@@ -1198,7 +1204,8 @@ Before proceeding to barn door, verify:
 
 **Track mounting location:**
 - Track mounts to living room panel (cabinet face)
-- Height: 2" above cabinet top (37" from cabinet bottom)
+- Height: 2" above the top edge of the cabinet box (NOT above countertop)
+- Measurement: 36-1/2" from cabinet bottom (34-1/2" cabinet height + 2" = 36-1/2")
 - Track length: Trim to 60" (provides 30" clear opening)
 
 **Track centering:**
@@ -1740,7 +1747,7 @@ Finishing sequence:
 
 - Zinsser B-I-N Shellac-Based Primer (1 quart)
 - Benjamin Moore Advance Satin Paint (2 gallons)
-- Color: Hale Navy (HC-154) or Iron Ore (SW 7069)
+- Color: Benjamin Moore Hale Navy (HC-154)
 
 ### Step 1: Surface Preparation
 
@@ -2152,6 +2159,30 @@ Before declaring project complete, verify:
 
 ---
 
+# Appendix D: Technical Diagrams
+
+The following technical diagrams are available in the `diagrams/` folder:
+
+| Diagram | File | Purpose |
+|---------|------|---------|
+| **Pocket Hole Placement** | `pocket-hole-placement.svg` | Shows edge distances, spacing patterns, and joint configurations |
+| **Electrical Wire Routing** | `electrical-routing.svg` | Complete 120V and low-voltage wire paths, hole positions H1-H6 |
+| **Cabinet Section Connections** | `cabinet-sections.svg` | How the three sections connect with shared dividers |
+| **Toe Kick Platform** | `toe-kick-platform.svg` | 2x4 frame layout, plywood top, leveling pad positions |
+
+### How to Use These Diagrams
+
+1. **Open SVG files** in any web browser for full-size viewing
+2. **Print for shop reference** - SVG scales cleanly to any paper size
+3. **Reference during assembly** - Each diagram addresses specific "how do I...?" questions
+
+### Living Room Panel
+
+For complete Living Room Panel (92" x 34-1/2" X-frame panel) construction and installation, see:
+- **[LIVING-ROOM-PANEL-CHAPTER.md](LIVING-ROOM-PANEL-CHAPTER.md)** - Full guide with materials, steps, and troubleshooting
+
+---
+
 ## Final Notes
 
 Congratulations on completing your Kitchen Bar Cabinet! This project combines multiple woodworking disciplines - cabinet making, door construction, finishing, and basic electrical work. The result is a custom piece of furniture that transforms your space.
@@ -2171,6 +2202,6 @@ Congratulations on completing your Kitchen Bar Cabinet! This project combines mu
 
 ---
 
-*Build Manual Version 1.0*
+*Build Manual Version 1.1 (Revised)*
 *Kitchen Bar Cabinet Project*
 *January 2026*

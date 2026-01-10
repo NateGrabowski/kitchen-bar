@@ -15,11 +15,12 @@ This guide provides a complete finishing plan for the kitchen bar cabinet projec
 
 | Surface | Product | Sheen |
 |---------|---------|-------|
-| Cabinet body | Benjamin Moore Hale Navy HC-154 or SW Iron Ore SW 7069 | Satin |
+| Cabinet body | **Benjamin Moore Hale Navy HC-154** | Satin |
 | Primer | Zinsser B-I-N Shellac-Based | - |
 | Wood accents | Minwax Golden Oak + Minwax Poly | Satin |
 | Butcher block | Rubio Monocoat Oil Plus 2C Pure | Matte |
 
+**Selected Color:** Benjamin Moore Hale Navy (HC-154)
 **Estimated Material Cost:** $350-450
 
 ---
@@ -37,19 +38,20 @@ This guide provides a complete finishing plan for the kitchen bar cabinet projec
 
 ## 1. Paint Color Selection
 
-### Recommended Colors
-
-#### Navy Option: Benjamin Moore Hale Navy (HC-154)
+### Selected Color: Benjamin Moore Hale Navy (HC-154)
 
 - **LRV:** 6.3 (very dark, rich color)
 - **Undertones:** Gray (prevents it from being overwhelming)
 - **Why it works:** Classic navy that pairs perfectly with warm wood tones. Benjamin Moore's #1 selling navy for decades. The gray undertones make it sophisticated and safe in any lighting.
 
-#### Charcoal Option: Sherwin Williams Iron Ore (SW 7069)
+### Alternative Option: Sherwin Williams Iron Ore (SW 7069)
+
+*If you prefer a charcoal over navy, Iron Ore is an excellent alternative.*
 
 - **LRV:** 6 (deep charcoal, almost black)
 - **Undertones:** Slight blue (dramatic without harshness)
 - **Why it works:** Creates striking contrast with warm acacia butcher block. Modern farmhouse favorite. Looks more black in low light, charcoal in bright light.
+- **Note:** Can be color-matched at Benjamin Moore store if you prefer Advance paint.
 
 ### Paint Product Recommendation
 
@@ -415,7 +417,7 @@ The design achieves contrast through:
 | Product | Size | Qty | Unit Price | Total | Where |
 |---------|------|-----|------------|-------|-------|
 | Zinsser B-I-N Shellac Primer | 1 quart | 1 | $28 | $28 | Home Depot |
-| Benjamin Moore Advance Satin (Hale Navy HC-154 OR Iron Ore color-match) | 1 gallon | 2 | $80 | $160 | BM Store |
+| Benjamin Moore Advance Satin (Hale Navy HC-154) | 1 gallon | 2 | $80 | $160 | BM Store |
 | **Subtotal Paint** | | | | **$188** | |
 
 ### Stains & Clear Coats

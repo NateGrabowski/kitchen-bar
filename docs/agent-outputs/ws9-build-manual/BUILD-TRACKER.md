@@ -180,6 +180,13 @@ Before proceeding to Phase 2:
 - [ ] Screw through dividers (4+ screws per joint)
 - [ ] Verify overall assembly is 92" wide
 
+### Build Living Room Panel
+
+- [ ] Cut panel to 92" x 34-1/2" (3/4" plywood)
+- [ ] Sand both faces (120, 150, 220 grit)
+- [ ] Mark which face is "out" (living room side)
+- [ ] Set aside for finishing before installation
+
 ### Quality Gate
 
 Before proceeding to Phase 3:
@@ -354,7 +361,7 @@ Before proceeding to Phase 5:
 
 ---
 
-## Phase 5: Cabinet Doors
+## Phase 5: Cabinet Doors (Pre-Finish Prep)
 
 **Target Date:** __________
 **Actual Date:** __________
@@ -365,35 +372,25 @@ Before proceeding to Phase 5:
 - [ ] Inspect doors for defects or damage
 - [ ] Verify dimensions: 15-1/2" x 34-1/2" each
 - [ ] Sand lightly with 220 grit
-- [ ] Set aside for finishing phase
 
-### Install Hinges (After Finishing)
-
-*Note: Install hinges after doors are primed and painted*
+### Prepare for Finishing
 
 - [ ] Mark hinge positions: 3" from top, 3" from bottom
-- [ ] Drill 35mm cup holes
-- [ ] Install hinges in cup holes
-- [ ] Install mounting plates in cabinet
-- [ ] Attach doors to cabinet
-- [ ] Adjust hinges for even gaps
-
-### Install Pulls (After Finishing)
-
+- [ ] Drill 35mm cup holes (BEFORE painting - cleaner holes)
 - [ ] Mark pull positions (vertical orientation, upper third)
-- [ ] Drill holes through doors
-- [ ] Install pulls
+- [ ] Drill holes for pulls
+- [ ] Set doors aside for Phase 6 (Finishing)
 
 ### Quality Gate
 
-*Complete after Phase 6 (Finishing)*
-
-- [ ] Doors swing freely
-- [ ] Soft-close engages
-- [ ] Gaps consistent all around
-- [ ] Pulls aligned and secure
+Before proceeding to Phase 6:
+- [ ] Pre-made doors inspected and prepped
+- [ ] All holes drilled (hinges and pulls)
+- [ ] Ready for primer and paint
 
 **Phase 5 Complete:** [ ] Date: __________
+
+*Note: Hinge and pull INSTALLATION happens in Phase 7 after paint cures*
 
 ---
 
@@ -403,11 +400,14 @@ Before proceeding to Phase 5:
 **Actual Date:** __________
 **Time Spent:** __________
 
+**Paint Color: Benjamin Moore Hale Navy (HC-154)**
+
 ### Day 1: Sand and Prepare
 
 - [ ] Sand all cabinet surfaces (150, then 220 grit)
-- [ ] Sand all drawer fronts
-- [ ] Sand cabinet doors
+- [ ] Sand all drawer fronts (3 pieces - 30" x 10-1/2" each)
+- [ ] Sand cabinet doors (2 pre-made doors)
+- [ ] Sand living room panel
 - [ ] Fill any holes, gaps, or defects
 - [ ] Let filler dry
 - [ ] Sand filler flush
@@ -420,15 +420,16 @@ Before proceeding to Phase 5:
 - [ ] Set up finishing area (ventilated, 50-85F)
 - [ ] Stir primer thoroughly
 - [ ] Prime all cabinet surfaces (brush edges, roll flats)
-- [ ] Prime drawer fronts
-- [ ] Prime cabinet doors
+- [ ] Prime drawer fronts (both sides)
+- [ ] Prime cabinet doors (both sides)
+- [ ] Prime living room panel (both sides)
 - [ ] Let dry 45 minutes
 - [ ] Light sand with 320 grit
 - [ ] Vacuum and tack cloth
 
 ### Day 3: First Paint Coat
 
-- [ ] Stir paint thoroughly
+- [ ] Stir BM Advance Hale Navy thoroughly
 - [ ] Apply first coat (brush and roll technique)
 - [ ] Let dry 16 hours (BM Advance)
 - [ ] Light sand with 320 grit
@@ -458,7 +459,10 @@ Before proceeding to Phase 5:
 
 Before proceeding to Phase 7:
 - [ ] Paint smooth, no brush marks or drips
-- [ ] Color consistent across all surfaces
+- [ ] Color consistent across all surfaces (Hale Navy)
+- [ ] Drawer fronts fully painted and cured
+- [ ] Cabinet doors fully painted and cured
+- [ ] Living room panel fully painted and cured
 - [ ] Stained wood has even color
 - [ ] Clear coat smooth and protected
 - [ ] All nail holes filled
@@ -491,14 +495,24 @@ Before proceeding to Phase 7:
 - [ ] Minimum 4 screws per section (8-12 total)
 - [ ] Verify cabinet still level and plumb
 
+### Install Living Room Panel
+
+- [ ] Position finished panel against cabinet back
+- [ ] Align flush with cabinet sides
+- [ ] Secure with screws through cabinet back (pre-drill)
+- [ ] Or attach with Z-clips for removability
+
 ### Final Hardware Installation
 
-- [ ] Install cabinet door hinges and plates
-- [ ] Hang cabinet doors
+- [ ] Install cabinet door hinges in pre-drilled cup holes
+- [ ] Install mounting plates in cabinet
+- [ ] Hang cabinet doors on hinges
 - [ ] Adjust hinges for even gaps
-- [ ] Install door pulls
+- [ ] Install door pulls in pre-drilled holes
 - [ ] Install barn door pull
-- [ ] Attach drawer fronts with spacers
+- [ ] Attach drawer fronts with 1/8" spacers between
+- [ ] Center each front side-to-side on drawer box
+- [ ] Secure with 1-1/4" screws from inside box
 - [ ] Install drawer pulls
 
 ### Quality Gate

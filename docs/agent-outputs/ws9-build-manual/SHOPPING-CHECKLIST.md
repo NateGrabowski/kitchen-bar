@@ -43,8 +43,9 @@ Ask the cutting station to rip your plywood to these widths (usually free, first
 | 1 | 18-Gauge Brad Nails 1-1/4" (box) | $8 | [ ] |
 | 1 | Construction Screws 2-1/2" (1 lb) | $10 | [ ] |
 | 1 | Cabinet Screws 3" (12 ct) | $8 | [ ] |
+| 1 pk | Z-Clips for Countertop (8 ct) | $12 | [ ] |
 
-**Fasteners Subtotal:** ~$68
+**Fasteners Subtotal:** ~$80
 
 ### Hardware - In-Store
 
@@ -92,12 +93,13 @@ Ask the cutting station to rip your plywood to these widths (usually free, first
 | 2 pk | Clean Cotton Rags | $8 ea = $16 | [ ] |
 | 1 | Disposable Nitrile Gloves (box) | $8 | [ ] |
 | 2 | Frog Tape Painter's Tape | $8 ea = $16 | [ ] |
+| 1 | 3-3/4" Hole Saw (for countertop outlet cutout) | $25 | [ ] |
 
-**Finishing Subtotal:** ~$282
+**Finishing Subtotal:** ~$307
 
 ---
 
-### Home Depot/Lowe's Trip Total: ~$935
+### Home Depot/Lowe's Trip Total: ~$972
 
 ---
 
@@ -107,7 +109,7 @@ Ask the cutting station to rip your plywood to these widths (usually free, first
 |-----|------|------------|-----|
 | 2 | Benjamin Moore Advance Satin (1 gal) | $80 ea = $160 | [ ] |
 
-**Color:** Hale Navy (HC-154) OR Sherwin Williams Iron Ore (SW 7069) - get color-matched
+**Color:** Benjamin Moore Hale Navy (HC-154)
 
 **Benjamin Moore Trip Total:** ~$160
 
@@ -141,9 +143,8 @@ Ask the cutting station to rip your plywood to these widths (usually free, first
 | 1 pk | LED Wire Connectors/Splitters | $8 | [ ] |
 | 1 | Inline Rotary Dimmer 24V DC | $15 | [ ] |
 | 1 pk | Adhesive Mounting Clips | $5 | [ ] |
-| 1 | 3-3/4" Hole Saw (for outlet cutout) | $25 | [ ] |
 
-**Electrical Subtotal:** ~$504
+**Electrical Subtotal:** ~$479
 
 ### Finishing
 
@@ -155,7 +156,7 @@ Ask the cutting station to rip your plywood to these widths (usually free, first
 
 ---
 
-### Amazon Trip Total: ~$664
+### Amazon Trip Total: ~$639
 
 ---
 
@@ -203,13 +204,13 @@ Ask the cutting station to rip your plywood to these widths (usually free, first
 
 | Store | Amount |
 |-------|--------|
-| Home Depot / Lowe's | $935 |
+| Home Depot / Lowe's | $972 |
 | Benjamin Moore | $160 |
-| Amazon | $664 |
+| Amazon | $639 |
 | Specialty Stores | $1,020 |
-| **GRAND TOTAL** | **$2,779** |
+| **GRAND TOTAL** | **$2,791** |
 
-Add 10% contingency: **~$3,057**
+Add 10% contingency: **~$3,070**
 
 ---
 

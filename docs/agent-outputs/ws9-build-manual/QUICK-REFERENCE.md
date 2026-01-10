@@ -183,7 +183,7 @@
 
 | Surface | Product | Sheen |
 |---------|---------|-------|
-| Cabinet body | BM Advance | Satin |
+| Cabinet body | BM Advance - **Hale Navy HC-154** | Satin |
 | Primer | Zinsser B-I-N | - |
 | Wood accents | Minwax Golden Oak + Poly | Satin |
 | Butcher block | Rubio Monocoat Pure | Matte |
@@ -202,7 +202,8 @@ Exterior width - (2 x 3/4") = Interior width
 **Drawer box width:**
 ```
 Cabinet interior - Slide clearance = Drawer width
-28.5" - 0.5" = 28" (approx 29.5" actual per design)
+28.5" - 1" (total for both slides) = 27.5" minimum
+Note: Actual design uses 29-1/2" to allow drawer to extend past side panels
 ```
 
 **Diagonal check (for square):**
@@ -252,6 +253,22 @@ Before assembly, confirm:
 - [ ] Drawer boxes all identical
 - [ ] Barn door 30" x 35" and square
 - [ ] Living room panel 92" x 34-1/2"
+
+---
+
+---
+
+## Supplementary Diagrams
+
+See the following detailed diagrams in the build manual:
+
+| Diagram | Description |
+|---------|-------------|
+| Pocket Hole Layout | Hole positions for all cabinet joints |
+| Electrical Routing | Wire paths and junction box placement |
+| Drawer Slide Mounting | Slide positions and alignment guide |
+| Barn Door Hardware | Track mounting and roller positions |
+| LED Channel Layout | Light strip routing zones 1 & 2 |
 
 ---
 

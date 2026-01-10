@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 650" width="850" height="650">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #000; }
+    .title { font-size: 18px; font-weight: bold; }
+    .subtitle { font-size: 14px; font-weight: bold; }
+    .label { font-size: 12px; }
+    .dimension { font-size: 11px; fill: #333; }
+    .note { font-size: 10px; fill: #555; font-style: italic; }
+    .frame-2x4 { fill: #f5e6d3; stroke: #8b7355; stroke-width: 2; }
+    .plywood { fill: #d4a574; stroke: #000; stroke-width: 1.5; }
+    .leveling-pad { fill: #666; stroke: #333; stroke-width: 1; }
+  </style>
+
+  <!-- Background -->
+  <rect width="850" height="650" fill="white"/>
+
+  <!-- Title -->
+  <text x="425" y="30" text-anchor="middle" class="title">TOE KICK PLATFORM DIAGRAM</text>
+  <text x="425" y="50" text-anchor="middle" class="note">2x4 Frame with 3/4" Plywood Top - 4-1/4" Total Height</text>
+
+  <!-- 3D Isometric View -->
+  <text x="425" y="85" text-anchor="middle" class="subtitle">Isometric View</text>
+
+  <!-- Transform group for isometric -->
+  <g transform="translate(150, 100)">
+    <!-- Plywood top (offset for 3D effect) -->
+    <polygon points="50,20 550,20 600,60 100,60" class="plywood"/>
+    <polygon points="550,20 600,60 600,70 550,30" fill="#b8956c" stroke="#000" stroke-width="1"/>
+    <text x="325" y="50" text-anchor="middle" class="label" style="fill:#fff">3/4" Plywood Top</text>
+
+    <!-- Front 2x4 -->
+    <polygon points="50,30 550,30 550,65 50,65" class="frame-2x4"/>
+    <polygon points="550,30 600,70 600,105 550,65" class="frame-2x4"/>
+    <text x="300" y="52" text-anchor="middle" class="label">Front Rail (2x4 - 92")</text>
+
+    <!-- Left 2x4 visible side -->
+    <polygon points="50,30 100,70 100,105 50,65" class="frame-2x4"/>
+
+    <!-- Cross braces visible -->
+    <polygon points="130,65 130,100 180,100 180,65" class="frame-2x4"/>
+    <polygon points="270,65 270,100 320,100 320,65" class="frame-2x4"/>
+    <polygon points="410,65 410,100 460,100 460,65" class="frame-2x4"/>
+
+    <!-- 2x4 label -->
+    <text x="300" y="90" text-anchor="middle" class="note">Cross Braces</text>
+  </g>
+
+  <!-- Top View (Frame Layout) -->
+  <text x="425" y="230" text-anchor="middle" class="subtitle">Top View - 2x4 Frame Layout</text>
+
+  <!-- Frame outline -->
+  <rect x="75" y="250" width="700" height="90" fill="none" stroke="#000" stroke-width="2"/>
+
+  <!-- Front rail -->
+  <rect x="75" y="250" width="700" height="15" class="frame-2x4"/>
+  <text x="425" y="262" text-anchor="middle" class="label" style="font-size:10px">Front Rail</text>
+
+  <!-- Back rail -->
+  <rect x="75" y="325" width="700" height="15" class="frame-2x4"/>
+  <text x="425" y="337" text-anchor="middle" class="label" style="font-size:10px">Back Rail</text>
+
+  <!-- Left end -->
+  <rect x="75" y="265" width="15" height="60" class="frame-2x4"/>
+
+  <!-- Right end -->
+  <rect x="760" y="265" width="15" height="60" class="frame-2x4"/>
+
+  <!-- Cross brace 1 -->
+  <rect x="190" y="265" width="15" height="60" class="frame-2x4"/>
+  <text x="197" y="298" text-anchor="middle" class="label" transform="rotate(-90, 197, 298)" style="font-size:9px">Brace 1</text>
+
+  <!-- Cross brace 2 -->
+  <rect x="340" y="265" width="15" height="60" class="frame-2x4"/>
+  <text x="347" y="298" text-anchor="middle" class="label" transform="rotate(-90, 347, 298)" style="font-size:9px">Brace 2</text>
+
+  <!-- Cross brace 3 -->
+  <rect x="490" y="265" width="15" height="60" class="frame-2x4"/>
+  <text x="497" y="298" text-anchor="middle" class="label" transform="rotate(-90, 497, 298)" style="font-size:9px">Brace 3</text>
+
+  <!-- Cross brace 4 -->
+  <rect x="640" y="265" width="15" height="60" class="frame-2x4"/>
+  <text x="647" y="298" text-anchor="middle" class="label" transform="rotate(-90, 647, 298)" style="font-size:9px">Brace 4</text>
+
+  <!-- Leveling pad locations -->
+  <circle cx="90" cy="295" r="8" class="leveling-pad"/>
+  <circle cx="197" cy="295" r="8" class="leveling-pad"/>
+  <circle cx="347" cy="295" r="8" class="leveling-pad"/>
+  <circle cx="497" cy="295" r="8" class="leveling-pad"/>
+  <circle cx="647" cy="295" r="8" class="leveling-pad"/>
+  <circle cx="768" cy="295" r="8" class="leveling-pad"/>
+
+  <!-- Dimensions for top view -->
+  <line x1="75" y1="360" x2="775" y2="360" stroke="#000" stroke-width="1"/>
+  <line x1="75" y1="355" x2="75" y2="365" stroke="#000" stroke-width="1"/>
+  <line x1="775" y1="355" x2="775" y2="365" stroke="#000" stroke-width="1"/>
+  <text x="425" y="375" text-anchor="middle" class="dimension">92" Total Length</text>
+
+  <line x1="55" y1="250" x2="55" y2="340" stroke="#000" stroke-width="1"/>
+  <line x1="50" y1="250" x2="60" y2="250" stroke="#000" stroke-width="1"/>
+  <line x1="50" y1="340" x2="60" y2="340" stroke="#000" stroke-width="1"/>
+  <text x="40" y="295" text-anchor="middle" class="dimension" transform="rotate(-90, 40, 295)">~12"</text>
+
+  <!-- Brace spacing -->
+  <line x1="90" y1="245" x2="197" y2="245" stroke="#666" stroke-width="1"/>
+  <text x="143" y="242" text-anchor="middle" class="note">~15"</text>
+
+  <!-- Side View (Cross Section) -->
+  <text x="425" y="415" text-anchor="middle" class="subtitle">Side View - Height Stack-up</text>
+
+  <!-- Floor line -->
+  <line x1="150" y1="550" x2="700" y2="550" stroke="#000" stroke-width="2"/>
+  <text x="720" y="555" class="label">Floor</text>
+
+  <!-- Leveling pad -->
+  <rect x="300" y="540" width="60" height="10" class="leveling-pad"/>
+  <rect x="490" y="540" width="60" height="10" class="leveling-pad"/>
+  <text x="425" y="575" text-anchor="middle" class="note">Rubber leveling pads (optional shims as needed)</text>
+
+  <!-- 2x4 frame (actual 1.5" x 3.5") -->
+  <rect x="200" y="485" width="450" height="55" class="frame-2x4"/>
+  <text x="425" y="518" text-anchor="middle" class="label">2x4 Frame (actual 1-1/2" x 3-1/2")</text>
+
+  <!-- 3/4" plywood top -->
+  <rect x="175" y="470" width="500" height="15" class="plywood"/>
+  <text x="425" y="483" text-anchor="middle" class="label" style="font-size:10px; fill:#fff">3/4" Plywood</text>
+
+  <!-- Height dimensions -->
+  <line x1="720" y1="470" x2="720" y2="550" stroke="#000" stroke-width="1"/>
+  <line x1="715" y1="470" x2="725" y2="470" stroke="#000" stroke-width="1"/>
+  <line x1="715" y1="550" x2="725" y2="550" stroke="#000" stroke-width="1"/>
+  <text x="760" y="515" text-anchor="middle" class="dimension" style="font-weight:bold">4-1/4"</text>
+  <text x="760" y="528" text-anchor="middle" class="note">Total</text>
+
+  <!-- Breakdown dimensions -->
+  <line x1="145" y1="470" x2="145" y2="485" stroke="#666" stroke-width="1"/>
+  <text x="130" y="480" text-anchor="end" class="dimension">3/4"</text>
+
+  <line x1="145" y1="485" x2="145" y2="540" stroke="#666" stroke-width="1"/>
+  <text x="130" y="518" text-anchor="end" class="dimension">3-1/2"</text>
+
+  <!-- Wire entry hole -->
+  <circle cx="350" cy="477" r="10" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  <text x="350" y="460" text-anchor="middle" class="note">Wire entry hole (1")</text>
+
+  <!-- Legend -->
+  <rect x="50" y="425" width="120" height="70" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="110" y="443" text-anchor="middle" class="subtitle" style="font-size:11px">Materials</text>
+  <rect x="60" y="453" width="20" height="12" class="frame-2x4"/>
+  <text x="85" y="463" class="label">2x4 Lumber</text>
+  <rect x="60" y="470" width="20" height="12" class="plywood"/>
+  <text x="85" y="480" class="label">3/4" Plywood</text>
+
+  <!-- Notes section -->
+  <rect x="50" y="590" width="750" height="50" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="65" y="608" class="subtitle">Construction Notes:</text>
+  <text x="65" y="625" class="label">1. Assemble 2x4 frame with 3" screws or pocket holes | 2. Space cross braces 15-18" apart for support</text>
+  <text x="65" y="638" class="label">3. Attach plywood top with 1-5/8" screws | 4. Use leveling pads/shims to ensure platform is level before cabinet install</text>
+</svg>

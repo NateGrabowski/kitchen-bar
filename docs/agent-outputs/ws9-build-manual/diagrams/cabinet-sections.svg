@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" width="900" height="700">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #000; }
+    .title { font-size: 18px; font-weight: bold; }
+    .subtitle { font-size: 14px; font-weight: bold; }
+    .label { font-size: 12px; }
+    .dimension { font-size: 11px; fill: #333; }
+    .note { font-size: 10px; fill: #555; font-style: italic; }
+    .section-a { fill: #e3f2fd; stroke: #1976d2; stroke-width: 2; }
+    .section-b { fill: #e8f5e9; stroke: #388e3c; stroke-width: 2; }
+    .section-c { fill: #fff3e0; stroke: #f57c00; stroke-width: 2; }
+    .divider { fill: #f5f5f5; stroke: #000; stroke-width: 1.5; }
+  </style>
+
+  <!-- Background -->
+  <rect width="900" height="700" fill="white"/>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" class="title">CABINET SECTION CONNECTION DIAGRAM</text>
+  <text x="450" y="50" text-anchor="middle" class="note">Three-Section Assembly with Shared Dividers</text>
+
+  <!-- Assembled View -->
+  <text x="450" y="85" text-anchor="middle" class="subtitle">Assembled View (Top)</text>
+
+  <!-- Total width dimension -->
+  <line x1="100" y1="100" x2="800" y2="100" stroke="#000" stroke-width="1"/>
+  <line x1="100" y1="95" x2="100" y2="105" stroke="#000" stroke-width="1"/>
+  <line x1="800" y1="95" x2="800" y2="105" stroke="#000" stroke-width="1"/>
+  <text x="450" y="97" text-anchor="middle" class="dimension">92" Total Length</text>
+
+  <!-- Assembled cabinet - top view -->
+  <rect x="100" y="115" width="700" height="100" fill="none" stroke="#000" stroke-width="2"/>
+
+  <!-- Section A -->
+  <rect x="100" y="115" width="228" height="100" class="section-a"/>
+  <text x="214" y="170" text-anchor="middle" class="label">Section A</text>
+
+  <!-- Divider 1 -->
+  <rect x="328" y="115" width="15" height="100" class="divider"/>
+
+  <!-- Section B -->
+  <rect x="343" y="115" width="213" height="100" class="section-b"/>
+  <text x="450" y="170" text-anchor="middle" class="label">Section B</text>
+
+  <!-- Divider 2 -->
+  <rect x="556" y="115" width="15" height="100" class="divider"/>
+
+  <!-- Section C -->
+  <rect x="571" y="115" width="229" height="100" class="section-c"/>
+  <text x="685" y="170" text-anchor="middle" class="label">Section C</text>
+
+  <!-- Section dimensions -->
+  <line x1="100" y1="230" x2="328" y2="230" stroke="#000" stroke-width="1"/>
+  <line x1="100" y1="225" x2="100" y2="235" stroke="#000" stroke-width="1"/>
+  <line x1="328" y1="225" x2="328" y2="235" stroke="#000" stroke-width="1"/>
+  <text x="214" y="245" text-anchor="middle" class="dimension">30"</text>
+
+  <line x1="343" y1="230" x2="556" y2="230" stroke="#000" stroke-width="1"/>
+  <line x1="343" y1="225" x2="343" y2="235" stroke="#000" stroke-width="1"/>
+  <line x1="556" y1="225" x2="556" y2="235" stroke="#000" stroke-width="1"/>
+  <text x="450" y="245" text-anchor="middle" class="dimension">30"</text>
+
+  <line x1="571" y1="230" x2="800" y2="230" stroke="#000" stroke-width="1"/>
+  <line x1="571" y1="225" x2="571" y2="235" stroke="#000" stroke-width="1"/>
+  <line x1="800" y1="225" x2="800" y2="235" stroke="#000" stroke-width="1"/>
+  <text x="685" y="245" text-anchor="middle" class="dimension">32"</text>
+
+  <!-- Depth dimension -->
+  <line x1="820" y1="115" x2="820" y2="215" stroke="#000" stroke-width="1"/>
+  <line x1="815" y1="115" x2="825" y2="115" stroke="#000" stroke-width="1"/>
+  <line x1="815" y1="215" x2="825" y2="215" stroke="#000" stroke-width="1"/>
+  <text x="835" y="170" text-anchor="middle" class="dimension" transform="rotate(90, 835, 170)">14" Depth</text>
+
+  <!-- Exploded View -->
+  <text x="450" y="290" text-anchor="middle" class="subtitle">Exploded View - Section Separation</text>
+
+  <!-- Section A Exploded -->
+  <rect x="50" y="320" width="180" height="160" class="section-a"/>
+  <text x="140" y="405" text-anchor="middle" class="label">Section A</text>
+  <text x="140" y="420" text-anchor="middle" class="dimension">30" x 14"</text>
+
+  <!-- Right side panel of A -->
+  <rect x="225" y="320" width="15" height="160" class="divider"/>
+  <text x="232" y="400" text-anchor="middle" class="label" transform="rotate(-90, 232, 400)">Divider 1</text>
+
+  <!-- Arrow showing separation -->
+  <line x1="260" y1="400" x2="300" y2="400" stroke="#000" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="300" y1="400" x2="260" y2="400" stroke="#000" stroke-width="1.5" marker-start="url(#arrowhead)"/>
+
+  <!-- Section B Exploded -->
+  <rect x="320" y="320" width="165" height="160" class="section-b"/>
+  <text x="402" y="405" text-anchor="middle" class="label">Section B</text>
+  <text x="402" y="420" text-anchor="middle" class="dimension">30" x 14"</text>
+
+  <!-- Right side panel of B -->
+  <rect x="480" y="320" width="15" height="160" class="divider"/>
+  <text x="487" y="400" text-anchor="middle" class="label" transform="rotate(-90, 487, 400)">Divider 2</text>
+
+  <!-- Arrow showing separation -->
+  <line x1="515" y1="400" x2="555" y2="400" stroke="#000" stroke-width="1.5"/>
+
+  <!-- Section C Exploded -->
+  <rect x="575" y="320" width="180" height="160" class="section-c"/>
+  <text x="665" y="405" text-anchor="middle" class="label">Section C</text>
+  <text x="665" y="420" text-anchor="middle" class="dimension">32" x 14"</text>
+
+  <!-- Connection Detail -->
+  <text x="450" y="520" text-anchor="middle" class="subtitle">Connection Detail - Pocket Hole Through Divider</text>
+
+  <!-- Detail zoom box -->
+  <rect x="200" y="540" width="500" height="120" fill="#fafafa" stroke="#000" stroke-width="1"/>
+
+  <!-- Divider cross section -->
+  <rect x="420" y="555" width="60" height="90" fill="#d4a574" stroke="#000" stroke-width="2"/>
+  <text x="450" y="605" text-anchor="middle" class="label" style="fill:#fff; font-size:11px">Divider</text>
+  <text x="450" y="620" text-anchor="middle" class="label" style="fill:#fff; font-size:10px">3/4" ply</text>
+
+  <!-- Adjacent panel Section A side -->
+  <rect x="220" y="560" width="200" height="20" class="section-a"/>
+  <text x="320" y="575" text-anchor="middle" class="label" style="font-size:10px">Section A - Bottom Panel</text>
+
+  <!-- Adjacent panel Section B side -->
+  <rect x="480" y="560" width="200" height="20" class="section-b"/>
+  <text x="580" y="575" text-anchor="middle" class="label" style="font-size:10px">Section B - Bottom Panel</text>
+
+  <!-- Pocket holes (shown as angled ovals into divider) -->
+  <ellipse cx="390" cy="595" rx="15" ry="8" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-30, 390, 595)"/>
+  <ellipse cx="390" cy="625" rx="15" ry="8" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-30, 390, 625)"/>
+
+  <!-- Screw lines -->
+  <line x1="375" y1="590" x2="420" y2="600" stroke="#000" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="375" y1="620" x2="420" y2="630" stroke="#000" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Labels -->
+  <text x="340" y="600" text-anchor="end" class="note">Pocket holes in</text>
+  <text x="340" y="612" text-anchor="end" class="note">bottom panel</text>
+  <text x="550" y="600" text-anchor="start" class="note">1-1/4" screws</text>
+  <text x="550" y="612" text-anchor="start" class="note">into divider edge</text>
+
+  <!-- Arrowhead marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#000"/>
+    </marker>
+  </defs>
+
+  <!-- Legend -->
+  <rect x="50" y="540" width="130" height="80" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="115" y="558" text-anchor="middle" class="subtitle" style="font-size:12px">Section Colors</text>
+  <rect x="60" y="565" width="20" height="12" class="section-a"/>
+  <text x="90" y="575" class="label">Section A (30")</text>
+  <rect x="60" y="582" width="20" height="12" class="section-b"/>
+  <text x="90" y="592" class="label">Section B (30")</text>
+  <rect x="60" y="599" width="20" height="12" class="section-c"/>
+  <text x="90" y="609" class="label">Section C (32")</text>
+
+  <!-- Notes -->
+  <rect x="50" y="670" width="800" height="25" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="65" y="687" class="label">Assembly Order: Build each section box independently, then join sections using pocket holes through shared dividers (4-6" spacing)</text>
+</svg>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #000; }
+    .title { font-size: 18px; font-weight: bold; }
+    .subtitle { font-size: 14px; font-weight: bold; }
+    .label { font-size: 12px; }
+    .dimension { font-size: 11px; fill: #333; }
+    .note { font-size: 10px; fill: #555; font-style: italic; }
+  </style>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="white"/>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">POCKET HOLE PLACEMENT DIAGRAM</text>
+  <text x="400" y="50" text-anchor="middle" class="note">For 3/4" Plywood Cabinet Construction</text>
+
+  <!-- Section 1: Edge Distance Detail -->
+  <text x="150" y="85" text-anchor="middle" class="subtitle">Edge Distance Detail</text>
+
+  <!-- Plywood edge piece -->
+  <rect x="50" y="100" width="200" height="80" fill="none" stroke="#000" stroke-width="2"/>
+  <text x="150" y="145" text-anchor="middle" class="label">3/4" Plywood</text>
+
+  <!-- Pocket hole positions -->
+  <ellipse cx="90" cy="140" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 90, 140)"/>
+  <ellipse cx="150" cy="140" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 150, 140)"/>
+  <ellipse cx="210" cy="140" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 210, 140)"/>
+
+  <!-- Edge distance dimension -->
+  <line x1="50" y1="195" x2="90" y2="195" stroke="#000" stroke-width="1"/>
+  <line x1="50" y1="190" x2="50" y2="200" stroke="#000" stroke-width="1"/>
+  <line x1="90" y1="190" x2="90" y2="200" stroke="#000" stroke-width="1"/>
+  <text x="70" y="210" text-anchor="middle" class="dimension">3/4"</text>
+  <text x="70" y="222" text-anchor="middle" class="note">from edge</text>
+
+  <!-- Section 2: Cabinet Box Joint Spacing -->
+  <text x="550" y="85" text-anchor="middle" class="subtitle">Cabinet Box Joint Spacing</text>
+
+  <!-- Long panel -->
+  <rect x="320" y="100" width="400" height="60" fill="none" stroke="#000" stroke-width="2"/>
+  <text x="520" y="135" text-anchor="middle" class="label">Side Panel</text>
+
+  <!-- Pocket holes with spacing -->
+  <ellipse cx="360" cy="130" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 360, 130)"/>
+  <ellipse cx="430" cy="130" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 430, 130)"/>
+  <ellipse cx="500" cy="130" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 500, 130)"/>
+  <ellipse cx="570" cy="130" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 570, 130)"/>
+  <ellipse cx="640" cy="130" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 640, 130)"/>
+  <ellipse cx="680" cy="130" rx="8" ry="12" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 680, 130)"/>
+
+  <!-- Spacing dimensions -->
+  <line x1="360" y1="175" x2="430" y2="175" stroke="#000" stroke-width="1"/>
+  <line x1="360" y1="170" x2="360" y2="180" stroke="#000" stroke-width="1"/>
+  <line x1="430" y1="170" x2="430" y2="180" stroke="#000" stroke-width="1"/>
+  <text x="395" y="190" text-anchor="middle" class="dimension">4-6"</text>
+  <text x="395" y="202" text-anchor="middle" class="note">typical spacing</text>
+
+  <!-- Section 3: Face Frame Joint Pattern -->
+  <text x="200" y="270" text-anchor="middle" class="subtitle">Face Frame Joint Pattern</text>
+
+  <!-- Stile (vertical) -->
+  <rect x="80" y="290" width="40" height="180" fill="#f5f5f5" stroke="#000" stroke-width="2"/>
+  <text x="100" y="385" text-anchor="middle" class="label" transform="rotate(-90, 100, 385)">Stile 1.5" x 36"</text>
+
+  <!-- Rail (horizontal) -->
+  <rect x="120" y="350" width="160" height="40" fill="#f5f5f5" stroke="#000" stroke-width="2"/>
+  <text x="200" y="375" text-anchor="middle" class="label">Rail 1.5" wide</text>
+
+  <!-- Pocket holes in rail end -->
+  <ellipse cx="135" cy="360" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 135, 360)"/>
+  <ellipse cx="135" cy="380" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(-15, 135, 380)"/>
+
+  <!-- Annotation -->
+  <line x1="135" y1="340" x2="135" y2="320" stroke="#000" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="160" y="310" class="label">2 pocket holes</text>
+  <text x="160" y="325" class="note">per joint minimum</text>
+
+  <!-- Section 4: Complete Cabinet Box Pattern -->
+  <text x="550" y="270" text-anchor="middle" class="subtitle">Cabinet Box - Top View</text>
+
+  <!-- Cabinet box outline -->
+  <rect x="400" y="290" width="300" height="180" fill="none" stroke="#000" stroke-width="2"/>
+
+  <!-- Labels -->
+  <text x="550" y="383" text-anchor="middle" class="label">Bottom Panel</text>
+
+  <!-- Top edge pocket holes -->
+  <ellipse cx="440" cy="305" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5"/>
+  <ellipse cx="490" cy="305" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5"/>
+  <ellipse cx="540" cy="305" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5"/>
+  <ellipse cx="590" cy="305" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5"/>
+  <ellipse cx="640" cy="305" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5"/>
+
+  <!-- Bottom edge pocket holes -->
+  <ellipse cx="440" cy="455" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5"/>
+  <ellipse cx="490" cy="455" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5"/>
+  <ellipse cx="540" cy="455" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5"/>
+  <ellipse cx="590" cy="455" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5"/>
+  <ellipse cx="640" cy="455" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5"/>
+
+  <!-- Left edge pocket holes -->
+  <ellipse cx="415" cy="330" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(90, 415, 330)"/>
+  <ellipse cx="415" cy="380" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(90, 415, 380)"/>
+  <ellipse cx="415" cy="430" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(90, 415, 430)"/>
+
+  <!-- Right edge pocket holes -->
+  <ellipse cx="685" cy="330" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(90, 685, 330)"/>
+  <ellipse cx="685" cy="380" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(90, 685, 380)"/>
+  <ellipse cx="685" cy="430" rx="6" ry="9" fill="none" stroke="#000" stroke-width="1.5" transform="rotate(90, 685, 430)"/>
+
+  <!-- Side labels -->
+  <text x="395" y="385" text-anchor="end" class="label" transform="rotate(-90, 395, 385)">Side</text>
+  <text x="715" y="385" text-anchor="start" class="label" transform="rotate(90, 715, 385)">Side</text>
+
+  <!-- Notes section -->
+  <rect x="30" y="510" width="740" height="75" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="45" y="530" class="subtitle">Key Notes:</text>
+  <text x="45" y="548" class="label">1. Use Kreg K4 or K5 jig set for 3/4" material thickness</text>
+  <text x="45" y="563" class="label">2. Drill depth: 1" for standard joints | Screw: 1-1/4" coarse thread</text>
+  <text x="45" y="578" class="label">3. Apply wood glue to joint before assembly | Clamp and drive screws</text>
+  <text x="450" y="548" class="label">4. Face frame: 2-3 holes per joint</text>
+  <text x="450" y="563" class="label">5. Cabinet box: Space 4-6" apart</text>
+  <text x="450" y="578" class="label">6. Keep holes 3/4" minimum from edges</text>
+</svg>
