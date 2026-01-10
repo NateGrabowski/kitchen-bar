@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_updated": "2026-01-09T00:00:00Z",
-  "current_session": 0,
+  "last_updated": "2026-01-09T14:00:00Z",
+  "current_session": 2,
   "gates": {
     "gate0": {
       "name": "Structural Column Assessment",
@@ -12,24 +12,27 @@
     },
     "gate1": {
       "name": "Final Cabinet Face Design",
-      "status": "PENDING",
+      "status": "READY_FOR_CLEARANCE",
       "resolved_at": null,
       "decision": null,
-      "validation_score": null
+      "validation_score": null,
+      "notes": "Human-specified design documented. Visualization exists at visualization/jsx/cabinet-face-final.jsx. Ready for human approval to clear gate."
     },
     "gate2": {
       "name": "Butcher Block Commitment",
-      "status": "PENDING",
-      "resolved_at": null,
-      "decision": null,
-      "validation_score": null
+      "status": "CLEARED",
+      "resolved_at": "2026-01-09",
+      "decision": "APPROVED - Lowe's Allen+Roth Chevron Acacia 72x39x1.5 (buy 2, join)",
+      "validation_score": 50,
+      "notes": "Human decided: Go with 2x Lowe's Allen+Roth Chevron Acacia 72\"x39\"x1.5\". 1.5\" thickness accepted. Will join two pieces."
     },
     "gate3": {
       "name": "Construction Approach Lock",
-      "status": "PENDING",
+      "status": "READY_FOR_CLEARANCE",
       "resolved_at": null,
       "decision": null,
-      "validation_score": null
+      "validation_score": null,
+      "notes": "WS3 refire complete. No-table-saw workflow documented. Drawer, barn door, X-frame construction guides created. Ready for human tool inventory and approval."
     },
     "gate4": {
       "name": "Final Dimensions Sign-off",
@@ -51,23 +54,31 @@
       "depends_on": ["gate0"],
       "started_at": "2026-01-09",
       "completed_at": "2026-01-09",
-      "current_iteration": 1,
-      "iterations": [{"session": 1, "score": 48, "notes": "3 options created, Option B recommended"}],
-      "current_agent_id": "aa7fb55",
-      "validation_score": 48,
-      "blocking_issues": []
+      "current_iteration": 2,
+      "iterations": [
+        {"session": 1, "score": 48, "notes": "3 options created, Option B recommended - REJECTED by human"},
+        {"session": 2, "score": null, "notes": "Human-specified design documented. Visualization already existed. FINAL-DESIGN.md created."}
+      ],
+      "current_agent_id": null,
+      "validation_score": null,
+      "blocking_issues": [],
+      "outputs": [
+        "visualization/jsx/cabinet-face-final.jsx",
+        "docs/agent-outputs/ws1-cabinet-face/FINAL-DESIGN.md"
+      ]
     },
     "ws2": {
       "name": "Butcher Block Research",
-      "status": "PENDING_HUMAN_REVIEW",
+      "status": "COMPLETE",
       "depends_on": [],
       "started_at": "2026-01-09",
       "completed_at": "2026-01-09",
       "current_iteration": 1,
-      "iterations": [{"session": 1, "score": 50, "notes": "5 vendors, Lowe's + lamination recommended"}],
+      "iterations": [{"session": 1, "score": 50, "notes": "5 vendors, Lowe's + lamination recommended - APPROVED by human"}],
       "current_agent_id": "ab00ed5",
       "validation_score": 50,
-      "blocking_issues": []
+      "blocking_issues": [],
+      "human_decision": "Buy 2x Lowe's Allen+Roth Chevron Acacia 72\"x39\"x1.5\", join them"
     },
     "ws3": {
       "name": "Construction Techniques",
@@ -75,11 +86,21 @@
       "depends_on": ["gate0"],
       "started_at": "2026-01-09",
       "completed_at": "2026-01-09",
-      "current_iteration": 1,
-      "iterations": [{"session": 1, "score": 50, "notes": "Pocket holes locked, 4-weekend build sequence"}],
-      "current_agent_id": "a40b453",
-      "validation_score": 50,
-      "blocking_issues": []
+      "current_iteration": 2,
+      "iterations": [
+        {"session": 1, "score": 50, "notes": "Pocket holes locked, 4-weekend build sequence - NEEDED UPDATE"},
+        {"session": 2, "score": null, "notes": "Refire complete: no-table-saw workflow, drawer construction, barn door guide, X-frame panels, BUILD-SEQUENCE-v2"}
+      ],
+      "current_agent_id": "aa29441",
+      "validation_score": null,
+      "blocking_issues": [],
+      "outputs": [
+        "docs/agent-outputs/ws3-construction/BUILD-SEQUENCE-v2.md",
+        "docs/agent-outputs/ws3-construction/ADDENDUM-no-table-saw.md",
+        "docs/agent-outputs/ws3-construction/drawer-construction.md",
+        "docs/agent-outputs/ws3-construction/barn-door-guide.md",
+        "docs/agent-outputs/ws3-construction/x-frame-panels.md"
+      ]
     },
     "ws4": {
       "name": "Cut Lists & Materials",
@@ -142,5 +163,20 @@
       "blocking_issues": []
     }
   },
-  "sessions": []
+  "sessions": [
+    {
+      "id": 1,
+      "date": "2026-01-09",
+      "work_streams_dispatched": ["ws1", "ws2", "ws3"],
+      "gates_cleared": ["gate0"],
+      "notes": "Initial parallel kickoff. All 3 streams completed but WS1 rejected, WS3 needs update."
+    },
+    {
+      "id": 2,
+      "date": "2026-01-09",
+      "work_streams_dispatched": ["ws1", "ws3"],
+      "gates_cleared": ["gate2"],
+      "notes": "Refire session. WS1 documentation updated for human-specified design. WS3 refired with no-table-saw constraints, drawer/barn door/X-frame guides added. Gate 2 cleared. Gates 1 and 3 ready for human approval."
+    }
+  ]
 }
