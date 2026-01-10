@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 350" width="920" height="350">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #333; }
+    .title { font-size: 16px; font-weight: bold; }
+    .subtitle { font-size: 12px; }
+    .dimension { font-size: 11px; fill: #666; }
+    .label { font-size: 10px; }
+    .note { font-size: 9px; fill: #888; font-style: italic; }
+    .panel { fill: #2c3e50; stroke: #1a252f; stroke-width: 2; }
+    .track { fill: #333; stroke: #111; stroke-width: 1; }
+    .door-closed { fill: #8b7355; stroke: #5d4e37; stroke-width: 2; opacity: 0.9; }
+    .door-open { fill: #8b7355; stroke: #5d4e37; stroke-width: 2; opacity: 0.4; stroke-dasharray: 5,3; }
+    .opening { fill: #4a5568; stroke: #2d3748; stroke-width: 1; }
+  </style>
+
+  <!-- Background -->
+  <rect width="920" height="350" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="460" y="25" text-anchor="middle" class="title">BARN DOOR TRACK POSITIONING</text>
+  <text x="460" y="42" text-anchor="middle" class="subtitle">60" Track on 92" Cabinet - Door Slides LEFT to Open</text>
+
+  <!-- Living Room Panel (92" wide) -->
+  <rect x="50" y="80" width="820" height="200" class="panel"/>
+
+  <!-- Section labels on panel -->
+  <text x="186" y="185" text-anchor="middle" class="label" fill="#ccc">Section 1</text>
+  <text x="186" y="200" text-anchor="middle" class="dimension" fill="#888">DRAWERS</text>
+
+  <text x="459" y="185" text-anchor="middle" class="label" fill="#ccc">Section 2</text>
+  <text x="459" y="200" text-anchor="middle" class="dimension" fill="#888">OPENING</text>
+
+  <text x="733" y="185" text-anchor="middle" class="label" fill="#ccc">Section 3</text>
+  <text x="733" y="200" text-anchor="middle" class="dimension" fill="#888">DOORS</text>
+
+  <!-- Barn door opening (center section - 30") -->
+  <rect x="323" y="95" width="267" height="170" class="opening"/>
+  <text x="456" y="180" text-anchor="middle" class="label" fill="#fff">30" Opening</text>
+
+  <!-- Section divider lines -->
+  <line x1="323" y1="80" x2="323" y2="280" stroke="#fff" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="590" y1="80" x2="590" y2="280" stroke="#fff" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Track (60" long, mounted 2" above cabinet top) -->
+  <rect x="190" y="65" width="533" height="8" class="track"/>
+  <text x="456" y="60" text-anchor="middle" class="dimension">60" Track</text>
+
+  <!-- Door in CLOSED position (covers opening) -->
+  <rect x="323" y="75" width="267" height="200" class="door-closed"/>
+  <text x="456" y="175" text-anchor="middle" class="label" fill="#fff">BARN DOOR</text>
+  <text x="456" y="190" text-anchor="middle" class="note" fill="#ddd">(Closed Position)</text>
+
+  <!-- Door in OPEN position (ghost, slid left) -->
+  <rect x="56" y="75" width="267" height="200" class="door-open"/>
+  <text x="189" y="175" text-anchor="middle" class="label" fill="#666">Door Open</text>
+  <text x="189" y="190" text-anchor="middle" class="note" fill="#888">(Slides Left)</text>
+
+  <!-- Arrow showing door movement -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c"/>
+    </marker>
+  </defs>
+  <line x1="310" y1="295" x2="180" y2="295" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="245" y="310" text-anchor="middle" class="label" fill="#e74c3c">Door slides left to open</text>
+
+  <!-- Dimension: Track start from left edge -->
+  <line x1="50" y1="320" x2="190" y2="320" stroke="#333" stroke-width="1"/>
+  <line x1="50" y1="315" x2="50" y2="325" stroke="#333" stroke-width="1"/>
+  <line x1="190" y1="315" x2="190" y2="325" stroke="#333" stroke-width="1"/>
+  <text x="120" y="335" text-anchor="middle" class="dimension">~16" from left</text>
+
+  <!-- Dimension: Track end from right edge -->
+  <line x1="723" y1="320" x2="870" y2="320" stroke="#333" stroke-width="1"/>
+  <line x1="723" y1="315" x2="723" y2="325" stroke="#333" stroke-width="1"/>
+  <line x1="870" y1="315" x2="870" y2="325" stroke="#333" stroke-width="1"/>
+  <text x="796" y="335" text-anchor="middle" class="dimension">~16" from right</text>
+
+  <!-- Cabinet total width -->
+  <line x1="50" y1="290" x2="870" y2="290" stroke="#333" stroke-width="1"/>
+  <line x1="50" y1="285" x2="50" y2="295" stroke="#333" stroke-width="1"/>
+  <line x1="870" y1="285" x2="870" y2="295" stroke="#333" stroke-width="1"/>
+  <text x="460" y="288" text-anchor="middle" class="dimension" fill="#fff">92" Cabinet Width</text>
+
+  <!-- Notes box -->
+  <rect x="680" y="75" width="185" height="75" fill="#fff" stroke="#ccc" stroke-width="1" rx="3"/>
+  <text x="690" y="92" class="subtitle" font-weight="bold">CRITICAL:</text>
+  <text x="690" y="107" class="label">• Track level is CRITICAL</text>
+  <text x="690" y="120" class="label">• Use laser level</text>
+  <text x="690" y="133" class="label">• Pre-drill into panel</text>
+  <text x="690" y="146" class="label">• Screws into solid backing</text>
+</svg>
