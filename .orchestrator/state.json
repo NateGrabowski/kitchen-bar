@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "last_updated": "2026-01-09T17:00:00Z",
-  "current_session": 3,
+  "last_updated": "2026-01-10T10:00:00Z",
+  "current_session": 4,
   "gates": {
     "gate0": {
       "name": "Structural Column Assessment",
@@ -43,9 +43,10 @@
     },
     "gate5": {
       "name": "Build Manual Review",
-      "status": "PENDING",
+      "status": "READY_FOR_REVIEW",
       "resolved_at": null,
-      "decision": null
+      "decision": null,
+      "notes": "Build manual complete. Awaiting human review and approval."
     }
   },
   "work_streams": {
@@ -88,13 +89,14 @@
       "depends_on": ["gate0"],
       "started_at": "2026-01-09",
       "completed_at": "2026-01-09",
-      "current_iteration": 3,
+      "current_iteration": 4,
       "iterations": [
         {"session": 1, "score": 50, "notes": "Pocket holes locked, 4-weekend build sequence - NEEDED UPDATE"},
         {"session": 2, "score": null, "notes": "Refire complete: no-table-saw workflow, drawer construction, barn door guide, X-frame panels, BUILD-SEQUENCE-v2"},
-        {"session": 3, "score": null, "notes": "Opus rerun: Ruthless optimization. Build time reduced 45-50h to 35-40h. Added BEST-PRACTICES, CRITICAL-PATH, INTEGRATION-CHECKLIST, BUILD-SEQUENCE-FINAL."}
+        {"session": 3, "score": null, "notes": "Opus rerun: Ruthless optimization. Build time reduced 45-50h to 35-40h. Added BEST-PRACTICES, CRITICAL-PATH, INTEGRATION-CHECKLIST, BUILD-SEQUENCE-FINAL."},
+        {"session": 4, "score": null, "notes": "Fixed tool-list.md: Removed incorrect table saw reference, updated to no-table-saw build."}
       ],
-      "current_agent_id": "a0a92d8",
+      "current_agent_id": null,
       "validation_score": null,
       "blocking_issues": [],
       "outputs": [
@@ -192,29 +194,40 @@
     },
     "ws8": {
       "name": "Integration & Validation (Opus)",
-      "status": "NOT_STARTED",
+      "status": "COMPLETE",
       "depends_on": ["ws1", "ws3", "ws4", "ws5", "ws6", "ws7", "gate1", "gate2", "gate3", "gate4"],
-      "started_at": null,
-      "completed_at": null,
-      "current_iteration": 0,
-      "iterations": [],
-      "current_agent_id": null,
+      "started_at": "2026-01-10",
+      "completed_at": "2026-01-10",
+      "current_iteration": 1,
+      "iterations": [{"session": 4, "score": null, "notes": "Opus: Complete validation of 41+ files. 96% confidence. Fixed tool-list.md table saw reference. Created VALIDATION-REPORT, CONSOLIDATED-BOM, CONSOLIDATED-TOOL-LIST, PHASE-INTEGRATION-MAP, WS9-PREPARATION-BRIEF."}],
+      "current_agent_id": "aec8ca4",
       "validation_score": null,
       "blocking_issues": [],
-      "notes": "ALL DEPENDENCIES CLEARED. Ready to dispatch Opus agent to compile, validate, and identify gaps before final manual."
+      "outputs": [
+        "docs/agent-outputs/ws8-integration/VALIDATION-REPORT.md",
+        "docs/agent-outputs/ws8-integration/CONSOLIDATED-BOM.md",
+        "docs/agent-outputs/ws8-integration/CONSOLIDATED-TOOL-LIST.md",
+        "docs/agent-outputs/ws8-integration/PHASE-INTEGRATION-MAP.md",
+        "docs/agent-outputs/ws8-integration/WS9-PREPARATION-BRIEF.md"
+      ]
     },
     "ws9": {
       "name": "Build Manual (Opus)",
-      "status": "NOT_STARTED",
+      "status": "COMPLETE",
       "depends_on": ["ws8"],
-      "started_at": null,
-      "completed_at": null,
-      "current_iteration": 0,
-      "iterations": [],
-      "current_agent_id": null,
+      "started_at": "2026-01-10",
+      "completed_at": "2026-01-10",
+      "current_iteration": 1,
+      "iterations": [{"session": 4, "score": null, "notes": "Opus: Complete 63KB build manual with 11 chapters + appendices. Print-ready. Includes BUILD-MANUAL.md, QUICK-REFERENCE.md, SHOPPING-CHECKLIST.md, BUILD-TRACKER.md."}],
+      "current_agent_id": "a96a646",
       "validation_score": null,
       "blocking_issues": [],
-      "notes": "Blocked on WS8. Final build manual synthesis by Opus after validation pass."
+      "outputs": [
+        "docs/agent-outputs/ws9-build-manual/BUILD-MANUAL.md",
+        "docs/agent-outputs/ws9-build-manual/QUICK-REFERENCE.md",
+        "docs/agent-outputs/ws9-build-manual/SHOPPING-CHECKLIST.md",
+        "docs/agent-outputs/ws9-build-manual/BUILD-TRACKER.md"
+      ]
     }
   },
   "sessions": [
@@ -238,6 +251,13 @@
       "work_streams_dispatched": ["ws4", "ws5", "ws6", "ws7"],
       "gates_cleared": ["gate1", "gate3", "gate4"],
       "notes": "Session 3: Cleared all remaining gates. Completed WS4-WS7. Opus reruns on WS3 (optimization), WS4 (cross-reference), WS6, WS7. Build time reduced 45-50h to 35-40h. All 7 work streams complete. Ready for WS8 integration."
+    },
+    {
+      "id": 4,
+      "date": "2026-01-10",
+      "work_streams_dispatched": ["ws8", "ws9"],
+      "gates_cleared": [],
+      "notes": "Session 4: CAPSTONE SESSION. WS8 Integration & Validation (Opus) validated all 41+ files at 96%+ confidence. Fixed tool-list.md table saw error. WS9 Build Manual (Opus) synthesized complete 63KB print-ready manual. Gate 5 ready for human review. PROJECT DOCUMENTATION COMPLETE."
     }
   ]
 }

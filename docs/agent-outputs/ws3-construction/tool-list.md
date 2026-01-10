@@ -10,9 +10,11 @@
 ## Tool Ownership Status
 
 ### Already Owned (Per Project Specs)
-- Table saw
 - Miter saw
 - Router
+- Circular saw
+
+**NOTE:** This is a NO TABLE SAW build. All sheet goods ripping is done at the store or with circular saw + straightedge guide.
 
 ### Need to Acquire
 See sections below for prioritized list
@@ -142,7 +144,7 @@ See sections below for prioritized list
 - **Cost:** $10-20
 
 **Hearing Protection**
-- Table saw and router are loud (90+ dB)
+- Router and circular saw are loud (90+ dB)
 - Foam ear plugs OR over-ear muffs
 - **Cost:** $5-25
 
@@ -170,12 +172,12 @@ See sections below for prioritized list
 - Bits wear out, have backups
 - **Cost:** $8-12
 
-**Table Saw Blade - CRITICAL UPGRADE**
+**Circular Saw Blade - CRITICAL UPGRADE**
 - **60-80 tooth plywood blade** - Prevents tearout on veneer
-- Your existing blade may not be suitable for cabinet-grade plywood
-- **Recommended:** Freud Diablo or Forrest Woodworker II
-- **Cost:** $40-150 (Diablo $40, Forrest $150)
-- **RECOMMENDATION: Freud Diablo** - Excellent for cost
+- Replace stock circular saw blade for cleaner cuts
+- **Recommended:** Freud Diablo or DeWalt 60T
+- **Cost:** $20-40
+- **RECOMMENDATION: Freud Diablo 7-1/4" 60T** - Excellent for cost
 
 **Router Bit (if using dados)**
 - ¾" straight cutting bit
@@ -481,7 +483,7 @@ See sections below for prioritized list
 |------|----------|-----------|--------|
 | Kreg K5 Pocket Hole Jig | 1 | $140 | Home Depot, Amazon |
 | Pocket hole screws (coarse, 1¼") | 500 ct | $20 | Home Depot, Amazon |
-| 60-tooth plywood blade | 1 | $40 | Home Depot (Diablo) |
+| 60-tooth circular saw blade (7-1/4") | 1 | $25 | Home Depot (Diablo) |
 | 24" bar clamps | 4 | $120 | Home Depot, Amazon |
 | Spring clamps (4") | 4 | $15 | Home Depot |
 | Combination square | 1 | $20 | Home Depot |
@@ -492,7 +494,7 @@ See sections below for prioritized list
 | Sandpaper assortment | 1 pk | $20 | Home Depot |
 | Wood filler | 1 pt | $8 | Home Depot |
 | Tack cloth | 3 pk | $5 | Home Depot |
-| **TOTAL IMMEDIATE** | | **$441** | |
+| **TOTAL IMMEDIATE** | | **$426** | |
 
 ---
 
@@ -523,17 +525,17 @@ See sections below for prioritized list
 ## Total Investment Summary
 
 ### Scenario 1: Essentials Only
-- Immediate purchase items: **$441**
+- Immediate purchase items: **$426**
 - Already own: Table saw, miter saw, router, drill
-- **Total out-of-pocket: $441**
+- **Total out-of-pocket: $426**
 
 ### Scenario 2: Essentials + Nice to Have
-- Immediate purchase: **$441**
+- Immediate purchase: **$426**
 - Nice to have: **$400**
 - **Total out-of-pocket: $841**
 
 ### Scenario 3: Essentials + Rentals
-- Immediate purchase: **$441**
+- Immediate purchase: **$426**
 - Rentals: **$90**
 - **Total out-of-pocket: $531**
 
@@ -541,7 +543,7 @@ See sections below for prioritized list
 
 ## Cost Comparison Context
 
-**Tool investment: $441-841**
+**Tool investment: $426-841**
 
 **Compare to alternatives:**
 - IKEA SEKTION cabinets: $700-1200 (no tools, just materials)
@@ -549,7 +551,7 @@ See sections below for prioritized list
 - Custom cabinet quote: $1500-3000
 
 **Key insight:**
-- Tool investment of $441 = lifetime asset
+- Tool investment of $426 = lifetime asset
 - Can build unlimited future projects
 - Tools retain value
 - **Break even after 1-2 projects**
@@ -601,14 +603,14 @@ See sections below for prioritized list
 
 1. **Kreg K5 Pocket Hole Jig** ($140)
 2. **Pocket hole screws** - 500 count coarse-thread 1¼" ($20)
-3. **60-tooth plywood blade** - Freud Diablo ($40)
+3. **60-tooth circular saw blade** - Freud Diablo 7-1/4" ($25)
 4. **Four 24" bar clamps** ($120)
 5. **Wood glue** - Titebond II, 2 quarts ($16)
 6. **Measuring tools** - Combination square, speed square ($30)
 7. **Safety equipment** - Glasses, dust masks ($27)
 8. **Finishing supplies** - Sandpaper, filler, tack cloth ($33)
 
-**Total minimum investment: $441**
+**Total minimum investment: $426**
 
 **Timeline:** Purchase all items Week 1, before cutting any wood
 

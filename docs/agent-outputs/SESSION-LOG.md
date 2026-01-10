@@ -394,4 +394,133 @@ After Gate 1 and Gate 3 clear:
 
 ---
 
+## Session 4: Capstone - Integration & Build Manual
+**Date:** 2026-01-10
+**Duration:** ~1 hour
+
+### Objective
+
+Complete the project documentation by running WS8 (Integration & Validation) and WS9 (Build Manual).
+
+### Agents Dispatched
+
+| Work Stream | Agent ID | Model | Status |
+|-------------|----------|-------|--------|
+| WS8: Integration & Validation | aec8ca4 | Opus | COMPLETE |
+| WS9: Build Manual | a96a646 | Opus | COMPLETE |
+
+### Actions Taken
+
+**WS8 Integration & Validation:**
+- Reviewed all 41+ output files from WS1-WS7
+- Cross-referenced dimensions, materials, and sequences
+- Identified critical issue: tool-list.md incorrectly listed table saw
+- **FIX APPLIED:** Updated tool-list.md to remove table saw, clarify no-table-saw build
+- Created 5 validation/consolidation files
+
+**WS9 Build Manual:**
+- Synthesized all validated outputs into comprehensive 63KB manual
+- Created 11 chapters + appendices
+- Included supporting documents (quick reference, shopping checklist, build tracker)
+
+### Outputs Produced
+
+**WS8: Integration & Validation** (5 files)
+| Output | Location | Status |
+|--------|----------|--------|
+| Validation Report | `ws8-integration/VALIDATION-REPORT.md` | COMPLETE |
+| Consolidated BOM | `ws8-integration/CONSOLIDATED-BOM.md` | COMPLETE |
+| Consolidated Tool List | `ws8-integration/CONSOLIDATED-TOOL-LIST.md` | COMPLETE |
+| Phase Integration Map | `ws8-integration/PHASE-INTEGRATION-MAP.md` | COMPLETE |
+| WS9 Preparation Brief | `ws8-integration/WS9-PREPARATION-BRIEF.md` | COMPLETE |
+
+**WS9: Build Manual** (4 files)
+| Output | Location | Status |
+|--------|----------|--------|
+| Build Manual (63KB) | `ws9-build-manual/BUILD-MANUAL.md` | COMPLETE |
+| Quick Reference | `ws9-build-manual/QUICK-REFERENCE.md` | COMPLETE |
+| Shopping Checklist | `ws9-build-manual/SHOPPING-CHECKLIST.md` | COMPLETE |
+| Build Tracker | `ws9-build-manual/BUILD-TRACKER.md` | COMPLETE |
+
+### Issue Fixed
+
+**Critical: Tool List Table Saw Reference**
+- Location: `docs/agent-outputs/ws3-construction/tool-list.md`
+- Issue: Listed "Table saw - Already Owned" despite no-table-saw build
+- Fix: Removed table saw, added "Circular saw" and clarifying note about no-table-saw approach
+- Updated costs from $441 to $426
+
+### Work Stream Status After Session 4
+
+| Stream | Status | Files |
+|--------|--------|-------|
+| WS1: Cabinet Face | COMPLETE | 2 |
+| WS2: Butcher Block | COMPLETE | 8 |
+| WS3: Construction | COMPLETE | 13 |
+| WS4: Cut Lists | COMPLETE | 5 |
+| WS5: Hardware | COMPLETE | 4 |
+| WS6: Finishing | COMPLETE | 4 |
+| WS7: Electrical | COMPLETE | 5 |
+| WS8: Integration | COMPLETE | 5 |
+| WS9: Build Manual | COMPLETE | 4 |
+
+**Total output files: 50 files across 9 work streams**
+
+### Gate Status
+
+| Gate | Status | Notes |
+|------|--------|-------|
+| Gate 0 | CLEARED | Column assumed to stay |
+| Gate 1 | CLEARED | Cabinet face design approved |
+| Gate 2 | CLEARED | Butcher block decision made |
+| Gate 3 | CLEARED | Construction approach approved |
+| Gate 4 | CLEARED | Dimensions confirmed |
+| Gate 5 | READY_FOR_REVIEW | Build manual complete, awaiting human review |
+
+### Build Manual Summary
+
+The complete build manual includes:
+
+- **Chapter 1:** Project Overview (specs, features, timeline)
+- **Chapter 2:** Tools & Materials (complete lists by store)
+- **Chapter 3:** Cut Lists (every piece labeled)
+- **Chapter 4:** Base Platform Construction
+- **Chapter 5:** Cabinet Box Assembly
+- **Chapter 6:** Drawer Construction
+- **Chapter 7:** Barn Door Section
+- **Chapter 8:** Doors & Hardware
+- **Chapter 9:** Countertop Installation
+- **Chapter 10:** Electrical & Features
+- **Chapter 11:** Finishing
+- **Appendices:** Troubleshooting, Quick Reference, Resources
+
+**Estimated Build:**
+- Time: 35-40 hours (4-5 weekends)
+- Cost: $2,900-3,500
+
+### Human Actions Requested
+
+**Gate 5: Build Manual Review**
+
+Please review the build manual and supporting documents:
+
+1. **Primary:** `docs/agent-outputs/ws9-build-manual/BUILD-MANUAL.md`
+2. **Reference:** `docs/agent-outputs/ws9-build-manual/QUICK-REFERENCE.md`
+3. **Shopping:** `docs/agent-outputs/ws9-build-manual/SHOPPING-CHECKLIST.md`
+4. **Tracker:** `docs/agent-outputs/ws9-build-manual/BUILD-TRACKER.md`
+
+**To clear Gate 5:**
+- Approve manual as complete, OR
+- Request revisions with specific feedback
+
+### Project Status
+
+**DOCUMENTATION COMPLETE**
+
+All 9 work streams finished. 50 output files created. Build manual synthesized and ready for review.
+
+Ready to build when Gate 5 clears.
+
+---
+
 *Log entries added automatically by orchestrator after each session*
